@@ -16,6 +16,9 @@
                     <div class="card-header"> <h3>Encuestas </h3></div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <div class="form-group">
+                                <a href="#" class="btn btn-success">Agregar encuesta</a>
+                            </div>
                         <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
@@ -30,6 +33,7 @@
                                     <td>{{ $poll->displayName }} </td>
                                     <td>{{ $poll->description  }}  </td>
                                     <td>
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             @empty
