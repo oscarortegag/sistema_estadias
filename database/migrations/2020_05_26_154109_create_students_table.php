@@ -16,12 +16,11 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->string('enrollment');
-            $table->unsignedInteger('id_period');
-            $table->unsignedInteger('id_educative_program');
+            $table->unsignedInteger('period_id');
+            $table->unsignedInteger('educative_program_id');
             $table->string('primerApellido');
             $table->string('segundoApellido');
             $table->string('name');
-            $table->string('curp');
             $table->string('email');
             $table->string('alternateEmail');
             $table->string('cellPhone');

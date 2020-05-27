@@ -25,4 +25,20 @@ Route::get('seguimiento', [
     'as'   => 'seguimiento.index',
 ]);
 
+Route::get('{period}\students', [
+    'uses' => 'admin\vinculacion\seguimiento\StudentController@index',
+    'as'   => 'students.index',
+]);
+
+Route::get('{period}\polls', [
+    'uses' => 'admin\vinculacion\seguimiento\PollController@index',
+    'as'   => 'polls.index',
+]);
+
+Route::get('{period}\statistics', [
+    'uses' => 'admin\vinculacion\seguimiento\StatisticController@index',
+    'as'   => 'statistics.index',
+]);
+
+
 
