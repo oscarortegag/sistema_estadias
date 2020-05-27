@@ -254,7 +254,7 @@ desired effect
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="active">
-                        <a href="#">
+                        <a href="{{route('seguimiento.index')}}">
                             <span>Seguimiento egresados</span>
                         </a>
                     </li>

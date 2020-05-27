@@ -16,7 +16,7 @@
                     <div class="card-header"> <h3>Encuestas </h3></div>
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
+                        <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -55,7 +55,7 @@
         @push('scripts')
             <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
             <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-            <script src="/js/admin/vinculacion/seguimiento/students/index.js"></script>
+            <script src="/js/admin/vinculacion/seguimiento/polls/index.js"></script>
     @endpush
 
 
