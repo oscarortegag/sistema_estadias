@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/home1', function () {
+    return view('home1');
 });
 
 Route::get('seguimiento', [

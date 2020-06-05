@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="facebook-circled" unicode="&#xe800;" d="M800 683q138-138 138-333 0-193-138-331t-331-138q-195 0-333 138-136 136-136 331 0 197 136 333 135 136 333 136 195 0 331-136z m-384-271q0 61 39 104t98 43l72 0 0-105-72 0q-13 0-22-9t-10-22l0-73 104 0 0-103-104 0 0-258q117 15 205 104 108 107 108 257 0 153-108 259t-257 106q-153 0-259-106t-106-259q0-150 106-257 89-89 206-104l0 258-103 0 0 103 103 0 0 62z" horiz-adv-x="938" />
+
+<glyph glyph-name="mail" unicode="&#xe801;" d="M0-29l324 342 176-100 176 100 324-342-1000 0z m0 114l0 414 254-147z m0 503l0 141 1000 0 0-141-500-285z m746-236l254 147 0-414z" horiz-adv-x="1000" />
+
+<glyph glyph-name="phone" unicode="&#xe802;" d="M0 615q0 50 28 76l138 138q45 37 77-13l113-211q18-39-14-71l-51-52q-5-6-5-14 25-98 132-195l31-30t36-34 34-26 41-25 40-14q20-6 27 2l61 60q39 30 72 12l203-121q22-14 25-37t-13-39l-141-139q-27-27-74-27-140 4-318 121-258 185-375 406-72 151-67 233z" horiz-adv-x="988" />
+
+<glyph glyph-name="location" unicode="&#xe803;" d="M586 556q0-7-1-21t-18-71-43-130-88-202-143-283q-82 153-142 282t-88 204-43 128-18 73l-2 20q0 121 86 207t207 86 207-86 86-207z m-207 0q0 36-25 61t-61 25-61-25-25-61 25-61 61-25 61 25 25 61z" horiz-adv-x="586" />
+
+<glyph glyph-name="twitter" unicode="&#xf309;" d="M920 636q-36-54-94-98l0-24q0-130-60-250t-186-203-290-83q-160 0-290 84 14-2 46-2 132 0 234 80-62 2-110 38t-66 94q10-4 34-4 26 0 50 6-66 14-108 66t-42 120l0 2q36-20 84-24-84 58-84 158 0 48 26 94 154-188 390-196-6 18-6 42 0 78 55 133t135 55q82 0 136-58 60 12 120 44-20-66-82-104 56 8 108 30z" horiz-adv-x="920" />
+</font>
+</defs>
+</svg>
