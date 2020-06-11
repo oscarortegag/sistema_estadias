@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
-Route::get('/home1', function () {
-    return view('home1');
+Route::get('/encuesta', function () {
+    return view('encuesta');
 });
 
 Route::get('seguimiento', [

@@ -10,18 +10,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>{{config('app.name')}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/adminlte/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/fontello.css"
+    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap/dist/css/bootstrap.min.css") }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset("css/fontello.css") }}">
+
+    <link rel="stylesheet" href="{{ asset("adminlte/css/AdminLTE.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("adminlte/plugins/iCheck/square/_all.css") }}">
     @stack('styles')
 
 <style>
     .encabezado
     {
-        width:100%;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 50px;
         text-align:center;
         background-color: #00ab84;
         min-height: 80px;
         color:#ffffff;
+        padding-bottom: 50px;
     }
     .encabezado>span {
         display:inline-block;
@@ -59,6 +67,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
     </div>
 </header>
+<!-- Main content -->
+<section class="content container-fluid" style="margin-top: 150px">
+
+    @yield('content')
+
+</section>
+<!-- /.content -->
+
 <footer>
     <div class="footer">
         <span class="icon-phone">(983)129 17 65</span>
@@ -73,5 +89,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </div>
 </footer>
+
+<script src="{{ asset("adminlte/jquery/dist/jquery.min.js") }}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ asset("adminlte/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+<script src="{{ asset("adminlte/plugins/iCheck/icheck.min.js") }}"></script>
+<script>
+    $(document).ready(function(){
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
 </body>
 </html>
