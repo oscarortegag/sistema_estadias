@@ -22,15 +22,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .encabezado
     {
         position: fixed;
+        left: 0; /* Posicionamos la cabecera al lado izquierdo */
         top: 0;
         width: 100%;
-        height: 50px;
+        height: 150px;
         text-align:center;
         background-color: #00ab84;
         min-height: 80px;
         color:#ffffff;
-        padding-bottom: 50px;
+        padding-bottom:    200px;
+        z-index: 200;
     }
+
     .encabezado>span {
         display:inline-block;
         vertical-align:middle;
@@ -52,26 +55,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
         color:#ffffff;
 
     }
+
+    .contenido {
+        margin-top: 200px;
+    }
+
+
+    @media only screen and (min-width: 1201px) {
+        .encabezado
+        {
+            position: fixed;
+            left: 0; /* Posicionamos la cabecera al lado izquierdo */
+            top: 0;
+            width: 100%;
+            height: 50px;
+            text-align:center;
+            background-color: #00ab84;
+            min-height: 80px;
+            color:#ffffff;
+            padding-bottom: 50px;
+            z-index: 50;
+        }
+        .contenido {
+            margin-top: 15px;
+        }
+
+    }
+
+
 </style>
 </head>
 <body>
 <header>
-    <div class="encabezado">
-        <div>
-        <div class="col-lg-2">
-            <img src="{{ asset("/images/baner_UT-230_blanco.png") }}">
-        </div>
-            <div class="col-lg-10">
-                <h1><span>Universidad Tecnológica de Chetumal</span></h1>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="encabezado">
+                    <div>
+                        <div class="col-lg-2">
+                            <img src="{{ asset("/images/baner_UT-230_blanco.png") }}">
+                        </div>
+                        <div class="col-lg-10">
+                            <h1><span>Universidad Tecnológica de Chetumal</span></h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
+
 </header>
+
 <!-- Main content -->
-<section class="content container-fluid" style="margin-top: 150px">
-
-    @yield('content')
-
+<section class="content container-fluid" >
+    <div class="contenido">
+        @yield('content')
+    </div>
 </section>
 <!-- /.content -->
 

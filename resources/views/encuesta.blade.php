@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- iCheck -->
-    <div class="col-md-4">
+    <div class="col-md-offset-3 col-md-6">
         <div class="box box-success" style="margin-top: 100px">
             <div class="box-header">
                 <h2 class="box-title">Pregunta con una respuesta</h2>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-offset-3 col-md-6">
         <div class="box box-success" style="margin-top: 100px">
             <div class="box-header">
                 <h2 class="box-title">Pregunta con varias respuesta</h2>
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-offset-3 col-md-6">
         <div class="box box-success" style="margin-top: 100px">
             <div class="box-header">
                 <h2 class="box-title">Pregunta con respuesta abierta</h2>

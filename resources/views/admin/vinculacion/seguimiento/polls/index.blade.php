@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Listado de encuestas ({{ $period->displayName }})</h1>
+    <h1>Listado de encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
 @stop
 
 @section('content')
@@ -34,6 +34,7 @@
                                     <td>{{ $poll->description  }}  </td>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
                                     </td>
                                 </tr>
                             @empty
