@@ -41,4 +41,7 @@ Route::get('statistics/{period}', [
 ]);
 
 
+//Auth::routes();
+Auth::routes(['register' => false]);
 
+//Route::get('/home', 'HomeController@index')->name('home');
