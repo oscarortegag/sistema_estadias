@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class PollController extends Controller
+class SurveyController extends Controller
 {
     function index(Period $period)
     {

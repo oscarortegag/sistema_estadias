@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
-});
+});*/
 
 
 Route::get('/encuesta', function () {
@@ -44,4 +44,6 @@ Route::get('statistics/{period}', [
 //Auth::routes();
 Auth::routes(['register' => false]);
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/', 'HomeController@index')->name('home');
