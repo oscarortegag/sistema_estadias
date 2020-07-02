@@ -30,9 +30,9 @@ Route::get('students/{period}', [
     'as'   => 'students.index',
 ]);
 
-Route::get('polls/{period}', [
-    'uses' => 'admin\vinculacion\seguimiento\PollController@index',
-    'as'   => 'polls.index',
+Route::get('surveys/{period}', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyController@index',
+    'as'   => 'surveys.index',
 ]);
 
 Route::get('statistics/{period}', [
@@ -46,4 +46,4 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

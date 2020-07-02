@@ -28,10 +28,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($polls as $poll)
+                            @forelse ($surveys as $survey)
                                 <tr>
-                                    <td>{{ $poll->displayName }} </td>
-                                    <td>{{ $poll->description  }}  </td>
+                                    <td>{{ $survey->displayName }} </td>
+                                    <td>{{ $survey->description  }}  </td>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>

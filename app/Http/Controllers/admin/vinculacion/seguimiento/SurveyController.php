@@ -11,11 +11,11 @@ class SurveyController extends Controller
 {
     function index(Period $period)
     {
-        $polls = DB::table('polls as l')
+        $surveys = DB::table('surveys as l')
             ->select(DB::raw("displayName, description"))
             ->where('l.period_id', '=', $period->id)
             ->get();
 
-        return view('admin.vinculacion.seguimiento.polls.index', compact('period', 'polls'));
+        return view('admin.vinculacion.seguimiento.surveys.index', compact('period', 'surveys'));
     }
 }

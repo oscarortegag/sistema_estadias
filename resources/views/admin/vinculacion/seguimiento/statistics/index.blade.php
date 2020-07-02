@@ -26,14 +26,14 @@
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                    <h3>{{ $polls[0]->total }}</h3>
+                    <h3>{{ $surveys[0]->total }}</h3>
 
                     <p>Encuestas registradas</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-android-list"></i>
                 </div>
-                <a href="{{route('polls.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         </div>

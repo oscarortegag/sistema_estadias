@@ -239,6 +239,8 @@ desired effect
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
+
+
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
@@ -251,16 +253,67 @@ desired effect
                 </div>
             </div>
 
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="active">
-                        <a href="{{route('seguimiento.index')}}">
-                            <span>Seguimiento egresados</span>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Menú</li>
+                @if(Auth::user()->hasRole('admin'))
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-user-circle"></i> <span>Seguimiento a egresados</span>
+                        <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+
+                    <ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ route("seguimiento.index") }}">
+                                <i class="fas fa-user-edit"></i> Datos seguimiento
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-users-cog"></i> Usuarios
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-cog"></i> Catalogo de parentesco
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @elseif(Auth::user()->hasRole('alumno'))
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-edit"></i> Validación de datos
                         </a>
                     </li>
-                </ul>
-            </nav>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-edit"></i> Carta de presentación
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-edit"></i> Carta de liberación
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-edit"></i> Encuestas
+                        </a>
+                    </li>
+                @endif
 
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link"  onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="fa fa-fw fa-power-off"></i>Cerrar sesión
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
             <!-- search form (Optional) -->
         {{--  <form action="#" method="get" class="sidebar-form">
            <div class="input-group">
