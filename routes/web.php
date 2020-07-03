@@ -47,3 +47,10 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/nuevo', 'UserController@create')->name('users.create');
+Route::post('/guardar', 'UserController@store')->name('users.store');
+Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
+Route::put('/editar/{id}', 'UserController@update')->name('users.update');
+

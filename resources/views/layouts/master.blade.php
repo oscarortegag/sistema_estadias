@@ -270,7 +270,7 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("users.index") }}#">
                                 <i class="fas fa-users-cog"></i> Usuarios
                             </a>
                         </li>
