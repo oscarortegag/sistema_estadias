@@ -54,3 +54,5 @@ Route::post('/guardar', 'UserController@store')->name('users.store');
 Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
 Route::put('/editar/{id}', 'UserController@update')->name('users.update');
 
+Route::get('/correo', 'EmailController@envio');
+
