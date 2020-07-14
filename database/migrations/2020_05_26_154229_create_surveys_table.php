@@ -19,9 +19,9 @@ class CreateSurveysTable extends Migration
             $table->string('displayName');
             $table->text('description');
             $table->boolean('validation');
-            $table->boolean('open');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->boolean('open')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
