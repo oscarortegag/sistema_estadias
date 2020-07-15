@@ -18,4 +18,10 @@ class SurveyController extends Controller
 
         return view('admin.vinculacion.seguimiento.surveys.index', compact('period', 'surveys'));
     }
+
+    function create()
+    {
+
+        return view('admin.vinculacion.seguimiento.surveys.create', compact('period', 'surveys'));
+    }
 }

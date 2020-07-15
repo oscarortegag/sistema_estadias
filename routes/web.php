@@ -35,6 +35,8 @@ Route::get('surveys/{period}', [
     'as'   => 'surveys.index',
 ]);
 
+Route::get('/surveys_nuevo', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
+
 Route::get('statistics/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StatisticController@index',
     'as'   => 'statistics.index',
