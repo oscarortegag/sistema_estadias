@@ -116,3 +116,8 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="/adminlte/ckeditor/ckeditor.js"></script>
+    <script src="/js/admin/vinculacion/seguimiento/survey/create.js"></script>
+@endpush
