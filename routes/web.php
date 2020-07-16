@@ -35,7 +35,20 @@ Route::get('surveys/{period}', [
     'as'   => 'surveys.index',
 ]);
 
-Route::get('/surveys_nuevo', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
+Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
+Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit');
+
+
+Route::get('questions_new/{survey}', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@create',
+    'as'   => 'questions.create',
+]);
+
+Route::get('questions_edit/{question}', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@edit',
+    'as'   => 'questions.edit',
+]);
+
 
 Route::get('statistics/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StatisticController@index',

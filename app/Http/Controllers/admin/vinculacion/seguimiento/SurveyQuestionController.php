@@ -1,30 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
-use App\SurveyQuestion;
+use App\admin\vinculacion\seguimiento\Period;
+use App\admin\vinculacion\seguimiento\Survey;
+use App\admin\vinculacion\seguimiento\SurveyQuestion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class SurveyQuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    function create(Survey $survey)
     {
-        //
+        $period = Period::find($survey->period_id);
+
+        return view('admin.vinculacion.seguimiento.questions.create', compact('period', 'survey'));
     }
 
     /**
@@ -55,9 +52,12 @@ class SurveyQuestionController extends Controller
      * @param  \App\SurveyQuestion  $surveyQuestions
      * @return \Illuminate\Http\Response
      */
-    public function edit(SurveyQuestion $surveyQuestions)
+    public function edit(SurveyQuestion $question)
     {
-        //
+        $survey = $question->survey;
+        $period = Period::find($survey->period_id);
+
+        return view('admin.vinculacion.seguimiento.questions.edit', compact('period', 'survey', 'question' ));
     }
 
     /**

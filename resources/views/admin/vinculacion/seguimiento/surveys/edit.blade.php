@@ -59,7 +59,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-outline card-success">
                     <div class="card-header">
-                        <h3>Nueva encuesta</h3>
+                        <h3>Editar encuesta</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -73,17 +73,16 @@
                                 </ul>
                             @endif
 
-                            <input name="period_id" type="hidden" value={{ $period->id }} id='period_id'>
 
                             <div class="form-group">
                                 <label for="displayName" class="col-form-label text-md-right">Nombre</label>
-                                <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" value="{{ old('displayName') }}" required autofocus>
+                                <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" value="{{ $survey->displayName }}" required autofocus>
                             </div>
 
                             <div class="form-group">
                                 <label for="description" class="col-form-label text-md-right">Descripción</label>
                                 <textarea id="description" name="description" rows="3" class="form-control">
-
+                                {{  $survey->description }}
                                 </textarea>
                             </div>
 
@@ -91,8 +90,13 @@
                                 <li class="list-group-item">
                                     <div class="row mb-2 mt-5">
                                         <div class="material-switch col-xs-1" style="margin-top: 10px">
-                                            <input id="someSwitchOptionDefault" name="someSwitchOption001" type="checkbox"/>
-                                            <label for="someSwitchOptionDefault" class="label-primary"></label>
+
+                                            @if ($survey->validation)
+                                                <input id="validation" name="validation" type="checkbox" checked />
+                                            @else
+                                                <input id="validation" name="validation" type="checkbox" />
+                                            @endif
+                                            <label for="validation" class="label-primary"></label>
                                         </div>
                                         <div class="col-xs-11">
                                             Validar datos de contacto?
@@ -114,12 +118,59 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+
+                <div class="col-md-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header"> <h3>Preguntas </h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="form-group">
+                                    <a href="{{route('questions.create', ['id'=>$survey->id])}}" class="btn btn-success">Agregar pregunta</a>
+                                </div>
+                                <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Pregunta</th>
+                                        <th>Complemento</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($survey->questions as $question)
+                                        <tr>
+                                            <td>{{ $question->name }} </td>
+                                            <td>{{ $question->content }}  </td>
+                                            <td>{{ $question->complemento }}  </td>
+                                            <td>
+                                                <a href="{{route('questions.edit', ['id'=>$question->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar pregunta"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fas fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">
+                                                <p> No existen preguntas en la encuesta </p>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="/adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+@endpush
+
 @push('scripts')
     <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="/js/admin/vinculacion/seguimiento/surveys/create.js"></script>
+    <script src="/adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="/js/admin/vinculacion/seguimiento/surveys/edit.js"></script>
 @endpush

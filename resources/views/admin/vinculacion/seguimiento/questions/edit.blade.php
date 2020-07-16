@@ -2,6 +2,7 @@
 
 @section('header')
     <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
+    <h2>{{$survey->diplayname}}</h2>
 @stop
 
 <style>
@@ -59,7 +60,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-outline card-success">
                     <div class="card-header">
-                        <h3>Nueva encuesta</h3>
+                        <h3>Editar una pregunta</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -76,14 +77,30 @@
                             <input name="period_id" type="hidden" value={{ $period->id }} id='period_id'>
 
                             <div class="form-group">
-                                <label for="displayName" class="col-form-label text-md-right">Nombre</label>
-                                <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" value="{{ old('displayName') }}" required autofocus>
+                                <label for="name" class="col-form-label text-md-right">Nombre</label>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{  $question->name }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="type_question" class="col-form-label text-md-right">Tipo de pregunta</label>
+                                <select name = "type_question" class="form-control">
+                                    <option value = 0>Seleccione el tipo de pregunta</option>
+                                    <option value= "1"  {{ $question->type_question = '1'? selected : }}Pregunta con una respuesta con opciones </option>
+                                    <option value= "2"  $question->type_question = '2'? 'selected' : ''>Pregunta con varias respuestas con opciones </option>
+                                    <option value= "4"  $question->type_question = '3'? 'selected' : ''>Pregunta con respuesta abierta</option>
+                                    <option value= "5" {{ $question->type_question = '4'? selected :  }}>Pregunta con respuesta tipo fecha</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="description" class="col-form-label text-md-right">Descripción</label>
-                                <textarea id="description" name="description" rows="3" class="form-control">
-
+                                <label for="content" class="col-form-label text-md-right">Pregunta</label>
+                                <textarea id="content" name="content" rows="3" class="form-control">
+                                    {{ $question->content }}
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="complemento" class="col-form-label text-md-right">Complemento de pregunta</label>
+                                <textarea id="complemento" name="complemento" rows="3" class="form-control">
+                                    {{ $question->complemento }}
                                 </textarea>
                             </div>
 
@@ -91,11 +108,16 @@
                                 <li class="list-group-item">
                                     <div class="row mb-2 mt-5">
                                         <div class="material-switch col-xs-1" style="margin-top: 10px">
-                                            <input id="someSwitchOptionDefault" name="someSwitchOption001" type="checkbox"/>
-                                            <label for="someSwitchOptionDefault" class="label-primary"></label>
+                                            @if ($survey->required)
+                                                <input id="required" name="required" type="checkbox" checked />
+                                            @else
+                                                <input id="required" name="required" type="checkbox" />
+                                            @endif
+
+                                            <label for="required" class="label-primary"></label>
                                         </div>
                                         <div class="col-xs-11">
-                                            Validar datos de contacto?
+                                            Pregunta requerida?
                                         </div>
                                     </div>
                                 </li>
@@ -121,5 +143,5 @@
 
 @push('scripts')
     <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="/js/admin/vinculacion/seguimiento/surveys/create.js"></script>
+    <script src="/js/admin/vinculacion/seguimiento/questions/create.js"></script>
 @endpush

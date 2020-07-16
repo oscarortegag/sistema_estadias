@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="form-group">
-                                <a href="#" class="btn btn-success">Agregar encuesta</a>
+                                <a href="{{route('surveys.create', ['id'=>$period->id])}}" class="btn btn-success">Agregar encuesta</a>
                             </div>
                         <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
@@ -33,13 +33,13 @@
                                     <td>{{ $survey->displayName }} </td>
                                     <td>{{ $survey->description  }}  </td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
+                                        <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7">
+                                    <td colspan="3">
                                         <p> No existen encuestas en el periodo </p>
                                     </td>
                                 </tr>
