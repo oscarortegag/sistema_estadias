@@ -26,7 +26,7 @@ class KinshipController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vinculacion.seguimiento.kinships.create');
     }
 
     /**
@@ -37,7 +37,17 @@ class KinshipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+
+        $kinship = Kinship::create([
+            'name' => $request->input('name'),
+        ]);
+
+
+        return redirect()->route('kinships.index');
     }
 
     /**

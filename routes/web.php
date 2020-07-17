@@ -69,3 +69,6 @@ Route::post('/guardar', 'UserController@store')->name('users.store');
 Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
 Route::put('/editar/{id}', 'UserController@update')->name('users.update');
 
+Route::get('/kinships', 'KinshipController@index')->name('kinships.index');
+Route::get('/new_kinship', 'KinshipController@create')->name('kinships.create');
+Route::post('/guardar_kinship', 'KinshipController@store')->name('kinships.store');
