@@ -33,7 +33,14 @@
                                         <td>{{$loop->index+1 }}</td>
                                         <td>{{ $kinship->name}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos del parentesco"></i></a>
+                                            <a href="{{ route('kinships.edit', ['id'=>$kinship->id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos del parentesco"></i></a>
+                                            <form style="display: inline" method="POST" action="{{ route('kinships.destroy', $kinship->id) }}">
+                                                {!! method_field('DELETE') !!}
+                                                {!! csrf_field() !!}
+
+                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de parentesco"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @empty

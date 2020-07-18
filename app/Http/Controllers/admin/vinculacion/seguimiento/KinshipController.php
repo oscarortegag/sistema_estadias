@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\Kinship;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class KinshipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $kinships = Kinship::all();
@@ -19,22 +15,11 @@ class KinshipController extends Controller
         return view('admin.vinculacion.seguimiento.kinships.index', compact('kinships'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.vinculacion.seguimiento.kinships.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -50,48 +35,31 @@ class KinshipController extends Controller
         return redirect()->route('kinships.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\admin\vinculacion\seguimiento\Kinship  $kinship
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kinship $kinship)
+    public function edit($id)
     {
-        //
+        $kinship = Kinship::find($id);
+
+        return view('admin.vinculacion.seguimiento.kinships.edit', compact('kinship'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\admin\vinculacion\seguimiento\Kinship  $kinship
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kinship $kinship)
+    public function update(Request $request, $id)
     {
-        //
+        $kinship = Kinship::find($id);
+
+        $request->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+        $kinship->update([
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->route('kinships.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\admin\vinculacion\seguimiento\Kinship  $kinship
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Kinship $kinship)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\admin\vinculacion\seguimiento\Kinship  $kinship
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kinship $kinship)
-    {
-        //
+        Kinship::destroy($id);
+        return redirect()->route('kinships.index');
     }
 }

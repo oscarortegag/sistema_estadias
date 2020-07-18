@@ -69,6 +69,9 @@ Route::post('/guardar', 'UserController@store')->name('users.store');
 Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
 Route::put('/editar/{id}', 'UserController@update')->name('users.update');
 
-Route::get('/kinships', 'KinshipController@index')->name('kinships.index');
-Route::get('/new_kinship', 'KinshipController@create')->name('kinships.create');
-Route::post('/guardar_kinship', 'KinshipController@store')->name('kinships.store');
+Route::get('/kinships', 'admin\vinculacion\seguimiento\KinshipController@index')->name('kinships.index');
+Route::get('/new_kinship', 'admin\vinculacion\seguimiento\KinshipController@create')->name('kinships.create');
+Route::post('/guardar_kinship', 'admin\vinculacion\seguimiento\KinshipController@store')->name('kinships.store');
+Route::get('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@edit')->name('kinships.edit');
+Route::put('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@update')->name('kinships.update');
+Route::delete('/delete_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@destroy')->name('kinships.destroy');
