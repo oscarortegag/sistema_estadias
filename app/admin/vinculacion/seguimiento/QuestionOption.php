@@ -5,10 +5,10 @@ namespace App\admin\vinculacion\seguimiento;
 use App\admin\vinculacion\seguimiento\SurveyQuestion;
 use Illuminate\Database\Eloquent\Model;
 
-class Survey extends Model
+class QuestionOption extends Model
 {
-    public function questions()
+    public function question()
     {
-       return $this->hasMany(SurveyQuestion::class);
+        return $this->belongsTo(SurveyQuestion::class);
     }
 }

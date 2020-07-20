@@ -35,6 +35,21 @@ Route::get('surveys/{period}', [
     'as'   => 'surveys.index',
 ]);
 
+Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
+Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit');
+
+
+Route::get('questions_new/{survey}', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@create',
+    'as'   => 'questions.create',
+]);
+
+Route::get('questions_edit/{question}', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@edit',
+    'as'   => 'questions.edit',
+]);
+
+
 Route::get('statistics/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StatisticController@index',
     'as'   => 'statistics.index',
@@ -53,6 +68,13 @@ Route::get('/nuevo', 'UserController@create')->name('users.create');
 Route::post('/guardar', 'UserController@store')->name('users.store');
 Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
 Route::put('/editar/{id}', 'UserController@update')->name('users.update');
+
+Route::get('/kinships', 'admin\vinculacion\seguimiento\KinshipController@index')->name('kinships.index');
+Route::get('/new_kinship', 'admin\vinculacion\seguimiento\KinshipController@create')->name('kinships.create');
+Route::post('/guardar_kinship', 'admin\vinculacion\seguimiento\KinshipController@store')->name('kinships.store');
+Route::get('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@edit')->name('kinships.edit');
+Route::put('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@update')->name('kinships.update');
+Route::delete('/delete_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@destroy')->name('kinships.destroy');
 
 Route::get('/correo', 'EmailController@envio');
 
