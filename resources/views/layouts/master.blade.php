@@ -275,7 +275,7 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("kinships.index") }}">
                                 <i class="fas fa-cog"></i> Catalogo de parentesco
                             </a>
                         </li>

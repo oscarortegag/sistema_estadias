@@ -2,7 +2,7 @@
 
 @section('header')
     <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
-    <h2>{{$survey->diplayname}}</h2>
+    <h2>{{$survey->diplayName}}</h2>
 @stop
 
 <style>
@@ -64,7 +64,8 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('questions.update', [$question->id]) }}">
+                            {!! method_field('PUT') !!}
                             @csrf
                             @if (count($errors)>0)
                                 <ul>
@@ -84,10 +85,10 @@
                                 <label for="type_question" class="col-form-label text-md-right">Tipo de pregunta</label>
                                 <select name = "type_question" class="form-control">
                                     <option value = 0>Seleccione el tipo de pregunta</option>
-                                    <option value= "1"  {{ $question->type_question = '1'? selected : }}Pregunta con una respuesta con opciones </option>
-                                    <option value= "2"  $question->type_question = '2'? 'selected' : ''>Pregunta con varias respuestas con opciones </option>
-                                    <option value= "4"  $question->type_question = '3'? 'selected' : ''>Pregunta con respuesta abierta</option>
-                                    <option value= "5" {{ $question->type_question = '4'? selected :  }}>Pregunta con respuesta tipo fecha</option>
+                                    <option value= "1"  {{ $question->type_question = '1'? 'selected' : ''}} >Pregunta con una respuesta con opciones </option>
+                                    <option value= "2"  {{ $question->type_question = '2'? 'selected' : ''}}>Pregunta con varias respuestas con opciones </option>
+                                    <option value= "3"  {{ $question->type_question = '3'? 'selected' : ''}}>Pregunta con respuesta abierta</option>
+                                    <option value= "4" {{ $question->type_question = '4'? 'selected' : ''}}>Pregunta con respuesta tipo fecha</option>
                                 </select>
                             </div>
 
@@ -108,7 +109,7 @@
                                 <li class="list-group-item">
                                     <div class="row mb-2 mt-5">
                                         <div class="material-switch col-xs-1" style="margin-top: 10px">
-                                            @if ($survey->required)
+                                            @if ($question->required)
                                                 <input id="required" name="required" type="checkbox" checked />
                                             @else
                                                 <input id="required" name="required" type="checkbox" />
@@ -128,7 +129,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
-                                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="btn btn-default">Regresar</a>
+                                    <a href="{{route('surveys.edit', ['id'=>$survey->id])}}" class="btn btn-default">Regresar</a>
                                 </div>
                             </div>
                         </form>

@@ -2,7 +2,7 @@
 
 @section('header')
     <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
-    <h2>{{$survey->diplayname}}</h2>
+    <h2>{{ $survey->displayName }}</h2>
 @stop
 
 <style>
@@ -64,7 +64,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route("questions.store") }}">
                             @csrf
                             @if (count($errors)>0)
                                 <ul>
@@ -74,7 +74,7 @@
                                 </ul>
                             @endif
 
-                            <input name="survey_id" type="hidden" value={{ $survey->id }} id='period_id'>
+                            <input name="survey_id" type="hidden" value={{ $survey->id }} id='survey_id'>
 
                             <div class="form-group">
                                 <label for="name" class="col-form-label text-md-right">Nombre</label>
@@ -121,7 +121,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
-                                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="btn btn-default">Regresar</a>
+                                    <a href="{{route('surveys.edit', ['id'=>$survey->id])}}" class="btn btn-default">Regresar</a>
                                 </div>
                             </div>
                         </form>
