@@ -14,16 +14,32 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('enrollment');
+            $table->increments('student_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('institution_id');
             $table->unsignedInteger('period_id');
-            $table->unsignedInteger('educative_program_id');
-            $table->string('primerApellido');
-            $table->string('segundoApellido');
-            $table->string('name');
-            $table->string('email');
-            $table->string('alternateEmail');
-            $table->string('cellPhone');
+            $table->string('name');            
+            $table->string('lastName');
+            $table->string('motherLastName');         
+            $table->unsignedInteger('gender_id');
+            $table->date('dateOfBirth');
+            $table->string('enrollment');
+            $table->unsignedInteger('quarter_id');
+            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('shift_id');
+            $table->string('socialSecurityNumber');
+            $table->string('accidentInsurance');
+            $table->unsignedInteger('educativeProgram_id');
+            $table->string('outOfTime',2)->nullable();
+            $table->unsignedInteger('schoolOrigin_id');           
+            $table->string('curp');
+            $table->string('institutionalEmail');
+            $table->year('incomeYear');
+            $table->unsignedInteger('degree_id');
+            $table->unsignedInteger('modality_id');             
+            $table->string('cellPhone')->nullable();
+            $table->string('personalEmail')->nullable();            
+            $table->string('facebook')->nullable();           
             $table->timestamps();
         });
     }

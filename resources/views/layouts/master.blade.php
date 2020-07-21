@@ -281,6 +281,102 @@ desired effect
                         </li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-user-circle"></i> <span>Importación</span>
+                        <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ route("imports.create") }}">
+                                <i class="fas fa-user-edit">Importar alumnos</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Importar empresas</i> 
+                            </a>
+                        </li>
+                    </ul>                   
+                </li>                
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-user-circle"></i> <span>Catálogos</span>
+                        <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+
+                    <ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ route("enterprise.index") }}">
+                                <i class="fas fa-user-edit">Institución educativa</i> 
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="{{ route("enterprise.index") }}">
+                                <i class="fas fa-user-edit">Empresa</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("shift.index") }}">
+                                <i class="fas fa-user-edit">Turno</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Modalidad</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Escuela de procedencia</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Carreras</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Periodos</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Género</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Cuatrimestre</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Grupos</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">División académica</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Asesor y vinculación</i> 
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Director académico</i> 
+                            </a>
+                        </li>
+
+                    </ul>                    
+                </li>
+                            
                 @elseif(Auth::user()->hasRole('alumno'))
                     <li>
                         <a href="#">
