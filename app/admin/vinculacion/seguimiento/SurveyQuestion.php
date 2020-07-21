@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class SurveyQuestion extends Model
 {
+    protected $fillable = [
+        'survey_id',
+        'name',
+        'content',
+        'complemento',
+        'required',
+    ];
+
     public function survey()
     {
         return $this->belongsTo(Survey::class);

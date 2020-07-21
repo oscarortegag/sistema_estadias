@@ -36,7 +36,10 @@ Route::get('surveys/{period}', [
 ]);
 
 Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
+Route::post('/survey_store', 'admin\vinculacion\seguimiento\SurveyController@store')->name('surveys.store');
 Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit');
+Route::put('/survey_edit/{id}', 'admin\vinculacion\seguimiento\SurveyController@update')->name('surveys.update');
+
 
 
 Route::get('questions_new/{survey}', [
@@ -44,10 +47,15 @@ Route::get('questions_new/{survey}', [
     'as'   => 'questions.create',
 ]);
 
+Route::post('/question_new', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
+Route::post('/question_edit', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
+
+
 Route::get('questions_edit/{question}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@edit',
     'as'   => 'questions.edit',
 ]);
+Route::put('/questions_update/{question}', 'admin\vinculacion\seguimiento\SurveyQuestionController@update')->name('questions.update');
 
 
 Route::get('statistics/{period}', [

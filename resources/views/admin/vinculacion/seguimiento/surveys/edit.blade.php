@@ -63,7 +63,8 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('surveys.update', [$survey->id]) }}">
+                            {!! method_field('PUT') !!}
                             @csrf
                             @if (count($errors)>0)
                                 <ul>

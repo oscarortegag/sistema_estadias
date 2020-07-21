@@ -26,11 +26,49 @@ class SurveyController extends Controller
         return view('admin.vinculacion.seguimiento.surveys.create', compact('period'));
     }
 
+    public function store(Request $request)
+    {
+        //dd($request);
+
+        $request->validate([
+            'displayName' => 'required|string|max:100',
+            'description' => 'required|string'
+        ]);
+
+
+        $survey = Survey::create([
+            'period_id' => $request->input('period_id'),
+            'displayName' => $request->input('displayName'),
+            'description' => $request->input('description'),
+            'validation' => $request->input('validation')? '1' : '0',
+        ]);
+
+        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
+    }
+
     public function edit($id)
     {
         $survey = Survey::find($id);
         $period = Period::find($survey->period_id);
 
         return view('admin.vinculacion.seguimiento.surveys.edit', compact('survey', 'period'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $survey = Survey::find($id);
+
+        $request->validate([
+            'displayName' => 'required|string|max:100',
+            'description' => 'required|string'
+        ]);
+
+        $survey->update([
+            'displayName' => $request->input('displayName'),
+            'description' => $request->input('description'),
+            'validation' => $request->input('validation')? '1' : '0',
+        ]);
+
+        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
     }
 }

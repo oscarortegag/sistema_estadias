@@ -32,7 +32,22 @@ class SurveyQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type_question' => 'required|integer',
+            'name' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+
+        $question = SurveyQuestion::create([
+            'survey_id' => $request->input('survey_id'),
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'complemento' => $request->input('complemento'),
+            'required' => $request->input('required')? '1' : '0',
+        ]);
+
+        return redirect()->route('questions.edit', ['id'=>$question->id]);
     }
 
     /**
@@ -67,9 +82,24 @@ class SurveyQuestionController extends Controller
      * @param  \App\SurveyQuestion  $surveyQuestions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SurveyQuestion $surveyQuestions)
+    public function update(Request $request, $id)
     {
-        //
+        $surveyQuestions = SurveyQuestion::find($id);
+
+        $request->validate([
+            'type_question' => 'required|integer',
+            'name' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        $surveyQuestions->update([
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'complemento' => $request->input('complemento'),
+            'required' => $request->input('required')? '1' : '0',
+        ]);
+
+        return redirect()->route('questions.edit', [$surveyQuestions->id]);
     }
 
     /**

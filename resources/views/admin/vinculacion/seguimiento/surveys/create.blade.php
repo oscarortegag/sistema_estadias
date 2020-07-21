@@ -63,7 +63,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route("surveys.store") }}">
                             @csrf
                             @if (count($errors)>0)
                                 <ul>
@@ -91,9 +91,10 @@
                                 <li class="list-group-item">
                                     <div class="row mb-2 mt-5">
                                         <div class="material-switch col-xs-1" style="margin-top: 10px">
-                                            <input id="someSwitchOptionDefault" name="someSwitchOption001" type="checkbox"/>
-                                            <label for="someSwitchOptionDefault" class="label-primary"></label>
+                                            <input id="validation" name="validation" type="checkbox" />
+                                            <label for="validation" class="label-primary"></label>
                                         </div>
+
                                         <div class="col-xs-11">
                                             Validar datos de contacto?
                                         </div>
