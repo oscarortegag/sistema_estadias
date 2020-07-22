@@ -7,8 +7,6 @@
 
 @section('content')
 
-    <div class="container">
-
         <div class="container box">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -18,13 +16,15 @@
                         <div class="table-responsive">
                             <div class="form-group">
                                 <a href="{{route('surveys.create', ['id'=>$period->id])}}" class="btn btn-success">Agregar encuesta</a>
+                                <a href="{{route('surveys.duplicate', ['id'=>$period->id])}}" class="btn btn-success">Copiar encuesta</a>
+
                             </div>
                         <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
+                                <th width="30%">Nombre</th>
+                                <th width="60%">Descripción</th>
+                                <th width="10%">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,6 +35,15 @@
                                     <td>
                                         <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
+                                        @if($survey->questions->count() == 0)
+                                        <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
+                                            {!! method_field('DELETE') !!}
+                                            {!! csrf_field() !!}
+
+                                            <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de encuesta"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        </form>
+                                        @endif
+
                                     </td>
                                 </tr>
                             @empty

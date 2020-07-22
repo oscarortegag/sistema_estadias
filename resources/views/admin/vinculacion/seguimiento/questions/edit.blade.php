@@ -85,10 +85,10 @@
                                 <label for="type_question" class="col-form-label text-md-right">Tipo de pregunta</label>
                                 <select name = "type_question" class="form-control">
                                     <option value = 0>Seleccione el tipo de pregunta</option>
-                                    <option value= "1"  {{ $question->type_question = '1'? 'selected' : ''}} >Pregunta con una respuesta con opciones </option>
-                                    <option value= "2"  {{ $question->type_question = '2'? 'selected' : ''}}>Pregunta con varias respuestas con opciones </option>
-                                    <option value= "3"  {{ $question->type_question = '3'? 'selected' : ''}}>Pregunta con respuesta abierta</option>
-                                    <option value= "4" {{ $question->type_question = '4'? 'selected' : ''}}>Pregunta con respuesta tipo fecha</option>
+                                    <option value= "1"  {{ $question->type_question == '1'? 'selected' : ''}} >Pregunta con una respuesta con opciones </option>
+                                    <option value= "2"  {{ $question->type_question == '2'? 'selected' : ''}}>Pregunta con varias respuestas con opciones </option>
+                                    <option value= "3"  {{ $question->type_question == '3'? 'selected' : ''}}>Pregunta con respuesta abierta</option>
+                                    <option value= "4" {{ $question->type_question == '4'? 'selected' : ''}}>Pregunta con respuesta tipo fecha</option>
                                 </select>
                             </div>
 
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 <label for="complemento" class="col-form-label text-md-right">Complemento de pregunta</label>
                                 <textarea id="complemento" name="complemento" rows="3" class="form-control">
-                                    {{ $question->complemento }}
+                                    {{ $question->complement }}
                                 </textarea>
                             </div>
 
@@ -137,6 +137,60 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+                @if ($question->type_question == 1 or $question->type_question == 2)
+                <div class="col-md-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header"> <h3>opciones</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form method="POST" action="{{ route('options.store') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input name="survey_question_id" type="hidden" value={{ $question->id }} id='survey_question_id'>
+                                            <input type="text" class="form-control" name="content" aria-label="...">
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-success">
+                                                    Agregar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($question->options as $option)
+                                        <tr>
+                                            <td>{{ $option->content }} </td>
+                                            <td>
+                                                <form style="display: inline" method="POST" action="{{ route("options.destroy", [$option->id]) }}">
+                                                    {!! method_field('DELETE') !!}
+                                                    {!! csrf_field() !!}
+
+                                                    <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar opción"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">
+                                                <p> No existen opciones de la pregunta </p>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -144,5 +198,5 @@
 
 @push('scripts')
     <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="/js/admin/vinculacion/seguimiento/questions/create.js"></script>
+    <script src="/js/admin/vinculacion/seguimiento/questions/edit.js"></script>
 @endpush

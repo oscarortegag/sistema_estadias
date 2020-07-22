@@ -97,8 +97,8 @@
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="complemento" class="col-form-label text-md-right">Complemento de pregunta</label>
-                                <textarea id="complemento" name="complemento" rows="3" class="form-control">
+                                <label for="complement" class="col-form-label text-md-right">Complemento de pregunta</label>
+                                <textarea id="complement" name="complement" rows="3" class="form-control">
                                 </textarea>
                             </div>
 

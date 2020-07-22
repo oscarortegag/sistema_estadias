@@ -18,7 +18,7 @@ class CreateSurveyQuestionsTable extends Migration
             $table->enum('type_question', ['1', '2', '3', '4']);
             $table->string('name');
             $table->text('content');
-            $table->text('complemento')->nullable();
+            $table->text('complement')->nullable();
             $table->boolean('required');
             $table->unsignedInteger('survey_id');
             $table->timestamps();

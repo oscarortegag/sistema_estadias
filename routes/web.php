@@ -39,7 +39,16 @@ Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyControlle
 Route::post('/survey_store', 'admin\vinculacion\seguimiento\SurveyController@store')->name('surveys.store');
 Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit');
 Route::put('/survey_edit/{id}', 'admin\vinculacion\seguimiento\SurveyController@update')->name('surveys.update');
+Route::get('survey_duplicate/{period}', 'admin\vinculacion\seguimiento\SurveyController@duplicate')->name('surveys.duplicate');
+Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyController@destroy')->name('surveys.destroy');
+Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate');
 
+
+Route::get('dropdown', function(){
+    $id = \Illuminate\Support\Facades\Input::get('option');
+    $surveys = \App\admin\vinculacion\seguimiento\Survey::where('period_id',$id)->get();
+    return $surveys->pluck('displayName', 'id');
+});
 
 
 Route::get('questions_new/{survey}', [
@@ -48,14 +57,19 @@ Route::get('questions_new/{survey}', [
 ]);
 
 Route::post('/question_new', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
-Route::post('/question_edit', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
+//Route::post('/question_edit', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
 
 
-Route::get('questions_edit/{question}', [
+Route::get('question_edit/{question}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@edit',
     'as'   => 'questions.edit',
 ]);
-Route::put('/questions_update/{question}', 'admin\vinculacion\seguimiento\SurveyQuestionController@update')->name('questions.update');
+Route::put('/question_update/{question}', 'admin\vinculacion\seguimiento\SurveyQuestionController@update')->name('questions.update');
+Route::delete('/question_delete/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@destroy')->name('questions.destroy');
+Route::post('/question_duplicate/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@duplicate')->name('questions.duplicate');
+
+Route::post('/option_new', 'admin\vinculacion\seguimiento\QuestionOptionController@store')->name('options.store');
+Route::delete('/option_delete/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@destroy')->name('options.destroy');
 
 
 Route::get('statistics/{period}', [

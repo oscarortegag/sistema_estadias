@@ -53,11 +53,10 @@
 
 
 @section('content')
-
     <div class="container box">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="card card-outline card-success">
+                <div class="col-md-12">
+                        <div class="card card-outline card-success">
                     <div class="card-header">
                         <h3>Editar encuesta</h3>
                     </div>
@@ -119,7 +118,6 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-
                 <div class="col-md-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header"> <h3>Preguntas </h3></div>
@@ -131,10 +129,10 @@
                                 <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Pregunta</th>
-                                        <th>Complemento</th>
-                                        <th>Acciones</th>
+                                        <th width="30%">Nombre</th>
+                                        <th width="30%">Pregunta</th>
+                                        <th width="30%">Complemento</th>
+                                        <th width="10%">Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -142,10 +140,20 @@
                                         <tr>
                                             <td>{{ $question->name }} </td>
                                             <td>{{ $question->content }}  </td>
-                                            <td>{{ $question->complemento }}  </td>
+                                            <td>{{ $question->complement }}  </td>
                                             <td>
                                                 <a href="{{route('questions.edit', ['id'=>$question->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar pregunta"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fas fa-copy"></i></a>
+                                                <form style="display: inline" method="POST" action="{{ route('questions.duplicate', [$question->id]) }}">
+                                                    {!! csrf_field() !!}
+                                                    <button type = "submit" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Duplicar pregunta"><i class="fas fa-copy"></i></button>
+                                                </form>
+                                                <form style="display: inline" method="POST" action="{{ route('questions.destroy', [$question->id]) }}">
+                                                    {!! method_field('DELETE') !!}
+                                                    {!! csrf_field() !!}
+
+                                                    <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @empty
@@ -162,6 +170,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 @endsection

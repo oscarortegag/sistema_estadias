@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\Period;
+use App\admin\vinculacion\seguimiento\QuestionOption;
 use App\admin\vinculacion\seguimiento\Survey;
 use App\admin\vinculacion\seguimiento\SurveyQuestion;
 use Illuminate\Http\Request;
@@ -12,11 +13,6 @@ use App\Http\Controllers\Controller;
 class SurveyQuestionController extends Controller
 {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     function create(Survey $survey)
     {
         $period = Period::find($survey->period_id);
@@ -24,12 +20,6 @@ class SurveyQuestionController extends Controller
         return view('admin.vinculacion.seguimiento.questions.create', compact('period', 'survey'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -43,30 +33,13 @@ class SurveyQuestionController extends Controller
             'survey_id' => $request->input('survey_id'),
             'name' => $request->input('name'),
             'content' => $request->input('content'),
-            'complemento' => $request->input('complemento'),
+            'complement' => $request->input('complement'),
             'required' => $request->input('required')? '1' : '0',
         ]);
 
         return redirect()->route('questions.edit', ['id'=>$question->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\SurveyQuestion  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SurveyQuestion $surveyQuestions)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SurveyQuestion  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
     public function edit(SurveyQuestion $question)
     {
         $survey = $question->survey;
@@ -75,13 +48,6 @@ class SurveyQuestionController extends Controller
         return view('admin.vinculacion.seguimiento.questions.edit', compact('period', 'survey', 'question' ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SurveyQuestion  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $surveyQuestions = SurveyQuestion::find($id);
@@ -95,21 +61,45 @@ class SurveyQuestionController extends Controller
         $surveyQuestions->update([
             'name' => $request->input('name'),
             'content' => $request->input('content'),
-            'complemento' => $request->input('complemento'),
+            'complement' => $request->input('complement'),
             'required' => $request->input('required')? '1' : '0',
         ]);
 
         return redirect()->route('questions.edit', [$surveyQuestions->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\SurveyQuestion  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SurveyQuestion $surveyQuestions)
+    public function destroy($id)
     {
-        //
+        $surveyQuestions = SurveyQuestion::find($id);
+        $survey_id = $surveyQuestions->survey_id;
+
+        $surveyQuestions->delete();
+
+        return redirect()->route('surveys.edit', [$survey_id]);
+    }
+
+    public function duplicate($id)
+    {
+        $surveyQuestions_previous = SurveyQuestion::find($id);
+        $survey_id = $surveyQuestions_previous->survey_id;
+
+        $question = SurveyQuestion::create([
+            'survey_id' => $surveyQuestions_previous->survey_id,
+            'name' => $surveyQuestions_previous->name,
+            'content' => $surveyQuestions_previous->content,
+            'complement' => $surveyQuestions_previous->complement,
+            'required' => $surveyQuestions_previous->required,
+        ]);
+
+        if ($surveyQuestions_previous->options->count() > 0) {
+            foreach ($surveyQuestions_previous->options as $option_previous) {
+                QuestionOption::create([
+                    'survey_question_id' => $question->id,
+                    'content' => $option_previous->content,
+                ]);
+            }
+        }
+
+        return redirect()->route('surveys.edit', [$survey_id]);
     }
 }
