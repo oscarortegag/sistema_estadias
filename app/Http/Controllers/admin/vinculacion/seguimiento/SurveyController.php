@@ -14,25 +14,16 @@ class SurveyController extends Controller
 {
     function index(Period $period)
     {
-        $surveys = Survey::where('period_id', $period->id)->get();
-
-        /*$surveys = DB::table('surveys as l')
-            ->select(DB::raw("id,displayName, description"))
-            ->where('l.period_id', '=', $period->id)
-            ->get();*/
-
-        return view('admin.vinculacion.seguimiento.surveys.index', compact('period', 'surveys'));
+        return view('admin.vinculacion.seguimiento.surveys.index', compact('period'));
     }
 
     function create(Period $period)
     {
-
         return view('admin.vinculacion.seguimiento.surveys.create', compact('period'));
     }
 
     public function store(Request $request)
     {
-        //dd($request);
 
         $request->validate([
             'displayName' => 'required|string|max:100',
@@ -53,9 +44,8 @@ class SurveyController extends Controller
     public function edit($id)
     {
         $survey = Survey::find($id);
-        $period = Period::find($survey->period_id);
 
-        return view('admin.vinculacion.seguimiento.surveys.edit', compact('survey', 'period'));
+        return view('admin.vinculacion.seguimiento.surveys.edit', compact('survey'));
     }
 
     public function update(Request $request, $id)

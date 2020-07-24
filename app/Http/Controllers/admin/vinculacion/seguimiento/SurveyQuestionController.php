@@ -15,9 +15,7 @@ class SurveyQuestionController extends Controller
 
     function create(Survey $survey)
     {
-        $period = Period::find($survey->period_id);
-
-        return view('admin.vinculacion.seguimiento.questions.create', compact('period', 'survey'));
+        return view('admin.vinculacion.seguimiento.questions.create', compact( 'survey'));
     }
 
     public function store(Request $request)
@@ -43,7 +41,7 @@ class SurveyQuestionController extends Controller
     public function edit(SurveyQuestion $question)
     {
         $survey = $question->survey;
-        $period = Period::find($survey->period_id);
+        $period = $survey->period;
 
         return view('admin.vinculacion.seguimiento.questions.edit', compact('period', 'survey', 'question' ));
     }

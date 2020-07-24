@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
+    <h1>Encuestas ({{ $period->name . " / " . date("Y", strtotime($period->firstDay)) }})</h1>
 @stop
 
 <style>
@@ -73,7 +73,7 @@
                                 </ul>
                             @endif
 
-                            <input name="period_id" type="hidden" value={{ $period->id }} id='period_id'>
+                            <input name="period_id" type="hidden" value={{ $period->period_id }} id='period_id'>
 
                             <div class="form-group">
                                 <label for="displayName" class="col-form-label text-md-right">Nombre</label>
@@ -107,7 +107,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
-                                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="btn btn-default">Regresar</a>
+                                    <a href="{{route('surveys.index', ['id'=>$period->period_id])}}" class="btn btn-default">Regresar</a>
                                 </div>
                             </div>
                         </form>

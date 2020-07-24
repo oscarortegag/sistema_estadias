@@ -12,7 +12,7 @@ class SeguimientoController extends Controller
     function index()
     {
 
-        $periodos = Period::select(DB::raw("CONCAT_WS(' ',Year(year), displayName) AS nombre"), 'id')
+        $periodos = Period::select(DB::raw("CONCAT_WS(' ',Year(firstDay), name) AS nombre"), 'period_id')
             ->getQuery() // Optional: downgrade to non-eloquent builder so we don't build invalid User objects.
             ->get();
 

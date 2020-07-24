@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
+    <h1>Encuestas ({{ $period->name . " / " . date("Y", strtotime($period->firstDay)) }})</h1>
 @stop
 
 @section('content')
@@ -24,7 +24,7 @@
                                 </ul>
                             @endif
 
-                            <input name="period_id" type="hidden" value={{ $period->id }} id='period_id'>
+                            <input name="period_id" type="hidden" value={{ $period->period_id }} id='period_id'>
 
                             <div class="form-group">
                                 <label for="previous_period_id" class= "col-form-label">
@@ -33,7 +33,7 @@
                                 <select name = "previous_period_id" class="form-control" id="previous_period_id">
                                     <option value = ''>Seleccione el periodo anterior</option>
                                     @foreach($periods as $previous_period)
-                                        <option value="{{ $previous_period->id }}">{{$previous_period->displayName . " / " . date("Y", strtotime($previous_period->year))}}</option>
+                                        <option value="{{ $previous_period->period_id }}">{{$previous_period->name . " / " . date("Y", strtotime($previous_period->firstDay))}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -52,7 +52,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Copiar
                                     </button>
-                                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="btn btn-default">Regresar</a>
+                                    <a href="{{route('surveys.index', ['id'=>$period->period_id])}}" class="btn btn-default">Regresar</a>
                                 </div>
                             </div>
                         </form>

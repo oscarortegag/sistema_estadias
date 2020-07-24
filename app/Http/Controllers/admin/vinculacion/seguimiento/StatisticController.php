@@ -13,12 +13,12 @@ class StatisticController extends Controller
     {
         $surveys = DB::table('surveys')
             ->select(DB::raw("count(*) as total"))
-            ->where('period_id', '=', $period->id)
+            ->where('period_id', '=', $period->period_id)
             ->get();
 
         $students = DB::table('students')
             ->select(DB::raw("count(*) as total"))
-            ->where('period_id', '=', $period->id)
+            ->where('period_id', '=', $period->_period_id)
             ->get();
 
         //dd($polls[0]->total);

@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Listado de encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
+    <h1>Listado de encuestas ({{ $period->name . " / " . date("Y", strtotime($period->firstDay)) }})</h1>
 @stop
 
 @section('content')
@@ -15,8 +15,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="form-group">
-                                <a href="{{route('surveys.create', ['id'=>$period->id])}}" class="btn btn-success">Agregar encuesta</a>
-                                <a href="{{route('surveys.duplicate', ['id'=>$period->id])}}" class="btn btn-success">Copiar encuesta</a>
+                                <a href="{{route('surveys.create', ['id'=>$period->period_id])}}" class="btn btn-success">Agregar encuesta</a>
+                                <a href="{{route('surveys.duplicate', ['id'=>$period->period_id])}}" class="btn btn-success">Copiar encuesta</a>
 
                             </div>
                         <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
@@ -28,10 +28,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($surveys as $survey)
+                            @forelse ($period->surveys as $survey)
                                 <tr>
-                                    <td>{{ $survey->displayName }} </td>
-                                    <td>{{ $survey->description  }}  </td>
+                                    <td>{{ $survey->displayName }}</td>
+                                    <td>{!! $survey->description !!}</td>
                                     <td>
                                         <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>

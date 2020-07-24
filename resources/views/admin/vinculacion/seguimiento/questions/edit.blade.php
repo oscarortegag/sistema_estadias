@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
-    <h2>{{$survey->diplayName}}</h2>
+    <h1>Encuestas ({{ $period->name . " / " . date("Y", strtotime($period->firstDay)) }})</h1>
+    <h1>{{ $survey->displayName }}</h1>
 @stop
 
 <style>
@@ -99,8 +99,8 @@
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="complemento" class="col-form-label text-md-right">Complemento de pregunta</label>
-                                <textarea id="complemento" name="complemento" rows="3" class="form-control">
+                                <label for="complement" class="col-form-label text-md-right">Complemento de pregunta</label>
+                                <textarea id="complement" name="complement" rows="3" class="form-control">
                                     {{ $question->complement }}
                                 </textarea>
                             </div>
@@ -118,7 +118,7 @@
                                             <label for="required" class="label-primary"></label>
                                         </div>
                                         <div class="col-xs-11">
-                                            Pregunta requerida?
+                                            Respuesta requerida?
                                         </div>
                                     </div>
                                 </li>
@@ -160,8 +160,8 @@
                                 <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Acciones</th>
+                                        <th width="80%">Nombre</th>
+                                        <th width="20%">Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -169,6 +169,8 @@
                                         <tr>
                                             <td>{{ $option->content }} </td>
                                             <td>
+                                                <button class="btn btn-primary btn-sm" type="button" id="btnEditOption" data-id="{{$option->id}}"><i class="fas fa-edit"></i></button>
+
                                                 <form style="display: inline" method="POST" action="{{ route("options.destroy", [$option->id]) }}">
                                                     {!! method_field('DELETE') !!}
                                                     {!! csrf_field() !!}
@@ -194,9 +196,20 @@
             </div>
         </div>
     </div>
+
+    <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
     <script src="/adminlte/ckeditor/ckeditor.js"></script>
+    <script src="{{ asset('js/SEQ.Utilities.js') }}"></script>
+    <script src="{{ asset('js/routes/routes.js') }}"></script>
     <script src="/js/admin/vinculacion/seguimiento/questions/edit.js"></script>
 @endpush

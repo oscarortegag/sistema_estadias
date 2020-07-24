@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
-    <h2>{{ $survey->displayName }}</h2>
+    <h1>Encuestas ({{ $survey->period->name . " / " . date("Y", strtotime($survey->period->firstDay)) }})</h1>
+    <h1>{{ $survey->displayName }}</h1>
 @stop
 
 <style>

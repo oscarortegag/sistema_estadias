@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Encuestas ({{ $period->displayName . " / " . date("Y", strtotime($period->year)) }})</h1>
+    <h1>Encuestas ({{ $survey->period->name . " / " . date("Y", strtotime($survey->period->firstDay)) }})</h1>
 @stop
 
 <style>
@@ -110,7 +110,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Guardar
                                     </button>
-                                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="btn btn-default">Regresar</a>
+                                    <a href="{{route('surveys.index', ['id'=>$survey->period->period_id])}}" class="btn btn-default">Regresar</a>
                                 </div>
                             </div>
                         </form>
@@ -139,8 +139,8 @@
                                     @forelse ($survey->questions as $question)
                                         <tr>
                                             <td>{{ $question->name }} </td>
-                                            <td>{{ $question->content }}  </td>
-                                            <td>{{ $question->complement }}  </td>
+                                            <td>{!! $question->content !!}  </td>
+                                            <td>{!! $question->complement !!}  </td>
                                             <td>
                                                 <a href="{{route('questions.edit', ['id'=>$question->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar pregunta"><i class="fas fa-edit"></i></a>
                                                 <form style="display: inline" method="POST" action="{{ route('questions.duplicate', [$question->id]) }}">

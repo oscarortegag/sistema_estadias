@@ -20,7 +20,12 @@ class QuestionOptionController extends Controller
         return redirect()->route('questions.edit', ['id'=>$opcion->survey_question_id]);
     }
 
+    public function editModal($id)
+    {
+        $option = QuestionOption::find($id);
 
+        return view('admin.vinculacion.seguimiento.options.editModal', compact('option'));
+    }
 
     public function destroy($id)
     {
