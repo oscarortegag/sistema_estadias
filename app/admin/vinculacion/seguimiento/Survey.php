@@ -17,6 +17,7 @@ class Survey extends Model
     {
        return $this->hasMany(SurveyQuestion::class);
     }
+
     public function period()
     {
         return $this->belongsTo(Period::class, 'period_id', 'period_id');

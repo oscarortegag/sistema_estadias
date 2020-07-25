@@ -20,4 +20,9 @@ class Period extends Model
         return $this->hasMany(Survey::class, 'period_id', 'period_id');
     }
 
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'period_id', 'period_id');
+    }
+
 }

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-        protected $table="students";
-        protected $primaryKey = "student_id";
+    protected $primaryKey = "student_id";
+
+    public function period()
+    {
+        return $this->belongsTo(Period::class, 'period_id', 'period_id');
+    }
 }
