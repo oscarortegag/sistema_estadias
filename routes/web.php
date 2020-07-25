@@ -113,3 +113,6 @@ Route::get('/shift', 'admin\vinculacion\seguimiento\ShiftController@index')->nam
 
 Route::get('/importar', 'admin\vinculacion\seguimiento\ImportarAlumnoController@create')->name('imports.create');
 Route::post('/importar/save', 'admin\vinculacion\seguimiento\ImportarAlumnoController@store')->name('imports.store');
+
+Route::get('/correo', 'EmailController@envio');
+
