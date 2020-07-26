@@ -117,4 +117,10 @@ class SurveyController extends Controller
         return redirect()->route('surveys.index', [$request->input('period_id')]);
 
     }
+
+    function apply_survey(Survey $survey)
+    {
+        //dd($survey);
+        return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey'));
+    }
 }

@@ -12,4 +12,15 @@ class Student extends Model
     {
         return $this->belongsTo(Period::class, 'period_id', 'period_id');
     }
+
+    public function educativeProgram()
+    {
+        return $this->belongsTo(EducativeProgram::class, 'educativeProgram_id', 'educativeProgram_id');
+    }
+
+    public function quarter()
+    {
+        return $this->belongsTo(Quarter::class, 'quarter_id', 'quarter_id');
+    }
+
 }

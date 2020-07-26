@@ -34,7 +34,7 @@
                                     <td>{!! $survey->description !!}</td>
                                     <td>
                                         <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
+                                        <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
                                         @if($survey->questions->count() == 0)
                                         <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
                                             {!! method_field('DELETE') !!}
@@ -69,7 +69,7 @@
         @push('scripts')
             <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
             <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-            <script src="/js/admin/vinculacion/seguimiento/polls/index.js"></script>
+            <script src="/js/admin/vinculacion/seguimiento/surveys/index.js"></script>
     @endpush
 
 
