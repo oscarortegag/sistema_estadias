@@ -13,7 +13,6 @@ class EmailController extends Controller
 
         Mail::to('wsanchez7012@gmail.com')->send(new EmailEncuesta());
 
-        //return new EmailEncuesta();
-        //return view('users.index', compact('users'));
+
     }
 }

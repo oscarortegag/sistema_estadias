@@ -43,6 +43,7 @@ Route::get('survey_duplicate/{period}', 'admin\vinculacion\seguimiento\SurveyCon
 Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyController@destroy')->name('surveys.destroy');
 Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate');
 Route::get('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey')->name('surveys.apply');
+Route::post('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey_post')->name('surveys.post_apply');
 
 
 
@@ -74,6 +75,7 @@ Route::post('/question_duplicate/{id}', 'admin\vinculacion\seguimiento\SurveyQue
 Route::post('/option_new', 'admin\vinculacion\seguimiento\QuestionOptionController@store')->name('options.store');
 Route::delete('/option_delete/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@destroy')->name('options.destroy');
 Route::get('/option/{id}/editModal', 'admin\vinculacion\seguimiento\QuestionOptionController@editModal')->name('options.editModal');
+Route::put('/edit_option/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@update')->name('options.update');
 
 
 Route::get('statistics/{period}', [

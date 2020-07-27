@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <form  method="POST" action="#" id='form-editModal'>
+                <form  method="POST" action="{{ route('options.update', $option->id) }}" id='form-editModal'>
                     {!! method_field('PUT') !!}
                     {!! csrf_field() !!}
 

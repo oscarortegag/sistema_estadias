@@ -4,11 +4,14 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\Period;
 use App\admin\vinculacion\seguimiento\QuestionOption;
+use App\admin\vinculacion\seguimiento\Student;
 use App\admin\vinculacion\seguimiento\Survey;
 use App\admin\vinculacion\seguimiento\SurveyQuestion;
+use App\Mail\EmailEncuesta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class SurveyController extends Controller
 {
@@ -122,5 +125,29 @@ class SurveyController extends Controller
     {
         //dd($survey);
         return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey'));
+    }
+
+    function apply_survey_post (Request $request, $id){
+
+        $alumnos = $request['alumnos'];
+        $survey = Survey::find($id);
+
+
+        for ($i=0; $i < count($alumnos); $i++ )
+        {
+            $student = Student::find($alumnos[$i]);
+            $correo = $student['personalEmail'];
+            var_dump($correo);
+
+            Mail::to($correo, $student['name'])->send(new EmailEncuesta($request['content']));
+            $data = array('student' => $student);
+
+
+        }
+
+        //Mail::to('wsanchez7012@gmail.com')->send(new EmailEncuesta());
+
+        //dd($request);
+        //return redirect()->route('surveys.index', [$survey->period_id]);
     }
 }

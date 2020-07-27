@@ -27,6 +27,26 @@ class QuestionOptionController extends Controller
         return view('admin.vinculacion.seguimiento.options.editModal', compact('option'));
     }
 
+    public function update(Request $request, $id)
+    {
+        try{
+            $option = QuestionOption::find($id);
+
+            $option->update([
+                'content' => $request->input('content'),
+            ]);
+
+            $ok = true;
+        }
+        catch(Exception $e){
+            $ok = false;
+            $msg = $e->getMessage();
+
+        }
+        return response()->json(compact('ok', 'msg', 'option'));
+
+    }
+
     public function destroy($id)
     {
         $questionOptions = QuestionOption::find($id);

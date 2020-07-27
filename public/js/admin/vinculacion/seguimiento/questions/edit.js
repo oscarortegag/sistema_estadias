@@ -1,8 +1,6 @@
-function onEditOption(){
-    Seq.buttons.$button = $(this);
+function abre_modal(id){
     route.urlName = "getEditOption";
-    Seq.buttons.loading();
-    Seq.get.html(route.get.url().replace("{id}", $(this).data('id')), fnShowModalEditOption);
+    Seq.get.html(route.get.url().replace("{id}", id), fnShowModalEditOption);
 }
 
 function fnShowModalEditOption(html){
@@ -12,9 +10,6 @@ function fnShowModalEditOption(html){
 }
 
 $(document).ready(function() {
-    var $btnEditOption = $('#btnEditOption');
     CKEDITOR.replace('content');
     CKEDITOR.replace('complement');
-    $btnEditOption.on('click', onEditOption);
-
 });

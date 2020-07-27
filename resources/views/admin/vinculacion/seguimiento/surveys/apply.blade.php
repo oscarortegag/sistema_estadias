@@ -14,7 +14,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form name="formulario" method="POST" action="{{ route("surveys.post_duplicate") }} enctype="multipart/form-data"">
+                        <form name="formulario" method="POST" action="{{ route("surveys.post_apply", [$survey->id]) }} enctype="multipart/form-data"">
                             @csrf
                             @if (count($errors)>0)
                                 <ul>
@@ -69,7 +69,7 @@
                                     <tr>
                                         <td>
                                             <div class="checkbox">
-                                                <label><input type="checkbox" value=""></label>
+                                                <label><input type="checkbox" value="{{ $student->student_id }}" name="alumnos[]"></label>
                                             </div>
                                         </td>
                                         <td>{{ $student->name . " " . $student->lastName . " " . $student->motherLastName }}  </td>
@@ -100,7 +100,7 @@
                             <div class="form-group mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Copiar
+                                        Aplicar encuesta
                                     </button>
                                     <a href="{{route('surveys.index', ['id'=>$survey->period->period_id])}}" class="btn btn-default">Regresar</a>
                                 </div>
@@ -121,6 +121,7 @@
 @endpush
 @push('scripts')
     <script src="/adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="/adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
     <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
     <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
     <script src="/adminlte/ckeditor/ckeditor.js"></script>
@@ -165,21 +166,7 @@
 
         $(document).ready(function() {
             $("#start_date").datepicker({
-                closeText: 'Cerrar',
-                prevText: '<Ant',
-                nextText: 'Sig>',
-                currentText: 'Hoy',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
+                language: 'es',
                 format:'dd/mm/yyyy',
                 autoclose: true
             }).on('changeDate', function (selected) {
@@ -190,21 +177,7 @@
             });
 
             $("#end_date").datepicker({
-                closeText: 'Cerrar',
-                prevText: '<Ant',
-                nextText: 'Sig>',
-                currentText: 'Hoy',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
+                language: 'es',
                 format:'dd/mm/yyyy',
                 autoclose: true
             }).on('changeDate', function (selected) {
@@ -227,7 +200,7 @@
             }
         );
 
-        CKEDITOR.replace('content');
+        //CKEDITOR.replace('content');
 
         $( '#todos' ).on( 'click', function() {
             if( $(this).is(':checked') ){
@@ -238,7 +211,6 @@
                 deseleccionar_todo();
             }
         });
-
 
     </script>
 @endpush

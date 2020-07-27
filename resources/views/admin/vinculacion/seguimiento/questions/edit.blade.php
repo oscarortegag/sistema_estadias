@@ -169,8 +169,9 @@
                                         <tr>
                                             <td>{{ $option->content }} </td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm" type="button" id="btnEditOption" data-id="{{$option->id}}"><i class="fas fa-edit"></i></button>
-
+                                                <a href="javascript:abre_modal('{{ $option->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de una opción">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
                                                 <form style="display: inline" method="POST" action="{{ route("options.destroy", [$option->id]) }}">
                                                     {!! method_field('DELETE') !!}
                                                     {!! csrf_field() !!}
@@ -207,9 +208,10 @@
 
 @endsection
 
+
 @push('scripts')
-    <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="{{ asset('js/SEQ.Utilities.js') }}"></script>
+    <script src="{{ asset('adminlte/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/routes/routes.js') }}"></script>
-    <script src="/js/admin/vinculacion/seguimiento/questions/edit.js"></script>
+    <script src="{{ asset('js/SEQ.Utilities.js') }}"></script>
+    <script src="{{ asset('js/admin/vinculacion/seguimiento/questions/edit.js') }}"></script>
 @endpush

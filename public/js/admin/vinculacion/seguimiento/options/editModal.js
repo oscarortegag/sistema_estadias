@@ -1,11 +1,11 @@
 "use strict";
-/**
- * Created by wsanchez on 12/10/2015.
- */
+
 (function (){
     var $btnModificar = $('#btn-editar-opcion');
     $btnModificar.on('click', onModificaOpcion);
+
     function onModificaOpcion(){
+        alert("En el boton");
         var $form = $('#form-editModal');
         var url = $form.attr('action');
         var data = $form.serialize();
