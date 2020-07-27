@@ -9,5 +9,7 @@
 
 <p> Prueba de encuesa</p>
 
+{!! $cuerpo !!}
+
 </body>
 </html>

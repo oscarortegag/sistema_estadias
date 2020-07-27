@@ -12,15 +12,23 @@ class EmailEncuesta extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    protected $data;
+    public $cuerpo;
 
-    public function __construct($message)
+    public function __construct($cuerpo, $data=[])
     {
-        $this->message = $message;
+        $this->data = $data;
+        $this->cuerpo = $cuerpo;
     }
 
     public function build()
     {
-        return $this->view('mails.email_encuestas');
+        return $this->view('mails.email_encuestas')
+            ->subject('Contestar encuesta')
+            ->attach($this->data['document']->getRealPath(),
+                [
+                    'as' => $this->data['document']->getClientOriginalName(),
+                    'mime' => $this->data['document']->getClientMimeType(),
+                ]);;
     }
 }

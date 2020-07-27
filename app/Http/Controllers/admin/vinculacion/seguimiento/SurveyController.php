@@ -132,15 +132,23 @@ class SurveyController extends Controller
         $alumnos = $request['alumnos'];
         $survey = Survey::find($id);
 
+        //dd($request['signature']);
+
+        var_dump($request['signature']->getRealPath());
+        var_dump($request['signature']->getClientOriginalName());
+        var_dump($request['signature']->getClientMimeType());
 
         for ($i=0; $i < count($alumnos); $i++ )
         {
             $student = Student::find($alumnos[$i]);
             $correo = $student['personalEmail'];
-            var_dump($correo);
 
-            Mail::to($correo, $student['name'])->send(new EmailEncuesta($request['content']));
-            $data = array('student' => $student);
+            $data = [
+                'document' => $request['signature'],
+            ];
+
+            //dd($request['signature']);
+            Mail::to($correo, $student['name'])->send(new EmailEncuesta($request['content'], $data));
 
 
         }

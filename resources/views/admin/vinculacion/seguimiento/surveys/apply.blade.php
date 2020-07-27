@@ -14,7 +14,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form name="formulario" method="POST" action="{{ route("surveys.post_apply", [$survey->id]) }} enctype="multipart/form-data"">
+                        <form name="formulario" method="POST" action="{{ route("surveys.post_apply", [$survey->id]) }}" enctype="multipart/form-data">
                             @csrf
                             @if (count($errors)>0)
                                 <ul>
@@ -200,7 +200,7 @@
             }
         );
 
-        //CKEDITOR.replace('content');
+        CKEDITOR.replace('content');
 
         $( '#todos' ).on( 'click', function() {
             if( $(this).is(':checked') ){
