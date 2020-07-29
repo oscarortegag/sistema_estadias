@@ -13,7 +13,7 @@ class SurveyQuestion extends Model
         'survey_id',
         'name',
         'content',
-        'complemento',
+        'complement',
         'required',
     ];
 

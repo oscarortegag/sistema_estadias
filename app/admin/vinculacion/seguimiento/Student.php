@@ -8,6 +8,12 @@ class Student extends Model
 {
     protected $primaryKey = "student_id";
 
+    protected $fillable = [
+        'cellPhone',
+        'personalEmail',
+        'facebook',
+    ];
+
     public function period()
     {
         return $this->belongsTo(Period::class, 'period_id', 'period_id');
@@ -21,6 +27,15 @@ class Student extends Model
     public function quarter()
     {
         return $this->belongsTo(Quarter::class, 'quarter_id', 'quarter_id');
+    }
+
+    public function applySurveys()
+    {
+        return $this->hasMany(ApplySurvey::class,'student_id', 'student_id');
+    }
+
+    public function contact() {
+        return $this->hasOne(ContactStudent::class, 'student_id', 'student_id');
     }
 
 }

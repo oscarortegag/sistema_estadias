@@ -20,6 +20,10 @@ Route::get('/encuesta', function () {
     return view('encuesta');
 });
 
+Route::get('/email', function () {
+    return view('email');
+});
+
 Route::get('seguimiento', [
     'uses' => 'admin\vinculacion\seguimiento\SeguimientoController@index',
     'as'   => 'seguimiento.index',
@@ -44,6 +48,8 @@ Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyContro
 Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate');
 Route::get('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey')->name('surveys.apply');
 Route::post('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey_post')->name('surveys.post_apply');
+Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer');
+Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer');
 
 
 

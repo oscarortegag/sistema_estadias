@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
+use App\admin\vinculacion\seguimiento\ApplySurvey;
 use App\admin\vinculacion\seguimiento\Period;
 use App\admin\vinculacion\seguimiento\QuestionOption;
 use App\admin\vinculacion\seguimiento\Student;
 use App\admin\vinculacion\seguimiento\Survey;
 use App\admin\vinculacion\seguimiento\SurveyQuestion;
+use App\admin\vinculacion\seguimiento\ContactStudent;
+use App\admin\vinculacion\seguimiento\SurveyResponse;
 use App\Mail\EmailEncuesta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,6 +68,14 @@ class SurveyController extends Controller
             'description' => $request->input('description'),
             'validation' => $request->input('validation')? '1' : '0',
         ]);
+
+        if ($request['start_date'] AND $request['end_date']) {
+            $survey->update([
+                'open' => '1',
+                'start_date' => date("Y-m-d", strtotime($request['start_date'])),
+                'end_date' => date("Y-m-d", strtotime($request['end_date'])),
+            ]);
+        }
 
         return redirect()->route('surveys.edit', ['id'=>$survey->id]);
     }
@@ -132,30 +143,34 @@ class SurveyController extends Controller
         $alumnos = $request['alumnos'];
         $survey = Survey::find($id);
 
-        //dd($request['signature']);
-
-        var_dump($request['signature']->getRealPath());
-        var_dump($request['signature']->getClientOriginalName());
-        var_dump($request['signature']->getClientMimeType());
+        $survey->update([
+           'open' => '1',
+           'start_date' => date("Y-m-d", strtotime($request['start_date'])),
+           'end_date' => date("Y-m-d", strtotime($request['end_date'])),
+        ]);
 
         for ($i=0; $i < count($alumnos); $i++ )
         {
             $student = Student::find($alumnos[$i]);
             $correo = $student['personalEmail'];
 
+
+            $applySurvey = ApplySurvey::create([
+                'survey_id' => $survey->id,
+                'student_id' => $student->student_id,
+            ]);
+
             $data = [
+                'content' => $request['content'],
                 'document' => $request['signature'],
+                'id' => $applySurvey->id,
             ];
 
-            //dd($request['signature']);
-            Mail::to($correo, $student['name'])->send(new EmailEncuesta($request['content'], $data));
-
+            Mail::to($correo, $student['name'])->send(new EmailEncuesta($data));
 
         }
 
-        //Mail::to('wsanchez7012@gmail.com')->send(new EmailEncuesta());
-
-        //dd($request);
-        //return redirect()->route('surveys.index', [$survey->period_id]);
+        return redirect()->route('surveys.index', [$survey->period_id]);
     }
-}
+
+    }

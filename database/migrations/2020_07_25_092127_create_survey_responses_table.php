@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSurveyResponses extends Migration
+class CreateSurveyResponsesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateSurveyResponses extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_survey_responses');
+        Schema::dropIfExists('survey_responses');
     }
 }

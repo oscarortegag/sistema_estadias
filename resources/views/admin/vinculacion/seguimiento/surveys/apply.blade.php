@@ -89,6 +89,7 @@
                             <div class="form-group">
                                 <label for="content" class="col-form-label text-md-right">Contenido del correo electrónico</label>
                                 <textarea id="content" name="content" rows="3" class="form-control">
+
                                 </textarea>
                             </div>
 
@@ -167,7 +168,7 @@
         $(document).ready(function() {
             $("#start_date").datepicker({
                 language: 'es',
-                format:'dd/mm/yyyy',
+                format:'yyyy-mm-dd',
                 autoclose: true
             }).on('changeDate', function (selected) {
                 var startDate = new Date(selected.date.valueOf());
@@ -178,7 +179,7 @@
 
             $("#end_date").datepicker({
                 language: 'es',
-                format:'dd/mm/yyyy',
+                format:'yyyy-mm-dd',
                 autoclose: true
             }).on('changeDate', function (selected) {
                 var endDate = new Date(selected.date.valueOf());
@@ -186,7 +187,6 @@
             }).on('clearDate', function (selected) {
                 $('#start_date').datepicker('setEndDate', null);
             });
-        });
 
         $('#tabla-alumnos').DataTable(
             {
@@ -210,6 +210,7 @@
                 // Hacer algo si el checkbox ha sido deseleccionado
                 deseleccionar_todo();
             }
+        });
         });
 
     </script>

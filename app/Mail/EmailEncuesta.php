@@ -12,13 +12,11 @@ class EmailEncuesta extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $data;
-    public $cuerpo;
+    public $data;
 
-    public function __construct($cuerpo, $data=[])
+    public function __construct($data=[])
     {
         $this->data = $data;
-        $this->cuerpo = $cuerpo;
     }
 
     public function build()

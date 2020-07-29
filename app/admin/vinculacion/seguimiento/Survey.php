@@ -12,6 +12,9 @@ class Survey extends Model
         'displayName',
         'description',
         'validation',
+        'open',
+        'start_date',
+        'end_date',
     ];
     public function questions()
     {
@@ -21,5 +24,10 @@ class Survey extends Model
     public function period()
     {
         return $this->belongsTo(Period::class, 'period_id', 'period_id');
+    }
+
+    public function applySurveys()
+    {
+        return $this->hasMany(ApplySurvey::class);
     }
 }

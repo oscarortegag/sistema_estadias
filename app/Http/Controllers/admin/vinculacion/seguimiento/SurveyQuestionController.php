@@ -29,6 +29,7 @@ class SurveyQuestionController extends Controller
 
         $question = SurveyQuestion::create([
             'survey_id' => $request->input('survey_id'),
+            'type_question' => $request->input('type_question'),
             'name' => $request->input('name'),
             'content' => $request->input('content'),
             'complement' => $request->input('complement'),
@@ -57,6 +58,7 @@ class SurveyQuestionController extends Controller
         ]);
 
         $surveyQuestions->update([
+            'type_question' => $request->input('type_question'),
             'name' => $request->input('name'),
             'content' => $request->input('content'),
             'complement' => $request->input('complement'),
@@ -98,6 +100,6 @@ class SurveyQuestionController extends Controller
             }
         }
 
-        return redirect()->route('surveys.edit', [$survey_id]);
+        return redirect()->route('questions.edit', ['id'=>$question->id]);
     }
 }
