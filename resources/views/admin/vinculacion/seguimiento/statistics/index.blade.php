@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Estadísticas ({{ $period->displayName }})</h1>
+    <h1>Estadísticas ({{ $period->name . " / " . date("Y", strtotime($period->firstDay)) }})</h1>
 @stop
 
 @section('content')

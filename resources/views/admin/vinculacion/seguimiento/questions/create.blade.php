@@ -84,10 +84,10 @@
                                 <label for="type_question" class="col-form-label text-md-right">Tipo de pregunta</label>
                                 <select name = "type_question" class="form-control">
                                     <option value = 0>Seleccione el tipo de pregunta</option>
-                                    <option value= "1">Pregunta con una respuesta con opciones</option>
-                                    <option value= "2">Pregunta con varias respuestas con opciones</option>
-                                    <option value= "3">Pregunta con respuesta abierta</option>
-                                    <option value= "4">Pregunta con respuesta tipo fecha</option>
+                                    <option value = 1>Pregunta con una respuesta con opciones</option>
+                                    <option value = 2>Pregunta con varias respuestas con opciones</option>
+                                    <option value = 3>Pregunta con respuesta abierta</option>
+                                    <option value = 4>Pregunta con respuesta tipo fecha</option>
                                 </select>
                             </div>
 

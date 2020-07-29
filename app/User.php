@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\admin\vinculacion\seguimiento\Student;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,5 +51,10 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
     }
 }

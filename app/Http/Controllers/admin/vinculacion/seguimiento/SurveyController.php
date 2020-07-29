@@ -173,4 +173,22 @@ class SurveyController extends Controller
         return redirect()->route('surveys.index', [$survey->period_id]);
     }
 
+    function activate($id)
+    {
+        $survey = Survey::find($id);
+
+        $survey->update(['active' => '1']);
+
+        return redirect()->route('surveys.index', [$survey->period_id]);
     }
+
+    function deactivate($id)
+    {
+        $survey = Survey::find($id);
+
+        $survey->update(['active' => '0']);
+
+        return redirect()->route('surveys.index', [$survey->period_id]);
+    }
+
+}

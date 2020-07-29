@@ -4,25 +4,64 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\ApplySurvey;
 use App\admin\vinculacion\seguimiento\ContactStudent;
+use App\admin\vinculacion\seguimiento\Kinship;
+use App\admin\vinculacion\seguimiento\State;
 use App\admin\vinculacion\seguimiento\Student;
 use App\admin\vinculacion\seguimiento\Survey;
 use App\admin\vinculacion\seguimiento\SurveyResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SurveyStudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    function index()
+    {
+        $student = Auth::user()->student;
+
+        return view('admin.vinculacion.seguimiento.surveyStudent.index', compact('student'));
+    }
+
     function answer_survey(ApplySurvey $applySurvey)
     {
+        $messages = array();
+        $error = 0;
+        $fecha_actual = date("Y-m-d");
 
-        if(!$applySurvey->student->contact){
-            $contactStudent = ContactStudent::create([
-                'student_id' => $applySurvey->student_id,
-            ]);
+        if ($applySurvey->student->student_id != Auth::user()->student->student_id ) {
+            $error = 1;
+            $messages[] = "La encuesta no pertenece a este usuario";
         }
 
-        //dd($contactStudent);
-        return view('admin.vinculacion.seguimiento.surveyStudent.answer', compact('applySurvey'));
+        if(($applySurvey->survey->start_date > $fecha_actual OR $fecha_actual > $applySurvey->survey->end_date) and $error == 0){
+            $error = 1;
+            $messages[] = "La fecha actual esta fuera del perido de aplicación de la encuesta";
+        }
+
+        if ($applySurvey->status == 1 and $error == 0) {
+            $error = 1;
+            $messages[] = "La encuesta ya fue contestada";
+        }
+
+        if ($error)
+            return view('admin.vinculacion.seguimiento.surveyStudent.error', compact('applySurvey', 'messages'));
+        else {
+            if (!$applySurvey->student->contact) {
+                $contactStudent = ContactStudent::create([
+                    'student_id' => $applySurvey->student_id,
+                ]);
+            }
+
+            $states = State::all();
+            $kinships = Kinship::all();
+
+            return view('admin.vinculacion.seguimiento.surveyStudent.answer', compact('applySurvey', 'states', 'kinships'));
+        }
     }
 
     function answer_survey_post (Request $request, $id)
@@ -92,6 +131,9 @@ class SurveyStudentController extends Controller
 
         $applySurvey->update(['status' => '1']);
 
+        return redirect()->route('answer_survey.index');
+
     }
+
 
 }

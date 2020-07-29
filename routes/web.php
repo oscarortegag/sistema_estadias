@@ -48,6 +48,15 @@ Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyContro
 Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate');
 Route::get('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey')->name('surveys.apply');
 Route::post('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey_post')->name('surveys.post_apply');
+Route::get('/survey_activate/{id}', 'admin\vinculacion\seguimiento\SurveyController@activate')->name('surveys.activate');
+Route::get('/survey_deactivate/{id}', 'admin\vinculacion\seguimiento\SurveyController@deactivate')->name('surveys.deactivate');
+
+
+Route::get('/answer_survey', [
+    'uses' => 'admin\vinculacion\seguimiento\SurveyStudentController@index',
+    'as'   => 'answer_survey.index',
+]);
+
 Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer');
 Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer');
 

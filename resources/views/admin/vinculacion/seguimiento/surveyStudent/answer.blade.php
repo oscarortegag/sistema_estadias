@@ -66,6 +66,13 @@
                             <label for="state_id" class="col-form-label text-md-right">Estado</label>
                             <select name = "state_id" class="form-control">
                                 <option value = 0>Seleccione el estado</option>
+                                @foreach($states as $state)
+                                    @if ($state->id == $applySurvey->student->contact->state_id)
+                                        <option value="{{ $state->id }}" selected>{{ $state->name }}</option>
+                                    @else
+                                        <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -85,6 +92,13 @@
                         <label for="kinship_id" class="col-form-label text-md-right">Parentesco</label>
                         <select name = "kinship_id" class="form-control">
                             <option value = 0>Seleccione el parentesco</option>
+                            @foreach($kinships as $kinship)
+                                @if ($kinship->id == $applySurvey->student->contact->kinship_id)
+                                    <option value="{{ $kinship->id }}" selected>{{ $kinship->name }}</option>
+                                @else
+                                    <option value="{{ $kinship->id }}">{{ $kinship->name }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

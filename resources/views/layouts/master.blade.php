@@ -290,16 +290,16 @@ desired effect
                     <ul class="treeview-menu" >
                         <li>
                             <a href="{{ route("imports.create") }}">
-                                <i class="fas fa-user-edit">Importar alumnos</i> 
+                                <i class="fas fa-user-edit">Importar alumnos</i>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">Importar empresas</i> 
+                                <i class="fas fa-user-edit">Importar empresas</i>
                             </a>
                         </li>
-                    </ul>                   
-                </li>                
+                    </ul>
+                </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-user-circle"></i> <span>Catálogos</span>
                         <span class="pull-right-container">
@@ -310,73 +310,73 @@ desired effect
                     <ul class="treeview-menu" >
                         <li>
                             <a href="{{ route("enterprise.index") }}">
-                                <i class="fas fa-user-edit">Institución educativa</i> 
+                                <i class="fas fa-user-edit">Institución educativa</i>
                             </a>
-                        </li>                        
+                        </li>
                         <li>
                             <a href="{{ route("enterprise.index") }}">
-                                <i class="fas fa-user-edit">Empresa</i> 
+                                <i class="fas fa-user-edit">Empresa</i>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route("shift.index") }}">
-                                <i class="fas fa-user-edit">Turno</i> 
+                                <i class="fas fa-user-edit">Turno</i>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">Modalidad</i> 
+                                <i class="fas fa-user-edit">Modalidad</i>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">Escuela de procedencia</i> 
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Carreras</i> 
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Periodos</i> 
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Género</i> 
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Cuatrimestre</i> 
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Grupos</i> 
+                                <i class="fas fa-user-edit">Escuela de procedencia</i>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">División académica</i> 
+                                <i class="fas fa-user-edit">Carreras</i>
                             </a>
-                        </li> 
+                        </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">Asesor y vinculación</i> 
+                                <i class="fas fa-user-edit">Periodos</i>
                             </a>
-                        </li> 
+                        </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user-edit">Director académico</i> 
+                                <i class="fas fa-user-edit">Género</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Cuatrimestre</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Grupos</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">División académica</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Asesor y vinculación</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Director académico</i>
                             </a>
                         </li>
 
-                    </ul>                    
+                    </ul>
                 </li>
-                            
+
                 @elseif(Auth::user()->hasRole('alumno'))
                     <li>
                         <a href="#">
@@ -394,7 +394,7 @@ desired effect
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('answer_survey.index') }}">
                             <i class="fas fa-user-edit"></i> Encuestas
                         </a>
                     </li>

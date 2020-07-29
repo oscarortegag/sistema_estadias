@@ -2,6 +2,7 @@
 
 namespace App\admin\vinculacion\seguimiento;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
@@ -29,13 +30,17 @@ class Student extends Model
         return $this->belongsTo(Quarter::class, 'quarter_id', 'quarter_id');
     }
 
-    public function applySurveys()
+    public function surveys()
     {
         return $this->hasMany(ApplySurvey::class,'student_id', 'student_id');
     }
 
     public function contact() {
         return $this->hasOne(ContactStudent::class, 'student_id', 'student_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 
 }

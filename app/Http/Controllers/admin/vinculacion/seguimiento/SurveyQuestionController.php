@@ -20,6 +20,7 @@ class SurveyQuestionController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'type_question' => 'required|integer',
             'name' => 'required|string',
@@ -35,6 +36,7 @@ class SurveyQuestionController extends Controller
             'complement' => $request->input('complement'),
             'required' => $request->input('required')? '1' : '0',
         ]);
+
 
         return redirect()->route('questions.edit', ['id'=>$question->id]);
     }

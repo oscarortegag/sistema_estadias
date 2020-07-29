@@ -168,7 +168,9 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="form-group">
-                                    <a href="{{route('questions.create', ['id'=>$survey->id])}}" class="btn btn-success">Agregar pregunta</a>
+                                    @if($survey->applySurveys->where('estatus', 1)->count() == 0)
+                                        <a href="{{route('questions.create', ['id'=>$survey->id])}}" class="btn btn-success">Agregar pregunta</a>
+                                    @endif
                                 </div>
                                 <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                                     <thead>
@@ -186,20 +188,21 @@
                                             <td>{!! $question->content !!}  </td>
                                             <td>{!! $question->complement !!}  </td>
                                             <td>
-                                                <a href="{{route('questions.edit', ['id'=>$question->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar pregunta"><i class="fas fa-edit"></i></a>
-                                                <form style="display: inline" method="POST" action="{{ route('questions.duplicate', [$question->id]) }}">
-                                                    {!! csrf_field() !!}
-                                                    <button type = "submit" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Duplicar pregunta"><i class="fas fa-copy"></i></button>
-                                                </form>
-                                                @if($question->options->count() == 0)
-                                                    <form style="display: inline" method="POST" action="{{ route('questions.destroy', [$question->id]) }}">
-                                                        {!! method_field('DELETE') !!}
+                                                @if($survey->applySurveys->where('estatus', 1)->count() == 0)
+                                                    <a href="{{route('questions.edit', ['id'=>$question->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar pregunta"><i class="fas fa-edit"></i></a>
+                                                    <form style="display: inline" method="POST" action="{{ route('questions.duplicate', [$question->id]) }}">
                                                         {!! csrf_field() !!}
-
-                                                        <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <button type = "submit" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Duplicar pregunta"><i class="fas fa-copy"></i></button>
                                                     </form>
-                                                @endif
+                                                    @if($question->options->count() == 0)
+                                                        <form style="display: inline" method="POST" action="{{ route('questions.destroy', [$question->id]) }}">
+                                                            {!! method_field('DELETE') !!}
+                                                            {!! csrf_field() !!}
 
+                                                            <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        </form>
+                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty

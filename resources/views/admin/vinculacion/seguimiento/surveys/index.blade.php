@@ -22,9 +22,10 @@
                         <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
-                                <th width="30%">Nombre</th>
+                                <th width="25%">Nombre</th>
                                 <th width="60%">Descripción</th>
-                                <th width="10%">Acciones</th>
+                                <th width="10%">Avance</th>
+                                <th width="5%">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -33,16 +34,38 @@
                                     <td>{{ $survey->displayName }}</td>
                                     <td>{!! $survey->description !!}</td>
                                     <td>
-                                        <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
-                                        <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
-                                        @if($survey->questions->count() == 0)
-                                        <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
-                                            {!! method_field('DELETE') !!}
-                                            {!! csrf_field() !!}
-
-                                            <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de encuesta"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </form>
+                                        @if($survey->applySurveys->count() == 0)
+                                            <span class="label label-danger">Encuesta sin aplicar</span>
+                                        @else
+                                            <div class="progress-group">
+                                                <span class="progress-number"><b>{{ $survey->applySurveys->where('status', 1)->count() }}</b> / {{$survey->applySurveys->count()}}</span>
+                                                <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-green" style="width: {{ ($survey->applySurveys->where('status', 1)->count() / $survey->applySurveys->count())*100 }}%"></div>
+                                                </div>
+                                            </div>
                                         @endif
+                                    </td>
+                                    <td>
+                                        @if($survey->active)
+                                            <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de la encuesta a estudiantes"><i class="fas fa-edit"></i></a>
+                                            @if(!$survey->open)
+                                                <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
+                                            @endif
+                                            @if($survey->questions->count() == 0)
+                                                <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
+                                                    {!! method_field('DELETE') !!}
+                                                    {!! csrf_field() !!}
+
+                                                    <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de encuesta"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            @endif
+                                            @if($survey->applySurveys->count() == 0)
+                                                <a href="{{route('surveys.deactivate',['id'=>$survey->id])}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Desactivar encuesta"><i class="fa fa-close"></i></a>
+                                            @endif
+                                        @else
+                                            <a href="{{route('surveys.activate',['id'=>$survey->id])}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Activar encuesta"><i class="fa fa-check"></i></a>
+                                        @endif
+
 
                                     </td>
                                 </tr>

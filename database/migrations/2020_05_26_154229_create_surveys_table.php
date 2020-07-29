@@ -22,6 +22,7 @@ class CreateSurveysTable extends Migration
             $table->boolean('open')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }
