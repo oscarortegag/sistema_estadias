@@ -15,31 +15,33 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('student_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('id');
             $table->unsignedInteger('institution_id');
             $table->unsignedInteger('period_id');
             $table->string('name');            
             $table->string('lastName');
-            $table->string('motherLastName');         
-            $table->unsignedInteger('gender_id');
+            $table->string('motherLastNames');         
+            //$table->unsignedInteger('gender_id');
             $table->date('dateOfBirth');
             $table->string('enrollment');
             $table->unsignedInteger('quarter_id');
-            $table->unsignedInteger('group_id');
-            $table->unsignedInteger('shift_id');
+            //$table->unsignedInteger('group_id');
+            //$table->unsignedInteger('shift_id');
             $table->string('socialSecurityNumber');
-            $table->string('accidentInsurance');
+            $table->string('accidentInsurance')->nullable();
             $table->unsignedInteger('educativeProgram_id');
             $table->string('outOfTime',2)->nullable();
             $table->unsignedInteger('schoolOrigin_id');           
             $table->string('curp');
             $table->string('institutionalEmail');
             $table->year('incomeYear');
-            $table->unsignedInteger('degree_id');
-            $table->unsignedInteger('modality_id');             
+            //$table->unsignedInteger('degree_id');
+            $table->unsignedInteger('modality_id');
+            $table->string('officePhone')->nullable();             
             $table->string('cellPhone')->nullable();
             $table->string('personalEmail')->nullable();            
-            $table->string('facebook')->nullable();           
+            $table->string('facebook')->nullable();
+            $table->boolean('verified')->nullable();        
             $table->timestamps();
         });
     }

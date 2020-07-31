@@ -4,12 +4,11 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Reader;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AlumnosCollectionImport;
-use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\Student;
+use Auth;
+use App\User;
 
-class ImportarAlumnoController extends Controller
+class PresentationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,8 @@ class ImportarAlumnoController extends Controller
      */
     public function index()
     {
-        //
+       $information = Auth::user();
+        return view('admin.vinculacion.seguimiento.letters.index', compact('information'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
-        return view('admin.vinculacion.seguimiento.imports.create');
+        //
     }
 
     /**
@@ -39,15 +39,7 @@ class ImportarAlumnoController extends Controller
      */
     public function store(Request $request)
     {
-
-           Excel::import(new AlumnosCollectionImport, request()->file('archivo'));
-           dd("Información importada");
-           return redirect()->route('imports.create');
-                      //dd();
-           //dd("Archivo cargado");
-           //dd(\Session::get('filas'));
-
-
+        //
     }
 
     /**
@@ -58,7 +50,7 @@ class ImportarAlumnoController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

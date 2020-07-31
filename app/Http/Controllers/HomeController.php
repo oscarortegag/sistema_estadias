@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        \Session::forget('perfil');     
     }
 
     /**
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        foreach (Auth::user()->roles as $rol) {
+                \Session::put('perfil',$rol->id);                
+        }
+
         return view('home');
     }
 }

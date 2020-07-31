@@ -4,12 +4,9 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Reader;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AlumnosCollectionImport;
-use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\EditorStyle;
 
-class ImportarAlumnoController extends Controller
+class EditorStyleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,8 @@ class ImportarAlumnoController extends Controller
      */
     public function index()
     {
-        //
+           $editor = EditorStyle::all();
+           return view('admin.vinculacion.seguimiento.editors.index', compact('editor')); 
     }
 
     /**
@@ -28,7 +26,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
-        return view('admin.vinculacion.seguimiento.imports.create');
+        return view('admin.vinculacion.seguimiento.editors.create');
     }
 
     /**
@@ -39,15 +37,13 @@ class ImportarAlumnoController extends Controller
      */
     public function store(Request $request)
     {
-
-           Excel::import(new AlumnosCollectionImport, request()->file('archivo'));
-           dd("Información importada");
-           return redirect()->route('imports.create');
-                      //dd();
-           //dd("Archivo cargado");
-           //dd(\Session::get('filas'));
-
-
+        $editor = new EditorStyle;
+        $editor->nameEditorialAdvisor = $request->nombreeditor;
+        $editor->editorialPosition = $request->cargoeditor;
+        $editor->editorialAdvisorEmail = $request->correoeditor;
+        $editor->editorialAdvisorPhone = $request->telefonoeditor;
+        $editor->save();
+        return redirect()->route('editors.index');
     }
 
     /**
@@ -69,7 +65,9 @@ class ImportarAlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editor = EditorStyle::find($id);
+
+        return view('admin.vinculacion.seguimiento.editors.edit', compact('editor')); 
     }
 
     /**
@@ -81,7 +79,14 @@ class ImportarAlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           $editor = EditorStyle::find($id);
+           $editor->nameEditorialAdvisor = $request->nombreeditor;
+           $editor->editorialPosition = $request->cargoeditor;
+           $editor->editorialAdvisorEmail = $request->correoeditor;
+           $editor->editorialAdvisorPhone = $request->telefonoeditor;
+           $editor->save();
+
+           return redirect()->route('editors.index'); 
     }
 
     /**
@@ -92,6 +97,7 @@ class ImportarAlumnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        EditorStyle::find($id)->delete();
+        return redirect()->route('editors.index');
     }
 }
