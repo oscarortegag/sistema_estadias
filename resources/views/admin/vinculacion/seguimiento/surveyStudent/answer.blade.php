@@ -24,6 +24,8 @@
             <strong>Cuatrimestre:</strong> {{ $applySurvey->student->quarter->quarterName  }}
         </div>
 
+
+
         <form method="POST" action="{{ route('surveys.post_answer', [$applySurvey->id]) }}">
             @csrf
             @if (count($errors)>0)
@@ -35,6 +37,7 @@
             @endif
 
 
+
         @if($applySurvey->survey->validation)
                 <div class="box box-success">
                     <h2> Datos de contacto </h2>
@@ -42,6 +45,14 @@
                     <div class="form-group">
                         <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal</label>
                         <input id="personalEmail" type="text" class="form-control @error('personalEmail') is-invalid @enderror" name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" required autofocus>
+                        @if (\Session::has('personalEmail'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{!! \Session::get('personalEmail') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
                     <div class="form-group">
                         <label for="homePhone" class="col-form-label text-md-right">Telefono de domicilio</label>

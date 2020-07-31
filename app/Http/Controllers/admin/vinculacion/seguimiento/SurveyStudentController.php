@@ -57,6 +57,8 @@ class SurveyStudentController extends Controller
                 ]);
             }
 
+            $applySurvey = ApplySurvey::find($applySurvey->id);
+
             $states = State::all();
             $kinships = Kinship::all();
 
@@ -70,6 +72,14 @@ class SurveyStudentController extends Controller
         $student = Student::find($applySurvey->student_id);
         $survey = Survey::find($applySurvey->survey_id);
         $contactStudent = $student->contact;
+
+        if( preg_match('/^([a-z0-9_\.-]+)@utchetumal\.edu\.mx$/', $request['personalEmail']) )
+        {
+            $message = "El correo personal no debe ser con dominio utchetumal.edu.mx";
+
+            return back()->with('personalEmail',$message);
+        }
+
 
         if ($survey->validation == 1) {
             $contactStudent->update([
