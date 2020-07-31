@@ -13,13 +13,13 @@ class CreateEducativeProgram extends Migration
      */
     public function up()
     {
-        Schema::create('educativeProgram', function (Blueprint $table) {
+        Schema::create('educative_programs', function (Blueprint $table) {
             $table->increments('educativeProgram_id');
             $table->string('shortName');
             $table->string('displayName');
-            $table->string('area');
-            $table->softDeletes();           
+            $table->string('area');          
             $table->timestamps();
+            $table->softDeletes();            
         });
     }
 
@@ -30,6 +30,6 @@ class CreateEducativeProgram extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('educativeProgram');
+        Schema::dropIfExists('educative_programs');
     }
 }
