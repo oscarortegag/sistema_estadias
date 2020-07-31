@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,5 +52,9 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function student(){
+        return $this->belongsTo('App\admin\vinculacion\seguimiento\Student','id','id');
     }
 }

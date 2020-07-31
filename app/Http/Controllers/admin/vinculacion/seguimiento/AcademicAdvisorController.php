@@ -4,12 +4,9 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Reader;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AlumnosCollectionImport;
-use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\AcademicAdvisor;
 
-class ImportarAlumnoController extends Controller
+class AcademicAdvisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,8 @@ class ImportarAlumnoController extends Controller
      */
     public function index()
     {
-        //
+           $advisor = AcademicAdvisor::all();
+           return view('admin.vinculacion.seguimiento.advisors.index', compact('advisor'));          
     }
 
     /**
@@ -28,7 +26,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
-        return view('admin.vinculacion.seguimiento.imports.create');
+        return view('admin.vinculacion.seguimiento.advisors.create');
     }
 
     /**
@@ -39,15 +37,14 @@ class ImportarAlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $advisor = new AcademicAdvisor;
+        $advisor->nameAcademicAdvisor = $request->nombreacademico;
+        $advisor->academicPosition = $request->cargoasesor;
+        $advisor->academicAdvisorEmail = $request->correoasesor;
+        $advisor->advisorPhone = $request->telefonoasesor;
+        $advisor->save();
 
-           Excel::import(new AlumnosCollectionImport, request()->file('archivo'));
-           dd("Información importada");
-           return redirect()->route('imports.create');
-                      //dd();
-           //dd("Archivo cargado");
-           //dd(\Session::get('filas'));
-
-
+        return redirect()->route('advisors.index');
     }
 
     /**
@@ -69,7 +66,9 @@ class ImportarAlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $advisor = AcademicAdvisor::find($id);
+
+        return view('admin.vinculacion.seguimiento.advisors.edit', compact('advisor')); 
     }
 
     /**
@@ -81,7 +80,14 @@ class ImportarAlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           $advisor = AcademicAdvisor::find($id);
+           $advisor->nameAcademicAdvisor = $request->nombreacademico;
+           $advisor->academicPosition = $request->cargoasesor;
+           $advisor->academicAdvisorEmail = $request->correoasesor;
+           $advisor->advisorPhone = $request->telefonoasesor;
+           $advisor->save();
+
+           return redirect()->route('advisors.index');           
     }
 
     /**
@@ -92,6 +98,7 @@ class ImportarAlumnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        AcademicAdvisor::find($id)->delete();
+        return redirect()->route('advisors.index');
     }
 }

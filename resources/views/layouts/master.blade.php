@@ -294,7 +294,7 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("importscompany.create") }}">
                                 <i class="fas fa-user-edit">Importar empresas</i> 
                             </a>
                         </li>
@@ -364,38 +364,47 @@ desired effect
                             </a>
                         </li> 
                         <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Asesor y vinculación</i> 
+                            <a href="{{ route("advisors.index") }}">
+                                <i class="fas fa-user-edit">Asesor académico</i> 
                             </a>
-                        </li> 
+                        </li>
+                        <li>
+                            <a href="{{ route("editors.index") }}">
+                                <i class="fas fa-user-edit">Asesor de redacción</i> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("linkings.index") }}">
+                                <i class="fas fa-user-edit">Responsble de vinculación</i> 
+                            </a>
+                        </li>                                                
                         <li>
                             <a href="#">
                                 <i class="fas fa-user-edit">Director académico</i> 
                             </a>
                         </li>
-
-                    </ul>                    
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-edit">Carta de presentación</i> 
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                             
                 @elseif(Auth::user()->hasRole('alumno'))
                     <li>
-                        <a href="#">
-                            <i class="fas fa-user-edit"></i> Validación de datos
+                        <a href="{{ route("studentcontact.index") }}">
+                            <i class="fas fa-user-edit"></i>Validación de datos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route("presentation.index") }}">
+                            <i class="fas fa-user-edit"></i>Documentación
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-user-edit"></i> Carta de presentación
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-user-edit"></i> Carta de liberación
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-user-edit"></i> Encuestas
+                            <i class="fas fa-user-edit"></i>Encuestas
                         </a>
                     </li>
                 @endif
@@ -563,5 +572,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+@stack('jscustom');     
 </body>
 </html>

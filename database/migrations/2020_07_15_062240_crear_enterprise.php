@@ -15,19 +15,20 @@ class CrearEnterprise extends Migration
     {
         Schema::create('enterprises', function (Blueprint $table) {
             $table->increments('enterprise_id');
-            $table->string('companyName',45);
-            $table->string('businessName',45)->nullable();
+            $table->string('companyName');
+            $table->string('businessName')->nullable();
             $table->string('companyPhone',20)->nullable();
-            $table->string('representativeName',150);
-            $table->string('representativePosition',150);
-            $table->string('businessAdvisorName',150);
-            $table->string('businessAdvisorEmail',150);
+            $table->string('representativeName');
+            $table->string('representativePosition');
+            $table->string('businessAdvisorName');
+            $table->string('businessAdvisorEmail');
             $table->string('businessAdvisorPhone',20)->nullable();
-            $table->string('businessContactName',150);
-            $table->string('businessContactEmail',150);
-            $table->string('businessContactPhone',20)->nullable();                                
-            $table->softDeletes();
+            $table->string('businessContactName')->nullable();
+            $table->string('businessContactEmail')->nullable();
+            $table->string('businessContactPhone',20)->nullable();
+            $table->date('importDate');                             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

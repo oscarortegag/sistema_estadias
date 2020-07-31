@@ -4,12 +4,9 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Reader;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AlumnosCollectionImport;
-use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\ResponsibleLinking;
 
-class ImportarAlumnoController extends Controller
+class LinkingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,8 @@ class ImportarAlumnoController extends Controller
      */
     public function index()
     {
-        //
+           $linking = ResponsibleLinking::all();
+           return view('admin.vinculacion.seguimiento.linkings.index', compact('linking')); 
     }
 
     /**
@@ -28,7 +26,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
-        return view('admin.vinculacion.seguimiento.imports.create');
+        return view('admin.vinculacion.seguimiento.linkings.create');
     }
 
     /**
@@ -39,15 +37,14 @@ class ImportarAlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $liking = new ResponsibleLinking;
+        $liking->nameResponsible = $request->nombrevinculacion;
+        $liking->responsiblePosition = $request->cargovinculacion;
+        $liking->responsibleEmail = $request->correovinculacion;
+        $liking->responsiblePhone = $request->telefonovinculacion;
+        $liking->save();
 
-           Excel::import(new AlumnosCollectionImport, request()->file('archivo'));
-           dd("Información importada");
-           return redirect()->route('imports.create');
-                      //dd();
-           //dd("Archivo cargado");
-           //dd(\Session::get('filas'));
-
-
+        return redirect()->route('linkings.index');
     }
 
     /**
@@ -69,7 +66,8 @@ class ImportarAlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $linking = ResponsibleLinking::find($id);
+        return view('admin.vinculacion.seguimiento.linkings.edit', compact('linking'));
     }
 
     /**
@@ -81,7 +79,14 @@ class ImportarAlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $liking = ResponsibleLinking::find($id);
+        $liking->nameResponsible = $request->nombrevinculacion;
+        $liking->responsiblePosition = $request->cargovinculacion;
+        $liking->responsibleEmail = $request->correovinculacion;
+        $liking->responsiblePhone = $request->telefonovinculacion;
+        $liking->save();
+
+        return redirect()->route('linkings.index');
     }
 
     /**
@@ -92,6 +97,7 @@ class ImportarAlumnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ResponsibleLinking::find($id)->delete();
+        return redirect()->route('linkings.index');
     }
 }
