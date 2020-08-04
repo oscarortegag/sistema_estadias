@@ -11,19 +11,19 @@ class StatisticController extends Controller
 {
     function index(Period $period)
     {
-        $surveys = DB::table('surveys')
+        /*$surveys = DB::table('surveys')
             ->select(DB::raw("count(*) as total"))
             ->where('period_id', '=', $period->period_id)
-            ->get();
+            ->get();*/
 
-        $students = DB::table('students')
+        /*$students = DB::table('students')
             ->select(DB::raw("count(*) as total"))
             ->where('period_id', '=', $period->period_id)
-            ->get();
+            ->get();*/
 
         //dd($polls[0]->total);
         //dd($students[0]->total);
 
-        return view('admin.vinculacion.seguimiento.statistics.index', compact('period', 'surveys', 'students'));
+        return view('admin.vinculacion.seguimiento.statistics.index', compact('period'));
     }
 }

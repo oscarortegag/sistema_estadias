@@ -12,7 +12,7 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>{{ $students[0]->total }}</h3>
+                    <h3>{{ $period->students->count() }}</h3>
 
                     <p>Alumnos registrados</p>
                 </div>
@@ -26,7 +26,7 @@
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                    <h3>{{ $surveys[0]->total }}</h3>
+                    <h3>{{ $period->surveys->count() }}</h3>
 
                     <p>Encuestas registradas</p>
                 </div>
@@ -77,6 +77,63 @@
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
+        @foreach($period->surveys as $survey)
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ $survey->displayName }}</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        @foreach($survey->questions as $question)
+                            <div class="col-md-10 col-md-offset-1">
+                                <h4>{!!  $question->content !!}</h4>
+                                @if($question->type_question == 1 OR $question->type_question == 2)
+                                <table>
+                                    <thead>
+                                        <th>Opción</th>
+                                        <th>Cantidad</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($question->options as $option)
+                                            <tr>
+                                                <td>
+                                                    {{$option->content}}
+                                                </td>
+                                                <td>
+                                                    {{$option->respuestas->count() }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @else
+                                    <table>
+                                        <thead>
+                                            <th>Respuestas</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($question->respuestas as $respuesta)
+                                                <td>
+                                                    {{$respuesta->reponse_string}}
+                                                </td>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        @endforeach
     </div>
 @stop
 

@@ -12,4 +12,15 @@ class SurveyResponse extends Model
         'reponse_date',
         'question_option_id',
     ];
+
+    public function opcion()
+    {
+        return $this->belongsTo(QuestionOption::class);
+    }
+
+    public function pregunta()
+    {
+        return $this->belongsTo(SurveyQuestion::class);
+    }
+
 }

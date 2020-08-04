@@ -24,7 +24,7 @@
 
 {!! $data['content'] !!}
 
-<p> Para contestar la encuesta hacer <a href="{{ route("surveys.answer", ['id'=>$data['id']]) }}" class="btn btn-primary"><strong>Click aqui</strong></a></p>
+<p> Para contestar la encuesta hacer click aqui <a href="{{ route("surveys.answer", ['id'=>$data['id']]) }}" class="btn btn-primary"><img src="{{ asset("images/contestar_encuesta.jpg") }}"></a></p>
 
 </body>
 <script src="{{ asset("adminlte/bootstrap/dist/js/bootstrap.min.js") }}"></script>
