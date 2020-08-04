@@ -4,12 +4,17 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Reader;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AlumnosCollectionImport;
+use App\admin\vinculacion\seguimiento\Student;
+use App\admin\vinculacion\seguimiento\EducativeProgram;
 use App\admin\vinculacion\seguimiento\Enterprise;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
+use Auth;
 
-class ImportarAlumnoController extends Controller
+
+//use App\User;
+
+class StudentContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +23,10 @@ class ImportarAlumnoController extends Controller
      */
     public function index()
     {
-        //
+        $id = Auth::user()->id;
+        $student = Student::where('id','=',$id)->get();
+
+        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student','enterprise'));      
     }
 
     /**
@@ -28,7 +36,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
-        return view('admin.vinculacion.seguimiento.imports.create');
+        //
     }
 
     /**
@@ -39,15 +47,7 @@ class ImportarAlumnoController extends Controller
      */
     public function store(Request $request)
     {
-
-           Excel::import(new AlumnosCollectionImport, request()->file('archivo'));
-           dd("Información importada");
-           return redirect()->route('imports.create');
-                      //dd();
-           //dd("Archivo cargado");
-           //dd(\Session::get('filas'));
-
-
+        //
     }
 
     /**
@@ -69,7 +69,18 @@ class ImportarAlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $idSearch = decrypt($id);
+        $student = Student::find($idSearch);
+
+        $program = EducativeProgram::all();
+        $enterprise = Enterprise::all();
+
+        $locked = '';
+        if(\Session::get('perfil') == 2){
+           $locked = "disabled"; 
+        }
+
+        return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','program','enterprise'))->with('locked',$locked);          
     }
 
     /**
@@ -81,7 +92,18 @@ class ImportarAlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           $idE = decrypt($id);
+           $student = Student::find($idE);     
+
+           if(\Session::get('perfil') == 2){
+               $student->cellPhone = $request->telCelular;
+               $student->officePhone = $request->telOficina;
+               $student->personalEmail= $request->correoPersonal;
+               $student->facebook = $request->facebook;
+               $student->verified = 1;
+               $student->save();
+           }
+           return redirect()->route('studentcontact.index');        
     }
 
     /**

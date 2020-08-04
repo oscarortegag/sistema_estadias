@@ -44,7 +44,7 @@
                     <br>
                     <div class="form-group">
                         <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal</label>
-                        <input id="personalEmail" type="text" class="form-control @error('personalEmail') is-invalid @enderror" name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" required autofocus>
+                        <input id="personalEmail" type="email" class="form-control @error('personalEmail') is-invalid @enderror" name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" required autofocus>
                         @if (\Session::has('personalEmail'))
                             <div class="alert alert-danger">
                                 <ul>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email_family" class="col-form-label text-md-right">Correo electronico</label>
-                        <input id="email_family" type="text" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }}">
+                        <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }}">
                     </div>
                 </div>
                 @endif

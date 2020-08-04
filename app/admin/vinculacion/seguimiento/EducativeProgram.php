@@ -3,12 +3,17 @@
 namespace App\admin\vinculacion\seguimiento;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EducativeProgram extends Model
 {
-    protected $table="educativeprogram";
+    use SoftDeletes;
+
+    protected $table="educative_programs";
 
     protected $primaryKey = 'educativeProgram_id';
+
+    protected $dates = ['deleted_at'];
 
     public function students()
     {

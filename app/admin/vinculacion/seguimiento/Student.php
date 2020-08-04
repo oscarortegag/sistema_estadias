@@ -2,7 +2,6 @@
 
 namespace App\admin\vinculacion\seguimiento;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
@@ -15,9 +14,17 @@ class Student extends Model
         'facebook',
     ];
 
+    public function document(){
+        return $this->belongsTo('App\admin\vinculacion\seguimiento\OfficialDocument','student_id','student_id');
+    }
+
     public function period()
     {
         return $this->belongsTo(Period::class, 'period_id', 'period_id');
+    }
+
+    public function program(){
+        return $this->hasOne('App\admin\vinculacion\seguimiento\EducativeProgram','educativeProgram_id','educativeProgram_id');
     }
 
     public function educativeProgram()
