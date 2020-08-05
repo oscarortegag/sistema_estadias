@@ -21,12 +21,12 @@ class CreateStudentsTable extends Migration
             $table->string('name');            
             $table->string('lastName');
             $table->string('motherLastNames');         
-            //$table->unsignedInteger('gender_id');
+            $table->unsignedInteger('gender_id');
             $table->date('dateOfBirth');
             $table->string('enrollment');
             $table->unsignedInteger('quarter_id');
-            //$table->unsignedInteger('group_id');
-            //$table->unsignedInteger('shift_id');
+            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('shift_id');
             $table->string('socialSecurityNumber');
             $table->string('accidentInsurance')->nullable();
             $table->unsignedInteger('educativeProgram_id');
@@ -35,13 +35,15 @@ class CreateStudentsTable extends Migration
             $table->string('curp');
             $table->string('institutionalEmail');
             $table->year('incomeYear');
-            //$table->unsignedInteger('degree_id');
+            $table->unsignedInteger('degree_id');
             $table->unsignedInteger('modality_id');
             $table->string('officePhone')->nullable();             
             $table->string('cellPhone')->nullable();
             $table->string('personalEmail')->nullable();            
             $table->string('facebook')->nullable();
-            $table->boolean('verified')->nullable();        
+            $table->boolean('verified')->nullable();
+            $table->text('data')->nullable();
+            $table->text('code');
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Importar archivos</h1>
+    <h1>Importar archivo</h1>
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
-                    <div class="card-header"> <h3>Alumnos </h3></div>
+                    <div class="card-header"> <h3>Alumnos</h3></div>
                     <div class="card-body">
                         <form name="frm" method="post" action="{{ route('imports.store') }}" enctype="multipart/form-data">
                             {{csrf_field()}}

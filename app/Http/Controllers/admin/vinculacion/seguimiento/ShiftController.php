@@ -26,7 +26,7 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vinculacion.seguimiento.shifts.create');
     }
 
     /**
@@ -37,7 +37,11 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $shift = new Shifts;
+        $shift->name = $request->turno;
+        $shift->save();
+
+        return redirect()->route('shift.index');
     }
 
     /**
@@ -59,7 +63,8 @@ class ShiftController extends Controller
      */
     public function edit($id)
     {
-        //
+        $shift = Shifts::find($id);
+        return view('admin.vinculacion.seguimiento.shifts.edit', compact('shift'));
     }
 
     /**
@@ -71,7 +76,11 @@ class ShiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $shift = Shifts::find($id);
+        $shift->name = $request->turno;
+        $shift->save();
+
+        return redirect()->route('shift.index');
     }
 
     /**
@@ -82,6 +91,7 @@ class ShiftController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Shifts::find($id)->delete();
+        return redirect()->route('shift.index');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Student;
+use App\admin\vinculacion\seguimiento\OfficialDocument;
+use Illuminate\Support\Facades\Crypt;
 use Auth;
 use App\User;
 
@@ -18,7 +20,13 @@ class PresentationController extends Controller
     public function index()
     {
        $information = Auth::user();
-        return view('admin.vinculacion.seguimiento.letters.index', compact('information'));
+       $status = 0;
+       foreach($information->student->surveys as $items){
+               if($items->status){
+                  $status = 1;
+               }
+       }
+       return view('admin.vinculacion.seguimiento.letters.index', compact('information','status'));
     }
 
     /**
@@ -61,7 +69,10 @@ class PresentationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $idSearch = decrypt($id);
+        $student = Student::find($idSearch);
+
+        return view('admin.vinculacion.seguimiento.letters.edit', compact('student'));
     }
 
     /**
@@ -73,7 +84,14 @@ class PresentationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           $idE = decrypt($id);
+           $document = OfficialDocument::find($idE);   
+
+           if(\Session::get('perfil') == 2){
+               $document->project = $request->project;
+               $document->save();
+           }
+           return redirect()->route('presentation.index');  
     }
 
     /**

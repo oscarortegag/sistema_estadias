@@ -39,9 +39,15 @@ class ImporterEnterpriseController extends Controller
      */
     public function store(Request $request)
     {
-     
+            $fecha = date("Y-m-d h:m:s");
+            $nombre = md5(time());
+            $file = $request->file('archivo');
+            $tipo = $file->getMimeType();
+
+            \Storage::disk('local')->put($nombre.".xlsx", \File::get($file));
+
             \Session::forget('dataFail');
-            $file = storage_path("app/importar_informacion_empresas.xlsx");
+            $file = storage_path("app/".$nombre.".xlsx");
             $spreadsheet = new Spreadsheet();
             $reader = new Xlsx();
 

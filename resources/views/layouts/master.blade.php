@@ -309,7 +309,7 @@ desired effect
 
                     <ul class="treeview-menu" >
                         <li>
-                            <a href="{{ route("enterprise.index") }}">
+                            <a href="{{ route("institutions.index") }}">
                                 <i class="fas fa-user-edit">Institución educativa</i>
                             </a>
                         </li>
@@ -324,37 +324,37 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("modalities.index") }}">
                                 <i class="fas fa-user-edit">Modalidad</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("schools.index") }}">
                                 <i class="fas fa-user-edit">Escuela de procedencia</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("degrees.index") }}">
                                 <i class="fas fa-user-edit">Carreras</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("periods.index") }}">
                                 <i class="fas fa-user-edit">Periodos</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("genders.index") }}">
                                 <i class="fas fa-user-edit">Género</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("quarters.index") }}">
                                 <i class="fas fa-user-edit">Cuatrimestre</i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("groups.index") }}">
                                 <i class="fas fa-user-edit">Grupos</i>
                             </a>
                         </li>
@@ -381,11 +381,6 @@ desired effect
                         <li>
                             <a href="#">
                                 <i class="fas fa-user-edit">Director académico</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Carta de presentación</i>
                             </a>
                         </li>
                     </ul>
@@ -572,5 +567,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+     @stack('jscustom');
 </body>
 </html>

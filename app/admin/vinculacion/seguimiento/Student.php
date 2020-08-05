@@ -50,4 +50,23 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function institution(){
+        return $this->hasOne(Institution::class,'institution_id','institution_id');
+    }
+
+    public function gender(){
+        return $this->hasOne(Gender::class,'gender_id','gender_id');
+    }
+
+    public function group(){
+        return $this->hasOne(Group::class,'group_id','group_id');
+    }
+
+    public function shift(){
+        return $this->hasOne(Shifts::class,'shift_id','shift_id');
+    }
+
+    public function degree(){
+        return $this->hasOne(Degree::class,'degree_id','degree_id');
+    }    
 }

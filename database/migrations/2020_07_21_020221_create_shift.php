@@ -16,9 +16,9 @@ class CreateShift extends Migration
         Schema::create('shifts', function (Blueprint $table) {
             $table->increments('shift_id');
             $table->string('name',45);
-            $table->string('displayName',45);
-            $table->softDeletes();                           
+            //$table->string('displayName',45);                         
             $table->timestamps();
+            $table->softDeletes();              
         });
     }
 

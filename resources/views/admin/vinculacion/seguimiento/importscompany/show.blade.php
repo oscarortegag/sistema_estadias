@@ -53,7 +53,9 @@
                                 @empty
                                     <tr>
                                         <td colspan="7">
-                                            <p class="text-light-blue">Importados</p>
+                                            <center>
+                                            <p class="text-light-blue">La información se completo exitosamente.</p></center>
+                                            </center>
                                         </td>
                                     </tr>
                                 @endforelse

@@ -23,5 +23,9 @@ class AcademicDirector extends Model
 
         public function division(){
 			return $this->hasOne('App\admin\vinculacion\seguimiento\AcademicDivision','academicDivision_id','academicDivision_id');
-        }	    
+        }
+
+        public function gender(){
+			return $this->hasOne(Gender::class,'gender_id','gender_id');
+        }        	    
 }

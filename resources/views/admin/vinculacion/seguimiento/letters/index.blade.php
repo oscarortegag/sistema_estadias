@@ -22,6 +22,16 @@
                             $msg = "<p class=\"text-red\">Tiene pendiente complementar sus datos de contacto</p>";
                         @endphp                    
                     @endif
+
+                    @if($status)
+                        @php
+                            $msg2 = "<p class=\"text-green\">Disponible</p>";
+                        @endphp
+                    @else
+                        @php
+                            $msg2 = "<p class=\"text-red\">Aun no ha contestado la encuesta</p>";
+                        @endphp
+                    @endif
                     <div class="card-body">
                           <div class="table-responsive">
                               <table id="tabla-parentescos" class="table table-bordered table-striped">
@@ -51,14 +61,13 @@
                                         <td>{{ $information->student->name." ".$information->student->lastName." ".$information->student->motherLastName }}</td>
                                         <td>{{ $information->student->document->advisor->nameAcademicAdvisor }}</td>
                                         <td>Carta de liberación</td>
-                                        <td>{!! $msg !!}</td>
+                                        <td>{!! $msg2 !!}</td>
                                         <td></td>                                         
                                         <td>
-                                            @if($information->student->verified)
-                                            <a href="{{ route('word.index',['doc'=>'2']) }}" class="btn btn-success btn-sm"><i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de liberación"></i></a>
-                                            @endif
-                                            &nbsp;
-                                            <a href="{{ route('word.index',['doc'=>'2']) }}" class="btn btn-primary btn-sm"><i class="fa fa-file-text-o" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>                                            
+                                            @if($status)
+                                                <a href="{{ route('word.index',['doc'=>'2']) }}" class="btn btn-success btn-sm"><i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de liberación"></i></a>&nbsp;
+                                                <a href="{{ route('presentation.edit',['id'=>Crypt::encrypt($information->student->student_id)]) }}" class="btn btn-primary btn-sm"><i class="fa fa-file-text-o" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>
+                                            @endif                                          
                                         </td>
                                     </tr>                                    
                                 </tbody>
