@@ -133,14 +133,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset("adminlte/bootstrap/dist/js/bootstrap.min.js") }}"></script>
 <script src="{{ asset("adminlte/plugins/iCheck/icheck.min.js") }}"></script>
-<script>
-    $(document).ready(function(){
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
+@stack('scripts')
+
+
 </body>
 </html>

@@ -53,6 +53,6 @@ class User extends Authenticatable
     }
 
     public function student(){
-        return $this->belongsTo('App\admin\vinculacion\seguimiento\Student','id','id');
+        return $this->belongsTo('App\admin\vinculacion\seguimiento\Student','user_id', 'id');
     }
 }

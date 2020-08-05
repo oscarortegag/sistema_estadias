@@ -10,6 +10,15 @@
             </p>
             <br>
         </div>
+
+
+                    <div class="callout callout-success">
+                        <h4>Todos los datos y preguntas marcados con <span style="color: orange"> * </span> son de respuesta requerida</h4>
+                    </div>
+
+
+
+
         <div class="box box-success">
             <h2> Datos del alumno </h2>
             <br>
@@ -23,8 +32,6 @@
             <br>
             <strong>Cuatrimestre:</strong> {{ $applySurvey->student->quarter->quarterName  }}
         </div>
-
-
 
         <form method="POST" action="{{ route('surveys.post_answer', [$applySurvey->id]) }}">
             @csrf
@@ -43,7 +50,7 @@
                     <h2> Datos de contacto </h2>
                     <br>
                     <div class="form-group">
-                        <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal</label>
+                        <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal <span style="color: orange">*</span></label>
                         <input id="personalEmail" type="email" class="form-control @error('personalEmail') is-invalid @enderror" name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" required autofocus>
                         @if (\Session::has('personalEmail'))
                             <div class="alert alert-danger">
@@ -55,27 +62,27 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="homePhone" class="col-form-label text-md-right">Telefono de domicilio</label>
-                        <input id="homePhone" type="text" class="form-control @error('homePhone') is-invalid @enderror" name="homePhone" value="{{ $applySurvey->student->contact->homePhone }}">
+                        <label for="homePhone" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
+                        <input id="homePhone" type="text" class="form-control @error('homePhone') is-invalid @enderror" name="homePhone" value="{{ $applySurvey->student->contact->homePhone }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="cellPhone" class="col-form-label text-md-right">Telefono celular</label>
-                        <input id="cellPhone" type="text" class="form-control @error('cellPhone') is-invalid @enderror" name="cellPhone" value="{{ $applySurvey->student->cellPhone }}">
+                        <label for="cellPhone" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
+                        <input id="cellPhone" type="text" class="form-control @error('cellPhone') is-invalid @enderror" name="cellPhone" value="{{ $applySurvey->student->cellPhone }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="facebook" class="col-form-label text-md-right">Facebook</label>
-                        <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $applySurvey->student->facebook  }}">
+                        <label for="facebook" class="col-form-label text-md-right">Facebook <span style="color: orange">*</span></label>
+                        <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $applySurvey->student->facebook  }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="col-form-label text-md-right">Domicilio</label>
-                        <textarea id="address" name="address" rows="2" class="form-control">
+                        <label for="address" class="col-form-label text-md-right">Domicilio <span style="color: orange">*</span></label>
+                        <textarea required id="address" name="address" rows="2" class="form-control" >
                             {{ $applySurvey->student->contact->address }}
                         </textarea>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="state_id" class="col-form-label text-md-right">Estado</label>
-                            <select name = "state_id" class="form-control">
+                            <label for="state_id" class="col-form-label text-md-right">Estado <span style="color: orange">*</span></label>
+                            <select required name = "state_id" class="form-control" >
                                 <option value = 0>Seleccione el estado</option>
                                 @foreach($states as $state)
                                     @if ($state->id == $applySurvey->student->contact->state_id)
@@ -87,12 +94,12 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="township" class="col-form-label text-md-right">Municipio</label>
-                            <input id="township" type="text" class="form-control @error('township') is-invalid @enderror" name="township" value="{{ $applySurvey->student->contact->township }}">
+                            <label for="township" class="col-form-label text-md-right">Municipio <span style="color: orange">*</span></label>
+                            <input id="township" type="text" class="form-control @error('township') is-invalid @enderror" name="township" value="{{ $applySurvey->student->contact->township }}" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="zip_code" class="col-form-label text-md-right">Codigo postal</label>
-                            <input id="zip_code" type="text" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ $applySurvey->student->contact->zip_code }}">
+                            <label for="zip_code" class="col-form-label text-md-right">Codigo postal <span style="color: orange">*</span></label>
+                            <input id="zip_code" type="text" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ $applySurvey->student->contact->zip_code }}" required>
                         </div>
                     </div>
                 </div>
@@ -118,16 +125,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="homePhone_family" class="col-form-label text-md-right">Telefono de domicilio</label>
-                        <input id="homePhone_family" type="text" class="form-control @error('homePhone_family') is-invalid @enderror" name="homePhone_family" value="{{ $applySurvey->student->contact->homePhone_family }}">
+                        <label for="homePhone_family" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
+                        <input id="homePhone_family" type="text" class="form-control @error('homePhone_family') is-invalid @enderror" name="homePhone_family" value="{{ $applySurvey->student->contact->homePhone_family }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="cellPhone_family" class="col-form-label text-md-right">Telefono celular</label>
-                        <input id="cellPhone_family" type="text" class="form-control @error('cellPhone_family') is-invalid @enderror" name="cellPhone_family" value="{{ $applySurvey->student->contact->cellPhone_family }}">
+                        <label for="cellPhone_family" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
+                        <input id="cellPhone_family" type="text" class="form-control @error('cellPhone_family') is-invalid @enderror" name="cellPhone_family" value="{{ $applySurvey->student->contact->cellPhone_family }} " required>
                     </div>
                     <div class="form-group">
-                        <label for="email_family" class="col-form-label text-md-right">Correo electronico</label>
-                        <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }}">
+                        <label for="email_family" class="col-form-label text-md-right">Correo electronico <span style="color: orange">*</span></label>
+                        <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }} " required>
                     </div>
                 </div>
                 @endif
@@ -135,7 +142,7 @@
                     @if ($question->type_question == 1)
                         <div class="box box-success" style="margin-top: 10px" >
                             <div class="box-header">
-                                <h2 class="box-title">{!! $question->content !!}</h2>
+                                <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -152,7 +159,7 @@
                     @elseif($question->type_question == 2)
                         <div class="box box-success" style="margin-top: 10px">
                             <div class="box-header">
-                                <h2 class="box-title">{!! $question->content !!}</h2>
+                                <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -169,22 +176,22 @@
                     @elseif($question->type_question == 3)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title">{!! $question->content !!}</h2>
+                                        <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
-                                        <textarea class="form-control" id="respuesta" name="{{ "pregunta" . $question->id }}" rows="3" cols="50">
+                                        <textarea class="form-control" id="respuesta" name="{{ "pregunta" . $question->id }}" rows="3" cols="50" required>
                                         </textarea>
                                     </div>
                                 </div>
                     @elseif($question->type_question == 4)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title">{!! $question->content !!}</h2>
+                                        <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
-                                        <input type="date" class="form-control" name="{{ "pregunta" . $question->id }}">
+                                        <input type="date" class="form-control" name="{{ "pregunta" . $question->id }}" required>
                                     </div>
                                 </div>
                     @endif
@@ -200,5 +207,30 @@
             </form>
     </div>
 
+
 @stop
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+                increaseArea: '20%' // optional
+            });
+
+            $('#personalEmail').change(function() {
+                var m = document.getElementById("personalEmail").value;
+                var expreg = new RegExp("^([a-z0-9_\\.-]+)@utchetumal\\.edu\\.mx$");
+
+                if(expreg.test(m))
+                    bootbox.alert("El correo electrónico personal no debe tener el dominio utchetumal.edu.mx");
+            });
+
+        });
+    </script>
+@endpush
+
 
