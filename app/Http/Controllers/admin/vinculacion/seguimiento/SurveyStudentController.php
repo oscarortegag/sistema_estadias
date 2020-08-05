@@ -36,7 +36,7 @@ class SurveyStudentController extends Controller
 
         //dd(Auth::user()->student);
 
-        if ($applySurvey->student->user_id != Auth::user()->id ) {
+        if ($applySurvey->student->id != Auth::user()->id ) {
             $error = 1;
             $messages[] = "La encuesta no pertenece a este usuario";
         }
@@ -126,8 +126,6 @@ class SurveyStudentController extends Controller
                     'homePhone.required' => 'El teléfono de domicilio es obligatorio.',
                     'cellPhone.required' => 'El teléfono celular es obligatorio.',
                     'facebook.required' => 'El facebook es obligatorio.',
-                    '.required' => 'El correo personal es obligatorio.',
-
 
                 ];
 

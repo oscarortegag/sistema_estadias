@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Listado de encuestas ({{ $student->period->name . " / " . date("Y", strtotime($student->period->firstDay)) }})</h1>
+   <h1>Listado de encuestas </h1>
 @stop
 
 @section('content')
