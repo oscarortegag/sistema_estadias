@@ -30,13 +30,20 @@ class WordController extends Controller
 
         $name = $information->student->name." ".$information->student->lastName." ".$information->student->motherLastNames;
         $enrollment = $information->student->enrollment;
+        $degree = $information->student->degree->degreeName;
         $nss = $information->student->socialSecurityNumber;
         $presDate = $information->student->document->presentationDate;
         $hour = $information->student->document->hoursStay;
         $advisor = $information->student->document->advisor->nameAcademicAdvisor;
-        $academicPosition = $information->student->document->advisor->academicPosition;      
+        $academicPosition = $information->student->document->advisor->academicPosition;  
 
         $academicDirector = $information->student->document->director->nameDirector;
+        $genderDirector = $information->student->document->director->gender->gender_id;
+        if($genderDirector == 1){
+           $director = "DIRECTOR";
+        }else if($genderDirector == 2){
+                 $director = "DIRECTORA";
+        }        
         $academicDivision = $information->student->document->director->division->nameDivision;       
         $editor = $information->student->document->editor->nameEditorialAdvisor;
         $editorialPosition = $information->student->document->editor->editorialPosition;
@@ -44,6 +51,12 @@ class WordController extends Controller
         $responsiblePosition = $information->student->document->link->responsiblePosition;        
         $businessAdvisor = $information->student->document->businessAdvisor;
         $educativeProgram = $information->student->program->displayName;
+        $gender = $information->student->gender->gender_id;
+        if($gender == 1){
+           $genderStudent = "el alumno";
+        }else if($gender == 2){
+                 $genderStudent = "la alumna";
+        }
 
 
         setlocale (LC_TIME, "es_MX.UTF-8");      
@@ -51,8 +64,9 @@ class WordController extends Controller
         $presentationDate .=strftime('%d de %B de %Y', strtotime($information->student->document->presentationDate));
         $releaseDate = "Chetumal, Quintana Roo, a ";
         $releaseDate .=strftime('%d de %B de %Y', strtotime($information->student->document->releaseDate));         
-        $startDate = strftime('%d de %B de %Y', strtotime($information->student->document->startDate));;
-        $endDate = strftime('%d de %B de %Y', strtotime($information->student->document->endDate));;
+        $startDate = strftime('%d de %B de %Y', strtotime($information->student->document->startDate));
+        $endDate = strftime('%d de %B de %Y', strtotime($information->student->document->endDate));
+        $project = $information->student->document->project;
 
         try{
             $template = new \PhpOffice\PhpWord\TemplateProcessor($file);
@@ -60,6 +74,7 @@ class WordController extends Controller
                 $tmpFile = $template->setValue('presentationDate',$presentationDate);            
                 $tmpFile = $template->setValue('name',$name);
                 $tmpFile = $template->setValue('enrollment',$enrollment);
+                $tmpFile = $template->setValue('degree',$degree);              
                 $tmpFile = $template->setValue('socialSecurityNumber',$nss);
                 $tmpFile = $template->setValue('hours',$hour);
                 $tmpFile = $template->setValue('advisor',$advisor);            
@@ -72,6 +87,7 @@ class WordController extends Controller
             }else if($doc == 2){
                      $tmpFile = $template->setValue('releaseDate',$releaseDate);                 
                      $tmpFile = $template->setValue('nameDirector',$academicDirector);
+                     $tmpFile = $template->setValue('director',$director);                     
                      $tmpFile = $template->setValue('academicDivision',$academicDivision);                                
                      $tmpFile = $template->setValue('name',$name);
                      $tmpFile = $template->setValue('educativeProgram',$educativeProgram);                     
@@ -86,6 +102,8 @@ class WordController extends Controller
                      $tmpFile = $template->setValue('responsiblePosition',$responsiblePosition);
                      $tmpFile = $template->setValue('nameEditorialAdvisor',$editor);
                      $tmpFile = $template->setValue('editorialPosition',$editorialPosition);
+                     $tmpFile = $template->setValue('project',$project);
+                     $tmpFile = $template->setValue('gender',$genderStudent);
 
             }
 

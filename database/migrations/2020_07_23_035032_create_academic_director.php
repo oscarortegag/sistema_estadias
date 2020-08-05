@@ -17,8 +17,9 @@ class CreateAcademicDirector extends Migration
             $table->increments('academicDirector_id');
             $table->unsignedInteger('academicDivision_id');
             $table->string('nameDirector');
+            $table->unsignedInteger('gender_id');
             $table->string('nameEmail');
-            $table->string('directorPhone');
+            $table->string('directorPhone')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -25,23 +25,19 @@
                                     <th width="5%">#</th>
                                     <th width="25%">Nombre</th>
                                     <th width="25%">Correo electrónico</th>
-                                    <th width="25%">Rol del usuario</th>
+                                    <th width="15%">Rol usuario</th>
+                                    <th width="15%">Contraseña</th>
                                     <th width="10%">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($users as $user)
+                                @forelse ($data as $user)
                                     <tr>
                                         <td>{{$loop->index+1 }}</td>
-                                        <td>{{ $user->name}}</td>
-                                        <td>{{ $user->email}}</td>
-                                        <td>
-                                            @if($user->hasRole('admin'))
-                                                Administrador
-                                            @elseif ($user->hasRole('alumno'))
-                                                Alumno
-                                            @endif
-                                        </td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->role }}</td>
+                                        <td>{{ $user->code }}</td>
                                         <td>
                                             <a href="{{ route('users.edit', ['id'=>$user->id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos del usuario"></i></a>
                                         </td>

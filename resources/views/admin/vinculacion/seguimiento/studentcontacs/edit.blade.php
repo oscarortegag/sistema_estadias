@@ -11,6 +11,10 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-primary">
                     <div class="card-header"><center><h3>Verificar datos generales e información de contacto</h3></center></div><br>
+                      <div class="alert alert-El correo personal otorgado se le enviará el vínculo para contestar la encuesta.warning">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fa fa-warning"></i>Al correo personal otorgado se le enviará el vínculo para contestar la encuesta.</h5>
+                      </div>                  
                     <div class="card-body ">
                         <form name="frmcontact" method="post" action="{{ route('studentcontact.update', [Crypt::encrypt($student->student_id)]) }}">
                             {!! method_field('PUT') !!}
@@ -154,7 +158,6 @@
 @stop
 @push('jscustom')
 <script type="text/javascript">
-/*
     $(document).ready(function () {
         $("#valida2").click(function() {
             var correoBase,correoPersonal,correoConfirma,celular,telefono,facebook;
@@ -184,13 +187,12 @@
             }
 
             if(confirm("¿ Desea registrar su información de contacto ?")){
-              // $("#frmcontact").submit();
                return true;
             }else{
                   return false;
             }
 
         });
-    }); */
+    });
 </script>
 @endpush

@@ -12,7 +12,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h3>Listado de turnos </h3>
-                        <a href="{{route('kinships.create')}}" class="btn btn-success">
+                        <a href="{{route('shift.create')}}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Nuevo turno
                         </a>
@@ -24,7 +24,6 @@
                                 <tr>
                                     <th >#</th>
                                     <th >Nombre</th>
-                                    <th>Nombre corto</th>
                                     <th >Acciones</th>
                                 </tr>
                                 </thead>
@@ -33,22 +32,19 @@
                                     <tr>
                                         <td>{{$loop->index+1 }}</td>
                                         <td>{{ $items->name}}</td>
-                                        <td>{{ $items->displayName}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos del parentesco"></i></a>
-                                            <form style="display: inline" method="POST" action="#">
+                                            <a href="{{ route('shift.edit',['id'=>$items->shift_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar turno"></i></a>
+                                            <form style="display: inline" method="POST" action="{{ route('shift.destroy',['id'=>$items->shift_id]) }}">
                                                 {!! method_field('DELETE') !!}
                                                 {!! csrf_field() !!}
-
-                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de parentesco"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar turno"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td >
-                                            <p> No existen parentescos </p>
+                                            <p> No existen turnos </p>
                                         </td>
                                         <td></td>
                                         <td></td>
