@@ -16,6 +16,11 @@ use Auth;
 
 class StudentContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,7 @@ class StudentContactController extends Controller
         $id = Auth::user()->id;
         $student = Student::where('id','=',$id)->get();
 
-        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student','enterprise'));      
+        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student','enterprise'));
     }
 
     /**
@@ -77,10 +82,10 @@ class StudentContactController extends Controller
 
         $locked = '';
         if(\Session::get('perfil') == 2){
-           $locked = "disabled"; 
+           $locked = "disabled";
         }
 
-        return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','program','enterprise'))->with('locked',$locked);          
+        return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','program','enterprise'))->with('locked',$locked);
     }
 
     /**
@@ -93,7 +98,7 @@ class StudentContactController extends Controller
     public function update(Request $request, $id)
     {
            $idE = decrypt($id);
-           $student = Student::find($idE);     
+           $student = Student::find($idE);
 
            if(\Session::get('perfil') == 2){
                $student->cellPhone = $request->telCelular;
@@ -103,7 +108,7 @@ class StudentContactController extends Controller
                $student->verified = 1;
                $student->save();
            }
-           return redirect()->route('studentcontact.index');        
+           return redirect()->route('studentcontact.index');
     }
 
     /**

@@ -19,6 +19,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @stack('styles')
 
 <style>
+    .pregunta {
+        font-size: x-large;
+        font-weight: bold;
+
+    }
     .encabezado
     {
         position: fixed;

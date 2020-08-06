@@ -149,6 +149,10 @@ class SurveyController extends Controller
            'end_date' => date("Y-m-d", strtotime($request['end_date'])),
         ]);
 
+        $archivo = $request->file('signature')->store('public');
+
+
+
         for ($i=0; $i < count($alumnos); $i++ )
         {
             $student = Student::find($alumnos[$i]);
@@ -162,11 +166,12 @@ class SurveyController extends Controller
 
             $data = [
                 'content' => $request['content'],
-                'document' => $request['signature'],
+                'document' => $archivo,
                 'id' => $applySurvey->id,
+                'url' => route("surveys.answer", ['id'=>$applySurvey->id]),
             ];
 
-            Mail::to($correo, $student['name'])->send(new EmailEncuesta($data));
+            Mail::to($correo)->send(new EmailEncuesta($data));
 
         }
 

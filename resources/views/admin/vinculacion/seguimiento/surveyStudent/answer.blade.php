@@ -142,7 +142,7 @@
                     @if ($question->type_question == 1)
                         <div class="box box-success" style="margin-top: 10px" >
                             <div class="box-header">
-                                <h2 class="box-title" style="display:inline;">{{$loop->index+1 . ". "}}{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                <div class="row pregunta"><div class="col-sm-1"><span style="color: orange; display: inline">*</span>{{  $loop->index+1 . ". "}}</div><div class="col-sm-10>"{!! $question->content !!}</div><div class="col-sm-1"> </div></div>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -159,7 +159,7 @@
                     @elseif($question->type_question == 2)
                         <div class="box box-success" style="margin-top: 10px">
                             <div class="box-header">
-                                <h2 class="box-title" style="display:inline;">{{$loop->index+1 . ". "}}{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                <h2 >{!! $loop->index+1 . ". " . $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -176,7 +176,7 @@
                     @elseif($question->type_question == 3)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title" style="display:inline;">{{$loop->index+1 . ". "}}{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                        <h2 style="display:inline;">{!! $loop->index+1 . ". " . $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
@@ -187,7 +187,7 @@
                     @elseif($question->type_question == 4)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title" style="display:inline;">{{$loop->index+1 . ". "}}{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                        <h2 style="display:inline;">{!!$loop->index+1 . ". " . $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">

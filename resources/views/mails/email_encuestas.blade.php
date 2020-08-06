@@ -1,10 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Encuestas</title>
-    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap/dist/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         html, body {
             background-color: #fff;
@@ -17,15 +14,14 @@
         .content { text-align: center; }
         .title { font-size: 84px; }
     </style>
+
+
 </head>
 <body>
 
-<p> Prueba de encuesa</p>
-
 {!! $data['content'] !!}
 
-<p> Para contestar la encuesta hacer click aqui <a href="{{ route("surveys.answer", ['id'=>$data['id']]) }}" class="btn btn-primary"><img src="{{ asset("images/contestar_encuesta.jpg") }}"></a></p>
+<p> Para contestar la encuesta hacer click <a href="{{ $data['url'] }}" class="btn btn-primary"><strong>aqui</strong></a></p>
 
 </body>
-<script src="{{ asset("adminlte/bootstrap/dist/js/bootstrap.min.js") }}"></script>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -27,6 +28,7 @@ use App\admin\vinculacion\seguimiento\Shifts;
 use App\admin\vinculacion\seguimiento\Gender;
 use App\admin\vinculacion\seguimiento\Group;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\EmailUserNotice;
 
 class ImportarAlumnoController extends Controller
 {
@@ -97,8 +99,6 @@ class ImportarAlumnoController extends Controller
             $group = Group::all();
 
             foreach($sheetData as $data){
-                    //var_dump($data);
-                    //exit;
                     $result = $this->validation($data);
                     $error = "";
                     if($row > 2 && $result != 32){
@@ -377,6 +377,16 @@ class ImportarAlumnoController extends Controller
                             $document->responsibleLinking_id = $linkId;
                             $document->save();
                             $importerRow++;
+
+                            $url = route('studentcontact.edit',['id'=>Crypt::encrypt($student->student_id)]);
+                            $data = [
+                                'nombre' => $user->name,
+                                'usuario' => $user->email,
+                                'password' => $password,
+                                'url' => $url,
+                            ];
+                            Mail::to($student->institutionalEmail)->send(new EmailUserNotice($data));
+
                         }else if($result != 32){
                                  $importerRowFailData[] = $data;
                                  $importerRowFail++;

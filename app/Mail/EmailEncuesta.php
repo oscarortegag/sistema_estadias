@@ -21,12 +21,19 @@ class EmailEncuesta extends Mailable implements ShouldQueue
 
     public function build()
     {
-        return $this->view('mails.email_encuestas')
+        /*return $this->view('mails.email_encuestas')
+            ->subject('Contestar encuesta');*/
+
+        /*return $this->view('mails.email_encuestas')
             ->subject('Contestar encuesta')
             ->attach($this->data['document']->getRealPath(),
                 [
                     'as' => $this->data['document']->getClientOriginalName(),
                     'mime' => $this->data['document']->getClientMimeType(),
-                ]);;
+                ]);*/
+
+        return $this->view('mails.email_encuestas')
+            ->subject('Contestar encuesta')
+            ->attach(storage_path('/', $this->data['document']));
     }
 }
