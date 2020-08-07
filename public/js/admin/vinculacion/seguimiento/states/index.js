@@ -30,8 +30,7 @@ $(document).ready(function() {
             "aServerSide": true,//Paginación y filtrado realizados por el servidor
             dom: 'Bfrtip',//Definimos los elementos del control de tabla
             "bDestroy": true,
-            "iDisplayLength": 5,//Paginación
-            "order": [[0, "desc"]]//Ordenar (columna,orden)
+            "iDisplayLength": 10,//Paginación
         }
     );
 });

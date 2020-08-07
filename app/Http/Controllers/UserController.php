@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\admin\vinculacion\seguimiento\Student;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UserController extends Controller
                 $obj->name = $user->name;
                 $obj->email = $user->email;
                 if($user->role_id == 1){
-                   $role = "admin"; 
+                   $role = "admin";
                 }else{
                       $role = "alumno";
                 }
@@ -32,7 +33,7 @@ class UserController extends Controller
                    $code = decrypt($user->code);
                 }
                 $obj->code = $code;
-                $data[]=$obj; 
+                $data[]=$obj;
         }
 
         //return view('users.index', compact('users'));
@@ -79,14 +80,23 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:150',
             'email' => 'required|string|email|max:100|unique:users,email,'.$id,
-            'password' => 'required|alpha_num|min:8',
-        ]);
+            ]);
 
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
         ]);
+
+        if (!is_null($request->input('password'))){
+            //$user->password = Hash::make($request->input('password'));
+            $user->update(['password' => Hash::make($request->input('password'))]);
+            if ($user->hasRole('alumno')){
+                $student = Student::where('id', $user->id);
+                //$student->code = $request->input('password');
+                $student->update(['code' =>Crypt::encrypt($request->input('password'))]);
+                //$student->save();
+            }
+           }
 
         return redirect()->route('users.index');
     }

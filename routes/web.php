@@ -94,28 +94,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/users', 'UserController@index')->name('users.index');
+/*Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/nuevo', 'UserController@create')->name('users.create');
 Route::post('/guardar', 'UserController@store')->name('users.store');
 Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
 Route::put('/editar/{id}', 'UserController@update')->name('users.update');
-
-/*Route::get('/kinships', 'admin\vinculacion\seguimiento\KinshipController@index')->name('kinships.index');
-Route::get('/new_kinship', 'admin\vinculacion\seguimiento\KinshipController@create')->name('kinships.create');
-Route::post('/guardar_kinship', 'admin\vinculacion\seguimiento\KinshipController@store')->name('kinships.store');
-Route::get('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@edit')->name('kinships.edit');
-Route::put('/edit_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@update')->name('kinships.update');
-Route::delete('/delete_kinship/{id}', 'admin\vinculacion\seguimiento\KinshipController@destroy')->name('kinships.destroy');
 */
+Route::resource('users', 'UserController')->except(['show','destroy']);
 Route::resource('kinships', 'admin\vinculacion\seguimiento\KinshipController')->except(['show']);
 Route::resource('states', 'admin\vinculacion\seguimiento\StateController')->except(['show']);
 
-/*Route::get('/states', 'admin\vinculacion\seguimiento\StateController@index')->name('states.index');
-Route::get('/new_state', 'admin\vinculacion\seguimiento\StateController@create')->name('states.create');
-Route::post('/guardar_state', 'admin\vinculacion\seguimiento\StateController@store')->name('states.store');
-Route::get('/edit_state/{id}', 'admin\vinculacion\seguimiento\StateController@edit')->name('states.edit');
-Route::put('/edit_state/{id}', 'admin\vinculacion\seguimiento\StateController@update')->name('states.update');
-Route::delete('/delete_state/{id}', 'admin\vinculacion\seguimiento\StateController@destroy')->name('states.destroy');*/
 
 Route::get('/enterprise', 'admin\vinculacion\seguimiento\EnterpriseController@index')->name('enterprise.index');
 Route::get('/enterprise/new', 'admin\vinculacion\seguimiento\EnterpriseController@create')->name('enterprise.create');
