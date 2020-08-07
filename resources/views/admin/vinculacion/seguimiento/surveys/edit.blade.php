@@ -225,12 +225,13 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="/adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css") }}">
 @endpush
 
 @push('scripts')
-    <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="/adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <script src="/adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
-    <script src="/js/admin/vinculacion/seguimiento/surveys/edit.js"></script>
+
+    <script src="{{ asset("adminlte/ckeditor/ckeditor.js") }}"></script>
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js") }}"></script>
+    <script src="{{ asset("js/admin/vinculacion/seguimiento/surveys/edit.js") }}"></script>
 @endpush

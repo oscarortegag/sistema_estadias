@@ -30,9 +30,6 @@ class EmailSurveySend extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        /*return $this->view('mails.email_encuestas')
-            ->subject('Contestar encuesta')
-            ->attach(storage_path('/', $this->data['document']));*/
 
         return $this->markdown('emails.surveys.send')
             ->subject($this->data['subject']);

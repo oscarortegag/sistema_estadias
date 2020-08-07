@@ -121,16 +121,19 @@
     </div>
 @endsection
 @push('styles')
-    <link rel="stylesheet" href="/adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/adminlte/datatables.net-bs/css/dataTables.bootstrap.css">
+
+
+    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css") }}">
+    <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
 
 @endpush
 @push('scripts')
-    <script src="/adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <script src="/adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
-    <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <script src="/adminlte/ckeditor/ckeditor.js"></script>
+
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
+    <script src="{{ asset("adminlte/ckeditor/ckeditor.js") }}"></script>
 
     <script>
         lenguaje = {

@@ -31,6 +31,6 @@ class EmailUserNotice extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.user.notice');
+        return $this->markdown('emails.user.notice')->subject("Seguimiento a egresados - Datos de usuario");
     }
 }

@@ -58,13 +58,13 @@
     </div>
 @stop
         @push('styles')
-            <link rel="stylesheet" href="/adminlte/datatables.net-bs/css/dataTables.bootstrap.css">
+            <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
         @endpush
 
         @push('scripts')
-            <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
-            <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-            <script src="/js/admin/vinculacion/seguimiento/index.js"></script>
+            <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
+            <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
+            <script src="{{ asset("js/admin/vinculacion/seguimiento/index.js") }}"></script>
     @endpush
 
 
