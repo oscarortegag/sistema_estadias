@@ -32,7 +32,6 @@ $(document).ready(function() {
             dom: 'Bfrtip',//Definimos los elementos del control de tabla
             "bDestroy": true,
             "iDisplayLength": 10,//Paginación
-            "order": [[0, "desc"]]//Ordenar (columna,orden)
         }
     );
 });

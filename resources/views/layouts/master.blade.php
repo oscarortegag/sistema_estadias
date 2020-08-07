@@ -375,7 +375,7 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route("kinships.index") }}">
+                            <a href="{{ route("states.index") }}">
                                 <i class="fas fa-user-edit"> Estados de la republica</i>
                             </a>
                         </li>
