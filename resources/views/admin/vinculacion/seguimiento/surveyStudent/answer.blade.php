@@ -22,7 +22,7 @@
         <div class="box box-success">
             <h2> Datos del alumno </h2>
             <br>
-            <strong>Nombre:</strong> {{ $applySurvey->student->name . $applySurvey->student->lastName . " " . $applySurvey->student->motherLastnames  }}
+            <strong>Nombre:</strong> {{ $applySurvey->student->name . " " . $applySurvey->student->lastName . " " . $applySurvey->student->motherLastname }}
             <br>
             <strong>Curp:</strong> {{ $applySurvey->student->curp  }}
             <br>
@@ -142,7 +142,15 @@
                     @if ($question->type_question == 1)
                         <div class="box box-success" style="margin-top: 10px" >
                             <div class="box-header">
-                                <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                <div class="row pregunta">
+                                    <div class="col-sm-1">
+                                        @if($question->required)
+                                            <span style="color: orange; display: inline">*</span>
+                                        @endif
+                                        {{  $loop->index+1 . ". "}}
+                                    </div>
+                                    <div class="col-sm-10">{!! $question->content !!}</div>
+                                </div>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -159,7 +167,15 @@
                     @elseif($question->type_question == 2)
                         <div class="box box-success" style="margin-top: 10px">
                             <div class="box-header">
-                                <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                <div class="row pregunta">
+                                    <div class="col-sm-1">
+                                        @if($question->required)
+                                            <span style="color: orange; display: inline">*</span>
+                                        @endif
+                                        {{  $loop->index+1 . ". "}}
+                                    </div>
+                                    <div class="col-sm-10">{!! $question->content !!}</div>
+                                </div>
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -176,7 +192,15 @@
                     @elseif($question->type_question == 3)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                        <div class="row pregunta">
+                                            <div class="col-sm-1">
+                                                @if($question->required)
+                                                    <span style="color: orange; display: inline">*</span>
+                                                @endif
+                                                {{  $loop->index+1 . ". "}}
+                                            </div>
+                                            <div class="col-sm-10">{!! $question->content !!}</div>
+                                        </div>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
@@ -187,7 +211,15 @@
                     @elseif($question->type_question == 4)
                                 <div class="box box-success" style="margin-top: 10px">
                                     <div class="box-header">
-                                        <h2 class="box-title">{!! $question->content !!} @if ($question->required) <span style="color: orange">*</span> @endif</h2>
+                                        <div class="row pregunta">
+                                            <div class="col-sm-1">
+                                                @if($question->required)
+                                                    <span style="color: orange; display: inline">*</span>
+                                                @endif
+                                                {{  $loop->index+1 . ". "}}
+                                            </div>
+                                            <div class="col-sm-10">{!! $question->content !!}</div>
+                                        </div>
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">

@@ -121,6 +121,6 @@
 @endsection
 
 @push('scripts')
-    <script src="/adminlte/ckeditor/ckeditor.js"></script>
-    <script src="/js/admin/vinculacion/seguimiento/surveys/create.js"></script>
+    <script src="{{ asset("adminlte/ckeditor/ckeditor.js") }}"></script>
+    <script src="{{ asset("js/admin/vinculacion/seguimiento/surveys/create.js") }}"></script>
 @endpush

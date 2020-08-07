@@ -27,14 +27,14 @@ class StudentContactController extends Controller
      */
     public function index()
     {
-        if(\Session::get('perfil') == 2){       
+        if(\Session::get('perfil') == 2){
             $id = Auth::user()->id;
             $student = Student::where('id','=',$id)->get();
         }else{
               $student = Student::all();
         }
 
-        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student'));      
+        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student'));
     }
 
     /**
@@ -85,10 +85,10 @@ class StudentContactController extends Controller
         $school = SchoolOrigin::all();
         $degree = Degree::all();
         $period = Period::all();
-        
+
         $locked = '';
         if(\Session::get('perfil') == 2){
-           $locked = "disabled"; 
+           $locked = "disabled";
         }
 
         return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','institution','period','program','enterprise','school','degree'))->with('locked',$locked);
@@ -104,7 +104,7 @@ class StudentContactController extends Controller
     public function update(Request $request, $id)
     {
            $idE = decrypt($id);
-           $student = Student::find($idE);     
+           $student = Student::find($idE);
 
            if(\Session::get('perfil') == 2){
                $student->cellPhone = $request->telCelular;
@@ -116,7 +116,7 @@ class StudentContactController extends Controller
            }else{
 
            }
-           return redirect()->route('studentcontact.index');        
+           return redirect()->route('studentcontact.index');
     }
 
     /**

@@ -11,10 +11,12 @@ use App\admin\vinculacion\seguimiento\SurveyQuestion;
 use App\admin\vinculacion\seguimiento\ContactStudent;
 use App\admin\vinculacion\seguimiento\SurveyResponse;
 use App\Mail\EmailEncuesta;
+use App\Mail\EmailSurveySend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class SurveyController extends Controller
 {
@@ -143,16 +145,29 @@ class SurveyController extends Controller
         $alumnos = $request['alumnos'];
         $survey = Survey::find($id);
 
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'subject' => 'required',
+            'content' => 'required',
+            'signature' => 'required'
+
+        ]);
+
         $survey->update([
            'open' => '1',
            'start_date' => date("Y-m-d", strtotime($request['start_date'])),
            'end_date' => date("Y-m-d", strtotime($request['end_date'])),
         ]);
 
+        $archivo = Storage::disk('firmas')->put('firmas', $request->file('signature'));
+
+        //dd(asset($archivo));
         for ($i=0; $i < count($alumnos); $i++ )
         {
             $student = Student::find($alumnos[$i]);
             $correo = $student['personalEmail'];
+            //$nombre = $student['name'] . " " . $student['lastName'] . " " . $student['motherLastName'];
 
 
             $applySurvey = ApplySurvey::create([
@@ -161,12 +176,14 @@ class SurveyController extends Controller
             ]);
 
             $data = [
+                'subject' => $request['subject'],
                 'content' => $request['content'],
-                'document' => $request['signature'],
+                'document' => asset($archivo),
                 'id' => $applySurvey->id,
+                'url' => route("surveys.answer", ['id'=>$applySurvey->id]),
             ];
 
-            Mail::to($correo, $student['name'])->send(new EmailEncuesta($data));
+            Mail::to($correo)->send(new EmailSurveySend($data));
 
         }
 

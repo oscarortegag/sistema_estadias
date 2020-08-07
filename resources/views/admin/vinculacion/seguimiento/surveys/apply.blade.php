@@ -65,14 +65,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($survey->period->students as $student)
+                                @forelse ($survey->period->students->where('verified', 1) as $student)
                                     <tr>
                                         <td>
                                             <div class="checkbox">
                                                 <label><input type="checkbox" value="{{ $student->student_id }}" name="alumnos[]"></label>
                                             </div>
                                         </td>
-                                        <td>{{ $student->name . " " . $student->lastName . " " . $student->motherLastName }}  </td>
+                                        <td>{{ $student->name . " " . $student->lastName . " " . $student->motherLastNames }}  </td>
                                         <td>{{ $student->educativeProgram->shortName  }}  </td>
                                         <td>{{ $student->quarter->quarterName}}</td>
                                     </tr>
@@ -87,8 +87,13 @@
                             </table>
 
                             <div class="form-group">
+                                <label for="subject" class="col-form-label text-md-right">Asunto</label>
+                                <input id="subject" type="text" class="form-control" name="subject" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="content" class="col-form-label text-md-right">Contenido del correo electrónico</label>
-                                <textarea id="content" name="content" rows="3" class="form-control">
+                                <textarea id="content" name="content" rows="3" class="form-control" required>
 
                                 </textarea>
                             </div>
@@ -116,16 +121,19 @@
     </div>
 @endsection
 @push('styles')
-    <link rel="stylesheet" href="/adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/adminlte/datatables.net-bs/css/dataTables.bootstrap.css">
+
+
+    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css") }}">
+    <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
 
 @endpush
 @push('scripts')
-    <script src="/adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <script src="/adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
-    <script src="/adminlte/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/adminlte/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <script src="/adminlte/ckeditor/ckeditor.js"></script>
+
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
+    <script src="{{ asset("adminlte/ckeditor/ckeditor.js") }}"></script>
 
     <script>
         lenguaje = {

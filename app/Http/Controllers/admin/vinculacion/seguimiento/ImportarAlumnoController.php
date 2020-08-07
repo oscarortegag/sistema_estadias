@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -27,6 +28,7 @@ use App\admin\vinculacion\seguimiento\Shifts;
 use App\admin\vinculacion\seguimiento\Gender;
 use App\admin\vinculacion\seguimiento\Group;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\EmailUserNotice;
 
 class ImportarAlumnoController extends Controller
 {
@@ -121,8 +123,8 @@ class ImportarAlumnoController extends Controller
                         if($gen->count() > 0){
                            foreach ($gen as $item) {
                                    $genId = $item->gender_id;
-                           }                                                   
-                        }else{ $valida++; $error.="D,";}                     
+                           }
+                        }else{ $valida++; $error.="D,";}
 
                         if((is_null($data["E"])) || $data["E"]==" "){
                             $valida++;
@@ -132,14 +134,14 @@ class ImportarAlumnoController extends Controller
                         if((is_null($data["F"])) || $data["F"]==" "){
                             $valida++;
                             $error.="F,";
-                        }                                
+                        }
 
                         $quart = $quarter->where('number','=',$data["G"]);
 
                         if($quart->count() > 0){
                            foreach ($quart as $item) {
                                    $quartId = $item->quarter_id;
-                           }                                                   
+                           }
                         }else{ $valida++; $error.="G,";}
 
                         $gro = $group->where('name','=',$data["H"]);
@@ -147,7 +149,7 @@ class ImportarAlumnoController extends Controller
                         if($gro->count() > 0){
                            foreach ($gro as $item) {
                                    $groId = $item->group_id;
-                           }                                                   
+                           }
                         }else{ $valida++; $error.="H,";}
 
                         $shi = $shift->where('name','=',$data["I"]);
@@ -155,8 +157,8 @@ class ImportarAlumnoController extends Controller
                         if($shi->count() > 0){
                            foreach ($shi as $item) {
                                    $shiId = $item->shift_id;
-                           }                                                   
-                        }else{ $valida++; $error.="I,";}                          
+                           }
+                        }else{ $valida++; $error.="I,";}
 
                         if((is_null($data["J"])) || $data["J"]==" "){
                             $valida++;
@@ -174,14 +176,14 @@ class ImportarAlumnoController extends Controller
                         if($per->count() > 0){
                            foreach ($per as $item) {
                                    $perId = $item->period_id;
-                           }                          
-                        }else{ $valida++; $error.="L y M,";}                   
+                           }
+                        }else{ $valida++; $error.="L y M,";}
 
                         $program = $programEducative->where('shortName','=',$data["N"]);
                         if($program->count() > 0){
                           foreach ($program as $item) {
                                    $programEducativeId = $item->educativeProgram_id;
-                          }                          
+                          }
                         }else{ $valida++; $error.="N,";}
 
                         if((is_null($data["O"])) || $data["O"]==" "){
@@ -194,8 +196,8 @@ class ImportarAlumnoController extends Controller
                         if($schoo->count() > 0){
                             foreach ($schoo as $item) {
                                      $schooId = $item->schoolOrigin_id;
-                            }                          
-                        }else { $valida++; $error.="P,";}                  
+                            }
+                        }else { $valida++; $error.="P,";}
 
                         if((is_null($data["Q"])) || $data["Q"]==" "){
                             $valida++;
@@ -226,7 +228,7 @@ class ImportarAlumnoController extends Controller
                         if($deg->count() > 0){
                             foreach ($deg as $item) {
                                      $degId = $item->degree_id;
-                            }                          
+                            }
                         }else { $valida++; $error.="U,";}
 
                         $mod = $modal->where('modalityName','=',$data["V"]);
@@ -234,7 +236,7 @@ class ImportarAlumnoController extends Controller
                         if($mod->count() > 0){
                            foreach ($mod as $item) {
                                    $modId = $item->modality_id;
-                           }                          
+                           }
                         }else{ $valida++; $error.="V,";}
 
                         $enterp = $enterprise->where('companyName','=',$data["W"]);
@@ -242,20 +244,20 @@ class ImportarAlumnoController extends Controller
                         $dataEnterprise  = array();
                         if($enterp->count() > 0){
                           foreach ($enterp as $item) {
-                                   $dataEnterprise[0] = $item->enterprise_id;                                   
+                                   $dataEnterprise[0] = $item->enterprise_id;
                                    $dataEnterprise[1] = $item->representativeName;
                                    $dataEnterprise[2] = $item->representativePosition;
                                    $dataEnterprise[3] = $item->companyName;
                                    $dataEnterprise[4] = $item->businessAdvisorName;
-                          }                          
+                          }
                         }else { $valida++; $error.="W,";}
-                        
+
                         $adv = $advisor->where('nameAcademicAdvisor','=',$data["X"]);
 
                         if($adv->count() > 0){
                            foreach ($adv as $item) {
                                     $advId = $item->academicAdvisor_id;
-                            }                          
+                            }
                         }else{ $valida++; $error.="X,";}
 
                         $edit = $editor->where('nameEditorialAdvisor','=',$data["Y"]);
@@ -263,7 +265,7 @@ class ImportarAlumnoController extends Controller
                         if($edit->count() > 0){
                            foreach ($edit as $item) {
                                     $editId = $item->editorialAdvisor_id;
-                           }                          
+                           }
                         }else{ $valida++; $error.="Y,";}
 
                         $link = $linking->where('nameResponsible','=',$data["Z"]);
@@ -271,8 +273,8 @@ class ImportarAlumnoController extends Controller
                         if($link->count() > 0){
                            foreach ($link as $item) {
                                     $linkId = $item->responsibleLinking_id;
-                           }                          
-                        }else{ $valida++; $error.="Z,";}                   
+                           }
+                        }else{ $valida++; $error.="Z,";}
 
                         if((is_null($data["AA"])) || $data["AA"]==" "){
                             $valida++;
@@ -284,7 +286,7 @@ class ImportarAlumnoController extends Controller
                         if($acaDir->count() > 0){
                            foreach ($acaDir as $item) {
                                    $acaDirId = $item->academicDirector_id;
-                           }                        
+                           }
                         }else { $valida++; $error.="AB,"; }
 
                         if((is_null($data["AC"])) || $data["AC"]==" "){
@@ -298,11 +300,11 @@ class ImportarAlumnoController extends Controller
                         }
 
                         $university = $institution->where('name','=',$data["AE"]);
-                        
+
                         if($university->count() > 0){
                            foreach ($university as $item) {
                                     $universityId = $item->institution_id;
-                           }                          
+                           }
                         }else{ $valida++; $error.="AE,";}
 
                         $dataJson = $data["AF"];
@@ -337,7 +339,7 @@ class ImportarAlumnoController extends Controller
                             $student->dateOfBirth = $data["E"];
                             $student->enrollment = $data["F"];
                             $student->quarter_id = $quartId;
-                            $student->group_id = $groId;                         
+                            $student->group_id = $groId;
                             $student->shift_id = $shiId;
                             $student->socialSecurityNumber = $data["J"];
                             $student->accidentInsurance = $data["K"];
@@ -370,16 +372,26 @@ class ImportarAlumnoController extends Controller
                             $document->endDate = $data["M"];
                             $document->hoursStay = $data["S"];
                             $document->academicDirector_id = $acaDirId;
-                            $document->academicAdvisor_id = $advId;                       
+                            $document->academicAdvisor_id = $advId;
                             $document->editorialAdvisor_id = $editId;
                             $document->responsibleLinking_id = $linkId;
                             $document->save();
                             $importerRow++;
+
+                            $url = route('studentcontact.edit',['id'=>Crypt::encrypt($student->student_id)]);
+                            $data = [
+                                'nombre' => $user->name,
+                                'usuario' => $user->email,
+                                'password' => $password,
+                                'url' => $url,
+                            ];
+                            Mail::to($student->institutionalEmail)->send(new EmailUserNotice($data));
+
                         }else if($result != 32){
                                  $importerRowFailData[] = $data;
                                  $importerRowFail++;
                         }
-                    }                                                                                                
+                    }
 
                     $row++;
             }
@@ -468,5 +480,5 @@ class ImportarAlumnoController extends Controller
              $max = strlen($pattern)-1;
              for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
              return $key;
-    }       
+    }
 }
