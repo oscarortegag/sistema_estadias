@@ -1,8 +1,8 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => config('app.url')])
-           Universidad Tecnologica de Chetumal
+        @component('mail::header', ['url' => '#'])
+           Universidad Tecnológica de Chetumal
         @endcomponent
     @endslot
 
@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            Sistema de seguimiento a egresados - {{ date('Y') }}
+            Dirección de vinculación - Sistema de seguimiento a egresados - {{ date('Y') }}
         @endcomponent
     @endslot
 @endcomponent

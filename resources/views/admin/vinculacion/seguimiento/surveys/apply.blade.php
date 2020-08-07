@@ -87,6 +87,11 @@
                             </table>
 
                             <div class="form-group">
+                                <label for="subject" class="col-form-label text-md-right">Asunto</label>
+                                <input id="subject" type="text" class="form-control" name="subject" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="content" class="col-form-label text-md-right">Contenido del correo electrónico</label>
                                 <textarea id="content" name="content" rows="3" class="form-control">
 
