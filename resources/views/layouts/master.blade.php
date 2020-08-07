@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{config('app.name')}}</title>
+    <title>UT Chetumal | Seguimiento a egresados</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('adminlte/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -41,6 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="icon" href="http://www.utchetumal.edu.mx/index/wp-content/uploads/2017/01/cropped-photo-32x32.jpg" sizes="32x32" />
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -256,31 +257,11 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Menú</li>
                 @if(Auth::user()->hasRole('admin'))
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-user-circle"></i> <span>Seguimiento a egresados</span>
-                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-
-                    <ul class="treeview-menu" >
-                        <li>
-                            <a href="{{ route("seguimiento.index") }}">
-                                <i class="fas fa-user-edit"></i> Datos seguimiento
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route("users.index") }}#">
-                                <i class="fas fa-users-cog"></i> Usuarios
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route("kinships.index") }}">
-                                <i class="fas fa-cog"></i> Catalogo de parentesco
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="{{ route("seguimiento.index") }}">
+                            <i class="fas fa-user-edit"></i> Seguimiento a egresados
+                        </a>
+                    </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-user-circle"></i> <span>Importación</span>
                         <span class="pull-right-container">
@@ -300,6 +281,7 @@ desired effect
                         </li>
                     </ul>
                 </li>
+
                 <li class="treeview">
                     <a href="#"><i class="fa fa-user-circle"></i> <span>Catálogos</span>
                         <span class="pull-right-container">
@@ -383,6 +365,22 @@ desired effect
                                 <i class="fas fa-user-edit">Director académico</i>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route("users.index") }}">
+                                <i class="fas fa-user-edit">Usuarios del sistema</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("kinships.index") }}">
+                                <i class="fas fa-user-edit"> Parentescos</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("kinships.index") }}">
+                                <i class="fas fa-user-edit"> Estados de la republica</i>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

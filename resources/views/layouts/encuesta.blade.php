@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{config('app.name')}}</title>
+    <title>UT Chetumal | Seguimiento a egresados</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset("adminlte/bootstrap/dist/css/bootstrap.min.css") }}">
@@ -18,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset("adminlte/plugins/iCheck/square/_all.css") }}">
     @stack('styles')
 
-<style>
+    <style>
     .pregunta {
         font-size: x-large;
         font-weight: bold;
@@ -89,6 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 </style>
+    <link rel="icon" href="http://www.utchetumal.edu.mx/index/wp-content/uploads/2017/01/cropped-photo-32x32.jpg" sizes="32x32" />
 </head>
 <body>
 <header>
