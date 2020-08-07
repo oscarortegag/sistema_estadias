@@ -145,6 +145,15 @@ class SurveyController extends Controller
         $alumnos = $request['alumnos'];
         $survey = Survey::find($id);
 
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'subject' => 'required',
+            'content' => 'required',
+            'signature' => 'required'
+
+        ]);
+
         $survey->update([
            'open' => '1',
            'start_date' => date("Y-m-d", strtotime($request['start_date'])),

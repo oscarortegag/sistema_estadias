@@ -6,4 +6,6 @@
 Contestar encuesta
 @endcomponent
 
+<img src="{{ $data['document'] }}">
+
 @endcomponent
