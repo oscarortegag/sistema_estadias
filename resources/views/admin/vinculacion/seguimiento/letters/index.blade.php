@@ -24,9 +24,15 @@
                     @endif
 
                     @if($status)
-                        @php
-                            $msg2 = "<p class=\"text-green\">Disponible</p>";
-                        @endphp
+                        @if(!is_null($information->student->document->project))
+                            @php
+                                $msg2 = "<p class=\"text-green\">Disponible</p>";
+                            @endphp
+                        @else
+                            @php
+                                $msg2 = "<p class=\"text-red\">Falta agregar el nombre del proyecto</p>";
+                            @endphp
+                        @endif
                     @else
                         @php
                             $msg2 = "<p class=\"text-red\">Aun no ha contestado la encuesta</p>";
@@ -38,7 +44,7 @@
                                 <thead>
                                 <tr>
                                     <th>Alumno</th>
-                                    <th>Asesor acádemico</th>
+                                    <th>Asesor académico</th>
                                     <th>Documento</th>
                                     <th>Estatus</th>                                    
                                     <th colspan="2">Descargar</th>
@@ -48,7 +54,7 @@
                                     <tr>
                                         <td>{{ $information->student->name." ".$information->student->lastName." ".$information->student->motherLastName }}</td>
                                         <td>{{ $information->student->document->advisor->nameAcademicAdvisor }}</td>
-                                        <td>Carta de presentación</td>
+                                        <td><span class="label label-primary">Carta de presentación</span></td>
                                         <td>{!! $msg !!}</td>
                                         <td></td>                                         
                                         <td>
@@ -60,13 +66,15 @@
                                     <tr>
                                         <td>{{ $information->student->name." ".$information->student->lastName." ".$information->student->motherLastName }}</td>
                                         <td>{{ $information->student->document->advisor->nameAcademicAdvisor }}</td>
-                                        <td>Carta de liberación</td>
+                                        <td><span class="label label-success">Carta de liberación</span></td>
                                         <td>{!! $msg2 !!}</td>
                                         <td></td>                                         
                                         <td>
                                             @if($status)
+                                                @if(!is_null($information->student->document->project))
                                                 <a href="{{ route('word.index',['doc'=>'2']) }}" class="btn btn-success btn-sm"><i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de liberación"></i></a>&nbsp;
-                                                <a href="{{ route('presentation.edit',['id'=>Crypt::encrypt($information->student->student_id)]) }}" class="btn btn-primary btn-sm"><i class="fa fa-file-text-o" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>
+                                                @endif
+                                                <a href="{{ route('presentation.edit',['id'=>Crypt::encrypt($information->student->student_id)]) }}" class="btn btn-primary btn-sm"><i class="fa fa-mortar-board" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>
                                             @endif                                          
                                         </td>
                                     </tr>                                    

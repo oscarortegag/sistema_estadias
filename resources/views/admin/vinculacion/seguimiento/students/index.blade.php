@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Listado de alumnos ({{ $period->displayName }})</h1>
+    <h1>Listado de alumnos ({{ $period->name." ".$period->year }})</h1>
 @stop
 
 @section('content')
@@ -23,20 +23,22 @@
                         <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
-                                <th>Matricula</th>
-                                <th>Nombre</th>
-                                <th>Especialidad</th>
-                                <th>Acciones</th>
+                                <th width="5%">Matrícula</th>
+                                <th width="15%">Nombre</th>
+                                <th width="25%">Grado académico</th>
+                                <th width="25%">Carrera</th>
+                                <th width="10%">Acción</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse ($students as $student)
                                 <tr>
-                                    <td>{{ $student->enrollment }} </td>
-                                    <td>{{ $student->fullName  }}  </td>
-                                    <td>{{ $student->especialidad  }}  </td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
+                                    <td width="5%">{{ $student->enrollment }} </td>
+                                    <td width="15%">{{ $student->name." ".$student->lastName." ".$student->MotherLastNames }}</td>
+                                    <td width="25%">{{ $student->educativeProgram->displayName }}</td>
+                                    <td width="25%">{{ $student->degree->degreeName }}</td>
+                                    <td width="10%">
+                                        <a href="{{ route('students.edit',['id'=>Crypt::encrypt($student->student_id)]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             @empty

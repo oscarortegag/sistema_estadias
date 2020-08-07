@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Catálogo empresas</h1>
+    <h1>Director académico</h1>
 @stop
 
 @section('content')
@@ -11,9 +11,9 @@
 
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3>Listado de empresas</h3>
-                        <a href="{{route('enterprise.create')}}" class="btn btn-success">
-                            <i class="fa fa-plus"></i>&nbsp;Nueva empresa
+                        <h3>Listado</h3>
+                        <a href="{{route('directors.create')}}" class="btn btn-success">
+                            <i class="fa fa-plus"></i>&nbsp;Nuevo director académico
                         </a><br><br>
                     </div>
                     <div class="card-body">
@@ -22,40 +22,36 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Empresa</th>
-                                    <th>Razón social</th>
+                                    <th>Nombre</th>
+                                    <th>División académica</th>
+                                    <th>Género</th>
+                                    <th>Correo electrónico</th>
                                     <th>Teléfono</th>
-                                    <th>Representante</th>
-                                    <th>Cargo</th>
-                                    <th>Asesor empresarial</th>
-                                    <th>Contacto empresarial</th>
-                                    <th>Acciones</th>
+                                    <th>Opciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($enterprise as $items)
+                                @forelse ($director as $items)
                                     <tr>
                                         <td>{{$loop->index+1 }}</td>
-                                        <td>{{ $items->companyName}}</td>
-                                        <td>{{ $items->businessName}}</td>
-                                        <td>{{ $items->companyPhone}}</td>
-                                        <td>{{ $items->representativeName}}</td>
-                                        <td>{{ $items->representativePosition}}</td>
-                                        <td>{{ $items->businessAdvisorName}}</td>
-                                        <td>{{ $items->businessContactName}}</td>    
+                                        <td>{{ $items->nameDirector}}</td>
+                                        <td>{{ $items->division->nameDivision }}</td>
+                                        <td>{{ $items->gender->name}}</td>
+                                        <td>{{ $items->nameEmail}}</td>
+                                        <td>{{ $items->directorPhone}}</td> 
                                         <td>
-                                            <a href="{{ route('enterprise.edit', ['id'=>$items->enterprise_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos empresa"></i></a>
-                                            <form style="display: inline" method="post" action="{{ route('enterprise.destroy', ['id'=>$items->enterprise_id]) }}">
+                                            <a href="{{ route('directors.edit', ['id'=>$items->academicDirector_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos director académico"></i></a>
+                                            <form style="display: inline" method="post" action="{{ route('directors.destroy', ['id'=>$items->academicDirector_id]) }}">
                                                 {!! method_field('DELETE') !!}
                                                 {!! csrf_field() !!}
-                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar empresa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos director académico"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">
-                                            <p>No existen empresas</p>
+                                        <td colspan="6">
+                                            <p>No existen asesores académicos</p>
                                         </td>
                                     </tr>
                                 @endforelse

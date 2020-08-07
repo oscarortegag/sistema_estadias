@@ -29,6 +29,10 @@ Route::get('students/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StudentController@index',
     'as'   => 'students.index',
 ]);
+Route::get('students/edit/{id}', [
+    'uses' => 'admin\vinculacion\seguimiento\StudentController@edit',
+    'as'   => 'students.edit',
+]);
 
 Route::get('surveys/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyController@index',
@@ -177,6 +181,20 @@ Route::post('/group/save', 'admin\vinculacion\seguimiento\GroupController@store'
 Route::get('/group/edit/{id}', 'admin\vinculacion\seguimiento\GroupController@edit')->name('groups.edit');
 Route::put('/group/edit/{id}', 'admin\vinculacion\seguimiento\GroupController@update')->name('groups.update');
 Route::delete('/group/delete/{id}', 'admin\vinculacion\seguimiento\GroupController@destroy')->name('groups.destroy');
+
+Route::get('/division', 'admin\vinculacion\seguimiento\AcademicDivisionController@index')->name('divisions.index');
+Route::get('/division/new', 'admin\vinculacion\seguimiento\AcademicDivisionController@create')->name('divisions.create');
+Route::post('/division/save', 'admin\vinculacion\seguimiento\AcademicDivisionController@store')->name('divisions.store');
+Route::get('/division/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@edit')->name('divisions.edit');
+Route::put('/division/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@update')->name('divisions.update');
+Route::delete('/division/delete/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@destroy')->name('divisions.destroy');
+
+Route::get('/director', 'admin\vinculacion\seguimiento\AcademicDirectorController@index')->name('directors.index');
+Route::get('/director/new', 'admin\vinculacion\seguimiento\AcademicDirectorController@create')->name('directors.create');
+Route::post('/director/save', 'admin\vinculacion\seguimiento\AcademicDirectorController@store')->name('directors.store');
+Route::get('/director/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@edit')->name('directors.edit');
+Route::put('/director/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@update')->name('directors.update');
+Route::delete('/director/delete/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@destroy')->name('directors.destroy');
 
 Route::get('/quarter', 'admin\vinculacion\seguimiento\QuarterController@index')->name('quarters.index');
 Route::get('/quarter/new', 'admin\vinculacion\seguimiento\QuarterController@create')->name('quarters.create');

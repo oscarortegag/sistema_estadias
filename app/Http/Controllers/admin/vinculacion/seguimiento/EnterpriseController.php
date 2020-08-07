@@ -49,6 +49,7 @@ class EnterpriseController extends Controller
         $enterprise->businessContactName = $request->nombrecontacto;
         $enterprise->businessContactEmail = $request->correocontacto;
         $enterprise->businessContactPhone = $request->telefonocontacto;
+        $enterprise->importDate = date("Y-d-m");
         $enterprise->save();
 
         return redirect()->route('enterprise.index');
@@ -87,13 +88,21 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $enterprise = Enterprise::find($id);
-           $enterprise->companyName = $request->nombre;
-           $enterprise->businessName = $request->razonsocial;
-           $enterprise->companyPhone = $request->telefono;
-           $enterprise->save();
+            $enterprise = Enterprise::find($id);
+            $enterprise->companyName = $request->nombre;
+            $enterprise->businessName = $request->razonsocial;
+            $enterprise->companyPhone = $request->telefono;
+            $enterprise->representativeName = $request->representante;
+            $enterprise->representativePosition = $request->cargo;
+            $enterprise->businessAdvisorName = $request->nombreasesor;
+            $enterprise->businessAdvisorEmail = $request->correoasesor;
+            $enterprise->businessAdvisorPhone = $request->telefonoasesor;
+            $enterprise->businessContactName = $request->nombrecontacto;
+            $enterprise->businessContactEmail = $request->correocontacto;
+            $enterprise->businessContactPhone = $request->telefonocontacto;
+            $enterprise->save();
 
-           return redirect()->route('enterprise.index');
+            return redirect()->route('enterprise.index');
     }
 
     /**

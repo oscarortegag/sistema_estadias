@@ -273,12 +273,7 @@ desired effect
                             <a href="{{ route("users.index") }}#">
                                 <i class="fas fa-users-cog"></i> Usuarios
                             </a>
-                        </li>
-                        <li>
-                            <a href="{{ route("kinships.index") }}">
-                                <i class="fas fa-cog"></i> Catalogo de parentesco
-                            </a>
-                        </li>
+                        </li>                        
                     </ul>
                 </li>
                 <li class="treeview">
@@ -308,6 +303,11 @@ desired effect
                     </a>
 
                     <ul class="treeview-menu" >
+                        <li>
+                            <a href="{{ route("kinships.index") }}">
+                                <i class="fas fa-cog"></i> Catalogo de parentesco
+                            </a>
+                        </li>                        
                         <li>
                             <a href="{{ route("institutions.index") }}">
                                 <i class="fas fa-user-edit">Institución educativa</i>
@@ -359,10 +359,15 @@ desired effect
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("divisions.index") }}">
                                 <i class="fas fa-user-edit">División académica</i>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route("directors.index") }}">
+                                <i class="fas fa-user-edit">Director académico</i>
+                            </a>
+                        </li>                        
                         <li>
                             <a href="{{ route("advisors.index") }}">
                                 <i class="fas fa-user-edit">Asesor académico</i>
@@ -376,11 +381,6 @@ desired effect
                         <li>
                             <a href="{{ route("linkings.index") }}">
                                 <i class="fas fa-user-edit">Responsble de vinculación</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-user-edit">Director académico</i>
                             </a>
                         </li>
                     </ul>

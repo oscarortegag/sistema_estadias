@@ -57,11 +57,11 @@
                                     value="{{ $student->name }}" required autocomplete="nombre" autofocus {{ $locked }}>
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label for="apellidoMat" class="col-form-label text-md-right">Razón social</label>
+                                    <label for="apellidoMat" class="col-form-label text-md-right">Apellido paterno</label>
                                     <input id="apellidoMat" type="text" class="form-control @error('apellidoMat') is-invalid @enderror" name="apellidoMat" value="{{ $student->lastName }}" required autocomplete="apellidoMat" autofocus {{ $locked }}>
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label for="apellidoPat" class="col-form-label text-md-right">Teléfono de la empresa</label>
+                                    <label for="apellidoPat" class="col-form-label text-md-right">Apellido materno</label>
                                     <input id="apellidoPat" type="text" class="form-control @error('apellidoPat') is-invalid @enderror" name="apellidoPat" 
                                     value="{{ $student->motherLastNames }}" required autocomplete="apellidoPat" autofocus {{ $locked }}>
                                 </div>
@@ -73,9 +73,17 @@
                                     value="{{ $student->enrollment }}" required autocomplete="nombre" autofocus {{ $locked }}>
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label for="Apellido Materno" class="col-form-label text-md-right">Escuela de procedencia</label>
-                                    <input id="apellidoMat" type="text" class="form-control @error('apellidoMat') is-invalid @enderror" name="apellidoMat" value="" required autocomplete="apellidoMat" autofocus {{ $locked }}>
-                                </div>
+                                    <label for="school" class="col-form-label text-md-right">Escuela de procedencia</label>
+                                    <select name="school" id="school" required class="form-control @error('school') is-invalid @enderror" {{ $locked }}>
+                                            @foreach($school as $items)
+                                                @if($items->schoolOrigin_id == $student->schoolOrigin_id)
+                                                    <option value="{{ $items->schoolOrigin_id }}" selected>{{ $items->schoolName }}</option>
+                                                @else
+                                                    <option value="{{ $items->schoolOrigin_id }}">{{ $items->schoolName }}</option>
+                                                @endif
+                                            @endforeach
+                                    </select>
+                                </div>                                 
                                 <div class="form-group col-xs-4">
                                     <label for="curp" class="col-form-label text-md-right">CURP</label>
                                     <input id="curp" type="text" class="form-control @error('curp') is-invalid @enderror" name="curp" 
@@ -84,8 +92,16 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label for="carrera" class="col-form-label text-md-right">Carrera</label>
-                                    <input id="carrera" type="text" class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="" required autocomplete="carrer" autofocus {{ $locked }}>
+                                    <label for="degree" class="col-form-label text-md-right">Carrera</label>
+                                    <select name="degree" id="degree" required class="form-control @error('degree') is-invalid @enderror" {{ $locked }}>
+                                            @foreach($degree as $items)
+                                                @if($items->degree_id == $student->degree_id)
+                                                    <option value="{{ $items->degree_id }}" selected>{{ $items->degreeName }}</option>
+                                                @else
+                                                    <option value="{{ $items->degree_id }}">{{ $items->degreeName }}</option>
+                                                @endif
+                                            @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label for="gradoAcademico" class="col-form-label text-md-right">Grado académico</label>

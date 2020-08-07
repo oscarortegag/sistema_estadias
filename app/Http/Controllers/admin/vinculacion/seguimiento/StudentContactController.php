@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Student;
 use App\admin\vinculacion\seguimiento\EducativeProgram;
 use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\SchoolOrigin;
+use App\admin\vinculacion\seguimiento\Degree;
+use App\admin\vinculacion\seguimiento\Period;
+
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Auth;
@@ -23,10 +27,14 @@ class StudentContactController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        $student = Student::where('id','=',$id)->get();
+        if(\Session::get('perfil') == 2){       
+            $id = Auth::user()->id;
+            $student = Student::where('id','=',$id)->get();
+        }else{
+              $student = Student::all();
+        }
 
-        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student','enterprise'));      
+        return view('admin.vinculacion.seguimiento.studentcontacs.index',compact('student'));      
     }
 
     /**
@@ -74,13 +82,16 @@ class StudentContactController extends Controller
 
         $program = EducativeProgram::all();
         $enterprise = Enterprise::all();
-
+        $school = SchoolOrigin::all();
+        $degree = Degree::all();
+        $period = Period::all();
+        
         $locked = '';
         if(\Session::get('perfil') == 2){
            $locked = "disabled"; 
         }
 
-        return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','program','enterprise'))->with('locked',$locked);          
+        return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','institution','period','program','enterprise','school','degree'))->with('locked',$locked);
     }
 
     /**
@@ -102,6 +113,8 @@ class StudentContactController extends Controller
                $student->facebook = $request->facebook;
                $student->verified = 1;
                $student->save();
+           }else{
+
            }
            return redirect()->route('studentcontact.index');        
     }
