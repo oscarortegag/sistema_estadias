@@ -12,9 +12,11 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>{{ $period->students->count() }}</h3>
+                    <h3>{{ $period->students->count() }} <p style="display:inline">Alumnos registrados</p>                    </h3>
 
-                    <p>Alumnos registrados</p>
+                    <h4>{{ $period->students->where('gender_id', 1)->count() }} <p style="display: inline">Hombres</p></h4>
+                    <h4>{{ $period->students->where('gender_id', 2)->count() }} <p style="display: inline">Mujeres</p></h4>
+
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -22,13 +24,15 @@
                 <a href="{{route('students.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+
+            <div class="col-lg-6 col-xs-12">
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                    <h3>{{ $period->surveys->count() }}</h3>
-
-                    <p>Encuestas registradas</p>
+                    <h3>{{ $period->surveys->count() }} <p style="display: inline">Encuestas registradas</p></h3>
+                    @foreach($period->surveys as $survey)
+                        <p>{{$survey->displayName}}    {{ $survey->applySurveys->where('status', 1)->count() ? (($survey->applySurveys->where('status', 1)->count() / $survey->applySurveys->count()) * 100) : 0}} % </p>
+                    @endforeach
                 </div>
                 <div class="icon">
                     <i class="ion ion-android-list"></i>

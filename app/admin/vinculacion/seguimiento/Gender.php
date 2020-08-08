@@ -20,4 +20,9 @@ class Gender extends Model
 
      */
     protected $dates = ['deleted_at'];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'gender_id', 'gender_id');
+    }
 }
