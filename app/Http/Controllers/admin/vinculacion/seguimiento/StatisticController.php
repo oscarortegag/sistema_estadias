@@ -29,7 +29,6 @@ class StatisticController extends Controller
             ->where('students.period_id', $period->period_id)->whereIn('survey_questions.type_question', [1, 2])
             ->get();
 
-        //dd($responses);
         return view('admin.vinculacion.seguimiento.statistics.index', compact('period', 'educativePrograms', 'students', 'studentByAge', 'responses'));
     }
 

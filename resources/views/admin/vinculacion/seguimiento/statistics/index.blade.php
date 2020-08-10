@@ -189,7 +189,6 @@
                                                     </td>
                                                     @endif
                                                 @endforeach
-
                                                 <td>
                                                     {{$option->respuestas->count() }}
                                                 </td>
