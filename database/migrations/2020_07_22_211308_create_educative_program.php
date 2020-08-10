@@ -17,9 +17,10 @@ class CreateEducativeProgram extends Migration
             $table->increments('educativeProgram_id');
             $table->string('shortName');
             $table->string('displayName');
-            $table->string('area');          
+            $table->string('area');
+            $table->integer('color_id');
             $table->timestamps();
-            $table->softDeletes();            
+            $table->softDeletes();
         });
     }
 
