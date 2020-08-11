@@ -12,7 +12,7 @@
                 <div class="card card-primary">
                     <div class="card-header"><center><h3>Modificar información</h3></center></div><br>                 
                     <div class="card-body ">
-                        <form name="frmcontact" method="post" action="{{ route('studentcontact.update', [Crypt::encrypt($student->student_id)]) }}">
+                        <form name="frmcontact" method="post" action="{{ route('students.update', [Crypt::encrypt($student->student_id)]) }}">
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
                             @if (count($errors)>0)
@@ -21,6 +21,13 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                               </ul>
+                            @endif
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        {{Session::get('flash_message')}}
+                                    </ul>
+                                </div>
                             @endif
                           <div class="box box-info">
                             <div class="box-header with-border">
@@ -40,7 +47,7 @@
                                     </select>
                                 </div>                                
                                 <div class="form-group col-xs-4">
-                                    <label for="period" class="col-form-label text-md-right">Cuatrimestre</label>
+                                    <label for="period" class="col-form-label text-md-right">Periodo</label>
                                     <select name="period" id="period" required class="form-control @error('period') is-invalid @enderror">
                                             @foreach($period as $items)
                                                 @if($items->period_id == $student->period_id)
@@ -104,12 +111,16 @@
                                                 @endif
                                             @endforeach
                                     </select>
-                                </div>                                                              
+                                </div>
                                 <div class="form-group col-xs-4">
                                     <label for="birthday" class="col-form-label text-md-right">Fecha de nacimiento</label>
-                                    <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday"
-                                    value="{{ $student->dateOfBirth }}" required autocomplete="birthday" autofocus>
-                                </div>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>    
+                                        <input id="birthday" type="text" class="form-control pull-right @error('birthday') isbirthday-invalid @enderror" name="birthday" value="{{$student->dateOfBirth}}" required autocomplete="birthday" autofocus>
+                                    </div>
+                                </div>                                
                                 <div class="form-group col-xs-4">&nbsp;
                                 </div>
                             </div>
@@ -208,7 +219,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label for="incomeYear" class="col-form-label text-md-right">Correo institucional</label>
+                                    <label for="incomeYear" class="col-form-label text-md-right">Año de ingreso</label>
                                     <input id="incomeYear" type="text" class="form-control @error('incomeYear') is-invalid @enderror" name="incomeYear" id="incomeYear2"
                                     value="{{ $student->incomeYear }}" required autocomplete="incomeYear" autofocus>
                                 </div>
@@ -276,17 +287,27 @@
                                 </div>                               
                                 <div class="form-group col-xs-4">
                                     <label for="horas" class="col-form-label text-md-right">Horas a desempeñar</label>
-                                    <input id="horas" type="text" class="form-control @error('horas') is-invalid @enderror" name="horas" value="{{$student->document->hoursStay}}" required autocomplete="horas" autofocus>
+                                    <input id="horas" type="text" class="form-control @error('horas') is-invalid @enderror" name="horas" value="{{$student->document->hoursStay}}" required autocomplete="horas"  autofocus>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label for="presentationDate" class="col-form-label text-md-right">Fecha de carta de presentación</label>
-                                    <input id="presentationDate" type="text" class="form-control @error('presentationDate') is-invalid @enderror" name="presentationDate" value="{{$student->document->presentationDate}}" required autocomplete="presentationDate" autofocus>
-                                </div>                                                              
+                                    <label for="presentationDate" class="col-form-label text-md-right">Fecha carta de presentación</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>    
+                                        <input id="presentationDate" type="text" class="form-control pull-right @error('presentationDate') is-invalid @enderror" name="presentationDate" value="{{$student->document->presentationDate}}" required autocomplete="rpresentationDate autofocus">
+                                    </div>
+                                </div>       
                                 <div class="form-group col-xs-4">
                                     <label for="releaseDate" class="col-form-label text-md-right">Fecha carta de liberación</label>
-                                    <input id="releaseDate" type="text" class="form-control @error('releaseDate') is-invalid @enderror" name="releaseDate" value="{{$student->document->releaseDate}}" required autocomplete="releaseDate" autofocus>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>    
+                                        <input id="releaseDate" type="text" class="form-control pull-right @error('releaseDate') is-invalid @enderror" name="releaseDate" value="{{$student->document->releaseDate}}" required autocomplete="releaseDate" autofocus>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -297,8 +318,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-8">
-                                    <label for="project" class="col-form-label text-md-right">Nombre del rector de la universidad</label>
-                                    <input id="project" type="text" class="form-control @error('project') is-invalid @enderror" name="project" value="{{$student->document->project}}" required autocomplete="project" autofocus>
+                                    <label for="rectorName" class="col-form-label text-md-right">Nombre del rector de la universidad</label>
+                                    <input id="rectorName" type="text" class="form-control @error('rectorName') is-invalid @enderror" name="rectorName" value="{{$student->document->nameRectorUniversity}}" required autocomplete="rectorName" autofocus>
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label for="director" class="col-form-label text-md-right">Director(a) académico</label>
@@ -315,7 +336,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-4">
-                                    <label for="advisor" class="col-form-label text-md-right">Asesor(a) Empresarial</label>
+                                    <label for="advisor" class="col-form-label text-md-right">Asesor(a) académico</label>
                                     <select name="advisor" id="advisor" required class="form-control @error('advisor') is-invalid @enderror">
                                             @foreach($advisor as $items)
                                                 @if($items->academicAdvisor_id == $student->document->academicAdvisor_id)
@@ -327,8 +348,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label for="group" class="col-form-label text-md-right">Asesor(a) de estilo y redacción</label>
-                                    <select name="group" id="group" required class="form-control @error('group') is-invalid @enderror">
+                                    <label for="editor" class="col-form-label text-md-right">Asesor(a) de estilo y redacción</label>
+                                    <select name="editor" id="editor" required class="form-control @error('editor') is-invalid @enderror">
                                             @foreach($editor as $items)
                                                 @if($items->editorialAdvisor_id == $student->document->editorialAdvisor_id)
                                                     <option value="{{ $items->editorialAdvisor_id }}" selected>{{ $items->nameEditorialAdvisor }}</option>
@@ -369,6 +390,21 @@
         </div>
     </div>
 @stop
+@push('styles')
+
+
+    <link rel="stylesheet" href="{{ asset("adminlte/bootstrap-datepicker/dist/css/bootstrap-datepicker.css") }}">
+    <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
+
+@endpush
+@push('scripts')
+
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
+@endpush
+
 @push('jscustom')
 <script type="text/javascript">
     $(document).ready(function () {
@@ -399,7 +435,7 @@
                 return false;
             }
 
-            if(confirm("¿ Desea registrar su información de contacto ?")){
+            if(confirm("¿ Desea modificar la información del alumno ?")){
                return true;
             }else{
                   return false;
@@ -407,5 +443,38 @@
 
         });
     });
+
+    $("#presentationDate").datepicker({
+        language: 'es',
+        format:'yyyy-mm-dd',
+        autoclose: true
+    }).on('changeDate', function (selected) {
+        var startDate = new Date(selected.date.valueOf());
+        $('#presentationDate').datepicker('setStartDate', startDate);
+    }).on('clearDate', function (selected) {
+        $('#presentationDate').datepicker('setStartDate', null);
+    });
+
+     $("#releaseDate").datepicker({
+        language: 'es',
+        format:'yyyy-mm-dd',
+        autoclose: true
+    }).on('changeDate', function (selected) {
+        var startDate = new Date(selected.date.valueOf());
+        $('#releaseDate').datepicker('setStartDate', startDate);
+    }).on('clearDate', function (selected) {
+        $('#releaseDate').datepicker('setStartDate', null);
+    });
+
+     $("#birthday").datepicker({
+        language: 'es',
+        format:'yyyy-mm-dd',
+        autoclose: true
+    }).on('changeDate', function (selected) {
+        var startDate = new Date(selected.date.valueOf());
+        $('#birthday').datepicker('setStartDate', startDate);
+    }).on('clearDate', function (selected) {
+        $('#birthday').datepicker('setStartDate', null);
+    });         
 </script>
 @endpush

@@ -20,7 +20,7 @@ class AcademicDirectorController extends Controller
            $director = AcademicDirector::all();
            $division = AcademicDivision::all();
            $gender = Gender::all();
-           return view('admin.vinculacion.seguimiento.directors.index', compact('director','division','gender'));           
+           return view('admin.vinculacion.seguimiento.directors.index', compact('director','division','gender'));
     }
 
     /**

@@ -25,17 +25,17 @@
                                 </ul>
                             @endif
                             <div class="row">
-                                <div class="form-group col-xs-8">
+                                <div class="form-group col-xs-4">
                                     <label for="number" class="col-form-label text-md-right">Número ordinario</label>
-                                    <input id="number" type="text" class="form-control @error('number') is-invalid @enderror" name="number"
-                                    value="{{ old('number') }}" required autocomplete=number" autofocus>
+                                    <input id="number" type="number" class="form-control @error('number') is-invalid @enderror" name="number"
+                                    value="{{ old('number') }}" required autocomplete=number" placeholder="Ejemplo: 1" autofocus>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-xs-8">
-                                    <label for="quarterName" class="col-form-label text-md-right">Nombre del cuatrimestre
+                                <div class="form-group col-xs-4">
+                                    <label for="quarterName" class="col-form-label text-md-right">Cuatrimestre</label>
                                     <input id="quarterName" type="text" class="form-control @error('quarterName') is-invalid @enderror" name="quarterName"
-                                    value="{{ old('quarterName') }}" required autocomplete="quarterName" autofocus>
+                                    value="{{ old('quarterName') }}" required autocomplete="quarterName" placeholder="Ejemplo: Primer cuatrimestre" autofocus>
                                 </div>
                             </div>                                                            
                             <div class="row">      

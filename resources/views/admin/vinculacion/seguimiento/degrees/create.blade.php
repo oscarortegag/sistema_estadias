@@ -11,7 +11,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-outline card-success">
                     <div class="card-header">
-                        <h3>Nueva escuela</h3>
+                        <h3>Nueva carrera</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

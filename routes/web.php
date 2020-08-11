@@ -29,6 +29,11 @@ Route::get('students/edit/{id}', [
     'as'   => 'students.edit',
 ]);
 
+Route::put('students/edit/{id}', [
+    'uses' => 'admin\vinculacion\seguimiento\StudentController@update',
+    'as'   => 'students.update',
+]);
+
 Route::get('surveys/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyController@index',
     'as'   => 'surveys.index',
@@ -221,6 +226,13 @@ Route::post('/linking/save','admin\vinculacion\seguimiento\LinkingController@sto
 Route::get('/linking/edit/{id}','admin\vinculacion\seguimiento\LinkingController@edit')->name('linkings.edit');
 Route::put('/linking/edit/{id}','admin\vinculacion\seguimiento\LinkingController@update')->name('linkings.update');
 Route::delete('/linking/delete/{id}', 'admin\vinculacion\seguimiento\LinkingController@destroy')->name('linkings.destroy');
+
+Route::get('/programs','admin\vinculacion\seguimiento\EducativeProgramController@index')->name('programs.index');
+Route::get('/programs/new','admin\vinculacion\seguimiento\EducativeProgramController@create')->name('programs.create');
+Route::post('/programs/save','admin\vinculacion\seguimiento\EducativeProgramController@store')->name('programs.store');
+Route::get('/programs/edit/{id}','admin\vinculacion\seguimiento\EducativeProgramController@edit')->name('programs.edit');
+Route::put('/programs/edit/{id}','admin\vinculacion\seguimiento\EducativeProgramController@update')->name('programs.update');
+Route::delete('/programs/delete/{id}', 'admin\vinculacion\seguimiento\EducativeProgramController@destroy')->name('programs.destroy');
 
 Route::get('/index/{doc}','admin\vinculacion\seguimiento\WordController@index')->name('word.index');
 

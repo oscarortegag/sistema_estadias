@@ -21,7 +21,7 @@ use App\admin\vinculacion\seguimiento\AcademicDirector;
 use App\admin\vinculacion\seguimiento\AcademicAdvisor;
 use App\admin\vinculacion\seguimiento\EditorStyle;
 use App\admin\vinculacion\seguimiento\ResponsibleLinking;
-
+use App\admin\vinculacion\seguimiento\OfficialDocument;
 
 class StudentController extends Controller
 {
@@ -108,7 +108,59 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $idSearch = decrypt($id);
+
+        $student = Student::find($idSearch);
+        $student->institution_id = $request->university;
+        $student->period_id = $request->period;
+        $student->name = $request->nombre;
+        $student->lastName = $request->apellidoPat;
+        $student->motherLastNames = $request->apellidoMat;
+        $student->gender_id = $request->gender;
+        $student->dateOfBirth = $request->birthday;
+        $student->enrollment = $request->matricula;
+        $student->quarter_id = $request->quarter;
+        $student->group_id = $request->group;
+        $student->shift_id = $request->shift;
+        $student->socialSecurityNumber = $request->nss;
+        $student->accidentInsurance = $request->socialNumber;
+        $student->educativeProgram_id = $request->gradoAcademico;
+        $student->outOfTime = $request->outTime;
+        $student->schoolOrigin_id = $request->school;
+        $student->curp = $request->curp;
+        $student->institutionalEmail = $request->correo;
+        $student->incomeYear = $request->incomeYear;
+        $student->degree_id = $request->degree;
+        $student->modality_id = $request->modality;
+        $student->importDate = date("Y-m-d");
+        $student->save();
+
+        $dataEnterprise = Enterprise::find($request->enterprise);
+        //dd($dataEnterprise);
+        $period = Period::find($request->period);
+
+
+        $documentId = $student->document->oficialDocument_id;
+        $document = OfficialDocument::find($documentId);
+        $document->enterprise_id = $dataEnterprise->enterprise_id;
+        $document->representativeName = $dataEnterprise->representativeName;
+        $document->representativePosition = $dataEnterprise->representativePosition;
+        $document->companyName = $dataEnterprise->companyName;
+        $document->businessAdvisor = $dataEnterprise->businessAdvisorName;
+        $document->nameRectorUniversity = $request->rectorName;
+        $document->presentationDate = $request->presentationDate;
+        $document->releaseDate = $request->releaseDate;
+        $document->startDate = $period->firstDay;
+        $document->endDate = $period->lastDay;
+        $document->hoursStay = $request->horas;
+        $document->academicDirector_id = $request->director;
+        $document->academicAdvisor_id = $request->advisor;
+        $document->editorialAdvisor_id = $request->editor;
+        $document->responsibleLinking_id = $request->link;
+        $document->save();
+
+        \Session::flash('flash_message','La información del alumno se actualizo existosamente');
+        return redirect()->route('students.edit',['id'=>$id]);            
     }
 
     /**

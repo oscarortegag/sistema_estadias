@@ -290,11 +290,6 @@ desired effect
 
                     <ul class="treeview-menu" >
                         <li>
-                            <a href="{{ route("kinships.index") }}">
-                                <i class="fas fa-cog"></i> Catalogo de parentesco
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ route("institutions.index") }}">
                                 <i class="fas fa-user-edit">Institución educativa</i>
                             </a>
@@ -350,6 +345,11 @@ desired effect
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route("programs.index") }}">
+                                <i class="fas fa-user-edit">Nivel académico</i>
+                            </a>
+                        </li>                        
+                        <li>
                             <a href="{{ route("directors.index") }}">
                                 <i class="fas fa-user-edit">Director académico</i>
                             </a>
@@ -366,7 +366,7 @@ desired effect
                         </li>
                         <li>
                             <a href="{{ route("linkings.index") }}">
-                                <i class="fas fa-user-edit">Responsble de vinculación</i>
+                                <i class="fas fa-user-edit">Responsable de vinculación</i>
                             </a>
                         </li>
                         <li>

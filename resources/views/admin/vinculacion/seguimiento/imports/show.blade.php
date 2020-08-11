@@ -35,34 +35,45 @@
                                     <th>apellidoPaterno</th>
                                     <th>apellidoMaterno</th>
                                     <th>genero</th>
-                                    <th>matrícula</th>
+                                    <th>matricula</th>
                                     <th>periodoInicio</th>
-                                    <th>periodoInicio</th>
-                                    <th>Errores en columnas</th>          
+                                    <th>periodoFin</th>
+                                    <th>Errores en las columnas</th>          
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse ($importerRowFailData as $items)
                                     <tr>
                                         <td>{{$loop->index+1 }}</td>
-                                        <td>{{ $items["A"] }}</td>
-                                        <td>{{ $items["B"] }}</td>
-                                        <td>{{ $items["C"] }}</td>
-                                        <td>{{ $items["D"] }}</td>
-                                        <td>{{ $items["F"] }}</td>                                        
-                                        <td>{{ $items["L"] }}</td>
-                                        <td>{{ $items["M"] }}</td>
-                                        <td>{{ $items["AG"] }}</td>                                   
+                                        <td>{{ $items[0]["A"] }}</td>
+                                        <td>{{ $items[0]["B"] }}</td>
+                                        <td>{{ $items[0]["C"] }}</td>
+                                        <td>{{ $items[0]["D"] }}</td>
+                                        <td>{{ $items[0]["F"] }}</td>                                        
+                                        <td>{{ $items[0]["L"] }}</td>
+                                        <td>{{ $items[0]["M"] }}</td>
+                                        <td>
+                                            <span class="label label-warning">{{ $items[1] }}</span>
+                                        </td>                                  
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="9">
                                             <center>
                                                 <p class="text-light-blue">La información se completo exitosamente.</p></center>
                                             </center>
                                         </td>
                                     </tr>
                                 @endforelse
+                                @if($importerRowFail > 0)
+                                    <tr>
+                                        <td colspan="9">
+                                          <div class="alert alert-danger alert-dismissible">
+                                            Los registros no importados presentan errores o están duplicados, revise las columnas especificados en su archivo de importación.
+                                          </div>
+                                        </td>
+                                    </tr>
+                                @endif    
                                 </tbody>
                             </table>
                         </div>

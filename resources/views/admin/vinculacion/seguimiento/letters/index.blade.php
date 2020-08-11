@@ -59,7 +59,7 @@
                                         <td></td>                                         
                                         <td>
                                             @if($information->student->verified)
-                                            <a href="{{ route('word.index',['doc'=>'1']) }}" class="btn btn-success btn-sm"><i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de presentación"></i></a>
+                                            <a href="{{ route('word.index',['doc'=>'1']) }}" <i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de presentación"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -72,10 +72,10 @@
                                         <td>
                                             @if($status)
                                                 @if(!is_null($information->student->document->project))
-                                                <a href="{{ route('word.index',['doc'=>'2']) }}" class="btn btn-success btn-sm"><i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de liberación"></i></a>&nbsp;
-                                                @endif
-                                                <a href="{{ route('presentation.edit',['id'=>Crypt::encrypt($information->student->student_id)]) }}" class="btn btn-primary btn-sm"><i class="fa fa-mortar-board" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>
-                                            @endif                                          
+                                                <a href="{{ route('word.index',['doc'=>'2']) }}" <i class="fa fa-file-word-o" aria-hidden="true" data-toggle="tooltip" title="Descargar carta de liberación"></i></a>&nbsp;
+                                                @endif                                                
+                                                <a href="{{ route('presentation.edit',['id'=>Crypt::encrypt($information->student->student_id)]) }}" <i class="fa fa-mortar-board" aria-hidden="true" data-toggle="tooltip" title="Agregar proyecto"></i></a>
+                                            @endif                           
                                         </td>
                                     </tr>                                    
                                 </tbody>

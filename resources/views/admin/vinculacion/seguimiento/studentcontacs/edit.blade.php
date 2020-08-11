@@ -11,7 +11,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-primary">
                     <div class="card-header"><center><h3>Verificar datos generales e información de contacto</h3></center></div><br>
-                      <div class="alert alert-El correo personal otorgado se le enviará el vínculo para contestar la encuesta.warning">
+                      <div class="alert alert-warning">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fa fa-warning"></i>Al correo personal otorgado se le enviará el vínculo para contestar la encuesta.</h5>
                       </div>                  
@@ -20,12 +20,31 @@
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
                             @if (count($errors)>0)
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             @endif
+                            @php
+                                $arr = \Session::get('error');
+                                if(!empty($arr)){
+                                $error = count($arr);                            
+                                if($error > 0){
+                            @endphp                            
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @for($i=0; $i < $error; $i++)
+                                                    <li>{{ $arr[$i] }}</li>
+                                            @endfor
+                                        </ul>
+                                    </div>
+                            @php } 
+
+                                }
+                            @endphp                           
                             <div class="row col-xs-12">
                                 <label for="carrera" class="col-form-label text-md-right">Información de estadía</label>
                             </div>                            
@@ -127,36 +146,29 @@
                             <div class="row">
                                 <div class="form-group col-xs-4">
                                     <label for="telCelular" class="col-form-label text-md-right">Teléfono celular</label>
-                                    <input id="telCelular" type="text" class="form-control @error('telCelular') is-invalid @enderror" name="telCelular" value="{{ $student->cellPhone }}" required autocomplete="telCelular" autofocus>
+                                    <input id="telCelular" type="text" class="form-control @error('telCelular') is-invalid @enderror" name="telCelular" value="{{ $student->cellPhone }}" autocomplete="telCelular" autofocus>
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label for="telOficina" class="col-form-label text-md-right">Teléfono oficina</label>
-                                    <input id="telOficina" type="text" class="form-control @error('telOficina') is-invalid @enderror" name="telOficina" value="{{ $student->officePhone }}" required autocomplete="telOficina" autofocus>
+                                    <input id="telOficina" type="text" class="form-control @error('telOficina') is-invalid @enderror" name="telOficina" value="{{ $student->officePhone }}" autocomplete="telOficina" autofocus>
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label for="correoPersonal" class="col-form-label text-md-right">Correo personal</label>
                                     <input id="correoPersonal" type="text" class="form-control @error('correoPersonal') is-invalid @enderror" name="correoPersonal" id="correPersonal2"
-                                    value="{{ $student->personalEmail }}" required autocomplete="correoPersonal" autofocus>
+                                    value="{{ $student->personalEmail }}" autocomplete="correoPersonal" autofocus>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-4">
                                     <label for="facebook" class="col-form-label text-md-right">Red social facebook</label>
-                                    <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $student->facebook }}" required autocomplete="facebook" autofocus>
+                                    <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $student->facebook }}" autocomplete="facebook" autofocus>
                                 </div>
                                 <div class="form-group col-xs-4">&nbsp;</div>
                                 <div class="form-group col-xs-4">
                                     <label for="facebook" class="col-form-label text-md-right">Confirmar correo personal</label>
-                                    <input id="correoPersonalConfirma" type="text" class="form-control @error(correoPersonalConfirma') is-invalid @enderror" name="correoPersonalConfirma" value="" required autocomplete=correoPersonalConfirma" autofocus>
+                                    <input id="correoPersonalConfirma" type="text" class="form-control @error(correoPersonalConfirma') is-invalid @enderror" name="correoPersonalConfirma" value="" autocomplete=correoPersonalConfirma" autofocus>
                                 </div>                                                                
-                            </div>
-                            <!--
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-ban"></i> Advertencias</h4>
-                                El correo personal te permitirá recibir información
-                            </div>
-                            -->                                
+                            </div>                                
                             <div class="row">
                                  <div class="form-group"><center>
                                     <button type="submit" name="valida" id="valida2" class="btn btn-primary">Validar información</button>&nbsp;
@@ -174,7 +186,7 @@
 @stop
 @push('jscustom')
 <script type="text/javascript">
-    $(document).ready(function () {
+   /* $(document).ready(function () {
         $("#valida2").click(function() {
             var correoBase,correoPersonal,correoConfirma,celular,telefono,facebook;
             correoPersonal = $("#correoPersonal").val();
@@ -209,6 +221,6 @@
             }
 
         });
-    });
+    });*/
 </script>
 @endpush

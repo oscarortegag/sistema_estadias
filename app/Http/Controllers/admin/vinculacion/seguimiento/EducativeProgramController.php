@@ -4,19 +4,19 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\admin\vinculacion\seguimiento\Period;
+use App\admin\vinculacion\seguimiento\EducativeProgram;
 
-class PeriodController extends Controller
+class EducativeProgramController extends Controller
 {
     /**
-     * Display a listing of the resource.s
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-           $period = Period::all();
-           return view('admin.vinculacion.seguimiento.periods.index', compact('period'));
+           $programs = EducativeProgram::all();
+           return view('admin.vinculacion.seguimiento.programs.index', compact('programs'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PeriodController extends Controller
      */
     public function create()
     {
-           return view('admin.vinculacion.seguimiento.periods.create');
+           return view('admin.vinculacion.seguimiento.programs.create', compact('programs'));
     }
 
     /**
@@ -37,14 +37,12 @@ class PeriodController extends Controller
      */
     public function store(Request $request)
     {
-        $per = new Period;
-        $per->name = $request->quarter;
-        $per->year = $request->year;
-        $per->firstDay = $request->firstDay;
-        $per->lastDay = $request->lastDay;        
-        $per->save();
+            $pro = new EducativeProgram;
+            $pro->shortName = $request->shortName;
+            $pro->displayName = $request->displayName;
+            $pro->save();
 
-        return redirect()->route('periods.index');
+            return redirect()->route('programs.index'); 
     }
 
     /**
@@ -66,8 +64,8 @@ class PeriodController extends Controller
      */
     public function edit($id)
     {
-        $period = Period::find($id);
-        return view('admin.vinculacion.seguimiento.periods.edit', compact('period'));
+            $programs = EducativeProgram::find($id);
+            return view('admin.vinculacion.seguimiento.programs.edit', compact('programs')); 
     }
 
     /**
@@ -79,14 +77,12 @@ class PeriodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $per = Period::find($id);
-        $per->name = $request->quarter;
-        $per->year = $request->year;
-        $per->firstDay = $request->firstDay;
-        $per->lastDay = $request->lastDay;        
-        $per->save();
+            $pro = EducativeProgram::find($id);
+            $pro->shortName = $request->shortName;
+            $pro->displayName = $request->displayName;
+            $pro->save();
 
-        return redirect()->route('periods.index');
+            return redirect()->route('programs.index');
     }
 
     /**
@@ -97,7 +93,7 @@ class PeriodController extends Controller
      */
     public function destroy($id)
     {
-        Period::find($id)->delete();
-        return redirect()->route('periods.index');
+        EducativeProgram::find($id)->delete();
+        return redirect()->route('programs.index');
     }
 }

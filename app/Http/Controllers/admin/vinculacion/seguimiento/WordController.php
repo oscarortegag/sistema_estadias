@@ -84,11 +84,13 @@ class WordController extends Controller
                 $tmpFile = $template->setValue('presentationDate',$presentationDate);
                 $tmpFile = $template->setValue('startDate',$startDate);
                 $tmpFile = $template->setValue('endDate',$endDate);
+                $filename = "carta_presentacion_".str_replace(" ","_",$name);
+
             }else if($doc == 2){
                      $tmpFile = $template->setValue('releaseDate',$releaseDate);                 
                      $tmpFile = $template->setValue('nameDirector',$academicDirector);
                      $tmpFile = $template->setValue('director',$director);                     
-                     $tmpFile = $template->setValue('academicDivision',$academicDivision);                                
+                     $tmpFile = $template->setValue('academicDivision',$academicDivision);
                      $tmpFile = $template->setValue('name',$name);
                      $tmpFile = $template->setValue('educativeProgram',$educativeProgram);                     
                      $tmpFile = $template->setValue('startDate',$startDate);
@@ -104,12 +106,12 @@ class WordController extends Controller
                      $tmpFile = $template->setValue('editorialPosition',$editorialPosition);
                      $tmpFile = $template->setValue('project',$project);
                      $tmpFile = $template->setValue('gender',$genderStudent);
-
+                     $filename = "carta_liberacion_".str_replace(" ","_",$name);
             }
 
             $tmpFile = tempnam(sys_get_temp_dir(),'PHPWord');
             $template->saveAs($tmpFile);
-            $archivo = md5(time()).".docx";
+            $archivo = $filename.".docx";
 
             $headers = ["Content-Type: application/octet-stream"];
             return response()->download($tmpFile,$archivo,$headers)->deletefileAfterSend(true);

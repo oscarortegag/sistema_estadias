@@ -44,6 +44,7 @@ class CreateStudentsTable extends Migration
             $table->boolean('verified')->nullable();
             $table->text('data')->nullable();
             $table->text('code');
+            $table->date('importDate');
             $table->timestamps();
         });
     }

@@ -1,61 +1,57 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Catálogo</h1>
+    <h1>Nivel académico</h1>
 @stop
 
 @section('content')
     <div class="container box">
             <div class="row justify-content-center">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
 
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3>Listado de escuela</h3>
-                        <a href="{{route('schools.create')}}" class="btn btn-success">
-                            <i class="fa fa-plus"></i>
-                            Nueva escuela
-                        </a>
-                    </div><br><br>
+                        <h3>Listado</h3>
+                        <a href="{{route('programs.create')}}" class="btn btn-success">
+                            <i class="fa fa-plus"></i>&nbsp;Nuevo nivel académico
+                        </a><br><br>
+                    </div>
                     <div class="card-body">
                           <div class="table-responsive">
-                              <table id="tabla-school" class="table table-bordered table-striped">
+                              <table id="tabla-programs" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th >#</th>
-                                    <th >Escuela</th>
-                                    <th >Acrónimo</th>
-                                    <th >Acciones</th>
+                                    <th>#</th>
+                                    <th>Acrónimo</th>
+                                    <th>Nombre</th>
+                                    <th>Opciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($school as $items)
+                                @forelse ($programs as $items)
                                     <tr>
                                         <td>{{$loop->index+1 }}</td>
-                                        <td>{{ $items->schoolName}}</td>
-                                        <td>{{ $items->shortName}}</td>                                        
+                                        <td>{{ $items->shortName}}</td>
+                                        <td>{{ $items->displayName }}</td>
                                         <td>
-                                            <a href="{{ route('schools.edit',['id'=>$items->schoolOrigin_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar escuela"></i></a>
-                                            <form style="display: inline" method="POST" action="{{ route('schools.destroy',['id'=>$items->schoolOrigin_id]) }}">
+                                            <a href="{{ route('programs.edit', ['id'=>$items->educativeProgram_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos nivel académico"></i></a>
+                                            <form style="display: inline" method="post" action="{{ route('programs.destroy', ['id'=>$items->educativeProgram_id]) }}">
                                                 {!! method_field('DELETE') !!}
                                                 {!! csrf_field() !!}
-                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar escuela"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos nivel académico"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td >
-                                            <p> No existen escuelas</p>
+                                        <td colspan="6">
+                                            <p>No existen niveles académicos</p>
                                         </td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
                                 @endforelse
                                 </tbody>
                             </table>
                         </div>
-
                         <div class="float-right">
                         </div>
                     </div>
@@ -98,7 +94,7 @@
             }
         };
 
-        $('#tabla-school').DataTable(
+        $('#tabla-programs').DataTable(
             {
                 "language": lenguaje,
                 "aProcessing": true,//Activamos el procesamiento del datatables
@@ -111,4 +107,5 @@
         );  
     </script>
 @endpush
+
 

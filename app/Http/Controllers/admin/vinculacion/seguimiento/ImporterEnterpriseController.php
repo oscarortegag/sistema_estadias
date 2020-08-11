@@ -28,6 +28,7 @@ class ImporterEnterpriseController extends Controller
      */
     public function create()
     {
+        \Session::forget('dataFail');
         return view('admin.vinculacion.seguimiento.importscompany.create');
     }
 
@@ -64,24 +65,33 @@ class ImporterEnterpriseController extends Controller
 
                     if(($result == 0) && ($row > 2)){
 
-                        $enterprise = new Enterprise;
-                        $enterprise->companyName = $data["A"];
-                        $enterprise->businessName = $data["B"];
-                        $enterprise->companyPhone = $data["C"];
-                        $enterprise->representativeName = $data["D"];
-                        $enterprise->representativePosition = $data["E"];
-                        $enterprise->businessAdvisorName = $data["F"];
-                        $enterprise->businessAdvisorEmail = $data["G"];
-                        $enterprise->businessAdvisorPhone = $data["H"];
-                        $enterprise->businessContactName = $data["I"];
-                        $enterprise->businessContactEmail = $data["J"];
-                        $enterprise->businessContactPhone = $data["K"];                        
-                        $enterprise->importDate = date("Y-m-d");                     
-                        $enterprise->save();
+                        $newEnterprise = Enterprise::where('companyName','=',$data["A"])->get();
+                        if($newEnterprise->count() == 0){
+                            $enterprise = new Enterprise;
+                            $enterprise->companyName = $data["A"];
+                            $enterprise->businessName = $data["B"];
+                            $enterprise->companyPhone = $data["C"];
+                            $enterprise->representativeName = $data["D"];
+                            $enterprise->representativePosition = $data["E"];
+                            $enterprise->businessAdvisorName = $data["F"];
+                            $enterprise->businessAdvisorEmail = $data["G"];
+                            $enterprise->businessAdvisorPhone = $data["H"];
+                            $enterprise->businessContactName = $data["I"];
+                            $enterprise->businessContactEmail = $data["J"];
+                            $enterprise->businessContactPhone = $data["K"];                        
+                            $enterprise->importDate = date("Y-m-d");                     
+                            $enterprise->save();
 
-                        $importerRow++;
+                            $importerRow++;
+                        }else{
+                              $importerRowFailData[] = ["0"=>$data,"1"=>"Error: registro duplicado"];
+                              $importerRowFail++;                              
+                        }
+
+
                     }else if(($row > 2) && ($result > 0 && $result != 10)){
-                             $importerRowFailData[] = $data; 
+                            // $importerRowFailData[] = $data;
+                             $importerRowFailData[] = ["0"=>$data,"1"=>$error]; 
                              $importerRowFail++;
                     }
 

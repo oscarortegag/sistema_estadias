@@ -49,6 +49,7 @@ class ImportarAlumnoController extends Controller
      */
     public function create()
     {
+        \Session::forget('dataFail');
         return view('admin.vinculacion.seguimiento.imports.create');
     }
 
@@ -76,7 +77,6 @@ class ImportarAlumnoController extends Controller
             $sheetData = $spreadsheet->getSheet(0)->toArray(null, true, true, true);
 
             $row = 1;
-            $valida = 0;
             $importerRow = 0;
             $importerRowFail = 0;
             $importerRowFailData = [];
@@ -101,6 +101,7 @@ class ImportarAlumnoController extends Controller
             foreach($sheetData as $data){
                     $result = $this->validation($data);
                     $error = "";
+                    $valida = 0;
                     if($row > 2 && $result != 32){
 
                         if((is_null($data["A"])) || $data["A"]==" "){
@@ -312,83 +313,90 @@ class ImportarAlumnoController extends Controller
                             $dataJson = null;
                         }
 
-                        $data["AG"] = $error;
-
                         if($valida==0){
                             $identifica = str_replace(" ","",$data["N"]);
-                            #Add user
-                            $password = $this->generarCodigo();
-                            $passwordCode = Crypt::encrypt($password);
                             $tmpEmail = explode('@',$data["R"]);
-                            $user = new User;
-                            $user->name = $data["A"]." ".$data["B"]." ".$data["C"];
-                            $user->email = $tmpEmail[0].".".$identifica."@".$tmpEmail[1];
-                            $user->password = Hash::make($password);
-                            $user->save();
-                            $insertId = $user->id;
+                            $newEmail = $tmpEmail[0].".".$identifica."@".$tmpEmail[1];
 
-                            #Add students;
-                            $student = new Student;
-                            $student->id = $insertId;
-                            $student->institution_id = $universityId;
-                            $student->period_id = $perId;
-                            $student->name = $data["A"];
-                            $student->lastName = $data["B"];
-                            $student->motherLastNames = $data["C"];
-                            $student->gender_id = $genId;
-                            $student->dateOfBirth = $data["E"];
-                            $student->enrollment = $data["F"];
-                            $student->quarter_id = $quartId;
-                            $student->group_id = $groId;
-                            $student->shift_id = $shiId;
-                            $student->socialSecurityNumber = $data["J"];
-                            $student->accidentInsurance = $data["K"];
-                            $student->educativeProgram_id = $programEducativeId;
-                            $student->outOfTime = $data["O"];
-                            $student->schoolOrigin_id = $schooId;
-                            $student->curp = $data["Q"];
-                            $student->institutionalEmail = $data["R"];
-                            $student->incomeYear = $data["T"];
-                            $student->degree_id = $degId;
-                            $student->modality_id = $modId;
-                            $student->data = $dataJson;
-                            $student->code = $passwordCode;
-                            $student->save();
-                            $insertIdStudent = $student->student_id;
-                            #Add relation user y student
-                            $user->roles()->attach(2);
-                            #Add official document
-                            $document = new OfficialDocument;
-                            $document->student_id = $insertIdStudent;
-                            $document->enterprise_id = $dataEnterprise[0];
-                            $document->representativeName = $dataEnterprise[1];
-                            $document->representativePosition = $dataEnterprise[2];
-                            $document->companyName = $dataEnterprise[3];
-                            $document->businessAdvisor = $dataEnterprise[4];
-                            $document->nameRectorUniversity = $data["AA"];
-                            $document->presentationDate = $data["AC"];
-                            $document->releaseDate = $data["AD"];
-                            $document->startDate = $data["L"];
-                            $document->endDate = $data["M"];
-                            $document->hoursStay = $data["S"];
-                            $document->academicDirector_id = $acaDirId;
-                            $document->academicAdvisor_id = $advId;
-                            $document->editorialAdvisor_id = $editId;
-                            $document->responsibleLinking_id = $linkId;
-                            $document->save();
-                            $importerRow++;
+                            $userFound = User::where('email','=',$newEmail)->get();
+                            if($userFound->count()==0){
+                                #Add user
+                                $password = $this->generarCodigo();
+                                $passwordCode = Crypt::encrypt($password);
+                                $user = new User;
+                                $user->name = $data["A"]." ".$data["B"]." ".$data["C"];
+                                $user->email = $newEmail;
+                                $user->password = Hash::make($password);
+                                $user->save();
+                                $insertId = $user->id;
 
-                            $url = route('studentcontact.edit',['id'=>Crypt::encrypt($student->student_id)]);
-                            $data = [
-                                'nombre' => $user->name,
-                                'usuario' => $user->email,
-                                'password' => $password,
-                                'url' => $url,
-                            ];
-                            Mail::to($student->institutionalEmail)->send(new EmailUserNotice($data));
+                                #Add students;
+                                $student = new Student;
+                                $student->id = $insertId;
+                                $student->institution_id = $universityId;
+                                $student->period_id = $perId;
+                                $student->name = $data["A"];
+                                $student->lastName = $data["B"];
+                                $student->motherLastNames = $data["C"];
+                                $student->gender_id = $genId;
+                                $student->dateOfBirth = $data["E"];
+                                $student->enrollment = $data["F"];
+                                $student->quarter_id = $quartId;
+                                $student->group_id = $groId;
+                                $student->shift_id = $shiId;
+                                $student->socialSecurityNumber = $data["J"];
+                                $student->accidentInsurance = $data["K"];
+                                $student->educativeProgram_id = $programEducativeId;
+                                $student->outOfTime = $data["O"];
+                                $student->schoolOrigin_id = $schooId;
+                                $student->curp = $data["Q"];
+                                $student->institutionalEmail = $data["R"];
+                                $student->incomeYear = $data["T"];
+                                $student->degree_id = $degId;
+                                $student->modality_id = $modId;
+                                $student->data = $dataJson;
+                                $student->code = $passwordCode;
+                                $student->importDate = date("Y-m-d");
+                                $student->save();
+                                $insertIdStudent = $student->student_id;
+                                #Add relation user y student
+                                $user->roles()->attach(2);
+                                #Add official document
+                                $document = new OfficialDocument;
+                                $document->student_id = $insertIdStudent;
+                                $document->enterprise_id = $dataEnterprise[0];
+                                $document->representativeName = $dataEnterprise[1];
+                                $document->representativePosition = $dataEnterprise[2];
+                                $document->companyName = $dataEnterprise[3];
+                                $document->businessAdvisor = $dataEnterprise[4];
+                                $document->nameRectorUniversity = $data["AA"];
+                                $document->presentationDate = $data["AC"];
+                                $document->releaseDate = $data["AD"];
+                                $document->startDate = $data["L"];
+                                $document->endDate = $data["M"];
+                                $document->hoursStay = $data["S"];
+                                $document->academicDirector_id = $acaDirId;
+                                $document->academicAdvisor_id = $advId;
+                                $document->editorialAdvisor_id = $editId;
+                                $document->responsibleLinking_id = $linkId;
+                                $document->save();
+                                $importerRow++;
+
+                                $url = route('studentcontact.edit',['id'=>Crypt::encrypt($student->student_id)]);
+                                $notification = [
+                                    'nombre' => $user->name,
+                                    'usuario' => $user->email,
+                                    'password' => $password,
+                                    'url' => $url,
+                                ];
+                                Mail::to($student->institutionalEmail)->send(new EmailUserNotice($notification));                                
+                            }else{
+                                 $importerRowFailData[] = ["0"=>$data,"1"=>"Error: registro duplicado"];
+                                 $importerRowFail++;
+                            }
 
                         }else if($result != 32){
-                                 $importerRowFailData[] = $data;
+                                 $importerRowFailData[] = ["0"=>$data,"1"=>$error];
                                  $importerRowFail++;
                         }
                     }

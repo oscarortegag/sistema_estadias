@@ -30,25 +30,33 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-xs-8">
+                                <div class="form-group col-xs-4">
                                     <label for="year" class="col-form-label text-md-right">Año</label>
-                                    <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year"
-                                    value="{{ $period->year }}" required autocomplete="year" autofocus>
+                                    <select name="year" id="year" required class="form-control @error('year') is-invalid @enderror">
+                                            @for($i=2020; $i <= 2022; $i++)
+                                                 @if($period->year == $i)
+                                                     <option value="{{ $i }}" selected>{{ $i }}</option>
+                                                 @else
+                                                     <option value="{{ $i }}">{{ $i }}</option>
+                                                 @endif 
+                                            @endfor
+                                    </select>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="row">
-                                <div class="form-group col-xs-8">
+                                <div class="form-group col-xs-4">
                                     <label for="firstDay" class="col-form-label text-md-right">Fecha inicio</label>
                                     <input id="firstDay" type="text" class="form-control @error('firstDay') is-invalid @enderror" name="firstDay"
                                     value="{{ $period->firstDay }}" required autocomplete="firstDay" autofocus>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-xs-8">
+                                <div class="form-group col-xs-4">
                                     <label for="lastDay" class="col-form-label text-md-right">Fecha fin</label>
                                     <input id="lastDay" type="text" class="form-control @error('lastDay') is-invalid @enderror" name="lastDay"
                                     value="{{ $period->lastDay }}" required autocomplete="lastDay" autofocus>
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
+
                             </div>                               
                                 <div class="row">      
                                     <div class="form-group mb-0">

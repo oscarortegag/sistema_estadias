@@ -42,7 +42,7 @@
                                 <div class="form-group mb-0">
                                     <center>
                                         <div class="form-group col-xs-8">
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
                                             <a href="{{ route('groups.index') }}" class="btn btn-default">Cancelar</a>
                                         </div>
                                     </center>

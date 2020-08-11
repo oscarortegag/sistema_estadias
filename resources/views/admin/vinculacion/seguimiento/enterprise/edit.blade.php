@@ -46,7 +46,7 @@
                             <div class="form-group col-xs-4">
                                 <label for="representante" class="col-form-label text-md-right">Nombre del representante</label>
                                 <input id="representante" type="text" class="form-control @error('representante') is-invalid @enderror" name="representante" 
-                                value="{{ $enterprise->representativeName }}}" required autocomplete="nombre" autofocus>
+                                value="{{ $enterprise->representativeName }}" required autocomplete="nombre" autofocus>
                             </div>
                             <div class="form-group col-xs-4">
                                 <label for="cargo" class="col-form-label text-md-right">Cargo del representante</label>
