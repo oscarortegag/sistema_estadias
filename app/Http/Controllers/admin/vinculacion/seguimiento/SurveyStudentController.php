@@ -157,11 +157,14 @@ class SurveyStudentController extends Controller
                 ]);
             }
 
+            //dd($applySurvey);
+
             foreach ($survey->questions as $question) {
+                dd($applySurvey->id);
                 if ($question->type_question == 1){
                     $pregunta = 'pregunta' . $question->id;
                     $surveyResponse = SurveyResponse::create([
-                        'apply_survey_id' =>$applySurvey->id,
+                        'apply_survey_id' => $applySurvey->id,
                         'survey_question_id' => $question->id,
                         'question_option_id' => $request[$pregunta],
                     ]);
@@ -170,7 +173,7 @@ class SurveyStudentController extends Controller
                     $opciones =  $request[$pregunta];
                     for($i=0; $i<count($opciones); $i++){
                         $surveyResponse = SurveyResponse::create([
-                            'apply_survey_id' =>$applySurvey->id,
+                            'apply_survey_id' => $applySurvey->id,
                             'survey_question_id' => $question->id,
                             'question_option_id' => $opciones[$i],
                         ]);
@@ -180,7 +183,7 @@ class SurveyStudentController extends Controller
                 } else if ($question->type_question == 3){
                     $pregunta = 'pregunta' . $question->id;
                     $surveyResponse = SurveyResponse::create([
-                        'apply_survey_id' =>$applySurvey->id,
+                        'apply_survey_id' => $applySurvey->id,
                         'survey_question_id' => $question->id,
                         'response_string' => $request[$pregunta],
                     ]);
@@ -189,7 +192,7 @@ class SurveyStudentController extends Controller
                 else if ($question->type_question == 4){
                     $pregunta = 'pregunta' . $question->id;
                     $surveyResponse = SurveyResponse::create([
-                        'apply_survey_id' =>$applySurvey->id,
+                        'apply_survey_id' => $applySurvey->id,
                         'survey_question_id' => $question->id,
                         'response_string' => date("Y-m-d", strtotime($request[$pregunta])),
                     ]);
