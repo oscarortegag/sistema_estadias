@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEducativeProgram extends Migration
+class CreateColorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateEducativeProgram extends Migration
      */
     public function up()
     {
-        Schema::create('educative_programs', function (Blueprint $table) {
-            $table->increments('educativeProgram_id');
-            $table->string('shortName');
-            $table->string('displayName');
-            $table->integer('color_id');
+        Schema::create('colors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name',50);
+            $table->string('code',10);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateEducativeProgram extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('educative_programs');
+        Schema::dropIfExists('colors');
     }
 }

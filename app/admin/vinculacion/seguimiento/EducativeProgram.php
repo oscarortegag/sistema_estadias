@@ -19,4 +19,8 @@ class EducativeProgram extends Model
     {
         return $this->hasMany(Student::class, 'educativeProgram_id', 'educativeProgram_id');
     }
+
+    public function color() {
+        return $this->belongsTo(Color::class);
+    }
 }

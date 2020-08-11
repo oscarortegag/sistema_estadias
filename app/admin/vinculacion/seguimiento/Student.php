@@ -55,7 +55,7 @@ class Student extends Model
     }
 
     public function gender(){
-        return $this->hasOne(Gender::class,'gender_id','gender_id');
+        return $this->belongsTo(Gender::class,'gender_id','gender_id');
     }
 
     public function group(){
@@ -68,5 +68,5 @@ class Student extends Model
 
     public function degree(){
         return $this->hasOne(Degree::class,'degree_id','degree_id');
-    }    
+    }
 }

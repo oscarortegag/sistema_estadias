@@ -46,13 +46,13 @@ $(document).ready(function() {
             value: 50,
             color: '#ff851b',
             highlight: '#ff851b',
-            label: 'TSU GASTRONOMÍA'
+            label: 'TSU DISEÑO DE NEGOCIOS'
         },
         {
             value: 30,
             color: '#f012be',
             highlight: '#f012be',
-            label: 'ING GASTRONOMÍA'
+            label: 'ING DISEÑO DE NEGOCIOS'
         }
     ];
     var pieOptions = {

@@ -95,6 +95,11 @@ Route::get('statistics/{period}', [
     'as'   => 'statistics.index',
 ]);
 
+Route::get('statistics/studentByEducativeProgram/{period}', [
+    'uses' => 'admin\vinculacion\seguimiento\StatisticController@alumnosPorCarrera',
+    'as'   => 'statistics.studentByEducativeProgram',
+]);
+
 
 //Auth::routes();
 Auth::routes(['register' => false]);
@@ -103,12 +108,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index')->name('home');
 
-/*Route::get('/users', 'UserController@index')->name('users.index');
-Route::get('/nuevo', 'UserController@create')->name('users.create');
-Route::post('/guardar', 'UserController@store')->name('users.store');
-Route::get('/editar/{id}', 'UserController@edit')->name('users.edit');
-Route::put('/editar/{id}', 'UserController@update')->name('users.update');
-*/
 Route::resource('users', 'UserController')->except(['show','destroy']);
 Route::resource('kinships', 'admin\vinculacion\seguimiento\KinshipController')->except(['show']);
 Route::resource('states', 'admin\vinculacion\seguimiento\StateController')->except(['show']);
