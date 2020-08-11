@@ -15,6 +15,7 @@ class CreateSurveyResponsesTable extends Migration
     {
         Schema::create('survey_responses', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('apply_survey_id');
             $table->unsignedInteger('survey_question_id');
             $table->text('response_string')->nullable();
             $table->date('response_date')->nullable();
