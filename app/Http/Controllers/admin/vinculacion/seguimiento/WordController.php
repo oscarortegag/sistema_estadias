@@ -58,8 +58,7 @@ class WordController extends Controller
                  $genderStudent = "la alumna";
         }
 
-
-        setlocale (LC_TIME, "es_MX.UTF-8");      
+        setlocale(LC_TIME, 'es_ES.UTF-8');
         $presentationDate = "Chetumal, Quintana Roo, a ";
         $presentationDate .=strftime('%d de %B de %Y', strtotime($information->student->document->presentationDate));
         $releaseDate = "Chetumal, Quintana Roo, a ";
