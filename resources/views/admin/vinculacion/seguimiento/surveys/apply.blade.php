@@ -65,7 +65,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($survey->period->students as $student)
+                                @forelse ($survey->period->students->where('verified', 1) as $student)
                                     <tr>
                                         <td>
                                             <div class="checkbox">

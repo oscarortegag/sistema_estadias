@@ -160,7 +160,6 @@ class SurveyStudentController extends Controller
             //dd($applySurvey);
 
             foreach ($survey->questions as $question) {
-                dd($applySurvey->id);
                 if ($question->type_question == 1){
                     $pregunta = 'pregunta' . $question->id;
                     $surveyResponse = SurveyResponse::create([
