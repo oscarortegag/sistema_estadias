@@ -23,11 +23,17 @@ class StatisticController extends Controller
         $responses = Student::join('educative_programs', 'students.educativeProgram_id', 'educative_programs.educativeProgram_id')
             ->join('apply_surveys', 'apply_surveys.student_id', 'students.student_id')
             ->join('survey_questions', 'survey_questions.survey_id', 'apply_surveys.survey_id')
-            ->join('question_options', 'question_options.id', 'survey_questions.id')
-            ->join('survey_responses', 'question_options.id', 'survey_responses.question_option_id')
-            ->select('students.educativeProgram_id','apply_surveys.survey_id',DB::raw('survey_questions.id as question_id'), DB::raw('survey_responses.question_option_id'))
-            ->where('students.period_id', $period->period_id)->whereIn('survey_questions.type_question', [1, 2])
+            ->join('question_options', 'question_options.survey_question_id', 'survey_questions.id')
+            ->join('survey_responses', [
+                ['question_options.id', '=', 'survey_responses.question_option_id'],
+                ['survey_responses.apply_survey_id', '=', 'apply_surveys.id'],
+            ])
+            ->select('students.educativeProgram_id','apply_surveys.survey_id',DB::raw('survey_questions.id as question_id'), DB::raw('survey_responses.question_option_id as option_id'))
+            ->where('students.period_id', $period->period_id)
+            ->whereIn('survey_questions.type_question', [1, 2])
             ->get();
+
+        //dd($responses);
 
         return view('admin.vinculacion.seguimiento.statistics.index', compact('period', 'educativePrograms', 'students', 'studentByAge', 'responses'));
     }

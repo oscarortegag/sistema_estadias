@@ -186,6 +186,7 @@
                                                 @foreach($educativePrograms as $educativeProgram)
                                                     @if($educativeProgram->students->count()>0)
                                                     <td>
+                                                        {{$responses->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->where('question_id', $question->id)->where('option_id', $option->id)->count()}}
                                                     </td>
                                                     @endif
                                                 @endforeach
@@ -203,9 +204,11 @@
                                         </thead>
                                         <tbody>
                                             @foreach($question->respuestas as $respuesta)
+                                                <tr>
                                                 <td>
-                                                    {{$respuesta->reponse_string}}
+                                                    {{$respuesta->response_string}}
                                                 </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
