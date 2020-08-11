@@ -53,6 +53,8 @@
 
 @section('content')
     <h1> Bienvenido al sistema de seguimiento a egresados 2020</h1>
+
+
 @stop
 
 
