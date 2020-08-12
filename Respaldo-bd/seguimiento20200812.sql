@@ -41,7 +41,7 @@ CREATE TABLE `academic_advisers` (
 
 LOCK TABLES `academic_advisers` WRITE;
 /*!40000 ALTER TABLE `academic_advisers` DISABLE KEYS */;
-INSERT INTO `academic_advisers` VALUES (1,'M.D.I.S. Eliezer Samuel Castillo Ruiz','ASESOR ACADÉMICO','eliezer.castillo@utchetumal.edu.mx','9831402065','2020-08-11 22:07:17','2020-08-11 22:07:17',NULL);
+INSERT INTO `academic_advisers` VALUES (1,'M.D.I.S. Eliezer Samuel Castillo Ruiz','ASESOR ACADÉMICO','eliezer.castillo@utchetumal.edu.mx','9831402065','2020-08-11 22:07:17','2020-08-12 09:54:00',NULL);
 /*!40000 ALTER TABLE `academic_advisers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +72,7 @@ CREATE TABLE `academic_directors` (
 
 LOCK TABLES `academic_directors` WRITE;
 /*!40000 ALTER TABLE `academic_directors` DISABLE KEYS */;
-INSERT INTO `academic_directors` VALUES (1,2,'M.A.N. ERWIN ADAME GÓMEZ',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:03:28','2020-08-11 22:03:28',NULL),(2,1,'M.T. MARTÍN ANTONIO SANTOS ROMERO',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:04:12','2020-08-11 22:04:12',NULL),(3,3,'M.E. VANESA DEL ROCÍO CABALLERO CERÓN',2,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:05:03','2020-08-11 22:05:03',NULL),(4,4,'LIC. GUILLERMO AZCORRA CHAN',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:06:00','2020-08-11 22:06:00',NULL);
+INSERT INTO `academic_directors` VALUES (1,2,'M.A.N. ERWIN ADAME GÓMEZ',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:03:28','2020-08-11 22:03:28',NULL),(2,1,'M.T. MARTÍN ANTONIO SANTOS ROMERO',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:04:12','2020-08-11 22:04:12',NULL),(3,3,'M.E. VANESA DEL ROCÍO CABALLERO CERÓN',2,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:05:03','2020-08-11 22:05:03',NULL),(4,4,'LIC. GUILLERMO AZCORRA CHAN',1,'conocido@utchetumal.edu.mx','9831402065','2020-08-11 22:06:00','2020-08-12 07:10:56',NULL);
 /*!40000 ALTER TABLE `academic_directors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +99,7 @@ CREATE TABLE `academic_divisions` (
 
 LOCK TABLES `academic_divisions` WRITE;
 /*!40000 ALTER TABLE `academic_divisions` DISABLE KEYS */;
-INSERT INTO `academic_divisions` VALUES (1,'TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN','2020-08-11 21:57:49','2020-08-11 21:57:49',NULL),(2,'DESARROLLO E INNOVACIÓN EMPRESARIAL','2020-08-11 21:58:13','2020-08-11 21:58:13',NULL),(3,'MECATRÓNICA','2020-08-11 21:58:29','2020-08-11 21:58:29',NULL),(4,'GASTRONOMÍA','2020-08-11 21:58:41','2020-08-11 21:58:41',NULL);
+INSERT INTO `academic_divisions` VALUES (1,'TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN','2020-08-11 21:57:49','2020-08-11 21:57:49',NULL),(2,'DESARROLLO E INNOVACIÓN EMPRESARIAL','2020-08-11 21:58:13','2020-08-11 21:58:13',NULL),(3,'MECATRÓNICA','2020-08-11 21:58:29','2020-08-11 21:58:29',NULL),(4,'GASTRONOMÍA','2020-08-11 21:58:41','2020-08-12 09:23:27',NULL);
 /*!40000 ALTER TABLE `academic_divisions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +320,7 @@ CREATE TABLE `contact_students` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +329,6 @@ CREATE TABLE `contact_students` (
 
 LOCK TABLES `contact_students` WRITE;
 /*!40000 ALTER TABLE `contact_students` DISABLE KEYS */;
-INSERT INTO `contact_students` VALUES (1,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-08-06 21:34:27','2020-08-06 21:34:27'),(2,3,'9832852151','Kohunlich No. 123\r\nCol Payo Obispo VI Etapa',23,'Othon P. Blanco','77083',9,'Maria Felix Espinoza Rosas','9832852151','9831035600','felixespinoza5@hotmail.com','2020-08-07 16:08:12','2020-08-11 18:40:48'),(3,2,'9832852151','Kohunlich No. 123\r\nCol Payo Obispo VI Etapa',23,'Othon P. Blanco','77083',9,'Maria Felix Espinoza Rosas','9832852151','9831035600','felixespinoza5@hotmail.com','2020-08-11 18:35:03','2020-08-11 18:38:11'),(4,4,'9832852151','Kohunlich No. 123\r\nCol Payo Obispo VI Etapa',23,'Othon P. Blanco','77083',9,'Maria Felix Espinoza Rosas','9832852151','9831035600','felixespinoza5@hotmail.com','2020-08-11 18:41:12','2020-08-11 18:42:51');
 /*!40000 ALTER TABLE `contact_students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +356,7 @@ CREATE TABLE `degrees` (
 
 LOCK TABLES `degrees` WRITE;
 /*!40000 ALTER TABLE `degrees` DISABLE KEYS */;
-INSERT INTO `degrees` VALUES (1,'TIC','Tecnologías de la Información y Comunicación área Sistemas Informáticos','2020-08-11 21:50:04','2020-08-11 21:50:04',NULL),(2,'ITI','Tecnologías de la Información y Comunicación','2020-08-11 21:50:25','2020-08-11 21:50:25',NULL),(3,'IDE','Desarrollo e Innovación Empresarial','2020-08-11 21:51:24','2020-08-11 21:51:24',NULL),(4,'IMECA','Mecatrónica','2020-08-11 21:51:45','2020-08-11 21:51:45',NULL),(5,'DNM','Desarrollo de Negocios área Mercadotecnia','2020-08-11 21:52:06','2020-08-11 21:52:06',NULL),(6,'MECA','Mecatrónica área Sistemas de Manufactura Flexible','2020-08-11 21:52:26','2020-08-11 21:52:26',NULL),(7,'GAS','Gastronomía','2020-08-11 21:52:57','2020-08-11 21:52:57',NULL),(8,'TI','Tecnologías de la Información área Desarrollo de Software Multiplataforma','2020-08-11 21:53:30','2020-08-11 21:53:30',NULL),(9,'INM','Innovación de Negocios y Mercadotecnia','2020-08-11 21:53:53','2020-08-11 21:53:53',NULL);
+INSERT INTO `degrees` VALUES (1,'TIC','Tecnologías de la Información y Comunicación área Sistemas Informáticos','2020-08-11 21:50:04','2020-08-11 21:50:04',NULL),(2,'ITI','Tecnologías de la Información y Comunicación','2020-08-11 21:50:25','2020-08-11 21:50:25',NULL),(3,'IDE','Desarrollo e Innovación Empresarial','2020-08-11 21:51:24','2020-08-11 21:51:24',NULL),(4,'IMECA','Mecatrónica','2020-08-11 21:51:45','2020-08-11 21:51:45',NULL),(5,'DNM','Desarrollo de Negocios área Mercadotecnia','2020-08-11 21:52:06','2020-08-11 21:52:06',NULL),(6,'MECA','Mecatrónica área Sistemas de Manufactura Flexible','2020-08-11 21:52:26','2020-08-11 21:52:26',NULL),(7,'GAS','Gastronomía','2020-08-11 21:52:57','2020-08-11 21:52:57',NULL),(8,'TI','Tecnologías de la Información área Desarrollo de Software Multiplataforma','2020-08-11 21:53:30','2020-08-11 21:53:30',NULL),(9,'INM','Innovación de Negocios y Mercadotecnia','2020-08-11 21:53:53','2020-08-12 08:13:54',NULL);
 /*!40000 ALTER TABLE `degrees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +386,7 @@ CREATE TABLE `editorial_stylies` (
 
 LOCK TABLES `editorial_stylies` WRITE;
 /*!40000 ALTER TABLE `editorial_stylies` DISABLE KEYS */;
-INSERT INTO `editorial_stylies` VALUES (1,'Lic. Daniel Herve Alonzo Medina','ASESOR DE REDACCIÓN Y ESTILO','daniel.hierve@utchetumal.edu.mx','9831402065','2020-08-11 22:12:04','2020-08-11 22:12:04',NULL);
+INSERT INTO `editorial_stylies` VALUES (1,'Lic. Daniel Herve Alonzo Medina','ASESOR DE REDACCIÓN Y ESTILO','daniel.hierve@utchetumal.edu.mx','9831402065','2020-08-11 22:12:04','2020-08-12 10:12:15',NULL);
 /*!40000 ALTER TABLE `editorial_stylies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +442,7 @@ CREATE TABLE `educative_institutions` (
 
 LOCK TABLES `educative_institutions` WRITE;
 /*!40000 ALTER TABLE `educative_institutions` DISABLE KEYS */;
-INSERT INTO `educative_institutions` VALUES (1,'Universidad Tecnológica de Chetumal','2020-08-11 20:36:11','2020-08-11 20:36:11',NULL);
+INSERT INTO `educative_institutions` VALUES (1,'Universidad Tecnológica de Chetumal','2020-08-11 20:36:11','2020-08-12 06:35:00',NULL);
 /*!40000 ALTER TABLE `educative_institutions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,7 +471,7 @@ CREATE TABLE `educative_programs` (
 
 LOCK TABLES `educative_programs` WRITE;
 /*!40000 ALTER TABLE `educative_programs` DISABLE KEYS */;
-INSERT INTO `educative_programs` VALUES (1,'TSU TI','Técnico Superior Universitario en Tecnologías de la Información',1,'2020-08-11 22:00:05','2020-08-11 22:00:05',NULL),(2,'ING TI','Ingeniería en Tecnologías de la Información y Comunicación',2,'2020-08-11 22:00:24','2020-08-11 22:00:24',NULL),(3,'TSU MECATRÓNICA','Técnico Superior Universitario en Mecatrónica',3,'2020-08-11 22:00:46','2020-08-11 22:00:46',NULL),(4,'ING MECATRÓNICA','Ingeniería en Mecatrónica',4,'2020-08-11 22:01:01','2020-08-11 22:01:01',NULL),(5,'TSU MERCADOTECNIA','Técnico Superior Universitario en Desarrollo de Negocios',5,'2020-08-11 22:01:15','2020-08-11 22:01:15',NULL),(6,'ING MERCADOTECNIA','Ingeniería en Desarrollo e Innovación Empresarial',6,'2020-08-11 22:01:27','2020-08-11 22:01:27',NULL),(7,'TSU GASTRONOMÍA','Técnico Superior Universitario en Gastronomía',7,'2020-08-11 22:01:41','2020-08-11 22:01:41',NULL),(8,'ING GASTRONOMÍA','Licenciatura en Gastronomía',8,'2020-08-11 22:01:55','2020-08-11 22:01:55',NULL);
+INSERT INTO `educative_programs` VALUES (1,'TSU TI','Técnico Superior Universitario en Tecnologías de la Información',1,'2020-08-11 22:00:05','2020-08-11 22:00:05',NULL),(2,'ING TI','Ingeniería en Tecnologías de la Información y Comunicación',2,'2020-08-11 22:00:24','2020-08-11 22:00:24',NULL),(3,'TSU MECATRÓNICA','Técnico Superior Universitario en Mecatrónica',3,'2020-08-11 22:00:46','2020-08-11 22:00:46',NULL),(4,'ING MECATRÓNICA','Ingeniería en Mecatrónica',4,'2020-08-11 22:01:01','2020-08-11 22:01:01',NULL),(5,'TSU MERCADOTECNIA','Técnico Superior Universitario en Desarrollo de Negocios',5,'2020-08-11 22:01:15','2020-08-11 22:01:15',NULL),(6,'ING MERCADOTECNIA','Ingeniería en Desarrollo e Innovación Empresarial',6,'2020-08-11 22:01:27','2020-08-11 22:01:27',NULL),(7,'TSU GASTRONOMÍA','Técnico Superior Universitario en Gastronomía',7,'2020-08-11 22:01:41','2020-08-12 09:42:55',NULL),(8,'ING GASTRONOMÍA','Licenciatura en Gastronomía',8,'2020-08-11 22:01:55','2020-08-12 09:43:37',NULL);
 /*!40000 ALTER TABLE `educative_programs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -530,7 +529,7 @@ CREATE TABLE `enterprises` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`enterprise_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -539,7 +538,7 @@ CREATE TABLE `enterprises` (
 
 LOCK TABLES `enterprises` WRITE;
 /*!40000 ALTER TABLE `enterprises` DISABLE KEYS */;
-INSERT INTO `enterprises` VALUES (1,'UNIVERSIDAD TECNOLÓGICA DE CHETUMAL','UNIVERSIDAD TECNOLÓGICA DE CHETUMAL','9831291765','LIC. OCTAVIO CHÁVEZ GABALDÓN','RECTOR','Lic. Andrei Jesús Pérez Cetina','andrei.perez@utchetumal.edu.mx','9831291765','Ing. Carlos Suriel','carlos.suriel@utchetumal.edu.mx','9831291765','2020-11-08','2020-08-11 20:40:55','2020-08-11 20:40:55',NULL);
+INSERT INTO `enterprises` VALUES (1,'Universidad Tecnológica de Chetumal','Universidad Tecnológica de Chetumal','9831291765','LIC. OCTAVIO CHÁVEZ GABALDÓN','RECTOR','Lic. Andrei Jesús Pérez Cetina','andrei.perez@utchetumal.edu.mx','9831291765','Ing. Carlos Suriel','carlos.suriel@utchetumal.edu.mx','9831291765','2020-11-08','2020-08-11 20:40:55','2020-08-12 06:59:34',NULL);
 /*!40000 ALTER TABLE `enterprises` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +565,7 @@ CREATE TABLE `genders` (
 
 LOCK TABLES `genders` WRITE;
 /*!40000 ALTER TABLE `genders` DISABLE KEYS */;
-INSERT INTO `genders` VALUES (1,'MASCULINO','2020-08-11 21:55:24','2020-08-11 21:55:24',NULL),(2,'FEMENINO','2020-08-11 21:55:32','2020-08-11 21:55:32',NULL);
+INSERT INTO `genders` VALUES (1,'MASCULINO','2020-08-11 21:55:24','2020-08-12 08:35:51',NULL),(2,'FEMENINO','2020-08-11 21:55:32','2020-08-12 08:35:48',NULL);
 /*!40000 ALTER TABLE `genders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -580,7 +579,7 @@ DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `generation` year(4) DEFAULT NULL,
+  `generation` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -594,7 +593,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'6TIAM20',2020,'2020-08-11 21:55:58','2020-08-11 21:55:58',NULL);
+INSERT INTO `groups` VALUES (1,'6TIAM20','2018-2020','2020-08-11 21:55:58','2020-08-13 01:37:01',NULL);
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -615,7 +614,7 @@ CREATE TABLE `jobs` (
   `created_at` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_index` (`queue`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -624,6 +623,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+INSERT INTO `jobs` VALUES (1,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"99698261\\\";s:3:\\\"url\\\";s:253:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6Ik40N1wvampPcW5lOUlhUEUzbVwvcjl4UT09IiwidmFsdWUiOiJtXC9pdkFFVmdkQUsxS21jclFxS3dqUT09IiwibWFjIjoiNzNmNjRhOWJlM2EzMjZlZmFjODYwMjI0MTM3NmQyNDJhZjVlMWI3NmRiODM5NTUwMGU1NGM2ZmE5MDgzYTU3ZiJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597174292,1597174292),(2,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"68368283\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6ImlIbGJhSmtLbm1lelp6ZzlOb0FxaGc9PSIsInZhbHVlIjoib2RKQm01blkwSmVOZ0xURTlLdmVhdz09IiwibWFjIjoiZGYyMzI4NDdmMTljMDNiODViYTRmZDZmZDEyNDE2NGQ2NWEwZTg4ZGM2NWViZDg2ZTkzZTQ4MGYyMmNiNjM4MCJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597253930,1597253930),(3,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"73588668\\\";s:3:\\\"url\\\";s:253:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6IklcL3lSMlNITDBwak1xaGxPUWphVXlBPT0iLCJ2YWx1ZSI6IkFRd1JqU2xLVmxHMUN3a2N4M3lBYWc9PSIsIm1hYyI6ImYwZjI0OWRjZjc1MDZiNzYxMzRjNzhlYTYyMGUyMmE4ZWQ2M2M5YmU4ZGRkZDhmMzk1MzMzMDM3ZWUxYTM3MDkifQ==\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597254575,1597254575),(4,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"93464995\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6IkY5QllvbU9ncnZUQ0F0SmVtNFNhdlE9PSIsInZhbHVlIjoiUkRab1BWS1h6QXVZbkhrbXJPUzNhQT09IiwibWFjIjoiODRhMTk1ODkyMTdiNjViOGY1Mjc5MGE4NDVkZGYxMDdlNmZkYzFjMzQyMGY4MTI0YWRkYWI1MWEzMDIyYTA3MiJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597255334,1597255334),(5,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"63293881\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6ImRFZVpkTW9KN1k1ZldUMFBqSlVYOFE9PSIsInZhbHVlIjoiWkFDdEhLWVJmNnlxb0FBZmhzYStEdz09IiwibWFjIjoiNjAzNWRlNGMyOWNjMWQzYWVjYjE4NGNjZDBjMjZhNTNmODc5MGU3MmM5NjMwNzE4MzdlYzMyMzk5Yjc1NzlhOSJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597255621,1597255621),(6,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"75849334\\\";s:3:\\\"url\\\";s:253:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6IkFTUU5FaEdUUVV3aStheTluNWd0SWc9PSIsInZhbHVlIjoiYkJrc08wdWtWeXBlXC9IV3BcL0RGRWhRPT0iLCJtYWMiOiIwYzJhYzBkY2ZkMjIyOTIzOTJhOGUzYWI3ZGIwNGU4NTE1OTBjNDEwYzdiNjlhN2NmODA0ZmE4NTY5OGRmYmMwIn0=\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597255870,1597255870),(7,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"21351239\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6ImM4S21ieU5JK0hQbldMK0JXZmZ4c0E9PSIsInZhbHVlIjoiVnJxeUx6V2R0clpRRU9HUGdrMTg3QT09IiwibWFjIjoiMjZjY2IxMDBjOWVkMWY3MTRlYTAwN2Q3YjIyNmM0MmExNDQ1ZTAyMTQ1ODEzODQyZDA2MzM0YzJjYjA4NDJmNyJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597256034,1597256034),(8,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"67946112\\\";s:3:\\\"url\\\";s:253:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6ImNrWE95dEsxMWtaTTdGXC9hRmJKbXJBPT0iLCJ2YWx1ZSI6IlhWdlpCQUUyS25XalBpb09nQ1BnTUE9PSIsIm1hYyI6Ijc3MmUwY2ZmYWZlZTAzYzM4OTI3NDM3NmY1MGM4MTkzZWUzOTE4ZmIzNGQxZmY2MDNmOTNkNDRlOTI2OWY0YzgifQ==\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597256964,1597256964),(9,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"51788767\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6InNDblJ1SDd2ZitzeXh4cndheUJ0WVE9PSIsInZhbHVlIjoiQTRyVzdxNFpqWDFmeW4yMDNTZTNkQT09IiwibWFjIjoiM2M3MzJmNDljMTc2MDM0OWNiMDUwOWE1OTgwY2UyZDY2M2FlMGJmNTk3NDc0MDMxZTY5MTlmMDdkYzA0NjIzYSJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597259348,1597259348),(10,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"66467886\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6IkR2emFxdTdLcjJxOVcyUlBTUXVhVFE9PSIsInZhbHVlIjoib1BVREFwc1o4dElCUUVzaEsrUXR1dz09IiwibWFjIjoiMmYwNzQzNTY1NzM4MTlhOTdiNjEyMzI2NzA0MmY2Y2VkNGIzOTQ1NmZhZTk5MmRhNmZhMGM4MDRkZjVhNTE0NiJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597260178,1597260178),(11,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"44327195\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6ImUyV0dSMnU5Z1BqN2Fzd3YwcGlVMkE9PSIsInZhbHVlIjoiQkh5aWJTZnRSNFJEQTBuMGxkQ2RiUT09IiwibWFjIjoiZmM5MzRlOTFmYmVlNzRiZjMzNWI4ZTEyOWIxMThkZWUzYTcyNjEyZWFhYjE3ZjA0YzA4NmFiNjExNDZmYzQ2MSJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597260438,1597260438),(12,'default','{\"displayName\":\"App\\\\Mail\\\\EmailUserNotice\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:24:\\\"App\\\\Mail\\\\EmailUserNotice\\\":23:{s:4:\\\"data\\\";a:4:{s:6:\\\"nombre\\\";s:22:\\\"Luis Eduardo Lopez Ake\\\";s:7:\\\"usuario\\\";s:34:\\\"8118110124.TSUTI@utchetumal.edu.mx\\\";s:8:\\\"password\\\";s:8:\\\"38535831\\\";s:3:\\\"url\\\";s:249:\\\"http:\\/\\/localhost:8181\\/seguimiento\\/public\\/studentcontact\\/edit\\/eyJpdiI6Ik1jMjRwRFcyOGZ2bVVrWTJiZCtWZHc9PSIsInZhbHVlIjoiVmE4dVFSRGEyTnl6WnlpMmVqd0FGQT09IiwibWFjIjoiNjFiM2UzNDY1N2NjODcxMDE0NDM3ZGMyZGZmNGExODk4ZGNiNmMzMGFkMWZlYjYxZDNjOTVlN2FiMTA3ODM2NSJ9\\\";}s:6:\\\"locale\\\";N;s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"8118110124@utchetumal.edu.mx\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:7:\\\"\\u0000*\\u0000html\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:15:\\\"diskAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}',0,NULL,1597260571,1597260571);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -701,7 +701,7 @@ CREATE TABLE `modalities` (
 
 LOCK TABLES `modalities` WRITE;
 /*!40000 ALTER TABLE `modalities` DISABLE KEYS */;
-INSERT INTO `modalities` VALUES (1,'BIS','2020-08-11 20:50:32','2020-08-11 20:50:32',NULL),(2,'TRADICIONAL','2020-08-11 20:50:40','2020-08-11 20:50:40',NULL);
+INSERT INTO `modalities` VALUES (1,'BIS','2020-08-11 20:50:32','2020-08-11 20:50:32',NULL),(2,'TRADICIONAL','2020-08-11 20:50:40','2020-08-12 07:44:09',NULL);
 /*!40000 ALTER TABLE `modalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -733,7 +733,6 @@ CREATE TABLE `official_documents` (
   `project` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`oficialDocument_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -773,7 +772,7 @@ CREATE TABLE `periods` (
 
 LOCK TABLES `periods` WRITE;
 /*!40000 ALTER TABLE `periods` DISABLE KEYS */;
-INSERT INTO `periods` VALUES (1,'Mayo-Agosto',2020,'2020-05-11','2020-08-07','2020-08-11 21:55:04','2020-08-11 21:55:04',NULL);
+INSERT INTO `periods` VALUES (1,'Mayo-Agosto',2020,'2020-05-11','2020-08-07','2020-08-11 21:55:04','2020-08-12 09:10:37',NULL);
 /*!40000 ALTER TABLE `periods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -801,7 +800,7 @@ CREATE TABLE `quarters` (
 
 LOCK TABLES `quarters` WRITE;
 /*!40000 ALTER TABLE `quarters` DISABLE KEYS */;
-INSERT INTO `quarters` VALUES (1,'1','Primer cuatrimestre','2020-08-11 20:33:26','2020-08-11 20:33:26',NULL),(2,'2','Segundo cuatrimestre','2020-08-11 20:33:41','2020-08-11 20:33:41',NULL),(3,'3','Tercer cuatrimestre','2020-08-11 20:33:55','2020-08-11 20:33:55',NULL),(4,'4','Cuarto cuatrimestre','2020-08-11 20:34:17','2020-08-11 20:34:17',NULL),(5,'5','Quinto cuatrimestre','2020-08-11 20:34:37','2020-08-11 20:34:37',NULL),(6,'6','Sexto cuatrimestre','2020-08-11 20:34:59','2020-08-11 20:34:59',NULL);
+INSERT INTO `quarters` VALUES (1,'1','Primer cuatrimestre','2020-08-11 20:33:26','2020-08-11 20:33:26',NULL),(2,'2','Segundo cuatrimestre','2020-08-11 20:33:41','2020-08-11 20:33:41',NULL),(3,'3','Tercer cuatrimestre','2020-08-11 20:33:55','2020-08-11 20:33:55',NULL),(4,'4','Cuarto cuatrimestre','2020-08-11 20:34:17','2020-08-11 20:34:17',NULL),(5,'5','Quinto cuatrimestre','2020-08-11 20:34:37','2020-08-11 20:34:37',NULL),(6,'6','Sexto cuatrimestre','2020-08-11 20:34:59','2020-08-13 01:33:06',NULL);
 /*!40000 ALTER TABLE `quarters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -860,7 +859,7 @@ CREATE TABLE `responsible_linkings` (
 
 LOCK TABLES `responsible_linkings` WRITE;
 /*!40000 ALTER TABLE `responsible_linkings` DISABLE KEYS */;
-INSERT INTO `responsible_linkings` VALUES (1,'Lic. Andrei Jesús Pérez Cetina','DIRECCIÓN DE VINCULACIÓN','andrei.jesus@utchetumal.edu.mx','9831402065','2020-08-11 22:13:07','2020-08-11 22:13:07',NULL);
+INSERT INTO `responsible_linkings` VALUES (1,'Lic. Andrei Jesús Pérez Cetina','DIRECCIÓN DE VINCULACIÓN','andrei.jesus@utchetumal.edu.mx','9831402065','2020-08-11 22:13:07','2020-08-12 10:22:38',NULL);
 /*!40000 ALTER TABLE `responsible_linkings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -908,7 +907,7 @@ CREATE TABLE `role_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -917,7 +916,7 @@ CREATE TABLE `role_user` (
 
 LOCK TABLES `role_user` WRITE;
 /*!40000 ALTER TABLE `role_user` DISABLE KEYS */;
-INSERT INTO `role_user` VALUES (1,1,1,'2020-06-30 07:27:34','2020-06-30 07:27:34'),(2,2,2,'2020-06-30 07:30:33','2020-06-30 07:30:33'),(3,2,3,'2020-08-06 20:29:33','2020-08-06 20:29:33'),(4,2,4,'2020-08-06 20:47:12','2020-08-06 20:47:12'),(5,2,5,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(6,2,6,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(7,2,7,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(8,2,8,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(9,2,9,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(10,2,10,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(11,2,11,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(12,2,12,'2020-08-06 20:49:38','2020-08-06 20:49:38'),(13,2,13,'2020-08-07 03:04:55','2020-08-07 03:04:55'),(14,2,14,'2020-08-07 03:08:10','2020-08-07 03:08:10'),(15,2,15,'2020-08-07 03:17:42','2020-08-07 03:17:42'),(16,2,16,'2020-08-07 03:22:51','2020-08-07 03:22:51'),(17,2,17,'2020-08-07 03:58:44','2020-08-07 03:58:44'),(18,2,18,'2020-08-07 03:58:45','2020-08-07 03:58:45'),(19,2,19,'2020-08-07 03:58:45','2020-08-07 03:58:45'),(20,2,20,'2020-08-07 03:58:46','2020-08-07 03:58:46'),(21,2,21,'2020-08-07 04:07:17','2020-08-07 04:07:17'),(22,2,22,'2020-08-07 04:07:17','2020-08-07 04:07:17'),(23,2,23,'2020-08-07 04:07:17','2020-08-07 04:07:17'),(24,2,24,'2020-08-07 04:07:17','2020-08-07 04:07:17'),(25,2,25,'2020-08-07 04:23:54','2020-08-07 04:23:54'),(26,2,26,'2020-08-07 04:25:14','2020-08-07 04:25:14'),(27,2,27,'2020-08-07 04:25:15','2020-08-07 04:25:15'),(28,2,28,'2020-08-07 04:25:15','2020-08-07 04:25:15'),(29,2,29,'2020-08-07 04:25:16','2020-08-07 04:25:16'),(30,2,30,'2020-08-07 04:33:28','2020-08-07 04:33:28'),(31,2,31,'2020-08-07 04:33:29','2020-08-07 04:33:29'),(32,2,32,'2020-08-07 04:33:29','2020-08-07 04:33:29'),(33,2,33,'2020-08-07 04:33:29','2020-08-07 04:33:29'),(34,2,34,'2020-08-07 05:14:09','2020-08-07 05:14:09'),(35,2,35,'2020-08-07 05:14:10','2020-08-07 05:14:10'),(36,2,36,'2020-08-07 05:17:35','2020-08-07 05:17:35'),(37,2,37,'2020-08-07 05:17:35','2020-08-07 05:17:35'),(38,2,38,'2020-08-07 05:24:04','2020-08-07 05:24:04'),(39,2,39,'2020-08-07 05:24:05','2020-08-07 05:24:05'),(40,2,40,'2020-08-07 05:24:05','2020-08-07 05:24:05'),(41,2,41,'2020-08-07 18:57:32','2020-08-07 18:57:32'),(42,2,42,'2020-08-07 18:57:33','2020-08-07 18:57:33'),(43,2,43,'2020-08-07 18:57:33','2020-08-07 18:57:33'),(44,2,44,'2020-08-07 21:41:41','2020-08-07 21:41:41'),(45,2,45,'2020-08-07 21:41:46','2020-08-07 21:41:46'),(46,2,46,'2020-08-07 21:41:46','2020-08-07 21:41:46'),(47,2,47,'2020-08-07 21:41:47','2020-08-07 21:41:47'),(48,2,48,'2020-08-07 21:41:47','2020-08-07 21:41:47'),(49,2,49,'2020-08-07 21:41:48','2020-08-07 21:41:48'),(50,2,50,'2020-08-07 21:41:48','2020-08-07 21:41:48'),(51,2,51,'2020-08-07 21:41:49','2020-08-07 21:41:49'),(52,2,52,'2020-08-11 17:37:56','2020-08-11 17:37:56'),(53,2,53,'2020-08-11 17:37:58','2020-08-11 17:37:58'),(54,2,54,'2020-08-11 17:37:58','2020-08-11 17:37:58'),(55,2,55,'2020-08-11 17:37:58','2020-08-11 17:37:58'),(56,2,56,'2020-08-11 17:37:58','2020-08-11 17:37:58');
+INSERT INTO `role_user` VALUES (1,1,1,'2020-08-11 15:15:40','2020-08-11 15:15:41');
 /*!40000 ALTER TABLE `role_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -944,7 +943,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin','Rol de admnistrador','2020-06-30 07:22:49','2020-06-30 07:22:49'),(2,'alumno','Rol de alumno','2020-06-30 07:23:23','2020-06-30 07:23:23');
+INSERT INTO `roles` VALUES (1,'admin','Administrador','2020-08-11 15:15:10','2020-08-11 15:15:11'),(2,'alumno','Alumnos','2020-08-11 15:15:12','2020-08-11 15:15:13');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +971,7 @@ CREATE TABLE `school_origins` (
 
 LOCK TABLES `school_origins` WRITE;
 /*!40000 ALTER TABLE `school_origins` DISABLE KEYS */;
-INSERT INTO `school_origins` VALUES (1,'Colegio de Estudios Científicos y Tecnológicos del Estado de Quintana Roo','CECYTE','2020-08-11 21:42:29','2020-08-11 21:42:29',NULL),(2,'Colegio de Bachilleres del Estado de Quintana Roo plantel Chetumal Uno','COBACH','2020-08-11 21:45:53','2020-08-11 21:47:58',NULL);
+INSERT INTO `school_origins` VALUES (1,'Colegio de Estudios Científicos y Tecnológicos del Estado de Quintana Roo','CECYTE','2020-08-11 21:42:29','2020-08-11 21:42:29',NULL),(2,'Colegio de Bachilleres del Estado de Quintana Roo plantel Chetumal Uno','COBACH','2020-08-11 21:45:53','2020-08-12 07:58:44',NULL);
 /*!40000 ALTER TABLE `school_origins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,7 +989,7 @@ CREATE TABLE `shifts` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`shift_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -999,7 +998,7 @@ CREATE TABLE `shifts` (
 
 LOCK TABLES `shifts` WRITE;
 /*!40000 ALTER TABLE `shifts` DISABLE KEYS */;
-INSERT INTO `shifts` VALUES (1,'MATUTINO','2020-08-11 20:45:42','2020-08-11 20:45:42',NULL),(2,'VESPERTINO','2020-08-11 20:45:50','2020-08-11 20:45:50',NULL);
+INSERT INTO `shifts` VALUES (1,'MATUTINO','2020-08-11 20:45:42','2020-08-11 20:45:42',NULL),(2,'VESPERTINO','2020-08-11 20:45:50','2020-08-13 01:25:23',NULL);
 /*!40000 ALTER TABLE `shifts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1195,7 +1194,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1204,7 +1203,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin','admin@example.com','$2y$10$6K3lFA.d/nHr0wlrOMZlMuu9.0EmCL9Otc780/tNzkgGGCLQanq9i','5Ns0Sfns8e1jHvovXey3CX3i374ks3aKfSKtihyPpPGTS9ieAMmLz49JGQZ1','2020-06-30 07:27:21','2020-06-30 07:27:21'),(2,'Alumno','alumno@example.com','$2y$10$YNId7X8/r9FuUFV5LWus9.IgKziXn8XB3Orsm/K7uRLnH6A9WMkh2','KRSdwz0B4iZI01RelJWyyoU4hlYl3OcaLcjYVmQZzUVPmgcg59f9ESpVNuAb','2020-06-30 07:30:21','2020-06-30 07:30:21');
+INSERT INTO `users` VALUES (1,'Admin','admin@example.com','$2y$10$jNBwyQ0qPSBlI6G8KPlYNuPuxx/EHMaGzuwFOmpKdbqHiNeZ0OisG','6DbnkTyRHX0PQwHB4d9dr1VKKTv6oCoIv6NJYTkqJz0JldxWCBh4PQnViDcp','2020-08-11 20:09:08','2020-08-11 20:09:08');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1217,4 +1216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-11 13:11:25
+-- Dump completed on 2020-08-12 18:53:19
