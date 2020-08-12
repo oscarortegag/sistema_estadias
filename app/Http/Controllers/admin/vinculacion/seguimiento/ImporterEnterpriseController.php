@@ -8,9 +8,13 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use App\admin\vinculacion\seguimiento\Enterprise;
+use Auth;
 
 class ImporterEnterpriseController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     /**
      * Display a listing of the resource.
      *

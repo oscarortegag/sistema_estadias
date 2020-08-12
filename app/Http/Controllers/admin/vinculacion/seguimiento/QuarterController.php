@@ -5,17 +5,23 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Quarter;
+use Auth;
 
 class QuarterController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }       
     /**
-     * Display a listing of the resource.
+     * Display     public function __construct(){
+           $this->middleware('auth');    
+    }   a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-           $quarter = Quarter::all();
+           $quarter = Quarter::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.quarters.index', compact('quarter'));
     }
 
@@ -42,7 +48,8 @@ class QuarterController extends Controller
         $quar->quarterName = $request->quarterName;            
         $quar->save();
 
-        return redirect()->route('quarters.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('quarters.index');          
     }
 
     /**
@@ -82,7 +89,8 @@ class QuarterController extends Controller
         $quar->quarterName = $request->quarterName;     
         $quar->save();
 
-        return redirect()->route('quarters.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('quarters.edit',['id'=>$id]);        
     }
 
     /**
@@ -94,6 +102,13 @@ class QuarterController extends Controller
     public function destroy($id)
     {
         Quarter::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');         
         return redirect()->route('quarters.index');
     }
+
+    public function restore($id){
+        Quarter::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('quarters.index');     
+    }     
 }

@@ -22,9 +22,14 @@ use App\admin\vinculacion\seguimiento\AcademicAdvisor;
 use App\admin\vinculacion\seguimiento\EditorStyle;
 use App\admin\vinculacion\seguimiento\ResponsibleLinking;
 use App\admin\vinculacion\seguimiento\OfficialDocument;
+use App\User;
+use Auth;
 
 class StudentController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }       
     /**
      * Display a listing of the resource.
      *
@@ -136,7 +141,6 @@ class StudentController extends Controller
         $student->save();
 
         $dataEnterprise = Enterprise::find($request->enterprise);
-        //dd($dataEnterprise);
         $period = Period::find($request->period);
 
 
@@ -160,7 +164,7 @@ class StudentController extends Controller
         $document->save();
 
         \Session::flash('flash_message','La información del alumno se actualizo existosamente');
-        return redirect()->route('students.edit',['id'=>$id]);            
+        return redirect()->route('students.edit',['id'=>$id]);      
     }
 
     /**
@@ -171,7 +175,20 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $period = \Request::input('period');
+        $idSearch = decrypt($id);
+        $student = Student::find($idSearch);
+        $documentId = $student->document->oficialDocument_id;
+        $userId = $student->id;
+        $student->document->delete();
+        $student->delete();
+
+        $user = User::find($userId);
+        $user->roles()->detach();
+        $user->delete();
+
+        \Session::flash('flash_message','¡El alumno ha sido eliminado!'); 
+        return redirect()->route('students.index',['period'=>$period]);
     }    
 
 }

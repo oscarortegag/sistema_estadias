@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Asesor académico</h1>
+    <h1>Asesor de estilo y redacción</h1>
 @stop
 
 @section('content')
@@ -23,6 +23,13 @@
                                     @endforeach
                                 </ul>
                             @endif
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        {{Session::get('flash_message')}}
+                                    </ul>
+                                </div>
+                            @endif                             
                             <div class="row">
                                 <div class="form-group">
                                     <label for="nombreeditor" class="col-form-label text-md-right">Nombre del asesor</label>

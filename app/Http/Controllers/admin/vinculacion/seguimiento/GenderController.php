@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Gender;
+use Auth;
 
 class GenderController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class GenderController extends Controller
      */
     public function index()
     {
-           $gender = Gender::all();
+           $gender = Gender::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.genders.index', compact('gender'));
     }
 
@@ -41,7 +45,8 @@ class GenderController extends Controller
         $gen->name = $request->genero;      
         $gen->save();
 
-        return redirect()->route('genders.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('genders.index');         
     }
 
     /**
@@ -80,7 +85,8 @@ class GenderController extends Controller
         $gen->name = $request->genero;      
         $gen->save();
 
-        return redirect()->route('genders.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('genders.edit',['id'=>$id]);          
     }
 
     /**
@@ -92,6 +98,13 @@ class GenderController extends Controller
     public function destroy($id)
     {
         Gender::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('genders.index');
     }
+
+    public function restore($id){
+        Gender::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('genders.index');     
+    }      
 }

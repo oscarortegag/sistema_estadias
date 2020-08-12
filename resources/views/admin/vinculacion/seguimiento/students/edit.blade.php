@@ -238,6 +238,7 @@
                                 <div class="form-group col-xs-4">&nbsp;
                                 </div>
                             </div>
+                            <!--
                             <div class="row">
                                 <div class="form-group col-xs-4">
                                     <label for="telCelular" class="col-form-label text-md-right">Teléfono celular</label>
@@ -264,6 +265,7 @@
                                     <input id="correoPersonalConfirma" type="text" class="form-control @error(correoPersonalConfirma') is-invalid @enderror" name="correoPersonalConfirma" value="" required autocomplete=correoPersonalConfirma" autofocus>
                                 </div>                                                                
                             </div>
+                        -->
                             </div>
                             <!-- /.box-body -->
                           </div>
@@ -409,32 +411,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#valida2").click(function() {
-            var correoBase,correoPersonal,correoConfirma,celular,telefono,facebook;
-            correoPersonal = $("#correoPersonal").val();
-            correoConfirma = $("#correoPersonalConfirma").val();
-            celular = $("#telCelular").val();
-            telefono = $("#telOficina").val();
-            facebook = $("#facebook").val();                                    
-
-            if((correoPersonal == "") || (correoConfirma=="") || (celular=="") || (facebook=="")){
-                alert("¡Especifique la información de contacto!");
-                return false;                
-            }
-
-            if(correoPersonal !== correoConfirma){
-               alert("¡Verifique el correo personal no coinciden!");
-               return false;
-            }
-
-            correoBase = $("#correo").val();
-            tmpCorreo = correoBase.split("@");
-            tmpCorreoP = correoPersonal.split("@");
-
-            if(tmpCorreoP[1] === tmpCorreo[1]){
-                alert("El correo personal no debe ser tipo institucional");
-                return false;
-            }
-
             if(confirm("¿ Desea modificar la información del alumno ?")){
                return true;
             }else{

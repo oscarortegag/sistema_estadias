@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Shifts;
+use Auth;
 
 class ShiftController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }       
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class ShiftController extends Controller
      */
     public function index()
     {
-           $shift = Shifts::all();
+           $shift = Shifts::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.shifts.index', compact('shift'));
     }
 
@@ -40,7 +44,7 @@ class ShiftController extends Controller
         $shift = new Shifts;
         $shift->name = $request->turno;
         $shift->save();
-
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('shift.index');
     }
 
@@ -80,7 +84,8 @@ class ShiftController extends Controller
         $shift->name = $request->turno;
         $shift->save();
 
-        return redirect()->route('shift.index');
+        \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+        return redirect()->route('shift.edit',['id'=>$id]);
     }
 
     /**
@@ -92,6 +97,13 @@ class ShiftController extends Controller
     public function destroy($id)
     {
         Shifts::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('shift.index');
     }
+
+    public function restore($id){
+        Shifts::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('shift.index');        
+    }     
 }

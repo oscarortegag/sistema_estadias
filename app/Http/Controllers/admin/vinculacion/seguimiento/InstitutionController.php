@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Institution;
+use Auth;
 
 class InstitutionController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class InstitutionController extends Controller
      */
     public function index()
     {
-           $institution = Institution::all();
+           $institution = Institution::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.institutions.index', compact('institution'));
     }
 
@@ -79,8 +83,8 @@ class InstitutionController extends Controller
         $inst = Institution::find($id);
         $inst->name = $request->instituto;
         $inst->save();
-
-        return redirect()->route('institutions.index');
+        \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+        return redirect()->route('institutions.edit',['id'=>$id]);
     }
 
     /**
@@ -92,6 +96,13 @@ class InstitutionController extends Controller
     public function destroy($id)
     {
         Institution::find($id)->delete();
+        \Session::flash('flash_message','La información ha sido ocultada');        
         return redirect()->route('institutions.index');
+    }
+
+    public function restore($id){
+        Institution::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','La información ha sido restablecido');          
+        return redirect()->route('institutions.index');        
     }
 }

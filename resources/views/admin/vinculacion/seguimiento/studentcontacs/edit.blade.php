@@ -44,7 +44,14 @@
                             @php } 
 
                                 }
-                            @endphp                           
+                            @endphp
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        {{Session::get('flash_message')}}
+                                    </ul>
+                                </div>
+                            @endif                                                      
                             <div class="row col-xs-12">
                                 <label for="carrera" class="col-form-label text-md-right">Información de estadía</label>
                             </div>                            
@@ -186,7 +193,7 @@
 @stop
 @push('jscustom')
 <script type="text/javascript">
-   /* $(document).ready(function () {
+    $(document).ready(function () {
         $("#valida2").click(function() {
             var correoBase,correoPersonal,correoConfirma,celular,telefono,facebook;
             correoPersonal = $("#correoPersonal").val();
@@ -221,6 +228,6 @@
             }
 
         });
-    });*/
+    });
 </script>
 @endpush

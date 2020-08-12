@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Degree;
+use Auth;
 
 class DegreeController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class DegreeController extends Controller
      */
     public function index()
     {
-           $degree = Degree::all();
+           $degree = Degree::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.degrees.index', compact('degree'));
     }
 
@@ -41,7 +45,7 @@ class DegreeController extends Controller
         $degr->code = $request->codigo;
         $degr->degreeName = $request->carrera; 
         $degr->save();
-
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('degrees.index');
     }
 
@@ -82,7 +86,8 @@ class DegreeController extends Controller
         $degr->degreeName = $request->carrera; 
         $degr->save();
 
-        return redirect()->route('degrees.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('degrees.edit',['id'=>$id]);        
     }
 
     /**
@@ -94,6 +99,13 @@ class DegreeController extends Controller
     public function destroy($id)
     {
         Degree::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('degrees.index');
     }
+
+    public function restore($id){
+        Degree::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('degrees.index');     
+    }     
 }

@@ -17,6 +17,13 @@
                             Nueva escuela
                         </a>
                     </div><br><br>
+                    @if(Session::has('flash_message'))
+                        <div class="alert alert-info">
+                            <ul>
+                                {{Session::get('flash_message')}}
+                            </ul>
+                        </div>
+                    @endif                     
                     <div class="card-body">
                           <div class="table-responsive">
                               <table id="tabla-school" class="table table-bordered table-striped">
@@ -35,12 +42,19 @@
                                         <td>{{ $items->schoolName}}</td>
                                         <td>{{ $items->shortName}}</td>                                        
                                         <td>
-                                            <a href="{{ route('schools.edit',['id'=>$items->schoolOrigin_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar escuela"></i></a>
-                                            <form style="display: inline" method="POST" action="{{ route('schools.destroy',['id'=>$items->schoolOrigin_id]) }}">
-                                                {!! method_field('DELETE') !!}
-                                                {!! csrf_field() !!}
-                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar escuela"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                            </form>
+                                            @if(is_null($items->deleted_at))
+                                                <a href="{{ route('schools.edit',['id'=>$items->schoolOrigin_id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar escuela"></i></a>
+                                                <form style="display: inline" method="POST" action="{{ route('schools.destroy',['id'=>$items->schoolOrigin_id]) }}">
+                                                    {!! method_field('DELETE') !!}
+                                                    {!! csrf_field() !!}
+                                                    <button type = "submit" name="eliminar" id="eliminar2" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Ocultar escuela"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                </form>
+                                            @else
+                                                <form style="display: inline" method="POST" action="{{ route('schools.restore',['id'=>$items->schoolOrigin_id]) }}">
+                                                    {!! csrf_field() !!}
+                                                    <button type = "submit" name="eliminar" id="eliminar3" class="btn btn-default btn-sm" data-toggle="tooltip" title="Mostrar escuela"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
@@ -111,4 +125,25 @@
         );  
     </script>
 @endpush
-
+@push('jscustom')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#eliminar2").click(function() {
+            if(confirm("¿ Desea ocultar este registro ?")){
+               return true;
+            }else{
+                  return false;
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#eliminar3").click(function() {
+            if(confirm("¿ Desea visualizar este registro ?")){
+               return true;
+            }else{
+                  return false;
+            }
+        });
+    });    
+</script>
+@endpush

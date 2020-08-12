@@ -8,6 +8,9 @@ use Auth;
 
 class WordController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }       
     /**
      * Display a listing of the resource.
      *
@@ -58,18 +61,44 @@ class WordController extends Controller
                  $genderStudent = "la alumna";
         }
 
-        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $mes = ["January"=>"enero",
+                "February"=>"febrero",
+                "March"=>"marzo",
+                "April"=>"abril",
+                "May"=>"mayo",
+                "June"=>"junio",
+                "July"=>"julio",
+                "August"=>"agosto",
+                "September"=>"septiembre",
+                "October"=>"octubre",
+                "November"=>"noviembre",
+                "December"=>"diciembre"
+        ];
+
+        $mesPresDate = date("F",strtotime($information->student->document->presentationDate));
+        $mesRelDate = date("F",strtotime($information->student->document->releaseDate));
+        $mesStartDate = date("F",strtotime($information->student->document->startDate));
+        $mesEndDate = date("F",strtotime($information->student->document->endDate));
+
         $presentationDate = "Chetumal, Quintana Roo, a ";
         $presentationDate .=strftime('%d de %B de %Y', strtotime($information->student->document->presentationDate));
+        $presentationDate = str_replace($mesPresDate,$mes[$mesPresDate],$presentationDate);
+
         $releaseDate = "Chetumal, Quintana Roo, a ";
-        $releaseDate .=strftime('%d de %B de %Y', strtotime($information->student->document->releaseDate));         
+        $releaseDate .=strftime('%d de %B de %Y', strtotime($information->student->document->releaseDate));
+        $releaseDate = str_replace($mesRelDate,$mes[$mesRelDate],$releaseDate);
+
         $startDate = strftime('%d de %B de %Y', strtotime($information->student->document->startDate));
+        $startDate = str_replace($mesStartDate,$mes[$mesStartDate],$startDate);
+
         $endDate = strftime('%d de %B de %Y', strtotime($information->student->document->endDate));
         $project = $information->student->document->project;
+        $endDate = str_replace($mesEndDate,$mes[$mesEndDate],$endDate);     
 
         try{
             $template = new \PhpOffice\PhpWord\TemplateProcessor($file);
             if($doc == 1){
+                $tmpFile = $template->setValue('companyNameTitle',mb_strtoupper($companyName,"UTF-8"));
                 $tmpFile = $template->setValue('presentationDate',$presentationDate);            
                 $tmpFile = $template->setValue('name',$name);
                 $tmpFile = $template->setValue('enrollment',$enrollment);

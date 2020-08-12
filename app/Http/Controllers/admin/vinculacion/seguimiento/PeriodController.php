@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Period;
+use Auth;
 
 class PeriodController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }   
     /**
      * Display a listing of the resource.s
      *
@@ -15,7 +19,7 @@ class PeriodController extends Controller
      */
     public function index()
     {
-           $period = Period::all();
+           $period = Period::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.periods.index', compact('period'));
     }
 
@@ -44,7 +48,8 @@ class PeriodController extends Controller
         $per->lastDay = $request->lastDay;        
         $per->save();
 
-        return redirect()->route('periods.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('periods.index');        
     }
 
     /**
@@ -86,7 +91,8 @@ class PeriodController extends Controller
         $per->lastDay = $request->lastDay;        
         $per->save();
 
-        return redirect()->route('periods.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('periods.edit',['id'=>$id]);         
     }
 
     /**
@@ -98,6 +104,13 @@ class PeriodController extends Controller
     public function destroy($id)
     {
         Period::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('periods.index');
     }
+
+    public function restore($id){
+        Period::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('periods.index');     
+    }    
 }
