@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Group;
+use Auth;
 
 class GroupController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-           $group = Group::all();
+           $group = Group::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.groups.index', compact('group'));
     }
 
@@ -42,7 +46,8 @@ class GroupController extends Controller
         $gro->generation = $request->generation;            
         $gro->save();
 
-        return redirect()->route('groups.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('groups.index');          
     }
 
     /**
@@ -82,7 +87,8 @@ class GroupController extends Controller
         $gro->generation = $request->generation;     
         $gro->save();
 
-        return redirect()->route('groups.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('groups.edit',['id'=>$id]);         
     }
 
     /**
@@ -94,6 +100,13 @@ class GroupController extends Controller
     public function destroy($id)
     {
         Group::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');         
         return redirect()->route('groups.index');
     }
+
+    public function restore($id){
+        Group::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('groups.index');     
+    }     
 }

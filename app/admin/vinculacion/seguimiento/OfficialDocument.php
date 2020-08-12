@@ -3,24 +3,24 @@
 namespace App\admin\vinculacion\seguimiento;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OfficialDocument extends Model
 {
-		use SoftDeletes;
+	//use SoftDeletes;
         protected $table="official_documents";
         protected $primaryKey = "oficialDocument_id";
         //protected $fillable = ['companyName','businessName','companyPhone'];
-	    /**
+	/**
 
-	     * The attributes that should be mutated to dates.
+	* The attributes that should be mutated to dates.
 
-	     *
+	*
 
-	     * @var array
+	* @var array
 
-	     */
-	    protected $dates = ['deleted_at'];
+	*/
+	//protected $dates = ['deleted_at'];
 
         public function advisor(){
         	return $this->hasOne('App\admin\vinculacion\seguimiento\AcademicAdvisor','academicAdvisor_id','academicAdvisor_id');

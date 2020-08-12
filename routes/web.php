@@ -34,6 +34,11 @@ Route::put('students/edit/{id}', [
     'as'   => 'students.update',
 ]);
 
+Route::delete('students/delete/{id}', [
+    'uses' => 'admin\vinculacion\seguimiento\StudentController@destroy',
+    'as'   => 'students.destroy',
+]);
+
 Route::get('surveys/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyController@index',
     'as'   => 'surveys.index',
@@ -119,6 +124,7 @@ Route::post('/enterprise/save', 'admin\vinculacion\seguimiento\EnterpriseControl
 Route::get('/enterprise/edit/{id}', 'admin\vinculacion\seguimiento\EnterpriseController@edit')->name('enterprise.edit');
 Route::put('/enterprise/edit/{id}', 'admin\vinculacion\seguimiento\EnterpriseController@update')->name('enterprise.update');
 Route::delete('/enterprise/delete/{id}', 'admin\vinculacion\seguimiento\EnterpriseController@destroy')->name('enterprise.destroy');
+Route::post('/enterprise/restore/{id}', 'admin\vinculacion\seguimiento\EnterpriseController@restore')->name('enterprise.restore');
 
 Route::get('/institute', 'admin\vinculacion\seguimiento\InstitutionController@index')->name('institutions.index');
 Route::get('/institute/new', 'admin\vinculacion\seguimiento\InstitutionController@create')->name('institutions.create');
@@ -126,6 +132,7 @@ Route::post('/institute/save', 'admin\vinculacion\seguimiento\InstitutionControl
 Route::get('/institute/edit/{id}', 'admin\vinculacion\seguimiento\InstitutionController@edit')->name('institutions.edit');
 Route::put('/institute/edit/{id}', 'admin\vinculacion\seguimiento\InstitutionController@update')->name('institutions.update');
 Route::delete('/institute/delete/{id}', 'admin\vinculacion\seguimiento\InstitutionController@destroy')->name('institutions.destroy');
+Route::post('/institute/restore/{id}', 'admin\vinculacion\seguimiento\InstitutionController@restore')->name('institutions.restore');
 
 Route::get('/shift', 'admin\vinculacion\seguimiento\ShiftController@index')->name('shift.index');
 Route::get('/shift/new', 'admin\vinculacion\seguimiento\ShiftController@create')->name('shift.create');
@@ -133,6 +140,7 @@ Route::post('/shift/save', 'admin\vinculacion\seguimiento\ShiftController@store'
 Route::get('/shift/edit/{id}', 'admin\vinculacion\seguimiento\ShiftController@edit')->name('shift.edit');
 Route::put('/shift/edit/{id}', 'admin\vinculacion\seguimiento\ShiftController@update')->name('shift.update');
 Route::delete('/shift/delete/{id}', 'admin\vinculacion\seguimiento\ShiftController@destroy')->name('shift.destroy');
+Route::post('/shift/restore/{id}', 'admin\vinculacion\seguimiento\ShiftController@restore')->name('shift.restore');
 
 Route::get('/modality', 'admin\vinculacion\seguimiento\ModalityController@index')->name('modalities.index');
 Route::get('/modality/new', 'admin\vinculacion\seguimiento\ModalityController@create')->name('modalities.create');
@@ -140,6 +148,7 @@ Route::post('/modality/save', 'admin\vinculacion\seguimiento\ModalityController@
 Route::get('/modality/edit/{id}', 'admin\vinculacion\seguimiento\ModalityController@edit')->name('modalities.edit');
 Route::put('/modality/edit/{id}', 'admin\vinculacion\seguimiento\ModalityController@update')->name('modalities.update');
 Route::delete('/modality/delete/{id}', 'admin\vinculacion\seguimiento\ModalityController@destroy')->name('modalities.destroy');
+Route::delete('/modality/restore/{id}', 'admin\vinculacion\seguimiento\ModalityController@restore')->name('modalities.restore');
 
 Route::get('/school', 'admin\vinculacion\seguimiento\SchoolOriginController@index')->name('schools.index');
 Route::get('/school/new', 'admin\vinculacion\seguimiento\SchoolOriginController@create')->name('schools.create');
@@ -147,6 +156,7 @@ Route::post('/school/save', 'admin\vinculacion\seguimiento\SchoolOriginControlle
 Route::get('/school/edit/{id}', 'admin\vinculacion\seguimiento\SchoolOriginController@edit')->name('schools.edit');
 Route::put('/school/edit/{id}', 'admin\vinculacion\seguimiento\SchoolOriginController@update')->name('schools.update');
 Route::delete('/school/delete/{id}', 'admin\vinculacion\seguimiento\SchoolOriginController@destroy')->name('schools.destroy');
+Route::post('/school/restore/{id}', 'admin\vinculacion\seguimiento\SchoolOriginController@restore')->name('schools.restore');
 
 Route::get('/degree', 'admin\vinculacion\seguimiento\DegreeController@index')->name('degrees.index');
 Route::get('/degree/new', 'admin\vinculacion\seguimiento\DegreeController@create')->name('degrees.create');
@@ -154,6 +164,7 @@ Route::post('/degree/save', 'admin\vinculacion\seguimiento\DegreeController@stor
 Route::get('/degree/edit/{id}', 'admin\vinculacion\seguimiento\DegreeController@edit')->name('degrees.edit');
 Route::put('/degree/edit/{id}', 'admin\vinculacion\seguimiento\DegreeController@update')->name('degrees.update');
 Route::delete('/degree/delete/{id}', 'admin\vinculacion\seguimiento\DegreeController@destroy')->name('degrees.destroy');
+Route::post('/degree/restore/{id}', 'admin\vinculacion\seguimiento\DegreeController@restore')->name('degrees.restore');
 
 Route::get('/period', 'admin\vinculacion\seguimiento\PeriodController@index')->name('periods.index');
 Route::get('/period/new', 'admin\vinculacion\seguimiento\PeriodController@create')->name('periods.create');
@@ -161,6 +172,7 @@ Route::post('/period/save', 'admin\vinculacion\seguimiento\PeriodController@stor
 Route::get('/period/edit/{id}', 'admin\vinculacion\seguimiento\PeriodController@edit')->name('periods.edit');
 Route::put('/period/edit/{id}', 'admin\vinculacion\seguimiento\PeriodController@update')->name('periods.update');
 Route::delete('/period/delete/{id}', 'admin\vinculacion\seguimiento\PeriodController@destroy')->name('periods.destroy');
+Route::post('/period/restore/{id}', 'admin\vinculacion\seguimiento\PeriodController@restore')->name('periods.restore');
 
 Route::get('/gender', 'admin\vinculacion\seguimiento\GenderController@index')->name('genders.index');
 Route::get('/gender/new', 'admin\vinculacion\seguimiento\GenderController@create')->name('genders.create');
@@ -168,6 +180,7 @@ Route::post('/gender/save', 'admin\vinculacion\seguimiento\GenderController@stor
 Route::get('/gender/edit/{id}', 'admin\vinculacion\seguimiento\GenderController@edit')->name('genders.edit');
 Route::put('/gender/edit/{id}', 'admin\vinculacion\seguimiento\GenderController@update')->name('genders.update');
 Route::delete('/gender/delete/{id}', 'admin\vinculacion\seguimiento\GenderController@destroy')->name('genders.destroy');
+Route::post('/gender/restore/{id}', 'admin\vinculacion\seguimiento\GenderController@restore')->name('genders.restore');
 
 Route::get('/group', 'admin\vinculacion\seguimiento\GroupController@index')->name('groups.index');
 Route::get('/group/new', 'admin\vinculacion\seguimiento\GroupController@create')->name('groups.create');
@@ -175,6 +188,7 @@ Route::post('/group/save', 'admin\vinculacion\seguimiento\GroupController@store'
 Route::get('/group/edit/{id}', 'admin\vinculacion\seguimiento\GroupController@edit')->name('groups.edit');
 Route::put('/group/edit/{id}', 'admin\vinculacion\seguimiento\GroupController@update')->name('groups.update');
 Route::delete('/group/delete/{id}', 'admin\vinculacion\seguimiento\GroupController@destroy')->name('groups.destroy');
+Route::post('/group/restore/{id}', 'admin\vinculacion\seguimiento\GroupController@restore')->name('groups.restore');
 
 Route::get('/division', 'admin\vinculacion\seguimiento\AcademicDivisionController@index')->name('divisions.index');
 Route::get('/division/new', 'admin\vinculacion\seguimiento\AcademicDivisionController@create')->name('divisions.create');
@@ -182,6 +196,7 @@ Route::post('/division/save', 'admin\vinculacion\seguimiento\AcademicDivisionCon
 Route::get('/division/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@edit')->name('divisions.edit');
 Route::put('/division/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@update')->name('divisions.update');
 Route::delete('/division/delete/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@destroy')->name('divisions.destroy');
+Route::post('/division/restore/{id}', 'admin\vinculacion\seguimiento\AcademicDivisionController@restore')->name('divisions.restore');
 
 Route::get('/director', 'admin\vinculacion\seguimiento\AcademicDirectorController@index')->name('directors.index');
 Route::get('/director/new', 'admin\vinculacion\seguimiento\AcademicDirectorController@create')->name('directors.create');
@@ -189,6 +204,7 @@ Route::post('/director/save', 'admin\vinculacion\seguimiento\AcademicDirectorCon
 Route::get('/director/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@edit')->name('directors.edit');
 Route::put('/director/edit/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@update')->name('directors.update');
 Route::delete('/director/delete/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@destroy')->name('directors.destroy');
+Route::post('/director/restore/{id}', 'admin\vinculacion\seguimiento\AcademicDirectorController@restore')->name('directors.restore');
 
 Route::get('/quarter', 'admin\vinculacion\seguimiento\QuarterController@index')->name('quarters.index');
 Route::get('/quarter/new', 'admin\vinculacion\seguimiento\QuarterController@create')->name('quarters.create');
@@ -196,6 +212,7 @@ Route::post('/quarter/save', 'admin\vinculacion\seguimiento\QuarterController@st
 Route::get('/quarter/edit/{id}', 'admin\vinculacion\seguimiento\QuarterController@edit')->name('quarters.edit');
 Route::put('/quarter/edit/{id}', 'admin\vinculacion\seguimiento\QuarterController@update')->name('quarters.update');
 Route::delete('/quarter/delete/{id}', 'admin\vinculacion\seguimiento\QuarterController@destroy')->name('quarters.destroy');
+Route::post('/quarter/restore/{id}', 'admin\vinculacion\seguimiento\QuarterController@restore')->name('quarters.restore');
 
 Route::get('/importar', 'admin\vinculacion\seguimiento\ImportarAlumnoController@create')->name('imports.create');
 Route::post('/importar/save', 'admin\vinculacion\seguimiento\ImportarAlumnoController@store')->name('imports.store');
@@ -211,6 +228,7 @@ Route::post('/advisor/save','admin\vinculacion\seguimiento\AcademicAdvisorContro
 Route::get('/advisor/edit/{id}','admin\vinculacion\seguimiento\AcademicAdvisorController@edit')->name('advisors.edit');
 Route::put('/advisor/edit/{id}','admin\vinculacion\seguimiento\AcademicAdvisorController@update')->name('advisors.update');
 Route::delete('/advisor/delete/{id}', 'admin\vinculacion\seguimiento\AcademicAdvisorController@destroy')->name('advisors.destroy');
+Route::post('/advisor/restore/{id}', 'admin\vinculacion\seguimiento\AcademicAdvisorController@restore')->name('advisors.restore');
 
 Route::get('/editore','admin\vinculacion\seguimiento\EditorStyleController@index')->name('editors.index');
 Route::get('/editore/new','admin\vinculacion\seguimiento\EditorStyleController@create')->name('editors.create');
@@ -218,6 +236,7 @@ Route::post('/editore/save','admin\vinculacion\seguimiento\EditorStyleController
 Route::get('/editore/edit/{id}','admin\vinculacion\seguimiento\EditorStyleController@edit')->name('editors.edit');
 Route::put('/editore/edit/{id}','admin\vinculacion\seguimiento\EditorStyleController@update')->name('editors.update');
 Route::delete('/editore/delete/{id}', 'admin\vinculacion\seguimiento\EditorStyleController@destroy')->name('editors.destroy');
+Route::post('/editore/restore/{id}', 'admin\vinculacion\seguimiento\EditorStyleController@restore')->name('editors.restore');
 
 Route::get('/linking','admin\vinculacion\seguimiento\LinkingController@index')->name('linkings.index');
 Route::get('/linking/new','admin\vinculacion\seguimiento\LinkingController@create')->name('linkings.create');
@@ -225,6 +244,7 @@ Route::post('/linking/save','admin\vinculacion\seguimiento\LinkingController@sto
 Route::get('/linking/edit/{id}','admin\vinculacion\seguimiento\LinkingController@edit')->name('linkings.edit');
 Route::put('/linking/edit/{id}','admin\vinculacion\seguimiento\LinkingController@update')->name('linkings.update');
 Route::delete('/linking/delete/{id}', 'admin\vinculacion\seguimiento\LinkingController@destroy')->name('linkings.destroy');
+Route::post('/linking/restore/{id}', 'admin\vinculacion\seguimiento\LinkingController@restore')->name('linkings.restore');
 
 Route::get('/programs','admin\vinculacion\seguimiento\EducativeProgramController@index')->name('programs.index');
 Route::get('/programs/new','admin\vinculacion\seguimiento\EducativeProgramController@create')->name('programs.create');
@@ -232,6 +252,8 @@ Route::post('/programs/save','admin\vinculacion\seguimiento\EducativeProgramCont
 Route::get('/programs/edit/{id}','admin\vinculacion\seguimiento\EducativeProgramController@edit')->name('programs.edit');
 Route::put('/programs/edit/{id}','admin\vinculacion\seguimiento\EducativeProgramController@update')->name('programs.update');
 Route::delete('/programs/delete/{id}', 'admin\vinculacion\seguimiento\EducativeProgramController@destroy')->name('programs.destroy');
+Route::post('/programs/restore/{id}', 'admin\vinculacion\seguimiento\EducativeProgramController@restore')->name('programs.restore');
+
 
 Route::get('/index/{doc}','admin\vinculacion\seguimiento\WordController@index')->name('word.index');
 

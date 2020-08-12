@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\ResponsibleLinking;
+use Auth;
 
 class LinkingController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class LinkingController extends Controller
      */
     public function index()
     {
-           $linking = ResponsibleLinking::all();
+           $linking = ResponsibleLinking::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.linkings.index', compact('linking')); 
     }
 
@@ -44,7 +48,8 @@ class LinkingController extends Controller
         $liking->responsiblePhone = $request->telefonovinculacion;
         $liking->save();
 
-        return redirect()->route('linkings.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('linkings.index');          
     }
 
     /**
@@ -86,7 +91,8 @@ class LinkingController extends Controller
         $liking->responsiblePhone = $request->telefonovinculacion;
         $liking->save();
 
-        return redirect()->route('linkings.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+        return redirect()->route('linkings.edit',['id'=>$id]);        
     }
 
     /**
@@ -98,6 +104,13 @@ class LinkingController extends Controller
     public function destroy($id)
     {
         ResponsibleLinking::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('linkings.index');
     }
+
+    public function restore($id){
+        ResponsibleLinking::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡Leditorsa información ha sido restablecido!');          
+        return redirect()->route('linkings.index');   
+    }     
 }

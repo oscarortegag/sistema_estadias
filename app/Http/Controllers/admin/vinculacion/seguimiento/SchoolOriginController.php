@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\SchoolOrigin;
+use Auth;
 
 class SchoolOriginController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }       
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class SchoolOriginController extends Controller
      */
     public function index()
     {
-           $school = SchoolOrigin::all();
+           $school = SchoolOrigin::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.schools.index', compact('school'));
     }
 
@@ -41,7 +45,7 @@ class SchoolOriginController extends Controller
         $scho->schoolName = $request->school;
         $scho->shortName = $request->siglas;        
         $scho->save();
-
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('schools.index');
     }
 
@@ -82,7 +86,8 @@ class SchoolOriginController extends Controller
         $scho->shortName = $request->siglas; 
         $scho->save();
 
-        return redirect()->route('schools.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+        return redirect()->route('schools.edit',['id'=>$id]);         
     }
 
     /**
@@ -94,6 +99,13 @@ class SchoolOriginController extends Controller
     public function destroy($id)
     {
         SchoolOrigin::find($id)->delete();
-        return redirect()->route('schools.index');
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
+        return redirect()->route('schools.index');        
     }
+
+    public function restore($id){
+        SchoolOrigin::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('schools.index');     
+    }      
 }

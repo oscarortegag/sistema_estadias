@@ -23,6 +23,13 @@
                                     @endforeach
                                 </ul>
                             @endif
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        {{Session::get('flash_message')}}
+                                    </ul>
+                                </div>
+                            @endif                             
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="shortName" class="col-form-label text-md-right">Acrónimo</label>

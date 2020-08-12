@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\EditorStyle;
+use Auth;
 
 class EditorStyleController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class EditorStyleController extends Controller
      */
     public function index()
     {
-           $editor = EditorStyle::all();
+           $editor = EditorStyle::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.editors.index', compact('editor')); 
     }
 
@@ -43,7 +47,9 @@ class EditorStyleController extends Controller
         $editor->editorialAdvisorEmail = $request->correoeditor;
         $editor->editorialAdvisorPhone = $request->telefonoeditor;
         $editor->save();
-        return redirect()->route('editors.index');
+
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('editors.index');         
     }
 
     /**
@@ -86,7 +92,8 @@ class EditorStyleController extends Controller
            $editor->editorialAdvisorPhone = $request->telefonoeditor;
            $editor->save();
 
-           return redirect()->route('editors.index'); 
+           \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+            return redirect()->route('editors.edit',['id'=>$id]);             
     }
 
     /**
@@ -98,6 +105,13 @@ class EditorStyleController extends Controller
     public function destroy($id)
     {
         EditorStyle::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!'); 
         return redirect()->route('editors.index');
     }
+
+    public function restore($id){
+        EditorStyle::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡Leditorsa información ha sido restablecido!');          
+        return redirect()->route('editors.index');   
+    } 
 }

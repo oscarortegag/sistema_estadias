@@ -8,10 +8,13 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\admin\vinculacion\seguimiento\Enterprise;
-
+use Auth;
 
 class ExcelController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *

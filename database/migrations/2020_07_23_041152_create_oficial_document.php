@@ -33,7 +33,6 @@ class CreateOficialDocument extends Migration
             $table->unsignedInteger('responsibleLinking_id');
             $table->text('project')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

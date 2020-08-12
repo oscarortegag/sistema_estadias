@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Enterprise;
+use Auth;
 
 class EnterpriseController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class EnterpriseController extends Controller
      */
     public function index()
     {
-        $enterprise = Enterprise::all();
+        $enterprise = Enterprise::withTrashed()->get();
         return view('admin.vinculacion.seguimiento.enterprise.index', compact('enterprise'));
     }
 
@@ -51,7 +55,7 @@ class EnterpriseController extends Controller
         $enterprise->businessContactPhone = $request->telefonocontacto;
         $enterprise->importDate = date("Y-d-m");
         $enterprise->save();
-
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('enterprise.index');
     }
 
@@ -102,7 +106,8 @@ class EnterpriseController extends Controller
             $enterprise->businessContactPhone = $request->telefonocontacto;
             $enterprise->save();
 
-            return redirect()->route('enterprise.index');
+            \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+            return redirect()->route('enterprise.edit',['id'=>$id]);            
     }
 
     /**
@@ -115,6 +120,13 @@ class EnterpriseController extends Controller
     {
         //Enterprise::destroy($id);
         Enterprise::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('enterprise.index');        
     }
+
+    public function restore($id){
+        Enterprise::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('enterprise.index');        
+    }    
 }

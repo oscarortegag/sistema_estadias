@@ -7,9 +7,13 @@ use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\AcademicDirector;
 use App\admin\vinculacion\seguimiento\Gender;
 use App\admin\vinculacion\seguimiento\AcademicDivision;
+use Auth;
 
 class AcademicDirectorController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,7 @@ class AcademicDirectorController extends Controller
      */
     public function index()
     {
-           $director = AcademicDirector::all();
+           $director = AcademicDirector::withTrashed()->get();
            $division = AcademicDivision::all();
            $gender = Gender::all();
            return view('admin.vinculacion.seguimiento.directors.index', compact('director','division','gender'));
@@ -30,7 +34,7 @@ class AcademicDirectorController extends Controller
      */
     public function create()
     {
-           $director = AcademicDirector::all();
+           $director = AcademicDirector::withTrashed()->get();
            $division = AcademicDivision::all();
            $gender = Gender::all();
            return view('admin.vinculacion.seguimiento.directors.create', compact('director','division','gender'));
@@ -51,7 +55,7 @@ class AcademicDirectorController extends Controller
             $dir->nameEmail = $request->correoDirector;
             $dir->directorPhone = $request->telefonoDirector;
             $dir->save();
-
+            \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
             return redirect()->route('directors.index');                        
     }
 
@@ -98,7 +102,8 @@ class AcademicDirectorController extends Controller
             $dir->directorPhone = $request->telefonoDirector;
             $dir->save();
 
-            return redirect()->route('directors.index');  
+            \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+            return redirect()->route('directors.edit',['id'=>$id]);             
     }
 
     /**
@@ -110,6 +115,13 @@ class AcademicDirectorController extends Controller
     public function destroy($id)
     {
         AcademicDirector::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('directors.index');
     }
+
+    public function restore($id){
+        AcademicDirector::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('directors.index');        
+    }    
 }

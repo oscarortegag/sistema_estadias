@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Modality;
+use Auth;
 
 class ModalityController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class ModalityController extends Controller
      */
     public function index()
     {
-           $modality = Modality::all();
+           $modality = Modality::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.modalities.index', compact('modality'));
     }
 
@@ -40,7 +44,7 @@ class ModalityController extends Controller
         $mod = new Modality;
         $mod->modalityName = $request->modalidad;
         $mod->save();
-
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('modalities.index');
     }
 
@@ -80,7 +84,8 @@ class ModalityController extends Controller
         $inst->modalityName = $request->modalidad;
         $inst->save();
 
-        return redirect()->route('modalities.index');
+       \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+        return redirect()->route('modalities.edit',['id'=>$id]);        
     }
 
     /**
@@ -92,6 +97,13 @@ class ModalityController extends Controller
     public function destroy($id)
     {
         Modality::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('modalities.index');
     }
+
+    public function restore($id){
+        Modality::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('modalities.index');     
+    }     
 }

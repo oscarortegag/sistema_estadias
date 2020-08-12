@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\EducativeProgram;
+use Auth;
 
 class EducativeProgramController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class EducativeProgramController extends Controller
      */
     public function index()
     {
-           $programs = EducativeProgram::all();
+           $programs = EducativeProgram::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.programs.index', compact('programs'));
     }
 
@@ -42,7 +46,8 @@ class EducativeProgramController extends Controller
             $pro->displayName = $request->displayName;
             $pro->save();
 
-            return redirect()->route('programs.index'); 
+            \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+            return redirect()->route('programs.index');              
     }
 
     /**
@@ -82,7 +87,8 @@ class EducativeProgramController extends Controller
             $pro->displayName = $request->displayName;
             $pro->save();
 
-            return redirect()->route('programs.index');
+           \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+            return redirect()->route('programs.edit',['id'=>$id]);             
     }
 
     /**
@@ -94,6 +100,13 @@ class EducativeProgramController extends Controller
     public function destroy($id)
     {
         EducativeProgram::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('programs.index');
     }
+
+    public function restore($id){
+        EducativeProgram::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('programs.index');     
+    }     
 }

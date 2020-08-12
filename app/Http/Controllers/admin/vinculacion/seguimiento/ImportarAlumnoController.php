@@ -29,9 +29,13 @@ use App\admin\vinculacion\seguimiento\Gender;
 use App\admin\vinculacion\seguimiento\Group;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\EmailUserNotice;
+use Auth;
 
 class ImportarAlumnoController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *

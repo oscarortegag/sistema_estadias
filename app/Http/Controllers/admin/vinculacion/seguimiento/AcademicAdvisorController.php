@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\AcademicAdvisor;
+use Auth;
 
 class AcademicAdvisorController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class AcademicAdvisorController extends Controller
      */
     public function index()
     {
-           $advisor = AcademicAdvisor::all();
+           $advisor = AcademicAdvisor::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.advisors.index', compact('advisor'));          
     }
 
@@ -44,7 +48,8 @@ class AcademicAdvisorController extends Controller
         $advisor->advisorPhone = $request->telefonoasesor;
         $advisor->save();
 
-        return redirect()->route('advisors.index');
+        \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
+        return redirect()->route('advisors.index');         
     }
 
     /**
@@ -87,7 +92,8 @@ class AcademicAdvisorController extends Controller
            $advisor->advisorPhone = $request->telefonoasesor;
            $advisor->save();
 
-           return redirect()->route('advisors.index');           
+           \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
+            return redirect()->route('advisors.edit',['id'=>$id]);                       
     }
 
     /**
@@ -99,6 +105,13 @@ class AcademicAdvisorController extends Controller
     public function destroy($id)
     {
         AcademicAdvisor::find($id)->delete();
+        \Session::flash('flash_message','¡La información ha sido ocultada!');        
         return redirect()->route('advisors.index');
     }
+
+    public function restore($id){
+        AcademicAdvisor::onlyTrashed($id)->restore();
+        \Session::flash('flash_message','¡La información ha sido restablecido!');          
+        return redirect()->route('advisors.index');     
+    }     
 }

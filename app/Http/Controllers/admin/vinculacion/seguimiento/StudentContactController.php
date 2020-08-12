@@ -155,7 +155,8 @@ class StudentContactController extends Controller
                $student->save();
             }                  
 
-            return redirect()->route('studentcontact.index');
+            \Session::flash('flash_message','La información de contacto del alumno se actualizo existosamente');
+            return redirect()->route('studentcontact.edit',['id'=>$id]);           
     }
 
     /**

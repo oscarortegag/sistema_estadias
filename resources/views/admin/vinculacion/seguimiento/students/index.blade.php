@@ -19,26 +19,39 @@
                             <!--<div class="form-group">
                                 <a href="#" class="btn btn-success">Agregar alumno</a>
                             </div>-->
-                            <input type="hidden" id="periodId" name="periodId" value={{$period->id}}>
+                        @if(Session::has('flash_message'))
+                            <div class="alert alert-success">
+                                <ul>
+                                    {{Session::get('flash_message')}}
+                                </ul>
+                            </div>
+                        @endif                            
+                        <input type="hidden" id="periodId" name="periodId" value={{$period->id}}>
                         <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
                                 <th width="5%">Matrícula</th>
-                                <th width="15%">Nombre</th>
-                                <th width="25%">Grado académico</th>
-                                <th width="25%">Carrera</th>
-                                <th width="10%">Acción</th>
+                                <th width="10%">Nombre</th>
+                                <th width="15%">Grado académico</th>
+                                <th width="15%">Carrera</th>
+                                <th width="5%">Acción</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse ($students as $student)
                                 <tr>
                                     <td width="5%">{{ $student->enrollment }} </td>
-                                    <td width="15%">{{ $student->name." ".$student->lastName." ".$student->MotherLastNames }}</td>
-                                    <td width="25%">{{ $student->educativeProgram->displayName }}</td>
-                                    <td width="25%">{{ $student->degree->degreeName }}</td>
+                                    <td width="10%">{{ $student->name." ".$student->lastName." ".$student->MotherLastNames }}</td>
+                                    <td width="15%">{{ $student->educativeProgram->displayName }}</td>
+                                    <td width="15%">{{ $student->degree->degreeName }}</td>
                                     <td width="5%">
-                                        <a href="{{ route('students.edit',['id'=>Crypt::encrypt($student->student_id)]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('students.edit',['id'=>Crypt::encrypt($student->student_id)]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>&nbsp;
+                                        <form style="display: inline" method="post" action="{{ route('students.destroy', ['id'=>Crypt::encrypt($student->student_id)]) }}">
+                                            {!! method_field('DELETE') !!}
+                                            {!! csrf_field() !!}
+                                            <input id="period" name="period" type="hidden" value="{{ $student->period_id}}">
+                                            <button type = "submit" name="eliminar" id="eliminar2" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar alumno"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        </form>                                        
                                     </td>
                                 </tr>
                             @empty
@@ -103,4 +116,17 @@
             }
         );          
     </script>
+@endpush
+@push('jscustom')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#eliminar2").click(function() {
+            if(confirm("¿ Desea eliminar este registro ?")){
+               return true;
+            }else{
+                  return false;
+            }
+        });
+    });
+</script>    
 @endpush

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 use App\admin\vinculacion\seguimiento\Kinship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class KinshipController extends Controller
 {
+    public function __construct(){
+           $this->middleware('auth');    
+    }     
     public function index()
     {
         $kinships = Kinship::all();
