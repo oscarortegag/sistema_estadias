@@ -15,6 +15,8 @@
     return view('home');
 });*/
 
+Route::get('/generaExcel', 'ExcelController@generaExcel');
+
 Route::get('seguimiento', [
     'uses' => 'admin\vinculacion\seguimiento\SeguimientoController@index',
     'as'   => 'seguimiento.index',
