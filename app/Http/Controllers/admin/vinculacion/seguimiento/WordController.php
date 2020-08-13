@@ -98,7 +98,14 @@ class WordController extends Controller
         try{
             $template = new \PhpOffice\PhpWord\TemplateProcessor($file);
             if($doc == 1){
-                $tmpFile = $template->setValue('companyNameTitle',mb_strtoupper($companyName,"UTF-8"));
+            	$company = strtoupper($companyName);
+            	$company = str_replace("ó","Ó",$company);
+            	$company = str_replace("í","Í",$company);
+            	$company = str_replace("á","Á",$company);
+            	$company = str_replace("é","É",$company);
+            	$company = str_replace("ú","Ú",$company);           	
+                //$tmpFile = $template->setValue('companyNameTitle',mb_strtoupper($companyName,"UTF-8"));
+                $tmpFile = $template->setValue('companyNameTitle',$company);                
                 $tmpFile = $template->setValue('presentationDate',$presentationDate);            
                 $tmpFile = $template->setValue('name',$name);
                 $tmpFile = $template->setValue('enrollment',$enrollment);
