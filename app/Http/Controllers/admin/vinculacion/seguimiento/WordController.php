@@ -103,7 +103,8 @@ class WordController extends Controller
             	$company = str_replace("í","Í",$company);
             	$company = str_replace("á","Á",$company);
             	$company = str_replace("é","É",$company);
-            	$company = str_replace("ú","Ú",$company);           	
+            	$company = str_replace("ú","Ú",$company);
+            	$company = str_replace("ñ","Ñ",$company);          	
                 //$tmpFile = $template->setValue('companyNameTitle',mb_strtoupper($companyName,"UTF-8"));
                 $tmpFile = $template->setValue('companyNameTitle',$company);                
                 $tmpFile = $template->setValue('presentationDate',$presentationDate);            
