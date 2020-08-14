@@ -74,6 +74,14 @@
                                     @endforeach
                                 </ul>
                             @endif
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <i class="icon fa fa-check"></i>
+                                    {{Session::get('flash_message')}}
+                                </div>
+                            @endif
+
 
                             <input name="period_id" type="hidden" value={{ $period->id }} id='period_id'>
 

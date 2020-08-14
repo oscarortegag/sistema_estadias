@@ -19,7 +19,14 @@
                                 <a href="{{route('surveys.duplicate', ['id'=>$period->period_id])}}" class="btn btn-success">Copiar encuesta</a>
 
                             </div>
-                        <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
+                            @if(Session::has('flash_message'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <i class="icon fa fa-check"></i>
+                                    {{Session::get('flash_message')}}
+                                </div>
+                            @endif
+                            <table id="tabla-encuestas" class="table table-responsive table-hover table-striped">
                             <thead>
                             <tr>
                                 <th width="25%">Nombre</th>

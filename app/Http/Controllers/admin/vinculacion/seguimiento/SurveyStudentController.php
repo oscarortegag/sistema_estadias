@@ -108,7 +108,7 @@ class SurveyStudentController extends Controller
 
 
                 $rules = [
-                    'personalEmail' => 'required',
+                    'personalEmail' => 'required|email',
                     'homePhone' => 'required',
                     'cellPhone' => 'required',
                     'facebook' => 'required',
@@ -118,15 +118,23 @@ class SurveyStudentController extends Controller
                     'zip_code' => 'required',
                     'homePhone_family' => 'required',
                     'cellPhone_family' => 'required',
-                    'email_family' => 'required',
+                    'email_family' => 'required|email',
                 ];
 
                 $messages = [
                     'personalEmail.required' => 'El correo electrónico personal es obligatorio.',
-                    'homePhone.required' => 'El teléfono de domicilio es obligatorio.',
-                    'cellPhone.required' => 'El teléfono celular es obligatorio.',
-                    'facebook.required' => 'El facebook es obligatorio.',
-
+                    'personalEmail.email' => 'El correo electrónico personal debe ser de formato correo electronico.',
+                    'homePhone.required' => 'El teléfono de domicilio personal es obligatorio.',
+                    'cellPhone.required' => 'El teléfono celular personal es obligatorio.',
+                    'facebook.required' => 'El facebook personal es obligatorio.',
+                    'address.required' => 'El domicilio personales obligatorio.',
+                    'state.required' => 'El estado de la república es obligatorio.',
+                    'township.required' => 'El municipio es obligatorio.',
+                    'zip_code.required' => 'El codigo postal es obligatorio.',
+                    'homePhone_family.required' => 'El teléfono de domicilio del familiar es obligatorio.',
+                    'cellPhone_family.required' => 'El teléfono de celular del familiar es obligatorio.',
+                    'email_family.required' => 'El correo electrónico del familiar es obligatorio.',
+                    'email_family.email' => 'El correo electrónico del familiar debe ser de formato correo electronico.',
                 ];
 
                 $this->validate($request, $rules, $messages);

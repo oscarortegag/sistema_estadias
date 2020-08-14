@@ -46,6 +46,8 @@ class SurveyController extends Controller
             'validation' => $request->input('validation')? '1' : '0',
         ]);
 
+        \Session::flash('flash_message','¡La encuesta fue creada exitosamente!');
+
         return redirect()->route('surveys.edit', ['id'=>$survey->id]);
     }
 
@@ -79,6 +81,8 @@ class SurveyController extends Controller
             ]);
         }
 
+        \Session::flash('flash_message','¡La encuesta se actualizo exitosamente!');
+
         return redirect()->route('surveys.edit', ['id'=>$survey->id]);
     }
 
@@ -86,6 +90,9 @@ class SurveyController extends Controller
     {
         $survey_eliminado = Survey::find($id);
         Survey::destroy($id);
+
+        \Session::flash('flash_message','¡La encuesta se elimino exitosamente!');
+
         return redirect()->route('surveys.index', [$survey_eliminado->period_id]);
     }
 
@@ -112,6 +119,7 @@ class SurveyController extends Controller
 
                 $question = SurveyQuestion::create([
                     'survey_id' => $survey->id,
+                    'type_question' => $questions_previous->type_question,
                     'name' => $questions_previous->name,
                     'content' => $questions_previous->content,
                     'complement' => $questions_previous->complement,
@@ -130,13 +138,14 @@ class SurveyController extends Controller
             }
         }
 
-        return redirect()->route('surveys.index', [$request->input('period_id')]);
+        \Session::flash('flash_message','¡La encuesta se duplico exitosamente!');
+
+        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
 
     }
 
     function apply_survey(Survey $survey)
     {
-        //dd($survey);
         return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey'));
     }
 
@@ -162,13 +171,10 @@ class SurveyController extends Controller
 
         $archivo = Storage::disk('firmas')->put('firmas', $request->file('signature'));
 
-        //dd(asset($archivo));
         for ($i=0; $i < count($alumnos); $i++ )
         {
             $student = Student::find($alumnos[$i]);
             $correo = $student['personalEmail'];
-            //$nombre = $student['name'] . " " . $student['lastName'] . " " . $student['motherLastName'];
-
 
             $applySurvey = ApplySurvey::create([
                 'survey_id' => $survey->id,
@@ -186,6 +192,8 @@ class SurveyController extends Controller
             Mail::to($correo)->send(new EmailSurveySend($data));
 
         }
+
+        \Session::flash('flash_message','¡La encuesta se aplico exitosamente!');
 
         return redirect()->route('surveys.index', [$survey->period_id]);
     }
