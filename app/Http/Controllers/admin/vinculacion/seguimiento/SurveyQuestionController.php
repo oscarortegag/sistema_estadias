@@ -37,6 +37,7 @@ class SurveyQuestionController extends Controller
             'required' => $request->input('required')? '1' : '0',
         ]);
 
+        \Session::flash('flash_message','¡La pregunta se creo exitosamente!');
 
         return redirect()->route('questions.edit', ['id'=>$question->id]);
     }
@@ -67,6 +68,8 @@ class SurveyQuestionController extends Controller
             'required' => $request->input('required')? '1' : '0',
         ]);
 
+        \Session::flash('flash_message','¡La pregunta se actualizo exitosamente!');
+
         return redirect()->route('questions.edit', [$surveyQuestions->id]);
     }
 
@@ -76,6 +79,8 @@ class SurveyQuestionController extends Controller
         $survey_id = $surveyQuestions->survey_id;
 
         $surveyQuestions->delete();
+
+        \Session::flash('flash_message','¡La pregunta se elimino exitosamente!');
 
         return redirect()->route('surveys.edit', [$survey_id]);
     }
@@ -101,6 +106,8 @@ class SurveyQuestionController extends Controller
                 ]);
             }
         }
+
+        \Session::flash('flash_message','¡La pregunta se duplico exitosamente!');
 
         return redirect()->route('questions.edit', ['id'=>$question->id]);
     }

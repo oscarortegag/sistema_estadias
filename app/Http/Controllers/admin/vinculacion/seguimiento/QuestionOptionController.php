@@ -17,6 +17,8 @@ class QuestionOptionController extends Controller
             'content' => $request->input('content'),
         ]);
 
+        \Session::flash('flash_message','¡La opción se agrego exitosamente!');
+
         return redirect()->route('questions.edit', ['id'=>$opcion->survey_question_id]);
     }
 
@@ -43,6 +45,9 @@ class QuestionOptionController extends Controller
             $msg = $e->getMessage();
 
         }
+
+        \Session::flash('flash_message','¡La opción se actualizo exitosamente!');
+
         return response()->json(compact('ok', 'msg', 'option'));
 
     }
@@ -53,6 +58,8 @@ class QuestionOptionController extends Controller
         $survey_question_id = $questionOptions->survey_question_id;
 
         $questionOptions->delete();
+
+        \Session::flash('flash_message','¡La opción se elimino exitosamente!');
 
         return redirect()->route('questions.edit', [$survey_question_id]);
     }

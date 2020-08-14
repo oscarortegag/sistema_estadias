@@ -10,14 +10,9 @@
             </p>
             <br>
         </div>
-
-
                     <div class="callout callout-success">
                         <h4>Todos los datos y preguntas marcados con <span style="color: orange"> * </span> son de respuesta requerida</h4>
                     </div>
-
-
-
 
         <div class="box box-success">
             <h2> Datos del alumno </h2>
@@ -35,23 +30,24 @@
 
         <form method="POST" action="{{ route('surveys.post_answer', [$applySurvey->id]) }}">
             @csrf
-            @if (count($errors)>0)
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-
 
         @if($applySurvey->survey->validation)
                 <div class="box box-success">
                     <h2> Datos de contacto </h2>
                     <br>
-                    <div class="form-group">
+                    <div class="@if (count($errors)>0) has-error @endif">
+                    @if (count($errors)>0)
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    </div>
+
+                    <div class="form-group ">
                         <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal <span style="color: orange">*</span></label>
-                        <input id="personalEmail" type="email" class="form-control @error('personalEmail') is-invalid @enderror" name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" required autofocus>
+                        <input id="personalEmail" type="email" class="form-control " name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" autofocus>
                         @if (\Session::has('personalEmail'))
                             <div class="alert alert-danger">
                                 <ul>
@@ -63,26 +59,26 @@
                     </div>
                     <div class="form-group">
                         <label for="homePhone" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
-                        <input id="homePhone" type="text" class="form-control @error('homePhone') is-invalid @enderror" name="homePhone" value="{{ $applySurvey->student->contact->homePhone }}" required>
+                        <input id="homePhone" type="text" class="form-control" name="homePhone" value="{{ $applySurvey->student->contact->homePhone }}">
                     </div>
                     <div class="form-group">
                         <label for="cellPhone" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
-                        <input id="cellPhone" type="text" class="form-control @error('cellPhone') is-invalid @enderror" name="cellPhone" value="{{ $applySurvey->student->cellPhone }}" required>
+                        <input id="cellPhone" type="text" class="form-control @error('cellPhone') has-error @enderror" name="cellPhone" value="{{ $applySurvey->student->cellPhone }}">
                     </div>
                     <div class="form-group">
                         <label for="facebook" class="col-form-label text-md-right">Facebook <span style="color: orange">*</span></label>
-                        <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $applySurvey->student->facebook  }}" required>
+                        <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $applySurvey->student->facebook  }}">
                     </div>
                     <div class="form-group">
                         <label for="address" class="col-form-label text-md-right">Domicilio <span style="color: orange">*</span></label>
-                        <textarea required id="address" name="address" rows="2" class="form-control" >
+                        <textarea id="address" name="address" rows="2" class="form-control" >
                             {{ $applySurvey->student->contact->address }}
                         </textarea>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="state_id" class="col-form-label text-md-right">Estado <span style="color: orange">*</span></label>
-                            <select required name = "state_id" class="form-control" >
+                            <select name = "state_id" class="form-control" >
                                 <option value = 0>Seleccione el estado</option>
                                 @foreach($states as $state)
                                     @if ($state->id == $applySurvey->student->contact->state_id)
@@ -95,11 +91,11 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="township" class="col-form-label text-md-right">Municipio <span style="color: orange">*</span></label>
-                            <input id="township" type="text" class="form-control @error('township') is-invalid @enderror" name="township" value="{{ $applySurvey->student->contact->township }}" required>
+                            <input id="township" type="text" class="form-control @error('township') is-invalid @enderror" name="township" value="{{ $applySurvey->student->contact->township }}">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="zip_code" class="col-form-label text-md-right">Codigo postal <span style="color: orange">*</span></label>
-                            <input id="zip_code" type="text" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ $applySurvey->student->contact->zip_code }}" required>
+                            <input id="zip_code" type="text" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ $applySurvey->student->contact->zip_code }}">
                         </div>
                     </div>
                 </div>
@@ -126,15 +122,15 @@
 
                     <div class="form-group">
                         <label for="homePhone_family" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
-                        <input id="homePhone_family" type="text" class="form-control @error('homePhone_family') is-invalid @enderror" name="homePhone_family" value="{{ $applySurvey->student->contact->homePhone_family }}" required>
+                        <input id="homePhone_family" type="text" class="form-control @error('homePhone_family') is-invalid @enderror" name="homePhone_family" value="{{ $applySurvey->student->contact->homePhone_family }}">
                     </div>
                     <div class="form-group">
                         <label for="cellPhone_family" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
-                        <input id="cellPhone_family" type="text" class="form-control @error('cellPhone_family') is-invalid @enderror" name="cellPhone_family" value="{{ $applySurvey->student->contact->cellPhone_family }} " required>
+                        <input id="cellPhone_family" type="text" class="form-control @error('cellPhone_family') is-invalid @enderror" name="cellPhone_family" value="{{ $applySurvey->student->contact->cellPhone_family }}">
                     </div>
                     <div class="form-group">
                         <label for="email_family" class="col-form-label text-md-right">Correo electronico <span style="color: orange">*</span></label>
-                        <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }} " required>
+                        <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }}">
                     </div>
                 </div>
                 @endif
@@ -204,7 +200,7 @@
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
-                                        <textarea class="form-control" id="respuesta" name="{{ "pregunta" . $question->id }}" rows="3" cols="50" required>
+                                        <textarea class="form-control" id="respuesta" name="{{ "pregunta" . $question->id }}" rows="3" cols="50">
                                         </textarea>
                                     </div>
                                 </div>
@@ -223,7 +219,7 @@
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
-                                        <input type="date" class="form-control" name="{{ "pregunta" . $question->id }}" required>
+                                        <input type="date" class="form-control" name="{{ "pregunta" . $question->id }}">
                                     </div>
                                 </div>
                     @endif
