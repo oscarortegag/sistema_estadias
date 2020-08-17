@@ -34,13 +34,9 @@
                                         <td>{{ $kinship->name}}</td>
                                         <td>
                                             <a href="{{ route('kinships.edit', ['id'=>$kinship->id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="tooltip" title="Editar datos del parentesco"></i></a>
-                                            <form style="display: inline" method="POST" action="{{ route('kinships.destroy', $kinship->id) }}">
-                                                {!! method_field('DELETE') !!}
-                                                {!! csrf_field() !!}
-
-                                                <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de parentesco"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                            </form>
-
+                                            <a class="btn btn-danger btn-sm btnEliminar" data-toggle="tooltip" title="Eliminar datos de parentesco" data-id="{{ $kinship->id }}" href="javascript:void(0)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
@@ -55,9 +51,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="float-right">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -70,9 +63,91 @@
 @endpush
 
 @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
-    <script src="{{ asset("js/admin/vinculacion/seguimiento/kinships/index.js") }}"></script>
+    <script>
+        lenguaje = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        };
+        $(document).ready(function() {
+            $('#tabla-parentescos').DataTable(
+                {
+                    "language": lenguaje,
+                    "aProcessing": true,//Activamos el procesamiento del datatables
+                    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+                    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+                    "bDestroy": true,
+                    "iDisplayLength": 10,//Paginación
+                }
+            );
+
+            $('.btnEliminar').click(function(e){
+
+                e.preventDefault();
+
+                var id = $(this).attr('data-id');
+                var parent = $(this).parent("td").parent("tr");
+
+                bootbox.dialog({
+                    message: "¿Estás seguro de eliminar el registro?"+id,
+                    title: "<i class='fa fa-trash-o'></i> ¡Atención!",
+                    buttons: {
+                        cancel: {
+                            label: "No",
+                            className: "btn-success",
+                            callback: function() {
+                                $('.bootbox').modal('hide');
+                            }
+                        },
+                        confirm: {
+                            label: "Eliminar",
+                            className: "btn-danger",
+                            callback: function() {
+                                $.ajax({
+                                    url: "/kinships/"+id,
+                                    data: {
+                                        "_token": "{{ csrf_token() }}"
+                                    },
+                                    type: 'DELETE',
+                                })
+                                    //Si todo ha ido bien...
+                                    .done(function(response){
+                                        console.log(response);
+                                        bootbox.alert(response);
+                                        parent.fadeOut('slow'); //Borra la fila afectada
+                                    })
+                                    .fail(function(){
+                                        bootbox.alert('Algo ha ido mal. No se ha podido completar la acción.');
+                                    })
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endpush
 
 

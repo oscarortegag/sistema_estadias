@@ -10,8 +10,8 @@ use Auth;
 class KinshipController extends Controller
 {
     public function __construct(){
-           $this->middleware('auth');    
-    }     
+           $this->middleware('auth');
+    }
     public function index()
     {
         $kinships = Kinship::all();
@@ -64,6 +64,6 @@ class KinshipController extends Controller
     public function destroy($id)
     {
         Kinship::destroy($id);
-        return redirect()->route('kinships.index');
+        return response("El parentesco fue eliminado exitosamente");
     }
 }
