@@ -88,8 +88,8 @@ class SurveyStudentController extends Controller
             $message = "El correo personal no debe ser con dominio utchetumal.edu.mx";
 
             $error = 1;
-            $errores = ['personalEmail' => $message];
-            //return back()->with('personalEmail',$message);
+            $errores += ['personalEmail' => $message];
+
         }
 
         foreach ($survey->questions as $question) {
@@ -98,7 +98,8 @@ class SurveyStudentController extends Controller
                 $message = "Esta pregunta requiere de una respuesta";
 
                 $error = 1;
-                $errores = [$pregunta => $message];
+
+                $errores += [$pregunta => $message];
             }
         }
 
@@ -138,9 +139,6 @@ class SurveyStudentController extends Controller
                 ];
 
                 $this->validate($request, $rules, $messages);
-
-
-
 
                 $request->validate([
                 ]);
@@ -212,9 +210,10 @@ class SurveyStudentController extends Controller
 
         return redirect()->route('answer_survey.index');
 
-        } else
+        } else{
+            //dd($errores);
             return back()->with($errores);
-
+        }
     }
 
 

@@ -147,6 +147,13 @@
                                     </div>
                                     <div class="col-sm-10">{!! $question->content !!}</div>
                                 </div>
+                                @if (\Session::has("pregunta" . $question->id))
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            <li>{!! \Session::get("pregunta" . $question->id) !!}</li>
+                                        </ul>
+                                    </div>
+                                @endif
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -172,6 +179,13 @@
                                     </div>
                                     <div class="col-sm-10">{!! $question->content !!}</div>
                                 </div>
+                                @if (\Session::has("pregunta" . $question->id))
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            <li>{!! \Session::get("pregunta" . $question->id) !!}</li>
+                                        </ul>
+                                    </div>
+                                @endif
                                 <p> {!! $question->complement !!}</p>
                             </div>
                             <div class="box-body">
@@ -197,6 +211,13 @@
                                             </div>
                                             <div class="col-sm-10">{!! $question->content !!}</div>
                                         </div>
+                                        @if (\Session::has("pregunta" . $question->id))
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    <li>{!! \Session::get("pregunta" . $question->id) !!}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
@@ -216,6 +237,13 @@
                                             </div>
                                             <div class="col-sm-10">{!! $question->content !!}</div>
                                         </div>
+                                        @if (\Session::has("pregunta" . $question->id))
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    <li>{!! \Session::get("pregunta" . $question->id) !!}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <p> {!! $question->complement !!}</p>
                                     </div>
                                     <div class="box-body">
