@@ -204,12 +204,9 @@
                                                         <button type = "submit" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Duplicar pregunta"><i class="fas fa-copy"></i></button>
                                                     </form>
                                                     @if($question->options->count() == 0)
-                                                        <form style="display: inline" method="POST" action="{{ route('questions.destroy', [$question->id]) }}">
-                                                            {!! method_field('DELETE') !!}
-                                                            {!! csrf_field() !!}
-
-                                                            <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar pregunta"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                        </form>
+                                                        <a class="btn btn-danger btn-sm btnEliminarQuestion" data-toggle="tooltip" title="Eliminar la pregunta" data-id="{{ $question->id }}" href="javascript:void(0)">
+                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        </a>
                                                     @endif
                                                 @endif
                                             </td>
@@ -238,9 +235,78 @@
 @endpush
 
 @push('scripts')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <script src="{{ asset("adminlte/ckeditor/ckeditor.js") }}"></script>
     <script src="{{ asset("adminlte/bootstrap-datepicker/dist/js/bootstrap-datepicker.js") }}"></script>
     <script src="{{ asset("adminlte/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js") }}"></script>
-    <script src="{{ asset("js/admin/vinculacion/seguimiento/surveys/edit.js") }}"></script>
+    <script>
+        $(document).ready(function() {
+            CKEDITOR.replace('description')
+
+            $("#start_date").datepicker({
+                language: 'es',
+                format:'yyyy-mm-dd',
+                autoclose: true
+            }).on('changeDate', function (selected) {
+                var startDate = new Date(selected.date.valueOf());
+                $('#end_date').datepicker('setStartDate', startDate);
+            }).on('clearDate', function (selected) {
+                $('#end_date').datepicker('setStartDate', null);
+            });
+
+            $("#end_date").datepicker({
+                language: 'es',
+                format:'yyyy-mm-dd',
+                autoclose: true
+            }).on('changeDate', function (selected) {
+                var endDate = new Date(selected.date.valueOf());
+                $('#start_date').datepicker('setEndDate', endDate);
+            }).on('clearDate', function (selected) {
+                $('#start_date').datepicker('setEndDate', null);
+            });
+
+            $('.btnEliminarQuestion').click(function(e){
+
+                e.preventDefault();
+
+                var id = $(this).attr('data-id');
+                var parent = $(this).parent("td").parent("tr");
+
+                bootbox.dialog({
+                    message: "¿Estás seguro de eliminar el registro?",
+                    title: "<i class='fa fa-trash-o'></i> ¡Atención!",
+                    buttons: {
+                        cancel: {
+                            label: "No",
+                            className: "btn-success",
+                            callback: function() {
+                                $('.bootbox').modal('hide');
+                            }
+                        },
+                        confirm: {
+                            label: "Eliminar",
+                            className: "btn-danger",
+                            callback: function() {
+                                $.ajax({
+                                    url: "/question_delete/"+id,
+                                    data: {
+                                        "_token": "{{ csrf_token() }}"
+                                    },
+                                    type: 'DELETE',
+                                })
+                                    //Si todo ha ido bien...
+                                    .done(function(response){
+                                        bootbox.alert(response);
+                                        parent.fadeOut('slow'); //Borra la fila afectada
+                                    })
+                                    .fail(function(){
+                                        bootbox.alert('Algo ha ido mal. No se ha podido completar la acción.');
+                                    })
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

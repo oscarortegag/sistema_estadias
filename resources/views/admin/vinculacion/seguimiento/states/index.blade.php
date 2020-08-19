@@ -122,7 +122,7 @@
                 var parent = $(this).parent("td").parent("tr");
 
                 bootbox.dialog({
-                    message: "¿Estás seguro de eliminar el registro?"+id,
+                    message: "¿Estás seguro de eliminar el registro?",
                     title: "<i class='fa fa-trash-o'></i> ¡Atención!",
                     buttons: {
                         cancel: {

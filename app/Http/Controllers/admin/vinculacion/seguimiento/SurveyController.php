@@ -91,9 +91,7 @@ class SurveyController extends Controller
         $survey_eliminado = Survey::find($id);
         Survey::destroy($id);
 
-        \Session::flash('flash_message','¡La encuesta se elimino exitosamente!');
-
-        return redirect()->route('surveys.index', [$survey_eliminado->period_id]);
+        return response("La encuesta fue eliminada exitosamente");
     }
 
     function duplicate(Period $period)
@@ -141,7 +139,6 @@ class SurveyController extends Controller
         \Session::flash('flash_message','¡La encuesta se duplico exitosamente!');
 
         return redirect()->route('surveys.edit', ['id'=>$survey->id]);
-
     }
 
     function apply_survey(Survey $survey)

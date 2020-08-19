@@ -59,8 +59,7 @@ class QuestionOptionController extends Controller
 
         $questionOptions->delete();
 
-        \Session::flash('flash_message','¡La opción se elimino exitosamente!');
+        return response("La opción fue eliminada exitosamente");
 
-        return redirect()->route('questions.edit', [$survey_question_id]);
     }
 }

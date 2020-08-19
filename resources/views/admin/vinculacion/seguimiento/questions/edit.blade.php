@@ -180,12 +180,9 @@
                                                 <a href="javascript:abre_modal('{{ $option->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de una opción">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form style="display: inline" method="POST" action="{{ route("options.destroy", [$option->id]) }}">
-                                                    {!! method_field('DELETE') !!}
-                                                    {!! csrf_field() !!}
-
-                                                    <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar opción"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                </form>
+                                                <a class="btn btn-danger btn-sm btnEliminarOption" data-toggle="tooltip" title="Eliminar datos del estado de la república" data-id="{{ $option->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty
@@ -218,8 +215,70 @@
 
 
 @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <script src="{{ asset('adminlte/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/routes/routes.js') }}"></script>
     <script src="{{ asset('js/SEQ.Utilities.js') }}"></script>
-    <script src="{{ asset('js/admin/vinculacion/seguimiento/questions/edit.js') }}"></script>
+    <script>
+        function abre_modal(id){
+            route.urlName = "getEditOption";
+            Seq.get.html(route.get.url().replace("{id}", id), fnShowModalEditOption);
+        }
+
+        function fnShowModalEditOption(html){
+            var $modal = $('#modal');
+            Seq.modal.render(html, $modal);
+            Seq.buttons.reset();
+        }
+
+        $(document).ready(function() {
+            CKEDITOR.replace('content');
+            CKEDITOR.replace('complement');
+
+            $('.btnEliminarOption').click(function(e){
+
+                e.preventDefault();
+
+                var id = $(this).attr('data-id');
+                var parent = $(this).parent("td").parent("tr");
+
+                bootbox.dialog({
+                    message: "¿Estás seguro de eliminar el registro?",
+                    title: "<i class='fa fa-trash-o'></i> ¡Atención!",
+                    buttons: {
+                        cancel: {
+                            label: "No",
+                            className: "btn-success",
+                            callback: function() {
+                                $('.bootbox').modal('hide');
+                            }
+                        },
+                        confirm: {
+                            label: "Eliminar",
+                            className: "btn-danger",
+                            callback: function() {
+                                $.ajax({
+                                    url: "/option_delete/"+id,
+                                    data: {
+                                        "_token": "{{ csrf_token() }}"
+                                    },
+                                    type: 'DELETE',
+                                })
+                                    //Si todo ha ido bien...
+                                    .done(function(response){
+                                        bootbox.alert(response);
+                                        parent.fadeOut('slow'); //Borra la fila afectada
+                                    })
+                                    .fail(function(){
+                                        bootbox.alert('Algo ha ido mal. No se ha podido completar la acción.');
+                                    })
+                            }
+                        }
+                    }
+                });
+            });
+
+
+        });
+    </script>
 @endpush

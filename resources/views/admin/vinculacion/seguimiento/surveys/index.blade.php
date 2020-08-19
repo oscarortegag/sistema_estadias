@@ -65,6 +65,9 @@
 
                                                     <button type = "submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar datos de encuesta"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </form>
+                                                <a class="btn btn-danger btn-sm btnEliminarSurvey" data-toggle="tooltip" title="Eliminar datos del estado de la república" data-id="{{ $survey->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
                                             @endif
                                             @if($survey->applySurveys->count() == 0)
                                                 <a href="{{route('surveys.deactivate',['id'=>$survey->id])}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Desactivar encuesta"><i class="fa fa-close"></i></a>
@@ -92,14 +95,96 @@
         </div>
     </div>
 @stop
-        @push('styles')
-            <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
-        @endpush
+@push('styles')
+    <link rel="stylesheet" href="{{ asset("adminlte/datatables.net-bs/css/dataTables.bootstrap.css") }}">
+@endpush
 
-        @push('scripts')
-            <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
-            <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
-            <script src="{{ asset("js/admin/vinculacion/seguimiento/surveys/index.js") }}"></script>
-    @endpush
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+    <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
+    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
+    <script>
+        lenguaje = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        };
+        $(document).ready(function() {
+            $('#tabla-encuestas').DataTable(
+                {
+                    "language": lenguaje,
+                    "aProcessing": true,//Activamos el procesamiento del datatables
+                    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+                    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+                    "bDestroy": true,
+                    "iDisplayLength": 5,//Paginación
+                }
+            );
+
+            $('.btnEliminarSurvey').click(function(e){
+
+                e.preventDefault();
+
+                var id = $(this).attr('data-id');
+                var parent = $(this).parent("td").parent("tr");
+
+                bootbox.dialog({
+                    message: "¿Estás seguro de eliminar el registro?",
+                    title: "<i class='fa fa-trash-o'></i> ¡Atención!",
+                    buttons: {
+                        cancel: {
+                            label: "No",
+                            className: "btn-success",
+                            callback: function() {
+                                $('.bootbox').modal('hide');
+                            }
+                        },
+                        confirm: {
+                            label: "Eliminar",
+                            className: "btn-danger",
+                            callback: function() {
+                                $.ajax({
+                                    url: "/survey_delete/"+id,
+                                    data: {
+                                        "_token": "{{ csrf_token() }}"
+                                    },
+                                    type: 'DELETE',
+                                })
+                                    //Si todo ha ido bien...
+                                    .done(function(response){
+                                        bootbox.alert(response);
+                                        parent.fadeOut('slow'); //Borra la fila afectada
+                                    })
+                                    .fail(function(){
+                                        bootbox.alert('Algo ha ido mal. No se ha podido completar la acción.');
+                                    })
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+@endpush
 
 

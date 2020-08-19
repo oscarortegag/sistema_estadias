@@ -80,9 +80,7 @@ class SurveyQuestionController extends Controller
 
         $surveyQuestions->delete();
 
-        \Session::flash('flash_message','¡La pregunta se elimino exitosamente!');
-
-        return redirect()->route('surveys.edit', [$survey_id]);
+        return response("La pregunta fue eliminada exitosamente");
     }
 
     public function duplicate($id)
