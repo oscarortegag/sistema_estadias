@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Catalogo de estados de la republica</h1>
+    <h1>Catalogo de estados de la república</h1>
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-primary">
-                    <div class="card-header"><h3> Actualizar datos del estado de la republica </h3></div>
+                    <div class="card-header"><h3> Actualizar datos del estado de la república </h3></div>
 
                     <div class="card-body ">
                         <form  method="POST" action="{{ route('states.update', [$state->id]) }}">

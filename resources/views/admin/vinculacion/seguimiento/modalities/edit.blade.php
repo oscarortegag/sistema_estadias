@@ -28,15 +28,15 @@
                                             {{Session::get('flash_message')}}
                                         </ul>
                                     </div>
-                                @endif                                 
+                                @endif
                                 <div class="row">
                                     <div class="form-group col-xs-8">
                                         <label for="modalidad" class="col-form-label text-md-right">Descripción</label>
                                         <input id="modalidad" type="text" class="form-control @error('modalidad') is-invalid @enderror" name="modalidad"
                                         value="{{ $modality->modalityName }}" required autocomplete="modalidad" autofocus>
                                     </div>
-                                </div>                              
-                                <div class="row">      
+                                </div>
+                                <div class="row">
                                     <div class="form-group mb-0">
                                         <center>
                                             <div class="form-group col-xs-8">

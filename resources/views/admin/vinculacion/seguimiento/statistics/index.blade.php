@@ -147,6 +147,7 @@
         </div>
 
         @foreach($period->surveys as $survey)
+            @if($survey->applySurveys->where('status',1)->count() > 0)
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ $survey->displayName }}</h3>
@@ -158,6 +159,15 @@
                 <br>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <div class="row">
+                        <div class="form-group mb-0">
+                                <div class="form-group col-xs-8">
+                                    <a href="{{route('generarExcel', ['id'=>$survey->id])}}" class="btn btn-success">
+                                        Generar detalle de encuesta
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
                     <div class="row">
                         @foreach($survey->questions as $question)
                             <div class="col-md-10 col-md-offset-1">
@@ -220,7 +230,28 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-
+            @else
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ $survey->displayName }}</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                Encuesta no aplicada
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            @endif
         @endforeach
     </div>
 @stop

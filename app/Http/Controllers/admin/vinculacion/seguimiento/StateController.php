@@ -31,6 +31,7 @@ class StateController extends Controller
             'name' => $request->input('name'),
         ]);
 
+        \Session::flash('flash_message','¡La estado de la república se agrego exitosamente!');
 
         return redirect()->route('states.index');
     }
@@ -54,13 +55,16 @@ class StateController extends Controller
             'name' => $request->input('name'),
         ]);
 
+        \Session::flash('flash_message','¡La estado de la república se actualizo exitosamente!');
+
         return redirect()->route('states.index');
     }
 
     public function destroy($id)
     {
         State::destroy($id);
-        return redirect()->route('states.index');
+
+        return response("El estado de la república fue eliminado exitosamente");
     }
 
 }

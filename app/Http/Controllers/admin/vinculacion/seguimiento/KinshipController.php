@@ -35,6 +35,7 @@ class KinshipController extends Controller
             'name' => $request->input('name'),
         ]);
 
+        \Session::flash('flash_message','¡El parentesco se agrego exitosamente!');
 
         return redirect()->route('kinships.index');
     }
@@ -57,6 +58,8 @@ class KinshipController extends Controller
         $kinship->update([
             'name' => $request->input('name'),
         ]);
+
+        \Session::flash('flash_message','¡El parentesco se actualizo exitosamente!');
 
         return redirect()->route('kinships.index');
     }

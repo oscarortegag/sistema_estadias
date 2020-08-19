@@ -17,6 +17,14 @@
                             Nuevo parentesco
                         </a>
                     </div>
+                    @if(Session::has('flash_message'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="icon fa fa-check"></i>
+                            {{Session::get('flash_message')}}
+                        </div>
+                    @endif
+
                     <div class="card-body">
                           <div class="table-responsive">
                               <table id="tabla-parentescos" class="table table-bordered table-striped">
@@ -99,7 +107,7 @@
                     "aServerSide": true,//Paginación y filtrado realizados por el servidor
                     dom: 'Bfrtip',//Definimos los elementos del control de tabla
                     "bDestroy": true,
-                    "iDisplayLength": 10,//Paginación
+                    "iDisplayLength": 50,//Paginación
                 }
             );
 
