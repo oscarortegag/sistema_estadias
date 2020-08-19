@@ -118,6 +118,7 @@
                                 <th>27 a 28</th>
                                 <th>29 a 30</th>
                                 <th>Mayor de 30</th>
+                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -132,6 +133,7 @@
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->whereBetween('edad', [28, 29])->count()  }}</td>
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->whereBetween('edad', [29, 30])->count()  }}</td>
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->where('edad', '>', 30)->count()  }}</td>
+                                        <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->count()  }}</td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -216,7 +218,7 @@
                                             @foreach($question->respuestas as $respuesta)
                                                 <tr>
                                                 <td>
-                                                    {{$respuesta->response_string}}
+                                                    {{is_null($respuesta->response_string) ? ' ' : $respuesta->response_string}}
                                                 </td>
                                                 </tr>
                                             @endforeach
