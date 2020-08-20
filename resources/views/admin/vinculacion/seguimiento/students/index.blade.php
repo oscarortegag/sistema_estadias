@@ -34,6 +34,7 @@
                                 <th width="10%">Nombre</th>
                                 <th width="15%">Grado académico</th>
                                 <th width="15%">Carrera</th>
+                                <th width="5%">Código</th>
                                 <th width="5%">Acción</th>
                             </tr>
                             </thead>
@@ -44,6 +45,7 @@
                                     <td width="10%">{{ $student->name." ".$student->lastName." ".$student->MotherLastNames }}</td>
                                     <td width="15%">{{ $student->educativeProgram->displayName }}</td>
                                     <td width="15%">{{ $student->degree->degreeName }}</td>
+                                    <td width="5%">{{ Crypt::decrypt($student->code) }}</td>
                                     <td width="5%">
                                         <a href="{{ route('students.edit',['id'=>Crypt::encrypt($student->student_id)]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>&nbsp;
                                         <form style="display: inline" method="post" action="{{ route('students.destroy', ['id'=>Crypt::encrypt($student->student_id)]) }}">
