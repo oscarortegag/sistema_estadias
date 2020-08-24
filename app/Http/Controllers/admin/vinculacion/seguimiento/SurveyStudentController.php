@@ -83,6 +83,38 @@ class SurveyStudentController extends Controller
         $errores = Array();
         $error = 0;
 
+        $rules = [
+            'personalEmail' => 'required|email',
+            'homePhone' => 'required',
+            'cellPhone' => 'required',
+            'facebook' => 'required',
+            'address' => 'required',
+            'state_id' => 'required',
+            'township' => 'required',
+            'zip_code' => 'required',
+            'homePhone_family' => 'required',
+            'cellPhone_family' => 'required',
+            'email_family' => 'required|email',
+        ];
+
+        $messages = [
+            'personalEmail.required' => 'El correo electrónico personal es obligatorio.',
+            'personalEmail.email' => 'El correo electrónico personal debe ser de formato correo electronico.',
+            'homePhone.required' => 'El teléfono de domicilio personal es obligatorio.',
+            'cellPhone.required' => 'El teléfono celular personal es obligatorio.',
+            'facebook.required' => 'El facebook personal es obligatorio.',
+            'address.required' => 'El domicilio personales obligatorio.',
+            'state.required' => 'El estado de la república es obligatorio.',
+            'township.required' => 'El municipio es obligatorio.',
+            'zip_code.required' => 'El codigo postal es obligatorio.',
+            'homePhone_family.required' => 'El teléfono de domicilio del familiar es obligatorio.',
+            'cellPhone_family.required' => 'El teléfono de celular del familiar es obligatorio.',
+            'email_family.required' => 'El correo electrónico del familiar es obligatorio.',
+            'email_family.email' => 'El correo electrónico del familiar debe ser de formato correo electronico.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         if( preg_match('/^([a-z0-9_\.-]+)@utchetumal\.edu\.mx$/', $request['personalEmail']) )
         {
             $message = "El correo personal no debe ser con dominio utchetumal.edu.mx";
@@ -106,44 +138,7 @@ class SurveyStudentController extends Controller
 
         if (!$error) {
             if ($survey->validation == 1) {
-
-
-                $rules = [
-                    'personalEmail' => 'required|email',
-                    'homePhone' => 'required',
-                    'cellPhone' => 'required',
-                    'facebook' => 'required',
-                    'address' => 'required',
-                    'state_id' => 'required',
-                    'township' => 'required',
-                    'zip_code' => 'required',
-                    'homePhone_family' => 'required',
-                    'cellPhone_family' => 'required',
-                    'email_family' => 'required|email',
-                ];
-
-                $messages = [
-                    'personalEmail.required' => 'El correo electrónico personal es obligatorio.',
-                    'personalEmail.email' => 'El correo electrónico personal debe ser de formato correo electronico.',
-                    'homePhone.required' => 'El teléfono de domicilio personal es obligatorio.',
-                    'cellPhone.required' => 'El teléfono celular personal es obligatorio.',
-                    'facebook.required' => 'El facebook personal es obligatorio.',
-                    'address.required' => 'El domicilio personales obligatorio.',
-                    'state.required' => 'El estado de la república es obligatorio.',
-                    'township.required' => 'El municipio es obligatorio.',
-                    'zip_code.required' => 'El codigo postal es obligatorio.',
-                    'homePhone_family.required' => 'El teléfono de domicilio del familiar es obligatorio.',
-                    'cellPhone_family.required' => 'El teléfono de celular del familiar es obligatorio.',
-                    'email_family.required' => 'El correo electrónico del familiar es obligatorio.',
-                    'email_family.email' => 'El correo electrónico del familiar debe ser de formato correo electronico.',
-                ];
-
-                $this->validate($request, $rules, $messages);
-
-                $request->validate([
-                ]);
-
-                $contactStudent->update([
+               $contactStudent->update([
                         'homePhone' => $request['homePhone'],
                         'address' => $request['address'],
                         'state_id' => $request['state_id'],

@@ -35,19 +35,18 @@
                 <div class="box box-success">
                     <h2> Datos de contacto </h2>
                     <br>
-                    <div class="@if (count($errors)>0) has-error @endif">
-                    @if (count($errors)>0)
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-                    </div>
-
                     <div class="form-group ">
                         <label for="personalEmail" class="col-form-label text-md-right">Correo Electrónico Personal <span style="color: orange">*</span></label>
                         <input id="personalEmail" type="email" class="form-control " name="personalEmail" value="{{ $applySurvey->student->personalEmail }}" autofocus>
+                        @if($errors->has('personalEmail'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                {{ $errors->first('personalEmail') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                         @if (\Session::has('personalEmail'))
                             <div class="alert alert-danger">
                                 <ul>
@@ -56,30 +55,70 @@
                             </div>
                         @endif
 
+
                     </div>
                     <div class="form-group">
                         <label for="homePhone" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
                         <input id="homePhone" type="text" class="form-control" name="homePhone" value="{{ $applySurvey->student->contact->homePhone }}">
+                        @if($errors->has('homePhone'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('homePhone') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="cellPhone" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
                         <input id="cellPhone" type="text" class="form-control @error('cellPhone') has-error @enderror" name="cellPhone" value="{{ $applySurvey->student->cellPhone }}">
+                        @if($errors->has('cellPhone'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('cellPhone') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
                     <div class="form-group">
                         <label for="facebook" class="col-form-label text-md-right">Facebook <span style="color: orange">*</span></label>
                         <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ $applySurvey->student->facebook  }}">
+                        @if($errors->has('facebook'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('facebook') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
                     <div class="form-group">
                         <label for="address" class="col-form-label text-md-right">Domicilio <span style="color: orange">*</span></label>
                         <textarea id="address" name="address" rows="2" class="form-control" >
                             {{ $applySurvey->student->contact->address }}
                         </textarea>
+                        @if($errors->has('address'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('address') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="state_id" class="col-form-label text-md-right">Estado <span style="color: orange">*</span></label>
                             <select name = "state_id" class="form-control" >
-                                <option value = 0>Seleccione el estado</option>
+                                <option >Seleccione el estado</option>
                                 @foreach($states as $state)
                                     @if ($state->id == $applySurvey->student->contact->state_id)
                                         <option value="{{ $state->id }}" selected>{{ $state->name }}</option>
@@ -88,14 +127,43 @@
                                     @endif
                                 @endforeach
                             </select>
+                            @if($errors->has('state_id'))
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <li>
+                                            {{ $errors->first('state_id') }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+
                         </div>
                         <div class="form-group col-md-4">
                             <label for="township" class="col-form-label text-md-right">Municipio <span style="color: orange">*</span></label>
                             <input id="township" type="text" class="form-control @error('township') is-invalid @enderror" name="township" value="{{ $applySurvey->student->contact->township }}">
+                            @if($errors->has('township'))
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <li>
+                                            {{ $errors->first('township') }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+
                         </div>
                         <div class="form-group col-md-4">
                             <label for="zip_code" class="col-form-label text-md-right">Codigo postal <span style="color: orange">*</span></label>
                             <input id="zip_code" type="text" class="form-control @error('zip_code') is-invalid @enderror" name="zip_code" value="{{ $applySurvey->student->contact->zip_code }}">
+                            @if($errors->has('township'))
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <li>
+                                            {{ $errors->first('zip_code') }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -123,14 +191,41 @@
                     <div class="form-group">
                         <label for="homePhone_family" class="col-form-label text-md-right">Telefono de domicilio <span style="color: orange">*</span></label>
                         <input id="homePhone_family" type="text" class="form-control @error('homePhone_family') is-invalid @enderror" name="homePhone_family" value="{{ $applySurvey->student->contact->homePhone_family }}">
+                        @if($errors->has('homePhone_family'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('homePhone_family') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="cellPhone_family" class="col-form-label text-md-right">Telefono celular <span style="color: orange">*</span></label>
                         <input id="cellPhone_family" type="text" class="form-control @error('cellPhone_family') is-invalid @enderror" name="cellPhone_family" value="{{ $applySurvey->student->contact->cellPhone_family }}">
+                        @if($errors->has('cellPhone_family'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('cellPhone_family') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="email_family" class="col-form-label text-md-right">Correo electronico <span style="color: orange">*</span></label>
                         <input id="email_family" type="email" class="form-control @error('email_family') is-invalid @enderror" name="email_family" value="{{ $applySurvey->student->contact->email_family }}">
+                        @if($errors->has('email_family'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>
+                                        {{ $errors->first('email_family') }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 @endif
