@@ -12,44 +12,58 @@
                 <div class="card card-outline card-success">
                     <div class="card-header">
                         <h3>Nuevo Usuario</h3>
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <p>En este módulo solo se pueden crear usuarios con el rol de administrador.</p>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}">
                             @csrf
-                            @if (count($errors)>0)
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-
 
                             <div class="form-group">
                                 <label for="name" class="col-form-label text-md-right">Nombre</label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <p class="help-block"></p>
+                                @if($errors->has('name'))
+                                    <p class="help-block">
+                                        {{ $errors->first('name') }}
+                                    </p>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="col-form-label text-md-right">Correo electrónico</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <p class="help-block"></p>
+                                @if($errors->has('email'))
+                                    <p class="help-block">
+                                        {{ $errors->first('email') }}
+                                    </p>
+                                @endif
+
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="col-form-label text-md-right">Contraseña</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required minlength="8">
+                                <input id="password" type="password" class="form-control" name="password" required minlength="8">
+                                <p class="help-block"></p>
+                                @if($errors->has('password'))
+                                    <p class="help-block">
+                                        {{ $errors->first('password') }}
+                                    </p>
+                                @endif
+
                             </div>
 
-
-                            <div class="form-group mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Guardar
-                                    </button>
-                                    <a href="{{ route('users.index') }}" class="btn btn-default">Regresar</a>
-                                </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                                <a href="{{ route('users.index') }}" class="btn btn-default">Regresar</a>
                             </div>
+
                         </form>
                     </div>
                     <!-- /.card-body -->

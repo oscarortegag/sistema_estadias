@@ -269,3 +269,10 @@ Route::get('/excel','admin\vinculacion\seguimiento\ExcelController@index')->name
 Route::get('/importerCompany', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@create')->name('importscompany.create');
 Route::post('/importerCompany/save', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@store')->name('importscompany.store');
 Route::get('/importerCompany/show/{id}', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@show')->name('importscompany.show');
+
+Route::get('/colors','admin\vinculacion\seguimiento\ColorController@index')->name('colors.index');
+Route::get('/colors/new','admin\vinculacion\seguimiento\ColorController@create')->name('colors.create');
+Route::post('/colors/save','admin\vinculacion\seguimiento\ColorController@store')->name('colors.store');
+Route::get('/colors/edit/{id}','admin\vinculacion\seguimiento\ColorController@edit')->name('colors.edit');
+Route::put('/colors/edit/{id}','admin\vinculacion\seguimiento\ColorController@update')->name('colors.update');
+Route::delete('/colors/{id}', 'admin\vinculacion\seguimiento\ColorController@destroy')->name('colors.destroy');

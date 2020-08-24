@@ -25,7 +25,7 @@
                                     {{Session::get('flash_message')}}
                                 </ul>
                             </div>
-                        @endif                            
+                        @endif
                         <input type="hidden" id="periodId" name="periodId" value={{$period->id}}>
                         <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                             <thead>
@@ -35,6 +35,7 @@
                                 <th width="15%">Grado académico</th>
                                 <th width="15%">Carrera</th>
                                 <th width="5%">Código</th>
+                                <th width="5%">Validación de datos</th>
                                 <th width="5%">Acción</th>
                             </tr>
                             </thead>
@@ -46,6 +47,7 @@
                                     <td width="15%">{{ $student->educativeProgram->displayName }}</td>
                                     <td width="15%">{{ $student->degree->degreeName }}</td>
                                     <td width="5%">{{ Crypt::decrypt($student->code) }}</td>
+                                    <td width="5%">{{$student->verified ? "Si" : "No"}}</td>
                                     <td width="5%">
                                         <a href="{{ route('students.edit',['id'=>Crypt::encrypt($student->student_id)]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos del alumno"><i class="fas fa-edit"></i></a>&nbsp;
                                         <form style="display: inline" method="post" action="{{ route('students.destroy', ['id'=>Crypt::encrypt($student->student_id)]) }}">
@@ -53,7 +55,7 @@
                                             {!! csrf_field() !!}
                                             <input id="period" name="period" type="hidden" value="{{ $student->period_id}}">
                                             <button type = "submit" name="eliminar" id="eliminar2" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Eliminar alumno"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </form>                                        
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -78,7 +80,7 @@
 
 @push('scripts')
     <script src="{{ asset("adminlte/datatables.net/js/jquery.dataTables.js") }}"></script>
-    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>    
+    <script src="{{ asset("adminlte/datatables.net-bs/js/dataTables.bootstrap.js") }}"></script>
     <script src="{{ asset("js/admin/vinculacion/seguimiento/students/index.js"></script>
     <script>
         lenguaje = {
@@ -116,7 +118,7 @@
                 "iDisplayLength": 5,//Paginación
                 "order": [[0, "desc"]]//Ordenar (columna,orden)
             }
-        );          
+        );
     </script>
 @endpush
 @push('jscustom')
@@ -130,5 +132,5 @@
             }
         });
     });
-</script>    
+</script>
 @endpush

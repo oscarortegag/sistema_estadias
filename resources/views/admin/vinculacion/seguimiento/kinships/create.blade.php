@@ -29,14 +29,13 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             </div>
 
-                            <div class="form-group mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Guardar
-                                    </button>
-                                    <a href="{{ route('kinships.index') }}" class="btn btn-default">Regresar</a>
-                                </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                                <a href="{{ route('kinships.index') }}" class="btn btn-default">Regresar</a>
                             </div>
+
                         </form>
                     </div>
                     <!-- /.card-body -->

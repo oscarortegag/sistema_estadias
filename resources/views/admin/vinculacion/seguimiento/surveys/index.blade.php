@@ -55,9 +55,7 @@
                                     <td>
                                         @if($survey->active)
                                             <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de la encuesta a estudiantes"><i class="fas fa-edit"></i></a>
-                                            @if(!$survey->open)
-                                                <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
-                                            @endif
+                                            <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
                                             @if($survey->questions->count() == 0)
                                                 <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
                                                     {!! method_field('DELETE') !!}
@@ -75,8 +73,6 @@
                                         @else
                                             <a href="{{route('surveys.activate',['id'=>$survey->id])}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Activar encuesta"><i class="fa fa-check"></i></a>
                                         @endif
-
-
                                     </td>
                                 </tr>
                             @empty
