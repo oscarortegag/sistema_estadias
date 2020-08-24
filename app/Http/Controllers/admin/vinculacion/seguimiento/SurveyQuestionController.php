@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 
 class SurveyQuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     function create(Survey $survey)
     {
