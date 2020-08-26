@@ -8,38 +8,36 @@
 @section('content')
     <div class="container">
         <div class="row">
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>{{ $period->students->count() }} <p style="display:inline">Alumnos registrados</p>                    </h3>
-
-                    <h4>{{ $period->students->where('gender_id', 1)->count() }} <p style="display: inline">Hombres</p></h4>
-                    <h4>{{ $period->students->where('gender_id', 2)->count() }} <p style="display: inline">Mujeres</p></h4>
-
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ $period->students->count() }} <p style="display:inline">Alumnos registrados</p>                    </h3>
+                        <h4>{{ $period->students->where('gender_id', 1)->count() }} <p style="display: inline">Hombres</p></h4>
+                        <h4>{{ $period->students->where('gender_id', 2)->count() }} <p style="display: inline">Mujeres</p></h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="{{route('students.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="{{route('students.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
 
             <div class="col-lg-6 col-xs-12">
-            <!-- small box -->
-            <div class="small-box bg-blue">
-                <div class="inner">
-                    <h3>{{ $period->surveys->count() }} <p style="display: inline">Encuestas registradas</p></h3>
-                    @foreach($period->surveys as $survey)
-                        <p>{{strlen($survey->displayName) > 60?substr($survey->displayName,0,60) . "...":substr($survey->displayName,0,60)}}    {{ $survey->applySurveys->where('status', 1)->count() ? (($survey->applySurveys->where('status', 1)->count() / $survey->applySurveys->count()) * 100) : 0}} % </p>
-                    @endforeach
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>{{ $period->surveys->count() }} <p style="display: inline">Encuestas registradas</p></h3>
+                        @foreach($period->surveys as $survey)
+                            <p>{{strlen($survey->displayName) > 60?substr($survey->displayName,0,60) . "...":substr($survey->displayName,0,60)}}    {{ $survey->applySurveys->where('status', 1)->count() ? (($survey->applySurveys->where('status', 1)->count() / $survey->applySurveys->count()) * 100) : 0}} % </p>
+                        @endforeach
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-android-list"></i>
+                    </div>
+                    <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-android-list"></i>
-                </div>
-                <a href="{{route('surveys.index', ['id'=>$period->id])}}" class="small-box-footer">Mas Información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
         </div>
 
         <div class="box box-default">
@@ -75,7 +73,7 @@
                             @foreach($educativePrograms as $educativeProgram)
                                 @if($educativeProgram->students->count()>0)
                                     <tr>
-                                        <td><i class="fa fa-circle-o {{$educativeProgram->color->name}}"></i>  {{$educativeProgram->displayName}}</td>
+                                        <td><i class="fa fa-circle-o" style="color: {{$educativeProgram->color->code}}"></i>  {{$educativeProgram->displayName}}</td>
                                         <td>{{$educativeProgram->students->where('gender_id',1)->count()  }}</td>
                                         <td>{{$educativeProgram->students->where('gender_id',2)->count()  }}</td>
                                         <td>{{$educativeProgram->students->count()  }}</td>
@@ -125,7 +123,7 @@
                             @foreach($educativePrograms as $educativeProgram)
                                 @if($educativeProgram->students->count()>0)
                                     <tr>
-                                        <td><i class="fa fa-circle-o {{$educativeProgram->color->name}}"></i>  {{$educativeProgram->displayName}}</td>
+                                        <td><i class="fa fa-circle-o" style="color: {{$educativeProgram->color->code}}"></i>  {{$educativeProgram->displayName}}</td>
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->whereBetween('edad', [18, 20])->count()  }}</td>
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->whereBetween('edad', [21, 22])->count()  }}</td>
                                         <td>{{$studentByAge->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->whereBetween('edad', [23, 24])->count()  }}</td>
@@ -150,88 +148,88 @@
 
         @foreach($period->surveys as $survey)
             @if($survey->applySurveys->where('status',1)->count() > 0)
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{ $survey->displayName }}</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ $survey->displayName }}</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="form-group mb-0">
+                    <br>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group mb-0">
                                 <div class="form-group col-xs-8">
                                     <a href="{{route('generarExcel', ['id'=>$survey->id])}}" class="btn btn-success">
                                         Generar detalle de encuesta
                                     </a>
                                 </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        @foreach($survey->questions as $question)
-                            <div class="col-md-10 col-md-offset-1">
-                                <h4>{!!  $question->content !!}</h4>
-                                @if($question->type_question == 1 OR $question->type_question == 2)
-                                <table class="table table-responsive table-hover table-striped">
-                                    <thead>
-                                        <th>Opción</th>
-                                        @foreach($educativePrograms as $educativeProgram)
-                                            @if($educativeProgram->students->count()>0)
-                                                <th>
-                                                    <i class="fa fa-circle-o {{$educativeProgram->color->name}}"></i>
-                                                    {{$educativeProgram->shortName}}
-                                                </th>
-                                            @endif
-                                        @endforeach
+                        <div class="row">
+                            @foreach($survey->questions as $question)
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h4>{!!  $question->content !!}</h4>
+                                    @if($question->type_question == 1 OR $question->type_question == 2)
+                                        <table class="table table-responsive table-hover table-striped">
+                                            <thead>
+                                            <th>Opción</th>
+                                            @foreach($educativePrograms as $educativeProgram)
+                                                @if($educativeProgram->students->count()>0)
+                                                    <th>
+                                                        <i class="fa fa-circle-o" style="color: {{$educativeProgram->color->code}}"></i>
+                                                        {{$educativeProgram->shortName}}
+                                                    </th>
+                                                @endif
+                                            @endforeach
 
-                                        <th>Total</th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($question->options as $option)
-                                            <tr>
-                                                <td>
-                                                    {{$option->content}}
-                                                </td>
-                                                @foreach($educativePrograms as $educativeProgram)
-                                                    @if($educativeProgram->students->count()>0)
-                                                    <td>
-                                                        {{$responses->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->where('question_id', $question->id)->where('option_id', $option->id)->count()}}
-                                                    </td>
-                                                    @endif
-                                                @endforeach
-                                                <td>
-                                                    {{$option->respuestas->count() }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                @else
-                                    <table>
-                                        <thead>
-                                            <th>Respuestas</th>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($question->respuestas as $respuesta)
+                                            <th>Total</th>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($question->options as $option)
                                                 <tr>
-                                                <td>
-                                                    {{is_null($respuesta->response_string) ? ' ' : $respuesta->response_string}}
-                                                </td>
+                                                    <td>
+                                                        {{$option->content}}
+                                                    </td>
+                                                    @foreach($educativePrograms as $educativeProgram)
+                                                        @if($educativeProgram->students->count()>0)
+                                                            <td>
+                                                                {{$responses->where('educativeProgram_id', $educativeProgram->educativeProgram_id)->where('question_id', $question->id)->where('option_id', $option->id)->count()}}
+                                                            </td>
+                                                        @endif
+                                                    @endforeach
+                                                    <td>
+                                                        {{$option->respuestas->count() }}
+                                                    </td>
                                                 </tr>
                                             @endforeach
-                                        </tbody>
-                                    </table>
-                                @endif
-                            </div>
-                        @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <table>
+                                            <thead>
+                                            <th>Respuestas</th>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($question->respuestas as $respuesta)
+                                                <tr>
+                                                    <td>
+                                                        {{is_null($respuesta->response_string) ? ' ' : $respuesta->response_string}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- /.row -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
-            </div>
             @else
                 <div class="box box-default">
                     <div class="box-header with-border">
