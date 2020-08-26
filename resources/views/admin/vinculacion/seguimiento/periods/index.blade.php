@@ -30,7 +30,7 @@
                                 <thead>
                                 <tr>
                                     <th >#</th>
-                                    <th >Cuatrimestre</th>
+                                    <th >Periodo</th>
                                     <th >Año</th>
                                     <th >Fecha inicio</th>
                                     <th >Fecha fin</th>

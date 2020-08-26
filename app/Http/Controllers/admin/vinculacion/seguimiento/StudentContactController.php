@@ -95,6 +95,13 @@ class StudentContactController extends Controller
         $locked = '';
         if(\Session::get('perfil') == 2){
            $locked = "readonly";
+        }else{
+               #Se incluye este código ya que al hacer un direccionamiento desde el correo recibido
+               #por el alumno no se crea la variable perfil. 
+               foreach (Auth::user()->roles as $rol) {
+                        \Session::put('perfil',$rol->pivot->role_id);                
+               }
+               $locked = "readonly";              
         }
 
         return view('admin.vinculacion.seguimiento.studentcontacs.edit', compact('student','institution','period','program','enterprise','school','degree'))->with('locked',$locked);

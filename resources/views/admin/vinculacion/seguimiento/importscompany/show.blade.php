@@ -36,7 +36,8 @@
                                     <th>nombreRepresentate</th>
                                     <th>cargoRepresentante</th>
                                     <th>nombreAsesorEmpresarial</th>
-                                    <th>nombreContactoEmpresarial</th>                                                      
+                                    <th>nombreContactoEmpresarial</th>
+                                    <th>Errores en las columnas</th>                                                      
                                 </tr>
                                 </thead>
                                 <tbody>

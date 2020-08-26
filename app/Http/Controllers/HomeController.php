@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         foreach (Auth::user()->roles as $rol) {
-                \Session::put('perfil',$rol->id);                
+                \Session::put('perfil',$rol->pivot->role_id);                
         }
 
         return view('home');

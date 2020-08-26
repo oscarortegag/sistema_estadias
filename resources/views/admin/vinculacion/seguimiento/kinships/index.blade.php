@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Catalogo de parentescos</h1>
+    <h1>Catálogo</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
 
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3>Parentescos </h3>
+                        <h3>Listado de parentescos </h3>
                         <a href="{{route('kinships.create')}}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Nuevo parentesco

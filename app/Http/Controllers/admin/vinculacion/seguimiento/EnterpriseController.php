@@ -53,7 +53,7 @@ class EnterpriseController extends Controller
         $enterprise->businessContactName = $request->nombrecontacto;
         $enterprise->businessContactEmail = $request->correocontacto;
         $enterprise->businessContactPhone = $request->telefonocontacto;
-        $enterprise->importDate = date("Y-d-m");
+        $enterprise->importDate = date("Y-m-d");
         $enterprise->save();
         \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('enterprise.index');

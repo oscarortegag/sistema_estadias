@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Catalogo de parentescos</h1>
+    <h1>Catálogo</h1>
 @stop
 
 @section('content')

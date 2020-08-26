@@ -26,7 +26,7 @@
                             @endif
                             <div class="row">
                                 <div class="form-group col-xs-8">
-                                    <label for="quarter" class="col-form-label text-md-right">Cuatrimestre</label>
+                                    <label for="quarter" class="col-form-label text-md-right">Periodo</label>
                                     <input id="quarter" type="text" class="form-control @error('quarter') is-invalid @enderror" name="quarter"
                                     value="{{ old('quarter') }}" required autocomplete="quarter" placeholder="Ejemplo: Mayo-Agosto" autofocus>
                                 </div>

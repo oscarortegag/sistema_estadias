@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    <h1>Asesor académico</h1>
+    <h1>Director académico</h1>
 @stop
 
 @section('content')

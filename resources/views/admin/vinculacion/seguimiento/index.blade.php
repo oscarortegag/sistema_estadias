@@ -37,8 +37,8 @@
                                     <td>{{ $periodo->nombre }} </td>
                                     <td>
                                         <a href="{{route('students.index', ['id'=>$periodo->period_id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Alumnos"><i class="fas fa-address-book"></i></a>
-                                        <a href="{{route('surveys.index', ['id'=>$periodo->period_id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Encuestas"><i class="fas fa-file-invoice"></i></a>
-                                        <a href="{{route('statistics.index', ['id'=>$periodo->period_id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Estadisticas"><i class="fas fa-chart-bar"></i></a>
+                                        <a href="{{route('surveys.index', ['id'=>$periodo->period_id])}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Encuestas"><i class="fas fa-file-invoice"></i></a>
+                                        <a href="{{route('statistics.index', ['id'=>$periodo->period_id])}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Estadisticas"><i class="fas fa-chart-bar"></i></a>
                                     </td>
                                 </tr>
                             @empty
