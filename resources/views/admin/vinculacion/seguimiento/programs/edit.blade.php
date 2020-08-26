@@ -29,22 +29,36 @@
                                         {{Session::get('flash_message')}}
                                     </ul>
                                 </div>
-                            @endif                             
+                            @endif
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="shortName" class="col-form-label text-md-right">Acrónimo</label>
                                     <input id="shortName" type="text" class="form-control @error('shortName') is-invalid @enderror" name="shortName"
                                     value="{{ $programs->shortName }}" required autocomplete="shortName" autofocus>
-                                </div>                                                                   
+                                </div>
                             </div>
-                            <div class="row">                                                          
+                            <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="displayName" class="col-form-label text-md-right">Nombre</label>
-                                    <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" 
+                                    <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName"
                                     value="{{ $programs->displayName }}" required autocomplete="displayName" autofocus>
-                                </div>                 
-                            </div>                                                            
-                            <div class="row">      
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="color_id" class="col-form-label text-md-right">Color en el estadístico</label>
+                                <select name = "color_id" class="form-control">
+                                    <option value = 0>Seleccione el color</option>
+                                    @foreach($colores as $color)
+                                        @if ($programs->color_id == $color->id)
+                                            <option value="{{ $color->id }}" style="background-color: {{$color->code}}" selected>{{$color->name}}</option>
+                                        @else
+                                            <option value="{{ $color->id }}" style="background-color: {{$color->code}}">{{$color->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="row">
                                 <div class="form-group mb-0">
                                     <center>
                                         <div class="form-group">

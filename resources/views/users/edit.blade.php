@@ -16,30 +16,34 @@
                         <form  method="POST" action="{{ route('users.update',[$user->id]) }}">
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
-                            @if (count($errors)>0)
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
+
                             <div class="form-group">
                                 <label for = "name" class="col-form-label text-md-right">
                                     Nombre
                                 </label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                @if($errors->has('name'))
+                                    <p class="help-block">
+                                        {{ $errors->first('name') }}
+                                    </p>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for = "email" class="col-form-label text-md-right">
                                     Correo electronico
                                 </label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                @if($errors->has('email'))
+                                    <p class="help-block">
+                                        {{ $errors->first('email') }}
+                                    </p>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="password" class="col-form-label text-md-right">Contraseña</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" minlength="8">
+                                <input id="password" type="password" class="form-control " name="password" minlength="8">
                             </div>
 
 

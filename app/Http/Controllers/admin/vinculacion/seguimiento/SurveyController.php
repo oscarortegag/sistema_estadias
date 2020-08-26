@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Storage;
 
 class SurveyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index(Period $period)
     {
         return view('admin.vinculacion.seguimiento.surveys.index', compact('period'));

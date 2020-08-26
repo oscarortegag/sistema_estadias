@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
+use App\admin\vinculacion\seguimiento\Color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\EducativeProgram;
@@ -10,8 +11,8 @@ use Auth;
 class EducativeProgramController extends Controller
 {
     public function __construct(){
-           $this->middleware('auth');    
-    }    
+           $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +20,7 @@ class EducativeProgramController extends Controller
      */
     public function index()
     {
+
            $programs = EducativeProgram::withTrashed()->get();
            return view('admin.vinculacion.seguimiento.programs.index', compact('programs'));
     }
@@ -30,7 +32,8 @@ class EducativeProgramController extends Controller
      */
     public function create()
     {
-           return view('admin.vinculacion.seguimiento.programs.create', compact('programs'));
+           $colores = Color::all();
+           return view('admin.vinculacion.seguimiento.programs.create', compact('programs', 'colores'));
     }
 
     /**
@@ -44,10 +47,11 @@ class EducativeProgramController extends Controller
             $pro = new EducativeProgram;
             $pro->shortName = $request->shortName;
             $pro->displayName = $request->displayName;
+            $pro->color_id = $request->color_id;
             $pro->save();
 
             \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
-            return redirect()->route('programs.index');              
+            return redirect()->route('programs.index');
     }
 
     /**
@@ -69,8 +73,11 @@ class EducativeProgramController extends Controller
      */
     public function edit($id)
     {
-            $programs = EducativeProgram::find($id);
-            return view('admin.vinculacion.seguimiento.programs.edit', compact('programs')); 
+        $colores = Color::all();
+
+        $programs = EducativeProgram::find($id);
+
+        return view('admin.vinculacion.seguimiento.programs.edit', compact('programs','colores'));
     }
 
     /**
@@ -85,10 +92,11 @@ class EducativeProgramController extends Controller
             $pro = EducativeProgram::find($id);
             $pro->shortName = $request->shortName;
             $pro->displayName = $request->displayName;
+            $pro->color_id = $request->color_id;
             $pro->save();
 
-           \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');       
-            return redirect()->route('programs.edit',['id'=>$id]);             
+           \Session::flash('flash_message','¡La información ha sido actualizada existosamente!');
+            return redirect()->route('programs.edit',['id'=>$id]);
     }
 
     /**
@@ -100,13 +108,13 @@ class EducativeProgramController extends Controller
     public function destroy($id)
     {
         EducativeProgram::find($id)->delete();
-        \Session::flash('flash_message','¡La información ha sido ocultada!');        
+        \Session::flash('flash_message','¡La información ha sido ocultada!');
         return redirect()->route('programs.index');
     }
 
     public function restore($id){
         EducativeProgram::onlyTrashed($id)->restore();
-        \Session::flash('flash_message','¡La información ha sido restablecido!');          
-        return redirect()->route('programs.index');     
-    }     
+        \Session::flash('flash_message','¡La información ha sido restablecido!');
+        return redirect()->route('programs.index');
+    }
 }

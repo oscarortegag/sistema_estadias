@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //$users = User::all();
         $users = User::Leftjoin('students','students.id','=','users.id')
                  ->join('role_user','role_user.user_id','=','users.id')->select('users.id','users.name','users.email','students.code','role_user.role_id')->get();
         $data = [];
@@ -36,7 +40,6 @@ class UserController extends Controller
                 $data[]=$obj;
         }
 
-        //return view('users.index', compact('users'));
         return view('users.index', compact('data'));
     }
 
@@ -101,9 +104,5 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function cambiar_password()
-    {
-        return view('usuario.cambiar_password');
-    }
 
 }

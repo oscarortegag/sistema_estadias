@@ -54,6 +54,14 @@
 @section('content')
     <h1> Bienvenido al sistema de seguimiento a egresados 2020</h1>
 
+    <select>
+        <option class="text-aqua" style="background-color: #f012be">
+            <i class="fa fa-square"></i> Opcion 1
+        </option>
+        <option class="text-blue" style="background-color: #01ff70">
+            <i class="fa fa-square"></i> Opcion 2
+        </option>
+    </select>
 @stop
 
 

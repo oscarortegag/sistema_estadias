@@ -51,10 +51,15 @@
                             </div>
                             </div>
 
+                            @if($survey->period->students->where('verified', '!=', 1)->count())
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Existen {{ $survey->period->students->where('verified', '!=', 1)->count() }} alumnos que no han realizado la validación de sus datos</p>
+                                </div>
+                           @endif
                             <div class="radio">
                                 <label><input type="checkbox" name="todos" id="todos"> Todos los alumnos</label>
                             </div>
-
                             <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                                 <thead>
                                 <tr>
@@ -68,9 +73,11 @@
                                 @forelse ($survey->period->students->where('verified', 1) as $student)
                                     <tr>
                                         <td>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value="{{ $student->student_id }}" name="alumnos[]"></label>
-                                            </div>
+                                            @if ($student->surveys->where('survey_id',$survey->id)->count() == 0)
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="{{ $student->student_id }}" name="alumnos[]"></label>
+                                                </div>
+                                            @endif
                                         </td>
                                         <td>{{ $student->name . " " . $student->lastName . " " . $student->motherLastNames }}  </td>
                                         <td>{{ $student->educativeProgram->shortName  }}  </td>

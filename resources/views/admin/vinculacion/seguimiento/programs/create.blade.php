@@ -23,20 +23,29 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
-                            @endif                                                          
+                            @endif
                             <div class="row">
                                 <div class="form-group col-xs-4">
                                     <label for="shortName" class="col-form-label text-md-right">Acrónimo</label>
                                     <input id="shortName" type="text" class="form-control @error('shortName') is-invalid @enderror" name="shortName"
                                     value="{{ old('shortName') }}" required autocomplete="shortName" autofocus>
-                                </div>                                                          
+                                </div>
                                 <div class="form-group col-xs-8">
                                     <label for="displayName" class="col-form-label text-md-right">Nombre</label>
-                                    <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" 
+                                    <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName"
                                     value="{{ old('displayName') }}" required autocomplete="displayName" autofocus>
-                                </div>                 
-                            </div>                              
-                            <div class="row">      
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="color_id" class="col-form-label text-md-right">Color en el estadístico</label>
+                                <select name = "color_id" class="form-control">
+                                    <option value = 0>Seleccione el color</option>
+                                    @foreach($colores as $color)
+                                        <option value="{{ $color->id }}" style="background-color: {{$color->code}}">{{$color->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
                                 <div class="form-group mb-0">
                                     <center>
                                         <div class="form-group">
@@ -47,7 +56,7 @@
                                         </div>
                                     </center>
                                 </div>
-                            </div>                                
+                            </div>
                         </form>
                     </div>
                     <!-- /.card-body -->

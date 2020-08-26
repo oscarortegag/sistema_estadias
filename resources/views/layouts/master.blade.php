@@ -261,7 +261,7 @@ desired effect
                     <a href="{{ route("seguimiento.index") }}">
                         <i class="fas fa-user-edit"></i> Seguimiento egresados
                     </a>
-                </li>                    
+                </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-user-circle"></i> <span>Importación</span>
                         <span class="pull-right-container">
@@ -348,7 +348,7 @@ desired effect
                             <a href="{{ route("programs.index") }}">
                                 <i class="fas fa-user-edit">Nivel académico</i>
                             </a>
-                        </li>                        
+                        </li>
                         <li>
                             <a href="{{ route("directors.index") }}">
                                 <i class="fas fa-user-edit">Director académico</i>
@@ -384,6 +384,11 @@ desired effect
                                 <i class="fas fa-user-edit"> Estados de la republica</i>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route("colors.index") }}">
+                                <i class="fas fa-user-edit"> Colores</i>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
@@ -406,14 +411,14 @@ desired effect
                     </li>
                 @endif
                 <li class="treeview">
-                   <a href="{{ route('logout') }}" 
+                   <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <i class="fa fa-fw fa-power-off"></i> <span>Cerrar sesión</span>
                         <span class="pull-right-container"></span>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
-                    </form>                                            
+                    </form>
                 </li>
             </ul>
             <!-- search form (Optional) -->

@@ -1,32 +1,22 @@
 <?php
 
+Auth::routes(['register' => false]);
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/home', 'HomeController@index')->name('home');
 
-/*Route::get('/', function () {
-    return view('home');
-});*/
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/generaExcel/{survey}', 'ExcelController@generaExcel')->name('generarExcel');
 
 Route::get('seguimiento', [
     'uses' => 'admin\vinculacion\seguimiento\SeguimientoController@index',
     'as'   => 'seguimiento.index',
-]);
+])->middleware('role:admin');
 
 Route::get('students/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StudentController@index',
     'as'   => 'students.index',
 ]);
+
 Route::get('students/edit/{id}', [
     'uses' => 'admin\vinculacion\seguimiento\StudentController@edit',
     'as'   => 'students.edit',
@@ -45,28 +35,29 @@ Route::delete('students/delete/{id}', [
 Route::get('surveys/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyController@index',
     'as'   => 'surveys.index',
-]);
+])->middleware('role:admin');
 
-Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create');
-Route::post('/survey_store', 'admin\vinculacion\seguimiento\SurveyController@store')->name('surveys.store');
-Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit');
-Route::put('/survey_edit/{id}', 'admin\vinculacion\seguimiento\SurveyController@update')->name('surveys.update');
-Route::get('survey_duplicate/{period}', 'admin\vinculacion\seguimiento\SurveyController@duplicate')->name('surveys.duplicate');
-Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyController@destroy')->name('surveys.destroy');
-Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate');
-Route::get('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey')->name('surveys.apply');
-Route::post('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey_post')->name('surveys.post_apply');
-Route::get('/survey_activate/{id}', 'admin\vinculacion\seguimiento\SurveyController@activate')->name('surveys.activate');
-Route::get('/survey_deactivate/{id}', 'admin\vinculacion\seguimiento\SurveyController@deactivate')->name('surveys.deactivate');
+Route::get('survey_new/{period}', 'admin\vinculacion\seguimiento\SurveyController@create')->name('surveys.create')->middleware('role:admin');
+Route::post('/survey_store', 'admin\vinculacion\seguimiento\SurveyController@store')->name('surveys.store')->middleware('role:admin');
+Route::get('survey_edit/{survey}', 'admin\vinculacion\seguimiento\SurveyController@edit')->name('surveys.edit')->middleware('role:admin');
+Route::put('/survey_edit/{id}', 'admin\vinculacion\seguimiento\SurveyController@update')->name('surveys.update')->middleware('role:admin');
+Route::get('survey_duplicate/{period}', 'admin\vinculacion\seguimiento\SurveyController@duplicate')->name('surveys.duplicate')->middleware('role:admin');
+Route::delete('/survey_delete/{id}', 'admin\vinculacion\seguimiento\SurveyController@destroy')->name('surveys.destroy')->middleware('role:admin');
+Route::post('/survey_duplicate', 'admin\vinculacion\seguimiento\SurveyController@post_duplicate')->name('surveys.post_duplicate')->middleware('role:admin');
+Route::get('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey')->name('surveys.apply')->middleware('role:admin');
+Route::post('/apply_survey/{survey}', 'admin\vinculacion\seguimiento\SurveyController@apply_survey_post')->name('surveys.post_apply')->middleware('role:admin');
+Route::get('/survey_activate/{id}', 'admin\vinculacion\seguimiento\SurveyController@activate')->name('surveys.activate')->middleware('role:admin');
+Route::get('/survey_deactivate/{id}', 'admin\vinculacion\seguimiento\SurveyController@deactivate')->name('surveys.deactivate')->middleware('role:admin');
 
+Route::get('/generaExcel/{survey}', 'ExcelController@generaExcel')->name('generarExcel')->middleware('role:admin');
 
 Route::get('/answer_survey', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyStudentController@index',
     'as'   => 'answer_survey.index',
-]);
+])->middleware('role:alumno');
 
-Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer');
-Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer');
+Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer')->middleware('role:alumno');
+Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer')->middleware('role:alumno');
 
 Route::get('dropdown', function(){
     $id = \Illuminate\Support\Facades\Input::get('option');
@@ -78,30 +69,29 @@ Route::get('dropdown', function(){
 Route::get('questions_new/{survey}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@create',
     'as'   => 'questions.create',
-]);
+])->middleware('role:admin');
 
-Route::post('/question_new', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
-//Route::post('/question_edit', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store');
+Route::post('/question_new', 'admin\vinculacion\seguimiento\SurveyQuestionController@store')->name('questions.store')->middleware('role:admin');
 
 
 Route::get('questions_edit/{question}', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyQuestionController@edit',
     'as'   => 'questions.edit',
-]);
-Route::put('/question_update/{question}', 'admin\vinculacion\seguimiento\SurveyQuestionController@update')->name('questions.update');
-Route::delete('/question_delete/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@destroy')->name('questions.destroy');
-Route::post('/question_duplicate/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@duplicate')->name('questions.duplicate');
+])->middleware('role:admin');
+Route::put('/question_update/{question}', 'admin\vinculacion\seguimiento\SurveyQuestionController@update')->name('questions.update')->middleware('role:admin');
+Route::delete('/question_delete/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@destroy')->name('questions.destroy')->middleware('role:admin');
+Route::post('/question_duplicate/{id}', 'admin\vinculacion\seguimiento\SurveyQuestionController@duplicate')->name('questions.duplicate')->middleware('role:admin');
 
-Route::post('/option_new', 'admin\vinculacion\seguimiento\QuestionOptionController@store')->name('options.store');
-Route::delete('/option_delete/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@destroy')->name('options.destroy');
-Route::get('/option/{id}/editModal', 'admin\vinculacion\seguimiento\QuestionOptionController@editModal')->name('options.editModal');
-Route::put('/edit_option/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@update')->name('options.update');
+Route::post('/option_new', 'admin\vinculacion\seguimiento\QuestionOptionController@store')->name('options.store')->middleware('role:admin');
+Route::delete('/option_delete/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@destroy')->name('options.destroy')->middleware('role:admin');
+Route::get('/option/{id}/editModal', 'admin\vinculacion\seguimiento\QuestionOptionController@editModal')->name('options.editModal')->middleware('role:admin');
+Route::put('/edit_option/{id}', 'admin\vinculacion\seguimiento\QuestionOptionController@update')->name('options.update')->middleware('role:admin');
 
 
 Route::get('statistics/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StatisticController@index',
     'as'   => 'statistics.index',
-]);
+])->middleware('role:admin');
 
 Route::get('statistics/studentByEducativeProgram/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StatisticController@alumnosPorCarrera',
@@ -109,16 +99,11 @@ Route::get('statistics/studentByEducativeProgram/{period}', [
 ]);
 
 
-//Auth::routes();
-Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::resource('users', 'UserController')->except(['show','destroy']);
-Route::resource('kinships', 'admin\vinculacion\seguimiento\KinshipController')->except(['show']);
-Route::resource('states', 'admin\vinculacion\seguimiento\StateController')->except(['show']);
+Route::resource('users', 'UserController')->except(['show','destroy'])->middleware('role:admin');
+Route::resource('kinships', 'admin\vinculacion\seguimiento\KinshipController')->except(['show'])->middleware('role:admin');
+Route::resource('states', 'admin\vinculacion\seguimiento\StateController')->except(['show'])->middleware('role:admin');
+Route::resource('colors', 'admin\vinculacion\seguimiento\ColorController')->except(['show'])->middleware('role:admin');
 
 
 Route::get('/enterprise', 'admin\vinculacion\seguimiento\EnterpriseController@index')->name('enterprise.index');
@@ -269,3 +254,4 @@ Route::get('/excel','admin\vinculacion\seguimiento\ExcelController@index')->name
 Route::get('/importerCompany', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@create')->name('importscompany.create');
 Route::post('/importerCompany/save', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@store')->name('importscompany.store');
 Route::get('/importerCompany/show/{id}', 'admin\vinculacion\seguimiento\ImporterEnterpriseController@show')->name('importscompany.show');
+

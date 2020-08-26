@@ -12,6 +12,7 @@ class KinshipController extends Controller
     public function __construct(){
            $this->middleware('auth');
     }
+
     public function index()
     {
         $kinships = Kinship::all();
