@@ -4,11 +4,14 @@ namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\Period;
 use App\admin\vinculacion\seguimiento\Student;
+use App\Mail\EmailSend;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\admin\vinculacion\seguimiento\Egresado;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class EgresadoController extends Controller
 {
@@ -50,6 +53,18 @@ class EgresadoController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function send_mail(Period $period)
+    {
+        return view('admin.vinculacion.seguimiento.egresados.send_mail', compact('period'));
+    }
+
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -77,6 +92,38 @@ class EgresadoController extends Controller
 
         \Session::flash('flash_message','¡La información ha sido registrada existosamente!');
         return redirect()->route('egresados.index', ["id"=>$request->period_id]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return RedirectResponse
+     */
+    public function postSendMail(Request $request, $id): RedirectResponse
+    {
+        $alumnos = $request['alumnos'];
+
+        $archivo = Storage::disk('firmas')->put('firmas', $request->file('signature'));
+
+        for ($i=0; $i < count($alumnos); $i++ )
+        {
+            $id_alumno = $alumnos[$i];
+            $student = Student::find($id_alumno);
+
+            $correo = $student['personalEmail'];
+
+            $data = [
+                'subject' => $request['subject'],
+                'content' => $request['content'],
+                'document' => asset($archivo),
+            ];
+
+            Mail::to($correo)->send(new EmailSend($data));
+        }
+
+        \Session::flash('flash_message','¡El correo se envió exitosamente!');
+        return redirect()->route('egresados.send_mail', ["id"=>$request->period_id]);
     }
 
     /**

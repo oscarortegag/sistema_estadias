@@ -27,6 +27,16 @@ Route::post('egresados_create/{period}/post_create', [
     'as'   => 'egresados.post_create',
 ]);
 
+Route::get('egresados_mail/{period}', [
+    'uses' => 'admin\vinculacion\seguimiento\EgresadoController@send_mail',
+    'as'   => 'egresados.send_mail',
+]);
+
+Route::post('egresados_mail/{period}/post_send_mail', [
+    'uses' => 'admin\vinculacion\seguimiento\EgresadoController@postSendMail',
+    'as'   => 'egresados.post_send_mail',
+]);
+
 Route::get('students/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StudentController@index',
     'as'   => 'students.index',
