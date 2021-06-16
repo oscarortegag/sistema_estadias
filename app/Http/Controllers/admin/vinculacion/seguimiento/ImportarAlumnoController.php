@@ -34,8 +34,8 @@ use Auth;
 class ImportarAlumnoController extends Controller
 {
     public function __construct(){
-           $this->middleware('auth');    
-    }    
+           $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -106,7 +106,7 @@ class ImportarAlumnoController extends Controller
                     $result = $this->validation($data);
                     $error = "";
                     $valida = 0;
-                    if($row > 2 && $result != 32){
+                    if($row > 1 && $result != 32){
 
                         if((is_null($data["A"])) || $data["A"]==" "){
                             $valida++;
@@ -362,6 +362,9 @@ class ImportarAlumnoController extends Controller
                                 $student->code = $passwordCode;
                                 $student->importDate = date("Y-m-d");
                                 $student->save();
+
+
+
                                 $insertIdStudent = $student->student_id;
                                 #Add relation user y student
                                 $user->roles()->attach(2);
@@ -393,7 +396,7 @@ class ImportarAlumnoController extends Controller
                                     'password' => $password,
                                     'url' => $url,
                                 ];
-                                Mail::to($student->institutionalEmail)->send(new EmailUserNotice($notification));                                
+                                //Mail::to($student->institutionalEmail)->send(new EmailUserNotice($notification));
                             }else{
                                  $importerRowFailData[] = ["0"=>$data,"1"=>"Error: registro duplicado"];
                                  $importerRowFail++;
@@ -490,7 +493,7 @@ class ImportarAlumnoController extends Controller
              $key = '';
              $pattern = '123456789';
              $max = strlen($pattern)-1;
-             for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
+             for($i=0;$i < $longitud;$i++) $key .= $pattern[mt_rand(0,$max)];
              return $key;
     }
 }

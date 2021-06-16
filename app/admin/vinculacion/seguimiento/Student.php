@@ -69,4 +69,10 @@ class Student extends Model
     public function degree(){
         return $this->hasOne(Degree::class,'degree_id','degree_id');
     }
+
+    // Relación para obtener el registro de egreso
+    public function egreso()
+    {
+        return $this->belongsTo(Egresado::class,'student_id','student_id');
+    }
 }

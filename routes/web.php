@@ -12,6 +12,21 @@ Route::get('seguimiento', [
     'as'   => 'seguimiento.index',
 ])->middleware('role:admin');
 
+Route::get('egresados/{period}', [
+    'uses' => 'admin\vinculacion\seguimiento\EgresadoController@index',
+    'as'   => 'egresados.index',
+]);
+
+Route::get('egresados_create/{period}', [
+    'uses' => 'admin\vinculacion\seguimiento\EgresadoController@create',
+    'as'   => 'egresados.create',
+]);
+
+Route::post('egresados_create/{period}/post_create', [
+    'uses' => 'admin\vinculacion\seguimiento\EgresadoController@postCreate',
+    'as'   => 'egresados.post_create',
+]);
+
 Route::get('students/{period}', [
     'uses' => 'admin\vinculacion\seguimiento\StudentController@index',
     'as'   => 'students.index',

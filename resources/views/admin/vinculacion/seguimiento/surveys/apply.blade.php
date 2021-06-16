@@ -50,7 +50,7 @@
 
                             </div>
                             </div>
-
+                            {{-- Cambiamos para obtener solo egresados --}}
                             @if($survey->period->students->where('verified', '!=', 1)->count())
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -58,7 +58,7 @@
                                 </div>
                            @endif
                             <div class="radio">
-                                <label><input type="checkbox" name="todos" id="todos"> Todos los alumnos</label>
+                                <label><input type="checkbox" name="todos" id="todos"> Todos los egresados</label>
                             </div>
                             <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                                 <thead>
@@ -70,7 +70,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse ($survey->period->students->where('verified', 1) as $student)
+                                @forelse ($survey->period->egresados as $student)
+                                    @php $student = $student->student @endphp
                                     <tr>
                                         <td>
                                             @if ($student->surveys->where('survey_id',$survey->id)->count() == 0)
@@ -86,7 +87,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="7">
-                                            <p> No existen alumnos en el periodo </p>
+                                            <p> No existen egresados en el periodo </p>
                                         </td>
                                     </tr>
                                 @endforelse

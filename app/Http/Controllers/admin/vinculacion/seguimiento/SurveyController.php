@@ -146,6 +146,8 @@ class SurveyController extends Controller
         return redirect()->route('surveys.edit', ['id'=>$survey->id]);
     }
 
+    // por injección de dependencias obtienes el Cuestionario a aplicar
+    // hay que cambiar el cuestionario o catalogarlo para reutilizar
     function apply_survey(Survey $survey)
     {
         return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey'));
