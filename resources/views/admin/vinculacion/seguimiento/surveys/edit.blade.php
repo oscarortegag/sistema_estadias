@@ -88,6 +88,25 @@
                                 <input id="displayName" type="text" class="form-control @error('displayName') is-invalid @enderror" name="displayName" value="{{ $survey->displayName }}" required autofocus>
                             </div>
 
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row mb-2 mt-5">
+                                        <div class="material-switch col-xs-1" style="margin-top: 10px">
+                                            @if ($survey->tipo)
+                                                <input id="tipo" name="tipo" type="checkbox" checked />
+                                            @else
+                                                <input id="tipo" name="tipo" type="checkbox" />
+                                            @endif
+                                            <label for="tipo" class="label-primary"></label>
+                                        </div>
+
+                                        <div class="col-xs-11">
+                                            Encuesta para empresas/organizaciones
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                             <div class="form-group">
                                 <label for="description" class="col-form-label text-md-right">Descripción</label>
                                 <textarea id="description" name="description" rows="3" class="form-control">

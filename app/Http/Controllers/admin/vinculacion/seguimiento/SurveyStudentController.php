@@ -22,10 +22,15 @@ class SurveyStudentController extends Controller
 
     function index()
     {
-        $student = Auth::user()->student;
 
-        return view('admin.vinculacion.seguimiento.surveyStudent.index', compact('student'));
+        if(Auth::user()->role == 'alumno')
+            $entidad = Auth::user()->student;
+        else
+            $entidad = Auth::user()->empresa;
+
+        return view('admin.vinculacion.seguimiento.surveyStudent.index', compact('entidad'));
     }
+
 
     function answer_survey(ApplySurvey $applySurvey)
     {
@@ -35,16 +40,24 @@ class SurveyStudentController extends Controller
         $fecha_actual = date("Y-m-d");
 
         //dd(Auth::user()->student);
-
-        if ($applySurvey->student->id != Auth::user()->id ) {
-            $error = 1;
-            $messages[] = "La encuesta no pertenece a este usuario";
+        // checar el tipo
+        if($applySurvey->survey->tipo){
+            if ($applySurvey->empresa->enterprise_id != Auth::user()->empresa_id ) {
+                $error = 1;
+                $messages[] = "La encuesta no pertenece a este usuario";
+            }
+        }else{
+            if ($applySurvey->student->id != Auth::user()->id ) {
+                $error = 1;
+                $messages[] = "La encuesta no pertenece a este usuario";
+            }
         }
 
+        /*
         if (!Auth::user()->hasRole('alumno') ) {
             $error = 1;
             $messages[] = "El usuario no tiene permisos de contestar una encuesta";
-        }
+        }*/
 
         if(($applySurvey->survey->start_date > $fecha_actual OR $fecha_actual > $applySurvey->survey->end_date) and $error == 0){
             $error = 1;
@@ -59,11 +72,14 @@ class SurveyStudentController extends Controller
         if ($error)
             return view('admin.vinculacion.seguimiento.surveyStudent.error', compact('applySurvey', 'messages'));
         else {
-            if (!$applySurvey->student->contact) {
-                $contactStudent = ContactStudent::create([
-                    'student_id' => $applySurvey->student_id,
-                ]);
+            if($applySurvey->survey->tipo == 0){
+                if (!$applySurvey->student->contact) {
+                    $contactStudent = ContactStudent::create([
+                        'student_id' => $applySurvey->student_id,
+                    ]);
+                }
             }
+
 
             $applySurvey = ApplySurvey::find($applySurvey->id);
 
@@ -77,9 +93,15 @@ class SurveyStudentController extends Controller
     function answer_survey_post (Request $request, $id)
     {
         $applySurvey = ApplySurvey::find($id);
-        $student = Student::find($applySurvey->student_id);
+
+
         $survey = Survey::find($applySurvey->survey_id);
-        $contactStudent = $student->contact;
+        if($survey->tipo == 0){
+            $student = Student::find($applySurvey->student_id);
+            $contactStudent = $student->contact;
+        }
+
+
         $errores = Array();
         $error = 0;
 
@@ -112,17 +134,19 @@ class SurveyStudentController extends Controller
             'email_family.required' => 'El correo electrónico del familiar es obligatorio.',
             'email_family.email' => 'El correo electrónico del familiar debe ser de formato correo electronico.',
         ];
+        if($survey->tipo == 0){
+            $this->validate($request, $rules, $messages);
 
-        $this->validate($request, $rules, $messages);
+            if( preg_match('/^([a-z0-9_\.-]+)@utchetumal\.edu\.mx$/', $request['personalEmail']) )
+            {
+                $message = "El correo personal no debe ser con dominio utchetumal.edu.mx";
 
-        if( preg_match('/^([a-z0-9_\.-]+)@utchetumal\.edu\.mx$/', $request['personalEmail']) )
-        {
-            $message = "El correo personal no debe ser con dominio utchetumal.edu.mx";
+                $error = 1;
+                $errores += ['personalEmail' => $message];
 
-            $error = 1;
-            $errores += ['personalEmail' => $message];
-
+            }
         }
+
 
         foreach ($survey->questions as $question) {
             $pregunta = 'pregunta' . $question->id;
@@ -136,9 +160,11 @@ class SurveyStudentController extends Controller
         }
 
 
+
         if (!$error) {
             if ($survey->validation == 1) {
-               $contactStudent->update([
+                if($survey->tipo == 0){
+                    $contactStudent->update([
                         'homePhone' => $request['homePhone'],
                         'address' => $request['address'],
                         'state_id' => $request['state_id'],
@@ -151,11 +177,13 @@ class SurveyStudentController extends Controller
                         'email_family' => $request['email_family'],
                     ]);
 
-                $student->update([
-                    'cellPhone' => $request['cellPhone'],
-                    'personalEmail' => $request['personalEmail'],
-                    'facebook' => $request['facebook'],
-                ]);
+                    $student->update([
+                        'cellPhone' => $request['cellPhone'],
+                        'personalEmail' => $request['personalEmail'],
+                        'facebook' => $request['facebook'],
+                    ]);
+                }
+
             }
 
             //dd($applySurvey);

@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function student(){
         return $this->belongsTo('App\admin\vinculacion\seguimiento\Student','id', 'id');
     }
+
+    public function empresa(){
+        return $this->belongsTo('App\admin\vinculacion\seguimiento\Enterprise','empresa_id', 'enterprise_id');
+    }
 }

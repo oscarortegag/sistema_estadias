@@ -79,10 +79,10 @@ Route::get('/generaExcel/{survey}', 'ExcelController@generaExcel')->name('genera
 Route::get('/answer_survey', [
     'uses' => 'admin\vinculacion\seguimiento\SurveyStudentController@index',
     'as'   => 'answer_survey.index',
-])->middleware('role:alumno');
+])->middleware('role:alumno|empresa');
 
-Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer')->middleware('role:alumno');
-Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer')->middleware('role:alumno');
+Route::get('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey')->name('surveys.answer')->middleware('role:alumno|empresa');
+Route::post('/answer_survey/{apply_survey}', 'admin\vinculacion\seguimiento\SurveyStudentController@answer_survey_post')->name('surveys.post_answer')->middleware('role:alumno|empresa');
 
 Route::get('dropdown', function(){
     $id = \Illuminate\Support\Facades\Input::get('option');

@@ -30,7 +30,8 @@
                             <thead>
                             <tr>
                                 <th width="25%">Nombre</th>
-                                <th width="60%">Descripción</th>
+                                <th width="30%">Tipo de encuesta</th>
+                                <th width="30%">Descripción</th>
                                 <th width="10%">Avance</th>
                                 <th width="5%">Acciones</th>
                             </tr>
@@ -39,6 +40,13 @@
                             @forelse ($period->surveys as $survey)
                                 <tr>
                                     <td>{{ $survey->displayName }}</td>
+                                    <td>
+                                        @if($survey->tipo == 0)
+                                            <span class="label label-info">Encuesta para alumnos</span>
+                                        @else
+                                            <span class="label label-success">Encuesta para empresas</span>
+                                        @endif
+                                    </td>
                                     <td>{!! $survey->description !!}</td>
                                     <td>
                                         @if($survey->applySurveys->count() == 0)
@@ -54,8 +62,17 @@
                                     </td>
                                     <td>
                                         @if($survey->active)
-                                            <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de la encuesta a estudiantes"><i class="fas fa-edit"></i></a>
-                                            <a href="{{route('surveys.apply',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
+                                            <a href="{{route('surveys.edit',['id'=>$survey->id])}}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar datos de la encuesta"><i class="fas fa-edit"></i></a>
+
+                                            {{-- Validar tipo de encuesta --}}
+                                            @if($survey->tipo)
+                                                <a href="{{route('surveys.apply',['id'=>$survey->id])}}"
+                                                   class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a empresas"><i class="fas fa-copy"></i></a>
+                                            @else
+                                                <a href="{{route('surveys.apply',['id'=>$survey->id])}}"
+                                                   class="btn btn-primary btn-sm" data-toggle="tooltip" title="Aplicar encuesta a estudiantes"><i class="fas fa-copy"></i></a>
+                                            @endif
+
                                             @if($survey->questions->count() == 0)
                                                 <form style="display: inline" method="POST" action="{{ route("surveys.destroy",[$survey->id]) }}">
                                                     {!! method_field('DELETE') !!}

@@ -9,6 +9,7 @@ class ApplySurvey extends Model
     protected $fillable = [
         'survey_id',
         'student_id',
+        'empresa_id',
         'status',
     ];
 
@@ -20,6 +21,11 @@ class ApplySurvey extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'student_id');
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Enterprise::class, 'empresa_id', 'enterprise_id');
     }
 
 

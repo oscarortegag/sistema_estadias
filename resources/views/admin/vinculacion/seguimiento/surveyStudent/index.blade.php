@@ -23,7 +23,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($student->surveys as $survey)
+                            @forelse ($entidad->surveys as $survey)
                                 <tr>
                                     <td>{{ $survey->survey->displayName }}</td>
                                     <td>{!! $survey->survey->description !!}</td>

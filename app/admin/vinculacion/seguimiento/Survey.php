@@ -15,6 +15,7 @@ class Survey extends Model
         'open',
         'start_date',
         'end_date',
+        'tipo',
         'active',
     ];
     public function questions()

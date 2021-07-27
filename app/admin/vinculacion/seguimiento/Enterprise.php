@@ -20,5 +20,10 @@ class Enterprise extends Model
 	     * @var array
 
 	     */
-	    protected $dates = ['deleted_at'];        
+	    protected $dates = ['deleted_at'];
+
+    public function surveys()
+    {
+        return $this->hasMany(ApplySurvey::class,'empresa_id', 'enterprise_id');
+    }
 }

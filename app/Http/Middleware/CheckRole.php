@@ -13,12 +13,21 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $roles)
     {
-        if (! $request->user()->hasRole($role)) {
+        $roles = explode('|', $roles);
+        if(is_array(($roles))){
+            foreach($roles as $role) {
+                if ($request->user()->hasRole($role)) {
+                    return $next($request);
+                }
+                // Check if user has the role This check will depend on how your roles are set up
+
+            }
+        }
+        if (! $request->user()->hasRole($roles)) {
             return redirect('home');
         }
-
         return $next($request);
 
     }

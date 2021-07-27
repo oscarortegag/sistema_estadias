@@ -58,9 +58,16 @@
                                 </div>
                            @endif
                             <div class="radio">
-                                <label><input type="checkbox" name="todos" id="todos"> Todos los egresados</label>
+                                @if($survey->tipo == 1)
+                                    <label><input type="checkbox" name="todos" id="todos"> Todas las empresas</label>
+                                @else
+                                    <label><input type="checkbox" name="todos" id="todos"> Todos los egresados</label>
+                                @endif
+
                             </div>
-                            <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
+                            {{-- Tabla de alumnos o empresas --}}
+                            @if($survey->tipo == 0)
+                                <table id="tabla-alumnos" class="table table-responsive table-hover table-striped">
                                 <thead>
                                 <tr>
                                     <th>Selección</th>
@@ -93,7 +100,39 @@
                                 @endforelse
                                 </tbody>
                             </table>
+                            @else
+                                <table id="tabla-empresas" class="table table-responsive table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Selección</th>
+                                        <th>Nombre</th>
+                                        <th>Representante</th>
+                                        <th>Asesor empresarial</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($empresas as $empresa)
+                                        <tr>
+                                            <td>
 
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="{{ $empresa->enterprise_id }}" name="empresas[]"></label>
+                                                    </div>
+                                            </td>
+                                            <td>{{ $empresa->companyName }}  </td>
+                                            <td>{{ $empresa->representativeName  }}  </td>
+                                            <td>{{ $empresa->businessAdvisorName }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7">
+                                                <p> No existen egresados en el periodo </p>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            @endif
                             <div class="form-group">
                                 <label for="subject" class="col-form-label text-md-right">Asunto</label>
                                 <input id="subject" type="text" class="form-control" name="subject" required>

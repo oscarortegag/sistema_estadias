@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin\vinculacion\seguimiento;
 
 use App\admin\vinculacion\seguimiento\ApplySurvey;
+use App\admin\vinculacion\seguimiento\Enterprise;
+use App\admin\vinculacion\seguimiento\Institution;
 use App\admin\vinculacion\seguimiento\Period;
 use App\admin\vinculacion\seguimiento\QuestionOption;
 use App\admin\vinculacion\seguimiento\Student;
@@ -45,15 +47,16 @@ class SurveyController extends Controller
 
 
         $survey = Survey::create([
-            'period_id' => $request->input('period_id'),
-            'displayName' => $request->input('displayName'),
-            'description' => $request->input('description'),
-            'validation' => $request->input('validation')? '1' : '0',
+            'period_id'     => $request->input('period_id'),
+            'displayName'   => $request->input('displayName'),
+            'description'   => $request->input('description'),
+            'validation'    => $request->input('validation') ? '1' : '0',
+            'tipo'          => $request->input('validation') ? '1' : '0',
         ]);
 
-        \Session::flash('flash_message','¡La encuesta fue creada exitosamente!');
+        \Session::flash('flash_message', '¡La encuesta fue creada exitosamente!');
 
-        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
+        return redirect()->route('surveys.edit', ['id' => $survey->id]);
     }
 
     public function edit($id)
@@ -73,12 +76,13 @@ class SurveyController extends Controller
         ]);
 
         $survey->update([
-            'displayName' => $request->input('displayName'),
-            'description' => $request->input('description'),
-            'validation' => $request->input('validation')? '1' : '0',
+            'displayName'   => $request->input('displayName'),
+            'description'   => $request->input('description'),
+            'validation'    => $request->input('validation') ? '1' : '0',
+            'tipo'          => $request->input('validation') ? '1' : '0',
         ]);
 
-        if ($request['start_date'] AND $request['end_date']) {
+        if ($request['start_date'] and $request['end_date']) {
             $survey->update([
                 'open' => '1',
                 'start_date' => date("Y-m-d", strtotime($request['start_date'])),
@@ -86,9 +90,9 @@ class SurveyController extends Controller
             ]);
         }
 
-        \Session::flash('flash_message','¡La encuesta se actualizo exitosamente!');
+        \Session::flash('flash_message', '¡La encuesta se actualizo exitosamente!');
 
-        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
+        return redirect()->route('surveys.edit', ['id' => $survey->id]);
     }
 
     public function destroy($id)
@@ -106,7 +110,8 @@ class SurveyController extends Controller
         return view('admin.vinculacion.seguimiento.surveys.duplicate', compact('period', 'periods'));
     }
 
-    function post_duplicate(Request $request){
+    function post_duplicate(Request $request)
+    {
 
         $survey_previous = Survey::find($request['previous_survey_id']);
 
@@ -115,6 +120,7 @@ class SurveyController extends Controller
             'displayName' => $survey_previous->displayName,
             'description' => $survey_previous->description,
             'validation' => $survey_previous->validation,
+            'tipo' => $survey_previous->tipo,
         ]);
 
         if ($survey_previous->questions->count() > 0) {
@@ -141,22 +147,30 @@ class SurveyController extends Controller
             }
         }
 
-        \Session::flash('flash_message','¡La encuesta se duplico exitosamente!');
+        \Session::flash('flash_message', '¡La encuesta se duplico exitosamente!');
 
-        return redirect()->route('surveys.edit', ['id'=>$survey->id]);
+        return redirect()->route('surveys.edit', ['id' => $survey->id]);
     }
 
     // por injección de dependencias obtienes el Cuestionario a aplicar
     // hay que cambiar el cuestionario o catalogarlo para reutilizar
     function apply_survey(Survey $survey)
     {
-        return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey'));
+         $empresas = Enterprise::all();
+
+        return view('admin.vinculacion.seguimiento.surveys.apply', compact('survey', 'empresas'));
     }
 
-    function apply_survey_post (Request $request, $id){
+    function apply_survey_post(Request $request, $id)
+    {
 
-        $alumnos = $request['alumnos'];
         $survey = Survey::find($id);
+
+        // Validar el tipo
+        if($survey->tipo)
+            $empresas = $request['empresas'];
+        else
+            $alumnos = $request['alumnos'];
 
         $request->validate([
             'start_date' => 'required',
@@ -164,40 +178,58 @@ class SurveyController extends Controller
             'subject' => 'required',
             'content' => 'required',
             'signature' => 'required'
-
         ]);
 
         $survey->update([
-           'open' => '1',
-           'start_date' => date("Y-m-d", strtotime($request['start_date'])),
-           'end_date' => date("Y-m-d", strtotime($request['end_date'])),
+            'open' => '1',
+            'start_date' => date("Y-m-d", strtotime($request['start_date'])),
+            'end_date' => date("Y-m-d", strtotime($request['end_date'])),
         ]);
 
         $archivo = Storage::disk('firmas')->put('firmas', $request->file('signature'));
 
-        for ($i=0; $i < count($alumnos); $i++ )
-        {
-            $student = Student::find($alumnos[$i]);
-            $correo = $student['personalEmail'];
+        if($survey->tipo){
+            for ($i = 0; $i < count($empresas); $i++) {
+                $empresa = Enterprise::find($empresas[$i]);
+                $correo = $empresa['businessContactEmail'];
 
-            $applySurvey = ApplySurvey::create([
-                'survey_id' => $survey->id,
-                'student_id' => $student->student_id,
-            ]);
+                $applySurvey = ApplySurvey::create([
+                    'survey_id' => $survey->id,
+                    'empresa_id' => $empresa->enterprise_id,
+                ]);
 
-            $data = [
-                'subject' => $request['subject'],
-                'content' => $request['content'],
-                'document' => asset($archivo),
-                'id' => $applySurvey->id,
-                'url' => route("surveys.answer", ['id'=>$applySurvey->id]),
-            ];
+                $data = [
+                    'subject' => $request['subject'],
+                    'content' => $request['content'],
+                    'document' => asset($archivo),
+                    'id' => $applySurvey->id,
+                    'url' => route("surveys.answer", ['id' => $applySurvey->id]),
+                ];
+                Mail::to($correo)->send(new EmailSurveySend($data));
+            }
+        }else{
+            for ($i = 0; $i < count($alumnos); $i++) {
+                $student = Student::find($alumnos[$i]);
+                $correo = $student['personalEmail'];
 
-            Mail::to($correo)->send(new EmailSurveySend($data));
+                $applySurvey = ApplySurvey::create([
+                    'survey_id' => $survey->id,
+                    'student_id' => $student->student_id,
+                ]);
 
+                $data = [
+                    'subject' => $request['subject'],
+                    'content' => $request['content'],
+                    'document' => asset($archivo),
+                    'id' => $applySurvey->id,
+                    'url' => route("surveys.answer", ['id' => $applySurvey->id]),
+                ];
+                Mail::to($correo)->send(new EmailSurveySend($data));
+            }
         }
 
-        \Session::flash('flash_message','¡La encuesta se aplico exitosamente!');
+
+        \Session::flash('flash_message', '¡La encuesta se aplico exitosamente!');
 
         return redirect()->route('surveys.index', [$survey->period_id]);
     }
